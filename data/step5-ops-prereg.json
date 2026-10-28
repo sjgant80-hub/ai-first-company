@@ -1,0 +1,33 @@
+{
+ "kind": "ai-first-company-step5-ops-prereg",
+ "v": 1,
+ "sealed": "2026-10-28",
+ "question": "When a deal closes, can the company deliver it — build the deliverable, prove it, hand it over, record it, and add it to the library of proven goods — with the AI doing the work and Simon asked only for the hand-over, and with nothing unproven ever handed over or added?",
+ "why": "Simon's AI-first company spec (2026-10-28), build step 5: 'the operations loop (closed deal → delivered → recorded → library grows)'. The pattern library is the product; a delivery that grows it is the company's compounding move.",
+ "design": {
+  "deliverable": "A deliverable is a receipt card exactly like the voice's (repo, full commit, path, sha256, facts). The IO fetches the receipt from GitHub at its pin and hashes it; kar-voice's claim gate (vendored byte-identical) decides whether it is proven.",
+  "ops": "src/ops.mjs deliver(deal, { card, gate, approve, library }): 'build' (put to the conductor in its own words: internal work) → the deliverable and its gate result → if the gate refuses: stop, nothing handed over, nothing added → 'hand the deliverable to @<handle>' put to the conductor (Simon's lane) → asked → handed over (a dry run) only on an approval of that exact text → a delivery record in the journal → the library gains one entry, never a duplicate.",
+  "record": "The delivery record is an entry in the hash-chained journal (who, what, which receipt by pin and hash, when). It is not signed by a key in this step.",
+  "noSwitch": "No kernel in this repo exports anything that turns a ledger on or attaches value to a record. A job that asks for it is Simon's (the conductor's ledger flag)."
+ },
+ "deals": [
+  { "id": "D1", "lead": "L1", "handle": "fixture_cy", "offer": "liveware-pilot", "card": { "id": "pilot-180k", "name": "The liveware pilot", "claim": "its ingest gateway admitted 180,000 genuine records and refused 0 of them", "url": "https://sjgant80-hub.github.io/break-it/",
+      "receipt": { "repo": "sjgant80-hub/break-it", "commit": "48a2fe210857c311a50a3e4f7b778cdfc3922983", "path": "receipts/pilot.json", "sha256": "6fe80de8669638c576ed30afcba3c52aef21c7e3079ff7daa0b3dc18f20a175f" },
+      "facts": [ { "path": "facts.admitted", "value": 180000 }, { "path": "facts.genuineRefused", "value": 0 } ] } },
+  { "id": "D2", "lead": "L2", "handle": "fixture_gu", "offer": "grow-a-brain", "card": { "id": "churn-brain", "name": "A grown churn brain", "claim": "held-out AUC 0.796 on 720 rows it never saw", "url": "https://sjgant80-hub.github.io/konomi-slm/pattern-books.html",
+      "receipt": { "repo": "sjgant80-hub/konomi-slm", "commit": "1c6b72263a1090528651f7c46486aff71b237e45", "path": "pattern-books/churn.receipt.json", "sha256": "a7d23cca5ee4d49fb314d313e132e5336858944b93037e93c2ad577ce60fb150" },
+      "facts": [ { "path": "heldAuc", "value": 0.795946 }, { "path": "held", "value": 720 } ] } },
+  { "id": "D3", "lead": "L2", "handle": "fixture_gu", "offer": "grow-a-brain", "forged": true, "card": { "id": "churn-brain-forged", "name": "A grown churn brain", "claim": "held-out AUC 0.896 on 720 rows it never saw", "url": "https://sjgant80-hub.github.io/konomi-slm/pattern-books.html",
+      "receipt": { "repo": "sjgant80-hub/konomi-slm", "commit": "1c6b72263a1090528651f7c46486aff71b237e45", "path": "pattern-books/churn.receipt.json", "sha256": "a7d23cca5ee4d49fb314d313e132e5336858944b93037e93c2ad577ce60fb150" },
+      "facts": [ { "path": "heldAuc", "value": 0.795946 }, { "path": "held", "value": 720 } ] } }
+ ],
+ "library": "The library starts as the voice's four genuine receipt cards that passed its gate (witness-ms, kar-controller, churn-book, conductor) plus credit-book: five entries.",
+ "claims": [
+  { "id": "O1", "claim": "D1 and D2 are each delivered exactly once: one build, one hand-over asked of Simon, one delivery record, and the library grows from 5 to 7.", "pass": "2 deliveries, 2 asks, 2 records, library 5 → 7" },
+  { "id": "O2", "claim": "D3, whose card moves a receipt number, is refused by the claim gate: nothing handed over, nothing recorded, nothing added.", "pass": "refused; 0 hand-overs, 0 records, library unchanged by it" },
+  { "id": "O3", "claim": "The hand-over waits for Simon: walked again with no approval, D1 is built and proven but never handed over, recorded or added.", "pass": "stage waiting; 0 hand-overs" },
+  { "id": "O4", "claim": "No switch: no kernel exports a name that turns a ledger on, and the conductor sends 'switch on the ledger' to Simon flagged ledger.", "pass": "0 such exports; simon with flag ledger" },
+  { "id": "O5", "claim": "Delivering D1 twice adds it to the library once.", "pass": "library +1, not +2" }
+ ],
+ "scope": "Two fixture deals delivered with real, pinned receipts from the estate's own repos as the deliverables; the hand-over is a dry run and the approvals are rehearsal records. What a real deliverable contains is agreed per deployment."
+}
