@@ -1,0 +1,21 @@
+{
+ "kind": "ai-first-company-step6-oversight-prereg",
+ "v": 1,
+ "sealed": "2026-10-28",
+ "question": "Can Simon oversee the company without operating it — one queue of what is waiting for him, a pause that stops everything outward at once, a denial that sticks and teaches, a steer on which offer to lead with — and a dashboard whose every number is the journal's, not a summary someone typed?",
+ "why": "Simon's AI-first company spec (2026-10-28), build step 6: 'the oversight layer (flags, dashboard, steering)': approval gates on money, deals, big or novel public claims, high-stakes replies, risky or precedent-setting actions and the ledger switch; a dashboard of leads, conversions, content, signals, deliveries and library growth; direction and course-correction.",
+ "design": {
+  "queue": "src/oversight.mjs queue(journal): one item per 'asked' event — what it is, the hash of its exact text, its flags, and its state: waiting, approved, denied or withdrawn (from later approved / steer-deny / steer-withdraw entries for the same hash).",
+  "steer": "Simon's steering is journal entries of kind 'steer' (by simon, or rehearsal in a rehearsal): { pause: true | false }, { deny: <text hash>, note }, { withdraw: <text hash> }, { focus: <offer id> }.",
+  "mayGo": "mayGo(journal, hash): approved, not denied, not withdrawn, and not paused at that moment. Outward steps ask mayGo before they go.",
+  "focus": "pickWithFocus(text, focus): the offer the person's own words call for; only when their words tie between offers does Simon's focus decide, and only if it is one of the tied offers.",
+  "dashboard": "dashboard(journal): signals (all, eligible, market), leads (qualified, converted), content (drafted, asked, approved, sent), deliveries (handed, recorded), library size, queue (waiting, approved, denied), steering entries — each a count of the journal's own entries."
+ },
+ "claims": [
+  { "id": "S1", "claim": "Every dashboard number equals an independent plain count of the journal's entries, on the step 4 and step 5 journals together, and the combined journal verifies.", "pass": "every number equal; verify ok" },
+  { "id": "S2", "claim": "The pause: on a journal where an item is approved, mayGo is true; after a pause entry it is false for that item and every other approved item; after an unpause it is true again.", "pass": "true, all false while paused, true" },
+  { "id": "S3", "claim": "A denial sticks and teaches: a denied item's mayGo is false even if it is approved afterwards, its queue state is denied, and its note is returned by notesFor for the next draft.", "pass": "false, denied, the note returned" },
+  { "id": "S4", "claim": "Focus steers only ties: with focus digi, the tied lead (L6, 'could my own model collect cards?') gets digi; the explicit leads L1, L2 and L3 keep their own offers; a focus that is not one of the tied offers changes nothing.", "pass": "all four as stated" }
+ ],
+ "scope": "The dashboard is computed from the rehearsal journals of steps 4 and 5 (fixture leads, rehearsal approvals). Simon's real steering arrives as journal entries Kar writes on his word in chat, quoted."
+}
