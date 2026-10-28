@@ -9,12 +9,14 @@
 //                           website breaks X's automation rules, and X's paid API is money, which is Simon's lane.
 //           'deterministic' | 'local' | 'frontier'
 //                           everything else, by Kar's own controller (kar-mind controller.mjs, vendored unchanged)
-//   flagsOf(job) → the reasons a job needs Simon ([] when it does not)
+//   flagsOf(job) → the reasons a job needs Simon ([] when it does not). It FAILS CLOSED (step 1b): a job whose first verb is
+//                  not a known internal verb goes to Simon, flagged 'unknown' — open wording has more ways to act than any
+//                  list of outward verbs (step 1's held-out: 39 of 57 such jobs slipped past a denylist).
 //   isReach(job) → is this a reading job about X?
 //
 // The words are read the way a person reads an order: the verbs that act are the ones that start the job or a clause
 // of it ("summarise the receipt, then share it"). A verb used as a noun ("draft a reply") acts on nothing.
-import { route } from '../vendor/kar-mind/controller.mjs';
+import { route, RUN, NARROW, JUDGE } from '../vendor/kar-mind/controller.mjs';
 
 export const LANES = Object.freeze(['simon', 'grok', 'deterministic', 'local', 'frontier']);
 
@@ -33,6 +35,13 @@ export const AMOUNT = /[£$€]\s?\d/;
 // Reading jobs, and the cue that the reading is about X.
 export const REACH = Object.freeze(['monitor', 'watch', 'scan', 'listen', 'track', 'search', 'find', 'look', 'read', 'check', 'pull', 'fetch', 'gather']);
 export const ON_X = /\bon x\b|^\S+ x\b|\btwitter\b|@\w|\btweets?\b|\btimeline\b/;
+// Everyday internal work: the first verbs a job may start with and still run without Simon (plus kar-mind's own verbs and
+// the reading verbs). Some of these also act outward when the job names someone outside (ask, schedule, show…): the AIMED
+// rule still flags those.
+export const WORK = Object.freeze(['analyse', 'analyze', 'assess', 'audit', 'calculate', 'compute', 'count', 'tally', 'estimate', 'forecast', 'research', 'study', 'investigate', 'explore', 'test', 'debug', 'fix', 'build', 'refactor', 'document', 'sort', 'filter', 'rank', 'score', 'match', 'merge', 'store', 'save', 'load', 'parse', 'convert', 'index', 'compile', 'compose', 'prepare', 'create', 'generate', 'organise', 'organize', 'record', 'log', 'note', 'evaluate', 'update', 'edit', 'revise', 'proofread', 'outline', 'sketch', 'brainstorm', 'map', 'model', 'simulate', 'grow', 'train', 'mint', 'seal', 'hash', 'clean', 'tidy', 'label', 'group', 'cluster', 'queue', 'schedule', 'ask', 'get', 'take', 'show', 'open', 'set', 'add', 'commit', 'wait', 'identify', 'detect', 'mark', 'reconcile', 'archive', 'back', 'select', 'pick', 'consider', 'think', 'remember', 'learn', 'explain', 'describe', 'report', 'remind', 'retry', 'refresh', 'reread', 'restart', 'stage', 'sample', 'split', 'join', 'combine', 'chart', 'plot', 'graph', 'visualise', 'visualize', 'benchmark', 'profile', 'inspect', 'examine', 'validate', 'confirm', 'double-check', 'cross-check', 'proof', 'polish', 'tighten', 'simplify', 'expand', 'complete', 'finish', 'continue', 'resume', 'keep', 'work', 'develop', 'process', 'improve', 'refine', 'iterate', 'tweak', 'adjust']);
+export const INTERNAL = Object.freeze([...new Set([...RUN, ...NARROW, ...JUDGE, ...REACH, ...WORK])]);
+export const TALK = Object.freeze(['write', 'speak', 'talk', 'say', 'explain', 'describe', 'report', 'show', 'present', 'recommend', 'suggest']);
+export const TO_PARTY = /\bto (the |a |an |our |my |this |that |these |those |every |each |all )?(new |potential |existing |interested |key )?(clients?|customers?|leads?|partners?|prospects?|buyers?|audience|followers|community|market|industry|network|stakeholders?|attendees?|public|world|people|everyone|investors?|vendors?|suppliers?|party|parties|users?)\b|\bto @\w/;
 const LEAD = new Set(['please', 'kar', 'now', 'also', 'then', 'and', 'so', 'finally', 'next']);
 const JOIN = new Set(['then', 'and', 'to', ',', ';', 'please', 'now', 'also', 'finally', 'so', 'or', 'next']);
 
@@ -66,7 +75,9 @@ export function flagsOf(job) {
     const text = job.words.toLowerCase();
     const t = tokens(job.words);
     const outside = OUTSIDE.test(text);
-    for (const v of verbs(t)) {
+    const vs = verbs(t);
+    if (TALK.includes(vs[0]) && TO_PARTY.test(text)) flags.add('outward');
+    for (const v of vs) {
       if (OUTWARD.includes(v)) flags.add('outward');
       if (MONEY.includes(v)) flags.add('money');
       if (DEAL.includes(v) && outside) flags.add('deal');
@@ -76,6 +87,7 @@ export function flagsOf(job) {
     if (AMOUNT.test(text)) flags.add('money');
     if (PRECEDENT.test(text)) flags.add('risky');
     if (LEDGER.test(text) && LEDGER_THING.test(text)) flags.add('ledger');
+    if (flags.size === 0 && !INTERNAL.includes(vs[0])) flags.add('unknown');   // fail closed: a first verb it does not know as internal work
     return [...flags];
   } catch { return ['unreadable']; }
 }

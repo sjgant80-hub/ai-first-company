@@ -39,7 +39,9 @@ test('structured fields flag a job whatever its words say', () => {
   assert.deepEqual(flagsOf(W('handle item 7', { outward: 'post' })), ['outward']);
   assert.deepEqual(flagsOf(W('process the order', { moneyPence: 5000 })), ['money']);
   assert.deepEqual(flagsOf(W('process the order', { moneyPence: null })), ['money']);
-  assert.deepEqual(flagsOf(W('process the order', { moneyPence: 0 })), []);
+  assert.deepEqual(flagsOf(W('update the order', { moneyPence: 0 })), []);
+  assert.deepEqual(flagsOf(W('update the order')), []);
+  assert.deepEqual(flagsOf(W('handle the order')), ['unknown']);
   assert.deepEqual(flagsOf(W('process the order')), []);
   assert.deepEqual(flagsOf(W('update the record', { deal: 'close' })), ['deal']);
   assert.deepEqual(flagsOf(W('tidy up', { risky: true })), ['risky']);
@@ -62,20 +64,41 @@ test('money: a money verb or an amount', () => {
 
 test('deal and aimed verbs count only when someone or somewhere outside is named', () => {
   assert.deepEqual(flagsOf(W('close the deal')), ['deal']);
-  assert.deepEqual(flagsOf(W('close the tab')), []);
+  assert.deepEqual(flagsOf(W('close the tab')), ['unknown']);
   assert.deepEqual(flagsOf(W('propose tonight’s build idea from the dream’s pair')), []);
   assert.deepEqual(flagsOf(W('get the quote over to the lead')), ['outward']);
   assert.deepEqual(flagsOf(W('get the build log')), []);
   assert.deepEqual(flagsOf(W('follow @someone')), ['outward']);
-  assert.deepEqual(flagsOf(W('follow the steps')), []);
+  assert.deepEqual(flagsOf(W('follow the steps')), ['unknown']);
 });
 
 test('risky, precedent and the ledger switch', () => {
   assert.deepEqual(flagsOf(W('delete the old drafts')), ['risky']);
   assert.deepEqual(flagsOf(W('set a standing approval for summoned answers')), ['risky']);
   assert.deepEqual(flagsOf(W('switch on the ledger')), ['ledger']);
-  assert.deepEqual(flagsOf(W('enable the dark theme')), []);
+  assert.deepEqual(flagsOf(W('enable the dark theme')), ['unknown']);
   assert.deepEqual(flagsOf(W('tidy the ledger')), []);
+});
+
+test('fail closed: a first verb it does not know as internal work goes to Simon', () => {
+  assert.deepEqual(flagsOf(W('provide a quote to a potential client')), ['unknown']);
+  assert.deepEqual(flagsOf(W('cancel the subscription')), ['unknown']);
+  assert.deepEqual(flagsOf(W('')), ['unknown']);
+  assert.deepEqual(flagsOf(W('please')), ['unknown']);
+  assert.deepEqual(flagsOf(W('compile the quote for the project')), []);
+  assert.deepEqual(flagsOf(W('re-run the census')), []);
+  assert.deepEqual(flagsOf(W('monitor x for mentions')), []);
+  assert.deepEqual(flagsOf(W('draft a reply to the lead')), []);
+  assert.deepEqual(conduct(W('cancel the subscription'), BUDGET), { lane: 'simon', why: 'needs Simon: unknown', flags: ['unknown'], wait: true, fallback: false });
+});
+
+test('a talking verb aimed at someone outside is outward', () => {
+  assert.deepEqual(flagsOf(W('write to the client about the delay')), ['outward']);
+  assert.deepEqual(flagsOf(W('explain the receipt to our new followers')), ['outward']);
+  assert.deepEqual(flagsOf(W('report the result to @someone')), ['outward']);
+  assert.deepEqual(flagsOf(W('write the reply to the feedback')), []);
+  assert.deepEqual(flagsOf(W('explain the receipt in plain words')), []);
+  assert.deepEqual(flagsOf(W('draft a note to the client')), []);
 });
 
 test('reading jobs about X', () => {
