@@ -15,7 +15,7 @@ import { HYPE, PRICE, ECONOMY, JARGON } from '../vendor/kar-voice/claim-gate.mjs
 export const OFFERS = Object.freeze([
   Object.freeze({ id: 'liveware-pilot', name: 'the liveware pilot', url: 'https://sjgant80-hub.github.io/break-it/', words: Object.freeze(['untrusted', 'files', 'file', 'parse', 'parser', 'ingest', 'attack', 'breach', 'gateway', 'input', 'inputs']) }),
   Object.freeze({ id: 'grow-a-brain', name: 'grow a brain from your own data', url: 'https://sjgant80-hub.github.io/konomi-slm/brain.html', words: Object.freeze(['own', 'model', 'spreadsheets', 'spreadsheet', 'csv', 'predict', 'trained', 'train', 'data']) }),
-  Object.freeze({ id: 'digi', name: 'DIGI cards', url: 'https://sjgant80-hub.github.io/digi-card/', words: Object.freeze(['card', 'cards', 'collect', 'collectible', 'digi']) }),
+  Object.freeze({ id: 'digi', name: 'DIGI cards', url: 'https://sjgant80-hub.github.io/kardlings/', words: Object.freeze(['card', 'cards', 'collect', 'collectible', 'digi']) }),
 ]);
 const LINK = /https?:\/\/\S+/g;
 const ESTATE = /^https:\/\/(sjgant80-hub\.github\.io\/|github\.com\/sjgant80-hub\/)/;

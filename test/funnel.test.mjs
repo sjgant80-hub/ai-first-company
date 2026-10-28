@@ -21,7 +21,7 @@ test('pickOffer: one offer the words call for, else none', () => {
 });
 
 test('drafts: plain words and the offer’s own page', () => {
-  assert.equal(replyText('ada', OFFERS[2]), '@ada Thanks for asking. That is DIGI cards: https://sjgant80-hub.github.io/digi-card/\nEvery claim on that page links to a receipt you can re-run yourself.');
+  assert.equal(replyText('ada', OFFERS[2]), '@ada Thanks for asking. That is DIGI cards: https://sjgant80-hub.github.io/kardlings/\nEvery claim on that page links to a receipt you can re-run yourself.');
   assert.equal(offerText('ada', OFFERS[0]), '@ada Here is how the liveware pilot starts: https://sjgant80-hub.github.io/break-it/\nSay go ahead here when you are ready, and we will set it up with you.');
 });
 

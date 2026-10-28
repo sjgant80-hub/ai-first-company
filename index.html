@@ -177,6 +177,18 @@
   <div class="card small"><p style="margin:0">The company's routine work runs on its own; the decisions that carry the company's name, money or commitments come to one person, in one queue, with the exact words in front of them. Every claim the company makes in public is pinned to evidence anyone can fetch, so a claim cannot drift from what was proven. Every step is in a record that cannot be quietly edited. It is measured the way it is sold: the claims were written down before the code, the failures are on the page, and anyone can re-run the checks. The software is yours (MIT), runs on your machines and accounts, and keeps running without the supplier.</p></div>
   <h3>Deployment, support and ownership</h3>
   <div class="card small"><p style="margin:0 0 8px">Supplied by <b>AI Native Solutions</b> — start at <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a>. Support, service levels, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed: no licence fee, and it keeps running without us.</p><p style="margin:0">It runs on your own machine and your own accounts: your channel keys, your Grok Bot, your repos. Claude is used for judgement on your own login inside a nightly budget; small models on your own hardware do the bulk.</p></div>
+  <h3>What it runs on, and what it costs to run</h3>
+  <div class="card small"><ul style="margin:0;padding-left:18px">
+    <li><b>A machine you own:</b> Node 22 for the kernels; Ollama with a 7B model (about 5 GB of memory) for the bulk wording work; a GitHub account for the pages, the receipts and the CI that re-checks them.</li>
+    <li><b>Accounts you already hold:</b> your X developer keys for the voice (it runs dry until you add them), your Grok Bot for reading X, your own Claude login for judgement.</li>
+    <li><b>Running costs:</b> your machine's electricity; your existing Grok and Claude subscriptions; X's own pay-per-use charge per post if you post. Claude is held to a nightly token budget the controller cannot cross; when the budget is spent, judgement falls back to the local model and says so.</li>
+  </ul></div>
+  <h3>Questions a buyer asks first</h3>
+  <div class="card small"><ul style="margin:0;padding-left:18px">
+    <li><b>Isn't one approver a bottleneck?</b> By design, one named person approves what leaves the company. When they are away, nothing outward goes — items wait in the queue, and everything inside the company keeps running. At one cycle a working day that is about thirty approvals a week, each one the exact words in front of them.</li>
+    <li><b>Who else runs this?</b> Nobody yet. This is the first deployment, run on the supplier's own company: the dashboard is a measured rehearsal, not a customer. The evidence is the receipts — sealed before the code, re-measured by CI on every change. A pilot starts in dry run, so you see everything before anything leaves.</li>
+    <li><b>Can I set my own numbers?</b> Yes: the hours, your own wage and your seat count above all recompute in the page, with the same code the receipts were measured with.</li>
+  </ul></div>
   <h3>Risks, answered straight</h3>
   <div class="card small"><ul style="margin:0;padding-left:18px">
     <li><b>The router can misjudge wording.</b> Measured: on wording written by a small model after the code was frozen, the first version let 39 of 57 outward jobs past; the fail-closed fix held every seen set but its fresh test failed too, partly on the test model's own mislabelled lines. That is why the router is the fence and the connector is the wall: nothing leaves without an approval of the exact item, whatever the router decided.</li>
@@ -255,11 +267,13 @@ try {
   const keys = Object.keys(DEFAULT_HOURS);
   box.innerHTML = `<p class="small" style="margin-top:0">Set the hours a person spends each week on each job the loop does. The cost uses the UK median hourly wage from ONS ASHE 2025 (${esc(String(basis.wageMedianHourly.value))} per hour, <a href="${esc(basis.wageMedianHourly.source)}">source</a>), before employer on-costs — so it is a floor, not a pitch.</p>` +
     keys.map((k) => `<div class="barrow"><label for="h-${k}">${esc(DEFAULT_HOURS[k].label)}</label><input id="h-${k}" type="range" min="0" max="20" step="0.5" value="${DEFAULT_HOURS[k].hours}" aria-describedby="hv-${k}"><span class="v" id="hv-${k}">${DEFAULT_HOURS[k].hours} h</span></div>`).join('') +
-    `<div class="grid g3" style="margin-top:12px"><div class="tile"><div class="n" id="cc-h">—</div><div class="l">hours a year the loop takes on</div></div><div class="tile"><div class="n" id="cc-c">—</div><div class="l">of a person's time at the median wage, a year</div></div><div class="tile"><div class="n" id="cc-s">—</div><div class="l">approvals a week for the owner, at one cycle each working day (six asks a cycle)</div></div></div>`;
+    `<div class="barrow"><label for="wage">Your own hourly wage, if you know it (£)</label><input id="wage" type="number" min="0" max="500" step="0.01" value="${esc(String(basis.wageMedianHourly.value))}" style="font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)"><span class="v"></span></div>` +
+    `<div class="grid g3" style="margin-top:12px"><div class="tile"><div class="n" id="cc-h">—</div><div class="l">hours a year the loop takes on</div></div><div class="tile"><div class="n" id="cc-c">—</div><div class="l">of a person's time at that wage, a year</div></div><div class="tile"><div class="n" id="cc-s">—</div><div class="l">approvals a week for the owner, at one cycle each working day (six asks a cycle)</div></div></div>`;
   const update = () => {
     const hours = Object.fromEntries(keys.map((k) => [k, Number($('#h-' + k).value)]));
     keys.forEach((k) => { $('#hv-' + k).textContent = hours[k] + ' h'; });
-    const r = costCase({ hours, wage: basis.wageMedianHourly.value });
+    const own = Number($('#wage').value);
+    const r = costCase({ hours, wage: Number.isFinite(own) && own >= 0 ? own : basis.wageMedianHourly.value });
     $('#cc-h').textContent = r.ok ? r.hoursPerYear.toLocaleString('en-GB') : '—';
     $('#cc-c').textContent = r.ok ? '£' + Math.round(r.costPerYear).toLocaleString('en-GB') : '—';
     $('#cc-s').textContent = r.ok ? String(r.approvalsPerWeek) : '—';
@@ -272,7 +286,7 @@ try {
   const seatUpdate = () => {
     const n = Number($('#seat-n').value); $('#seat-v').textContent = String(n);
     const r = seatsNow(basis, { crm: n, copilot: n });
-    $('#seat-out').innerHTML = r.ok ? `<div class="tablewrap"><table><thead><tr><th>Seat</th><th>List price</th><th>Seats</th><th>A year</th></tr></thead><tbody>${r.lines.map((l) => `<tr><td><a href="${esc(l.source)}">${esc(l.product)}</a></td><td>£${esc(l.perMonth)} a user a month</td><td>${l.seats}</td><td>£${Math.round(l.perYear).toLocaleString('en-GB')}</td></tr>`).join('')}<tr><th colspan="3">Seats, a year</th><th>£${Math.round(r.perYear).toLocaleString('en-GB')}</th></tr></tbody></table></div>` : '<p class="muted small">—</p>';
+    $('#seat-out').innerHTML = r.ok ? `<div class="tablewrap"><table><thead><tr><th>Seat</th><th>List price</th><th>Seats</th><th>A year</th></tr></thead><tbody>${r.lines.map((l) => `<tr><td><a href="${esc(l.source)}">${esc(l.product)}</a></td><td>£${esc(Number.isInteger(l.perMonth) ? l.perMonth : l.perMonth.toFixed(2))} a user a month</td><td>${l.seats}</td><td>£${Math.round(l.perYear).toLocaleString('en-GB')}</td></tr>`).join('')}<tr><th colspan="3">Seats, a year</th><th>£${Math.round(r.perYear).toLocaleString('en-GB')}</th></tr></tbody></table></div>` : '<p class="muted small">—</p>';
   };
   sb.addEventListener('input', seatUpdate); seatUpdate();
   } catch { $('#seats').innerHTML = '<p class="muted small">The comparison could not be loaded: reload the page.</p>'; }

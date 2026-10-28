@@ -617,12 +617,12 @@
    "data": {
     "lead": "L3",
     "item": "reply",
-    "text": "@fixture_ha Thanks for asking. That is DIGI cards: https://sjgant80-hub.github.io/digi-card/\nEvery claim on that page links to a receipt you can re-run yourself.",
-    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45",
+    "text": "@fixture_ha Thanks for asking. That is DIGI cards: https://sjgant80-hub.github.io/kardlings/\nEvery claim on that page links to a receipt you can re-run yourself.",
+    "textSha256": "5fdf4c165e914e0950c715bfbcc438a2db48f85721070f9174143c372073f79d",
     "wordsOk": true
    },
    "prev": "fb2cb597286d8cf23bfac40fb15e1327fdf3e8f23fb098fc33deca3a7088ce17",
-   "hash": "1e048263a913a8801ba8bddb3a5bbb5aded8f00f831b802a630f681c25b14d00"
+   "hash": "f47c260ca4217dd570b1723201bc6217b3fafe1508830d2937cfc72e153e9e82"
   },
   {
    "n": 39,
@@ -632,13 +632,13 @@
    "data": {
     "lead": "L3",
     "item": "reply",
-    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45",
+    "textSha256": "5fdf4c165e914e0950c715bfbcc438a2db48f85721070f9174143c372073f79d",
     "flags": [
      "outward"
     ]
    },
-   "prev": "1e048263a913a8801ba8bddb3a5bbb5aded8f00f831b802a630f681c25b14d00",
-   "hash": "020a86690c7bc4508e3081a5464ce9fd2504748e0f9cb4bac88be6e8027cccc8"
+   "prev": "f47c260ca4217dd570b1723201bc6217b3fafe1508830d2937cfc72e153e9e82",
+   "hash": "c985a20db06d76a75c3728085ec46973d790e0b326bbd3c5d9ab63b7941e96b1"
   },
   {
    "n": 40,
@@ -648,10 +648,10 @@
    "data": {
     "lead": "L3",
     "item": "reply",
-    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45"
+    "textSha256": "5fdf4c165e914e0950c715bfbcc438a2db48f85721070f9174143c372073f79d"
    },
-   "prev": "020a86690c7bc4508e3081a5464ce9fd2504748e0f9cb4bac88be6e8027cccc8",
-   "hash": "f26de0c3536aed92e4472595c47dbddd5bb1e39098f5190b927814dfdf80de43"
+   "prev": "c985a20db06d76a75c3728085ec46973d790e0b326bbd3c5d9ab63b7941e96b1",
+   "hash": "8bec691211620ee52a00a0e72aeec37240f2734134161780ee5960b5b3b6c814"
   },
   {
    "n": 41,
@@ -661,11 +661,11 @@
    "data": {
     "lead": "L3",
     "item": "reply",
-    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45",
+    "textSha256": "5fdf4c165e914e0950c715bfbcc438a2db48f85721070f9174143c372073f79d",
     "dryRun": true
    },
-   "prev": "f26de0c3536aed92e4472595c47dbddd5bb1e39098f5190b927814dfdf80de43",
-   "hash": "89ece9139b45d2a6642f662c7495c2f9cf1c3b05bd26ce55411719c6562cdfd6"
+   "prev": "8bec691211620ee52a00a0e72aeec37240f2734134161780ee5960b5b3b6c814",
+   "hash": "bc57ad8ff289314a5a2f81921878f367aa8bda1bb8bffba8f6981940161cb8fe"
   },
   {
    "n": 42,
@@ -679,8 +679,8 @@
     "text": "is there a way to own a model trained on my own spreadsheets?",
     "eligible": false
    },
-   "prev": "89ece9139b45d2a6642f662c7495c2f9cf1c3b05bd26ce55411719c6562cdfd6",
-   "hash": "0277c1089a7700ac70e742b6785f96e90a1db8f9f45fdd6263cdc6b2b9ec41c6"
+   "prev": "bc57ad8ff289314a5a2f81921878f367aa8bda1bb8bffba8f6981940161cb8fe",
+   "hash": "848bd565634c6b4faa82f62a8093548c49ecc237518b385e6fac7f19cf9cf672"
   },
   {
    "n": 43,
@@ -691,8 +691,8 @@
     "lead": "L4",
     "id": "s2"
    },
-   "prev": "0277c1089a7700ac70e742b6785f96e90a1db8f9f45fdd6263cdc6b2b9ec41c6",
-   "hash": "2dc6831184c4b7b0e5efbc9063df1c35e907e592a5783fac5d920386d2bd292d"
+   "prev": "848bd565634c6b4faa82f62a8093548c49ecc237518b385e6fac7f19cf9cf672",
+   "hash": "e434c33377be989d6d805bffe48e181daf027f66fa73d7328ae6f4077a790d5f"
   },
   {
    "n": 44,
@@ -706,8 +706,8 @@
     "text": "@example_co hello!",
     "eligible": true
    },
-   "prev": "2dc6831184c4b7b0e5efbc9063df1c35e907e592a5783fac5d920386d2bd292d",
-   "hash": "3b4ad91f1e6175a230138149fa2f74654ef72f15355fa1c0b9e831095414c10e"
+   "prev": "e434c33377be989d6d805bffe48e181daf027f66fa73d7328ae6f4077a790d5f",
+   "hash": "bd49f67f7bf8dddbb20d29477f666c4a6d546fec064c3e53a28ffaf62ffeeb52"
   },
   {
    "n": 45,
@@ -718,8 +718,8 @@
     "lead": "L5",
     "id": "s9"
    },
-   "prev": "3b4ad91f1e6175a230138149fa2f74654ef72f15355fa1c0b9e831095414c10e",
-   "hash": "b682d7241632e6884d9a950029055d01ae27c2943f27ae7f8660f1e8afb7ac85"
+   "prev": "bd49f67f7bf8dddbb20d29477f666c4a6d546fec064c3e53a28ffaf62ffeeb52",
+   "hash": "79799a6aa4807abd537eb6b2e00bb6f539b9df2437e8c700fbcda1809e90cf61"
   },
   {
    "n": 46,
@@ -733,8 +733,8 @@
     "text": "@example_co could my own model collect cards?",
     "eligible": true
    },
-   "prev": "b682d7241632e6884d9a950029055d01ae27c2943f27ae7f8660f1e8afb7ac85",
-   "hash": "96f90bf7892e0435c4c6f2ec99ebf283f2e3887e6174e4ef6c3ba7f08d05c389"
+   "prev": "79799a6aa4807abd537eb6b2e00bb6f539b9df2437e8c700fbcda1809e90cf61",
+   "hash": "c4737c623dfc8bd945ff8354c0d77a094f41badedc2c8d917b24edbd6f3b8ce2"
   },
   {
    "n": 47,
@@ -745,8 +745,8 @@
     "lead": "L6",
     "id": "s10"
    },
-   "prev": "96f90bf7892e0435c4c6f2ec99ebf283f2e3887e6174e4ef6c3ba7f08d05c389",
-   "hash": "5376b1af0a74881822118c4aa106fe675de49b6db47a0e6824625e4f1d3cd13a"
+   "prev": "c4737c623dfc8bd945ff8354c0d77a094f41badedc2c8d917b24edbd6f3b8ce2",
+   "hash": "884279fce3f4e2f05d26910fe1cf51b29035019d35f542c394a4a6657986e05b"
   }
  ]
 }

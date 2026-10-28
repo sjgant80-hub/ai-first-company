@@ -28,6 +28,13 @@ jobs:
         run: |
           for s in step1 step1b step3 step4; do node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; done
           for s in step5 step6 step7; do if [ -f tools/$s-measure.mjs ]; then node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; fi; done
+      - name: every offer link the funnel drafts into a reply is alive (a renamed repo once broke one)
+        run: |
+          node --input-type=module -e "
+          import { OFFERS } from './src/funnel.mjs';
+          let bad = 0;
+          for (const o of OFFERS) { const r = await fetch(o.url, { redirect: 'follow' }); console.log(r.status, o.url); if (r.status !== 200) bad++; }
+          process.exit(bad ? 1 : 0);"
 
   witness:
     name: mutation gate (witness)
