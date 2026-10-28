@@ -1,0 +1,29 @@
+{
+ "kind": "ai-first-company-step4-funnel-prereg",
+ "v": 1,
+ "sealed": "2026-10-28",
+ "question": "Can the company turn a person who asked into a customer — qualify them, answer, offer, close — with the AI doing every step in between and Simon asked only for the three that leave the company or commit it, and with no cold contact, no pitch the person's own words don't call for, and a record of every step that cannot be quietly edited?",
+ "why": "Simon's AI-first company spec (2026-10-28), build step 4: 'the GTM loop end to end (a lead from monitoring → qualified → Simon approves → converted)'. Directive (2026-10-08): no human sales, no 'let's jump on a call', no slimy outreach — answer when summoned.",
+ "design": {
+  "journal": "src/journal.mjs — every event is one record { n, at, kind, by (kar | grok | simon | rehearsal), data, prev, hash } with hash = sha256 of the canonical JSON of the other fields (pure synchronous SHA-256 vendored byte-identical from fall-kit f9e7af2, so the browser re-verifies the same bytes). verify(chain) names the first record that does not hold.",
+  "offers": "liveware-pilot (untrusted files and data: break-it), grow-a-brain (a model from your own data: konomi-slm), digi (collectible AI cards: digi-card). Each offer is chosen only by words in the person's own post; a post that matches none, or two equally, is not pitched.",
+  "funnel": "src/funnel.mjs over a signal as step 3's reader returns it ({ id, handle, text, eligible, ... }). Stages: market (not eligible: recorded, nothing drafted) · no-offer (eligible, no single offer: nothing pitched) · qualified → reply drafted → [Simon: the reply] → replied → engaged (the same person writes back, summoning us again) → offer drafted → [Simon: the offer] → offered → accepted (the same person says go ahead) → [Simon: the close] → converted. Which steps wait for Simon is decided by the conductor (step 1b) from each step's own words, not by the funnel.",
+  "approvals": "The run is a rehearsal: each item Simon is asked for is approved by a 'rehearsal' record bound to the item's text hash. Simon's real approvals do not exist yet; nothing here is sent."
+ },
+ "leads": [
+  { "id": "L1", "signal": { "id": "s3", "handle": "fixture_cy", "kind": "lead", "text": "@example_co we parse untrusted partner files all day, could your gateway sit in front of that?", "eligible": true }, "then": ["@example_co yes please, how do we start?", "@example_co let's go ahead with the pilot"], "expect": { "offer": "liveware-pilot", "stage": "converted", "asked": 3 } },
+  { "id": "L2", "signal": { "id": "s7", "handle": "fixture_gu", "kind": "question", "text": "@example_co can I own a model trained on my own spreadsheets?", "eligible": true }, "then": ["@example_co sounds good, how do I start?", "@example_co yes, go ahead"], "expect": { "offer": "grow-a-brain", "stage": "converted", "asked": 3 } },
+  { "id": "L3", "signal": { "id": "s8", "handle": "fixture_ha", "kind": "question", "text": "@example_co are the collectible AI cards out yet?", "eligible": true }, "then": [], "expect": { "offer": "digi", "stage": "replied", "asked": 1 } },
+  { "id": "L4", "signal": { "id": "s2", "handle": "fixture_bo", "kind": "question", "text": "is there a way to own a model trained on my own spreadsheets?", "eligible": false }, "then": [], "expect": { "offer": null, "stage": "market", "asked": 0 } },
+  { "id": "L5", "signal": { "id": "s9", "handle": "fixture_io", "kind": "mention", "text": "@example_co hello!", "eligible": true }, "then": [], "expect": { "offer": null, "stage": "no-offer", "asked": 0 } },
+  { "id": "L6", "signal": { "id": "s10", "handle": "fixture_ju", "kind": "question", "text": "@example_co could my own model collect cards?", "eligible": true }, "then": [], "expect": { "offer": null, "stage": "no-offer", "asked": 0 } }
+ ],
+ "claims": [
+  { "id": "G1", "claim": "Each lead ends at the stage the table states, with the offer it states, and Simon is asked exactly the number of times it states (3 for a conversion: the reply, the offer, the close) — each ask decided by the conductor's Simon lane.", "pass": "6 of 6 leads as stated" },
+  { "id": "G2", "claim": "No cold contact: a signal that is not eligible is recorded as a market signal and nothing is drafted for it.", "pass": "0 drafts for L4" },
+  { "id": "G3", "claim": "No pitch the person's words don't call for: no offer text is drafted for L5 or L6.", "pass": "0 offer drafts for L5 and L6" },
+  { "id": "G4", "claim": "Every reply and offer drafted passes the claim gate's word rules (no hype, price, economy term or jargon) and links only to the estate's own pages.", "pass": "every draft passes" },
+  { "id": "G5", "claim": "Nothing goes out without an approval: every 'sent' event in the journal follows an approval of the same text hash; the journal re-verifies; and changing one byte in any record breaks verification at that record.", "pass": "0 sends without approval; verify ok; every record's tamper caught at that record" }
+ ],
+ "scope": "Fixture leads with fictional handles; no real person, message or money. 'Sent' means a dry-run record: nothing reaches X. The offers point at the estate's live pages; what a deal contains is agreed per deployment, off the page."
+}
