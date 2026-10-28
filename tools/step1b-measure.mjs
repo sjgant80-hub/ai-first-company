@@ -89,7 +89,7 @@ if (cmd === '--check') {
   console.error(`✓ fresh held-out set: ${union('leaves').length} LEAVES, ${union('stays').length} STAYS from ${asks.length} asks`);
 } else if (cmd === '--run' || cmd === '--verify') {
   const H = readJSON(HELD);
-  const vendor = readJSON('vendor/VENDOR.json').files.map((f) => ({ path: f.path, ok: sha(readFileSync(file(f.path))) === f.sha256 }));
+  const vendor = readJSON('vendor/VENDOR.json').files.filter((f) => f.path.startsWith('vendor/kar-mind/')).map((f) => ({ path: f.path, ok: sha(readFileSync(file(f.path))) === f.sha256 }));
   const g = grade(readJSON(STEP1), readJSON(STEP1HELD).karMindTasks, H, vendor, await conductorAt(H.conductorCommit));
   const result = { kind: 'ai-first-company-step1b-conductor-run', seal: SEAL, conductorCommit: H.conductorCommit, claims: g.claims, held: Object.values(g.claims).filter((c) => c.pass).length, of: 3, rows: g.rows };
   const text = JSON.stringify(result, null, 1) + '\n';

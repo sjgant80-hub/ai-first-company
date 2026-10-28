@@ -65,7 +65,8 @@ async function conductorAt(commit) {
   try { return (await import(tmp.href)).conduct; } finally { rmSync(tmp, { force: true }); }
 }
 function vendorCheck() {
-  return readJSON('vendor/VENDOR.json').files.map((f) => ({ path: f.path, ok: sha(readFileSync(file(f.path))) === f.sha256 }));
+  // the files step 1 vendored (kar-mind's controller and its wallet); later steps vendor more, which step 1 never claimed
+  return readJSON('vendor/VENDOR.json').files.filter((f) => f.path.startsWith('vendor/kar-mind/')).map((f) => ({ path: f.path, ok: sha(readFileSync(file(f.path))) === f.sha256 }));
 }
 function karTasks() {
   // kar-mind's sealed routing tasks, copied into the held-out file at measure time so CI needs no sibling checkout

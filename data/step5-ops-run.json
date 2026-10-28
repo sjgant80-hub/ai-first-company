@@ -1,0 +1,337 @@
+{
+ "kind": "ai-first-company-step5-ops-run",
+ "seal": "8685e32",
+ "gate": "witness ops 31/31",
+ "claims": {
+  "O1": {
+   "pass": true,
+   "measured": "2 delivered, 2 asks, 2 records; library 5 → 7"
+  },
+  "O2": {
+   "pass": true,
+   "measured": "refused: the number 0.896 is not a field of the receipt; 0 hand-overs, 0 records, library 7 → 7"
+  },
+  "O3": {
+   "pass": true,
+   "measured": "stage waiting; 0 hand-overs; library stays 5"
+  },
+  "O4": {
+   "pass": true,
+   "measured": "0 of 45 exported names turn anything on; 'switch on the ledger' → simon (ledger)"
+  },
+  "O5": {
+   "pass": true,
+   "measured": "library 5 → 6 → 6"
+  }
+ },
+ "held": 5,
+ "of": 5,
+ "journalVerifies": true,
+ "library": [
+  {
+   "id": "witness-ms",
+   "from": "the voice’s gated feed"
+  },
+  {
+   "id": "kar-controller",
+   "from": "the voice’s gated feed"
+  },
+  {
+   "id": "churn-book",
+   "from": "the voice’s gated feed"
+  },
+  {
+   "id": "conductor",
+   "from": "the voice’s gated feed"
+  },
+  {
+   "id": "credit-book",
+   "from": "the voice’s gated feed"
+  },
+  {
+   "id": "pilot-180k",
+   "name": "The liveware pilot",
+   "from": "D1",
+   "receipt": {
+    "repo": "sjgant80-hub/break-it",
+    "commit": "48a2fe210857c311a50a3e4f7b778cdfc3922983",
+    "path": "receipts/pilot.json",
+    "sha256": "6fe80de8669638c576ed30afcba3c52aef21c7e3079ff7daa0b3dc18f20a175f"
+   }
+  },
+  {
+   "id": "churn-brain",
+   "name": "A grown churn brain",
+   "from": "D2",
+   "receipt": {
+    "repo": "sjgant80-hub/konomi-slm",
+    "commit": "1c6b72263a1090528651f7c46486aff71b237e45",
+    "path": "pattern-books/churn.receipt.json",
+    "sha256": "a7d23cca5ee4d49fb314d313e132e5336858944b93037e93c2ad577ce60fb150"
+   }
+  }
+ ],
+ "journal": [
+  {
+   "n": 0,
+   "at": "2026-10-28T13:00:00.000Z",
+   "kind": "build",
+   "by": "kar",
+   "data": {
+    "deal": "D1",
+    "offer": "liveware-pilot",
+    "lane": "local"
+   },
+   "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+   "hash": "f233ad84701fc602e504d4f5b1b3d6e1e8a4166f1b946355ed7347eb2dd2f7c1"
+  },
+  {
+   "n": 1,
+   "at": "2026-10-28T13:00:01.000Z",
+   "kind": "deliverable",
+   "by": "kar",
+   "data": {
+    "deal": "D1",
+    "card": "pilot-180k",
+    "receipt": {
+     "repo": "sjgant80-hub/break-it",
+     "commit": "48a2fe210857c311a50a3e4f7b778cdfc3922983",
+     "path": "receipts/pilot.json",
+     "sha256": "6fe80de8669638c576ed30afcba3c52aef21c7e3079ff7daa0b3dc18f20a175f"
+    },
+    "proven": true,
+    "why": []
+   },
+   "prev": "f233ad84701fc602e504d4f5b1b3d6e1e8a4166f1b946355ed7347eb2dd2f7c1",
+   "hash": "d2d373ddae543e397839318bdd1ff0f9a07e69fc30fc50b70eaa69106dbd632e"
+  },
+  {
+   "n": 2,
+   "at": "2026-10-28T13:00:02.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "deal": "D1",
+    "item": "hand-over",
+    "textSha256": "98c7f18171958e049ae881d81c7c3988e9574c792d6cf0998a5ed41c9b80afce",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "d2d373ddae543e397839318bdd1ff0f9a07e69fc30fc50b70eaa69106dbd632e",
+   "hash": "ec755e4d19c46966d0d4b0a6f720b331806f1d67946c83044e46f114460dc2b8"
+  },
+  {
+   "n": 3,
+   "at": "2026-10-28T13:00:03.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "deal": "D1",
+    "item": "hand-over",
+    "textSha256": "98c7f18171958e049ae881d81c7c3988e9574c792d6cf0998a5ed41c9b80afce"
+   },
+   "prev": "ec755e4d19c46966d0d4b0a6f720b331806f1d67946c83044e46f114460dc2b8",
+   "hash": "a1cbc0284dcd9b5cd8ce0945fe0833c609d5a8cb2a02f19476ef42574ba2dbaa"
+  },
+  {
+   "n": 4,
+   "at": "2026-10-28T13:00:04.000Z",
+   "kind": "handed",
+   "by": "kar",
+   "data": {
+    "deal": "D1",
+    "textSha256": "98c7f18171958e049ae881d81c7c3988e9574c792d6cf0998a5ed41c9b80afce",
+    "dryRun": true
+   },
+   "prev": "a1cbc0284dcd9b5cd8ce0945fe0833c609d5a8cb2a02f19476ef42574ba2dbaa",
+   "hash": "e82f5fcfdc9ad88952e7047ed14ef61d97b15efc259341193b884b86cb68b372"
+  },
+  {
+   "n": 5,
+   "at": "2026-10-28T13:00:05.000Z",
+   "kind": "recorded",
+   "by": "kar",
+   "data": {
+    "deal": "D1",
+    "offer": "liveware-pilot",
+    "card": "pilot-180k",
+    "receipt": {
+     "repo": "sjgant80-hub/break-it",
+     "commit": "48a2fe210857c311a50a3e4f7b778cdfc3922983",
+     "path": "receipts/pilot.json",
+     "sha256": "6fe80de8669638c576ed30afcba3c52aef21c7e3079ff7daa0b3dc18f20a175f"
+    }
+   },
+   "prev": "e82f5fcfdc9ad88952e7047ed14ef61d97b15efc259341193b884b86cb68b372",
+   "hash": "ed535bcb50adde2cc5a1b054fd1697b3564a5200d3669328be1ff280eb95ef71"
+  },
+  {
+   "n": 6,
+   "at": "2026-10-28T13:00:06.000Z",
+   "kind": "library",
+   "by": "kar",
+   "data": {
+    "deal": "D1",
+    "added": true,
+    "size": 6
+   },
+   "prev": "ed535bcb50adde2cc5a1b054fd1697b3564a5200d3669328be1ff280eb95ef71",
+   "hash": "3dbb2b06d2dcff76dfab8ed9daa7ca409f3194e37f39c6788f5faa1490c60536"
+  },
+  {
+   "n": 7,
+   "at": "2026-10-28T13:00:07.000Z",
+   "kind": "build",
+   "by": "kar",
+   "data": {
+    "deal": "D2",
+    "offer": "grow-a-brain",
+    "lane": "local"
+   },
+   "prev": "3dbb2b06d2dcff76dfab8ed9daa7ca409f3194e37f39c6788f5faa1490c60536",
+   "hash": "1b76ae377ea03d96225fb91609bdd7184e4f00009f1fc779fa1cedda5b67a9fe"
+  },
+  {
+   "n": 8,
+   "at": "2026-10-28T13:00:08.000Z",
+   "kind": "deliverable",
+   "by": "kar",
+   "data": {
+    "deal": "D2",
+    "card": "churn-brain",
+    "receipt": {
+     "repo": "sjgant80-hub/konomi-slm",
+     "commit": "1c6b72263a1090528651f7c46486aff71b237e45",
+     "path": "pattern-books/churn.receipt.json",
+     "sha256": "a7d23cca5ee4d49fb314d313e132e5336858944b93037e93c2ad577ce60fb150"
+    },
+    "proven": true,
+    "why": []
+   },
+   "prev": "1b76ae377ea03d96225fb91609bdd7184e4f00009f1fc779fa1cedda5b67a9fe",
+   "hash": "75a5408548db2cca5e0459755e22a9ba35e7996635649d9434d70c824930f7f1"
+  },
+  {
+   "n": 9,
+   "at": "2026-10-28T13:00:09.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "deal": "D2",
+    "item": "hand-over",
+    "textSha256": "f1be8bdb70a29dbbbdfcc5e9584e250d5d5f336af8b54332ce50be9e97150534",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "75a5408548db2cca5e0459755e22a9ba35e7996635649d9434d70c824930f7f1",
+   "hash": "d049c24daa15b84cf4be484e11d821cba2ad99d18bfd120d04691d0360b8b419"
+  },
+  {
+   "n": 10,
+   "at": "2026-10-28T13:00:10.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "deal": "D2",
+    "item": "hand-over",
+    "textSha256": "f1be8bdb70a29dbbbdfcc5e9584e250d5d5f336af8b54332ce50be9e97150534"
+   },
+   "prev": "d049c24daa15b84cf4be484e11d821cba2ad99d18bfd120d04691d0360b8b419",
+   "hash": "fba93b285af179ffb071af972183a8208a20fff6456c176248c9e3b3d2463247"
+  },
+  {
+   "n": 11,
+   "at": "2026-10-28T13:00:11.000Z",
+   "kind": "handed",
+   "by": "kar",
+   "data": {
+    "deal": "D2",
+    "textSha256": "f1be8bdb70a29dbbbdfcc5e9584e250d5d5f336af8b54332ce50be9e97150534",
+    "dryRun": true
+   },
+   "prev": "fba93b285af179ffb071af972183a8208a20fff6456c176248c9e3b3d2463247",
+   "hash": "fec4b9dd416420e376a91abfbb99cf560c6000ace3b4422584b2beca43f50fcf"
+  },
+  {
+   "n": 12,
+   "at": "2026-10-28T13:00:12.000Z",
+   "kind": "recorded",
+   "by": "kar",
+   "data": {
+    "deal": "D2",
+    "offer": "grow-a-brain",
+    "card": "churn-brain",
+    "receipt": {
+     "repo": "sjgant80-hub/konomi-slm",
+     "commit": "1c6b72263a1090528651f7c46486aff71b237e45",
+     "path": "pattern-books/churn.receipt.json",
+     "sha256": "a7d23cca5ee4d49fb314d313e132e5336858944b93037e93c2ad577ce60fb150"
+    }
+   },
+   "prev": "fec4b9dd416420e376a91abfbb99cf560c6000ace3b4422584b2beca43f50fcf",
+   "hash": "a2ea1d9710cd5acaefaa066445245b6e1331acbbe56cdde709397143a150f540"
+  },
+  {
+   "n": 13,
+   "at": "2026-10-28T13:00:13.000Z",
+   "kind": "library",
+   "by": "kar",
+   "data": {
+    "deal": "D2",
+    "added": true,
+    "size": 7
+   },
+   "prev": "a2ea1d9710cd5acaefaa066445245b6e1331acbbe56cdde709397143a150f540",
+   "hash": "e66c97f1437d147cf56633a8c9ca86b2218f5592d9a43c3c1b9f3a425f8be2fd"
+  },
+  {
+   "n": 14,
+   "at": "2026-10-28T13:00:14.000Z",
+   "kind": "build",
+   "by": "kar",
+   "data": {
+    "deal": "D3",
+    "offer": "grow-a-brain",
+    "lane": "local"
+   },
+   "prev": "e66c97f1437d147cf56633a8c9ca86b2218f5592d9a43c3c1b9f3a425f8be2fd",
+   "hash": "b3b6e0417b5cd171cba3f05faec4e9c57fd204b507d887fbba6c0891dbb577d7"
+  },
+  {
+   "n": 15,
+   "at": "2026-10-28T13:00:15.000Z",
+   "kind": "deliverable",
+   "by": "kar",
+   "data": {
+    "deal": "D3",
+    "card": "churn-brain-forged",
+    "receipt": {
+     "repo": "sjgant80-hub/konomi-slm",
+     "commit": "1c6b72263a1090528651f7c46486aff71b237e45",
+     "path": "pattern-books/churn.receipt.json",
+     "sha256": "a7d23cca5ee4d49fb314d313e132e5336858944b93037e93c2ad577ce60fb150"
+    },
+    "proven": false,
+    "why": [
+     "the number 0.896 is not a field of the receipt"
+    ]
+   },
+   "prev": "b3b6e0417b5cd171cba3f05faec4e9c57fd204b507d887fbba6c0891dbb577d7",
+   "hash": "5b1585c87e89aa6d704dcaf0188b37a6b200708e6e23291dcb09512402f4b672"
+  },
+  {
+   "n": 16,
+   "at": "2026-10-28T13:00:16.000Z",
+   "kind": "refused",
+   "by": "kar",
+   "data": {
+    "deal": "D3",
+    "card": "churn-brain-forged"
+   },
+   "prev": "5b1585c87e89aa6d704dcaf0188b37a6b200708e6e23291dcb09512402f4b672",
+   "hash": "13fe2526ea8da7cd957a9cf3cde0d5e3fef8bb73c4405abb13bd43f23d66adaa"
+  }
+ ]
+}
