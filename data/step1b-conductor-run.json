@@ -1,0 +1,1277 @@
+{
+ "kind": "ai-first-company-step1b-conductor-run",
+ "seal": "1456837",
+ "conductorCommit": "d557e6bda4748a1b3f8027f9c079d0b4a23a3096",
+ "claims": {
+  "B1": {
+   "pass": true,
+   "measured": "outward 29 of 29 to simon; internal 0 of 30 to simon; kar-mind 30 of 30 on their tier; X reading 8 of 8 to grok, 8 wait unbooted; structured 6 of 6 to simon; vendored 2 of 2 byte-identical"
+  },
+  "B2": {
+   "pass": false,
+   "measured": "16 leaks among 68 fresh LEAVES lines"
+  },
+  "B3": {
+   "pass": false,
+   "measured": "9 of 25 fresh STAYS lines to simon (36%)"
+  }
+ },
+ "held": 1,
+ "of": 3,
+ "rows": {
+  "leaves": [
+   {
+    "words": "Tell customers the software has bugs.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Contact investors about company plans.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Answer a customer's question about pricing.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Hand over project management to a new team.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Agree to a discount with a client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Quit working on the software project.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Fire the AI operator.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "End the partnership.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Hand over the client list.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Share the client data.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Negotiate a better contract.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Cancel the subscription.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Transfer the domain name.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: money",
+    "ok": true
+   },
+   {
+    "words": "Offer a refund.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Close the account.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Tell customers about price cuts.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Contact investors about profit.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Agree terms for a partnership.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Hand over the invoice to the client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Answer questions from the press.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Provide a quote to a potential client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Make a public statement about company changes.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Answer complaints from users.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Hand over funds to suppliers.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Offer discounts to new users.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Commit to a new product launch.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"commit\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Close a deal with a vendor.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Discuss investment opportunities with stakeholders.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Respond to a competitor's market move.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Offer support to existing clients.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Negotiate a contract with a client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Answer inquiries from investors.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Provide feedback on the product to users.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Respond to a legal inquiry.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Hand over the final report to a partner.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Respond to a media request.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Answer a request for information from a client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "Provide support to a client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Commit to a new marketing strategy.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"commit\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Answer questions from analysts.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Offer terms to a new partner.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Close a sales opportunity with a client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Review the invoice for accuracy.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Work on the post for the blog.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Negotiate the offer with the client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Finalize the quote for the project.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Discuss the deal with the team.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Revise the post for the social media campaign.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"revise\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Finalize the proposal for the client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Work on the reply to the customer.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Prepare the offer for the new product.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Discuss the payment terms with the partner.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Work on the post for the upcoming event.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Finalize the invoice for the services.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Negotiate the terms with the vendor.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Prepare the quote for the marketing campaign.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Work on the deal with the supplier.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Draft the post for the newsletter.",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": false
+   },
+   {
+    "words": "Negotiate the invoice for the materials.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Work on the reply to the investor.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Prepare the post for the webinar.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Discuss the offer with the client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Work on the payment plan for the project.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Negotiate the terms with the client.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "Work on the deal for the new feature.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Discuss the post for the press release.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": true
+   },
+   {
+    "words": "Prepare the quote for the new client.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": false
+   },
+   {
+    "words": "Negotiate the deal with the new partner.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   }
+  ],
+  "stays": [
+   {
+    "words": "Work on the post for the new software release.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Review the invoice for the latest expenses.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Discuss the offer with the sales team.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": false
+   },
+   {
+    "words": "Prepare the quote for the next project.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Finalize the payment terms with the supplier.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": false
+   },
+   {
+    "words": "Work on the software update.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Review the invoice.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Process the quote.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"process\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Finish the offer.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"finish\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Manage the payment.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": false
+   },
+   {
+    "words": "Draft the contract.",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "Work on the deal.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Prepare the proposal.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Send the offer letter.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": false
+   },
+   {
+    "words": "Follow up on the invoice.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": false
+   },
+   {
+    "words": "Review the payment terms.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Work on the project proposal.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"work\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Finalize the deal terms.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": false
+   },
+   {
+    "words": "Create the project invoice.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"create\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Respond to the offer.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": false
+   },
+   {
+    "words": "Negotiate the quote.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": false
+   },
+   {
+    "words": "Process the payment.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"process\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "Handle the deal signing.",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: unknown",
+    "ok": false
+   },
+   {
+    "words": "Draft the contract agreement.",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "Review the offer letter.",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   }
+  ],
+  "outward": [
+   {
+    "words": "publish a new product feature on X",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "reach out to a potential partner",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "message a client with an update",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "follow a relevant influencer on X",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "like a competitor's post on X",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "initiate a chat with a lead",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "propose a partnership to a business",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "negotiate terms with a potential client",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "close a deal with a satisfied customer",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "deliver a service to a client",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "inform our audience of the new feature launch",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "distribute the offer to potential clients",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "extend the deal to the interested party",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: deal",
+    "ok": true
+   },
+   {
+    "words": "broadcast the closing to the community",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "share the receipt with the client",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "advertise the service availability",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "publish the testimonial from the satisfied customer",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "share the feedback with the market",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "display the payment request on X",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "inform the network of the upcoming webinar",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "notify the attendees about the exclusive offer",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "announce the partnership on X",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "advertise the discount to the followers",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "inform the partners of the latest project update",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "broadcast the success story to the industry",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "share the milestone achievement with the community",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "advertise the webinar on X",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "publish the results of the client survey",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   },
+   {
+    "words": "inform the stakeholders of the new hire",
+    "lane": "simon",
+    "wait": true,
+    "why": "needs Simon: outward",
+    "ok": true
+   }
+  ],
+  "internal": [
+   {
+    "words": "draft a reply to the lead from this morning",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "summarise the conversation with the client",
+    "lane": "local",
+    "wait": false,
+    "why": "\"summarise\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "check the lead's score in the CRM",
+    "lane": "deterministic",
+    "wait": false,
+    "why": "\"check\" is an organ’s job: run it, no model",
+    "ok": true
+   },
+   {
+    "words": "review the offer's terms internally",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "organise the follow-up tasks for the day",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"organise\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "measure the effectiveness of the latest campaign",
+    "lane": "deterministic",
+    "wait": false,
+    "why": "\"measure\" is an organ’s job: run it, no model",
+    "ok": true
+   },
+   {
+    "words": "score the leads based on their interests",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"score\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "record the meeting minutes for the week",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"record\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "verify the accuracy of the offer quote",
+    "lane": "deterministic",
+    "wait": false,
+    "why": "\"verify\" is an organ’s job: run it, no model",
+    "ok": true
+   },
+   {
+    "words": "evaluate the performance of the DIGI cards",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"evaluate\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "draft tomorrow's post about the witness receipt",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "check the invoice total against the ledger",
+    "lane": "deterministic",
+    "wait": false,
+    "why": "\"check\" is an organ’s job: run it, no model",
+    "ok": true
+   },
+   {
+    "words": "review the email correspondence with the client",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "prepare the deal details for final approval",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "compile the quote for the upcoming project",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"compile\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "draft the tweet about the new service",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "compose the reply to the inquiry",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"compose\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "format the offer document for distribution",
+    "lane": "local",
+    "wait": false,
+    "why": "\"format\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "create the invoice for the completed work",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"create\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "review the post content for accuracy",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "check the deal terms for compliance",
+    "lane": "deterministic",
+    "wait": false,
+    "why": "\"check\" is an organ’s job: run it, no model",
+    "ok": true
+   },
+   {
+    "words": "prepare the email for client follow-up",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "draft the tweet for the launch announcement",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "write the reply to the feedback",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"write\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "compile the report on the project progress",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"compile\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "review the post for compliance",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   },
+   {
+    "words": "draft the invoice for the payment",
+    "lane": "local",
+    "wait": false,
+    "why": "\"draft\" is a narrow wording job: the local model",
+    "ok": true
+   },
+   {
+    "words": "compose the reply to the proposal",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"compose\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "prepare the deal summary for the team",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"prepare\" is a verb the router does not know: Claude when unsure: the frontier",
+    "ok": true
+   },
+   {
+    "words": "review the offer document for final edits",
+    "lane": "frontier",
+    "wait": false,
+    "why": "\"review\" is judgement: the frontier",
+    "ok": true
+   }
+  ],
+  "kar": [
+   {
+    "words": "run the witness gate on light/codec.mjs",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "re-run the census of the estate's organs",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "pack Kar's memory into the LIGHT vault",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "check the foundation receipt reproduces",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "recall what the soul holds on break-it",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "append tonight's probe to the experiment ledger",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "verify the vendored kernels against their commits",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "measure the recall probe on tonight's facts",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "unload the local model",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "preflight the next build",
+    "sealed": "deterministic",
+    "lane": "deterministic",
+    "ok": true
+   },
+   {
+    "words": "classify this share as a lesson or a platitude",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "summarise the fall-kit-core memory in one line",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "extract the repo names from this paragraph",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "format the morning brief's lines",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "draft a one-line commit summary for the vendor change",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "tag this chat with its topics",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "shorten this description to ninety characters",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "name a slug for the new memory file",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "rewrite this route in plain words",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "translate the dream's route into a sentence",
+    "sealed": "local",
+    "lane": "local",
+    "ok": true
+   },
+   {
+    "words": "propose tonight's build idea from the dream's pair",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "decide which queued build comes next",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "choose what Simon should hear first in the brief",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "review the diff to node.mjs for bugs",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "plan moving the ledgers onto LIGHT",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "design the sealed claims for the mesh phase",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "write code for the relay that carries packets between devices",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "diagnose why last night's back-fold skipped",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "judge whether the morning brief says anything new",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   },
+   {
+    "words": "coordinate break-it and konomi-slm's next skills",
+    "sealed": "frontier",
+    "lane": "frontier",
+    "ok": true
+   }
+  ]
+ }
+}
