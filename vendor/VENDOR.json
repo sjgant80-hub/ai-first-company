@@ -1,0 +1,7 @@
+{
+ "note": "Vendored byte-identical; test/vendor.test.mjs re-hashes every file. Update only by re-copying from the source commit and changing the hashes here.",
+ "files": [
+  { "path": "vendor/kar-mind/controller.mjs", "from": "sjgant80-hub/kar-mind", "commit": "3a8890756c02dfe61d54c34e4d8261fc2100d922", "sourcePath": "controller.mjs", "sha256": "3b5637e660cdfeedbf8e4ef45f293eae554d638cb945e801e2631805f74af7b5" },
+  { "path": "vendor/kar-mind/vendor/fall-kit-core/vendor/wallet/wallet.mjs", "from": "sjgant80-hub/kar-mind", "commit": "3a8890756c02dfe61d54c34e4d8261fc2100d922", "sourcePath": "vendor/fall-kit-core/vendor/wallet/wallet.mjs", "sha256": "9a01dcb6134cdf724e1717b757fca7843544137e0c6051510a1d15682c6166f6" }
+ ]
+}
