@@ -210,9 +210,12 @@
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const getJSON = async (u) => { try { const r = await fetch(u + (u.includes('?') ? '&' : '?') + 'cb=' + Date.now()); return r.ok ? await r.json() : null; } catch { return null; } };
+// the page and its modules must be the same version: Pages caches each file for ten minutes, so a visitor right after an
+// update can get a new page beside an old module. Each top-level module is fetched fresh.
+const BUST = '?v=' + Date.now();
 
 // ── try the conductor: the real kernel ────────────────────────────────────────
-const { conduct } = await import('./src/conductor.mjs');
+const { conduct } = await import('./src/conductor.mjs' + BUST);
 const EXAMPLES = ['draft tomorrow’s post about the witness receipt', 'send the quote to the lead', 'monitor X for mentions of the company', 'run the witness gate', 'summarise the receipt, then share it', 'decide which offer fits this lead', 'take the deposit from the new client', 'cancel the subscription'];
 const LANE_WHY = { simon: 'waits for Simon’s approval', grok: 'Grok Bot’s job (reads X, read-only)', deterministic: 'an organ’s own code runs it — no model', local: 'a small model on this laptop', frontier: 'Claude, for judgement, inside tonight’s budget' };
 function route(words) {
@@ -246,7 +249,7 @@ $('#receiptlist').innerHTML = runs.filter((x) => x.pre).map(({ s, pre, run }) =>
 
 // ── the cost case: hours × the UK median wage, from the vendored, sourced basis ─
 try {
-  const { costCase, DEFAULT_HOURS } = await import('./src/costcase.mjs');
+  const { costCase, DEFAULT_HOURS, seatsNow } = await import('./src/costcase.mjs' + BUST);
   const basis = await getJSON('vendor/sovereign-enterprise/data/basis.json');
   const box = $('#costcase');
   const keys = Object.keys(DEFAULT_HOURS);
@@ -262,8 +265,8 @@ try {
     $('#cc-s').textContent = r.ok ? String(r.approvalsPerWeek) : '—';
   };
   box.addEventListener('input', update); update();
-  // what a team pays now for the seats the loop does without: sourced seat prices, a year
-  const { seatsNow } = await import('./src/costcase.mjs');
+  // what a team pays now for the seats the loop does without: sourced seat prices, a year (its own failure stays its own)
+  try {
   const sb = $('#seats');
   sb.innerHTML = `<p class="small" style="margin-top:0">A sales-and-marketing team typically runs a CRM seat and an AI-assistant seat per person. Set the head count; the prices are the vendors' own published list prices (each linked), a year.</p><div class="barrow"><label for="seat-n">People with both seats</label><input id="seat-n" type="range" min="0" max="25" step="1" value="3"><span class="v" id="seat-v">3</span></div><div id="seat-out"></div><p class="small muted" style="margin-bottom:0">What replaces them here: the conductor, the voice and the journal run on your own machine (MIT, no licence fee); the reach arm is the Grok Bot the owner already has; Claude for judgement runs on the owner's own login inside a nightly budget.</p>`;
   const seatUpdate = () => {
@@ -272,13 +275,14 @@ try {
     $('#seat-out').innerHTML = r.ok ? `<div class="tablewrap"><table><thead><tr><th>Seat</th><th>List price</th><th>Seats</th><th>A year</th></tr></thead><tbody>${r.lines.map((l) => `<tr><td><a href="${esc(l.source)}">${esc(l.product)}</a></td><td>£${esc(l.perMonth)} a user a month</td><td>${l.seats}</td><td>£${Math.round(l.perYear).toLocaleString('en-GB')}</td></tr>`).join('')}<tr><th colspan="3">Seats, a year</th><th>£${Math.round(r.perYear).toLocaleString('en-GB')}</th></tr></tbody></table></div>` : '<p class="muted small">—</p>';
   };
   sb.addEventListener('input', seatUpdate); seatUpdate();
-} catch { $('#costcase').innerHTML = '<p class="muted small">The cost case could not be loaded.</p>'; }
+  } catch { $('#seats').innerHTML = '<p class="muted small">The comparison could not be loaded: reload the page.</p>'; }
+} catch { $('#costcase').innerHTML = '<p class="muted small">The cost case could not be loaded: reload the page.</p>'; }
 
 // ── the dashboard, from the rehearsal cycle's journal ─────────────────────────
 try {
   const cyc = await getJSON('data/cycle-run.json');
   if (cyc) {
-    const { viewOf } = await import('./src/page.mjs');
+    const { viewOf } = await import('./src/page.mjs' + BUST);
     const v = viewOf(cyc);
     if (!v.ok) throw new Error(v.why);
     const max = Math.max(1, ...v.funnel.map((f) => f.n));
