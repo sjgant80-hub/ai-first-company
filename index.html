@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI-First Company</title>
+<meta name="description" content="A company the AI runs and a person oversees: the AI finds the market, drafts, qualifies, delivers and records; every outward action waits for the owner's approval of its exact words; every public claim is checked against a committed receipt. Each piece is sealed before it is measured, and its failures are kept." />
+<meta name="color-scheme" content="light dark" />
+<style>
+  :root{ --bg:#f6f7f5; --surface:#fcfcfb; --panel:#ffffff; --ink:#0b0b0b; --ink2:#52514e; --muted:#6b6a66; --line:#e3e2dc;
+    --accent:#2a78d6; --accent-ink:#1d5fae; --good:#0ca30c; --warn:#b07400; --bad:#d03b3b; --code:#f0efea;
+    --radius:14px; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#121211; --surface:#1a1a19; --panel:#1f1f1d; --ink:#f0efec; --ink2:#c3c2b7; --muted:#9a998f; --line:#33332f; --accent:#3987e5; --accent-ink:#8fbcf2; --good:#2fbf2f; --warn:#fab219; --bad:#e66767; --code:#262624; } }
+  :root[data-theme="dark"]{ --bg:#121211; --surface:#1a1a19; --panel:#1f1f1d; --ink:#f0efec; --ink2:#c3c2b7; --muted:#9a998f; --line:#33332f; --accent:#3987e5; --accent-ink:#8fbcf2; --good:#2fbf2f; --warn:#fab219; --bad:#e66767; --code:#262624; }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px 80px}
+  a{color:var(--accent-ink)} code,.mono{font-family:var(--mono);font-size:.9em} code{background:var(--code);padding:1px 5px;border-radius:5px}
+  header.hero{padding:56px 0 26px}
+  .kicker{font-family:var(--mono);font-size:13px;color:var(--accent-ink);letter-spacing:.04em}
+  h1{font-size:clamp(30px,5.4vw,50px);line-height:1.08;margin:10px 0 14px;letter-spacing:-.02em}
+  .lede{font-size:clamp(16px,2.3vw,19px);color:var(--ink2);max-width:70ch;margin:0}
+  nav.toc{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -16px;padding:10px 16px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-size:14px;padding:5px 10px;border-radius:999px;border:1px solid transparent}
+  nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--line);color:var(--ink)}
+  section{padding-top:44px} h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 6px;letter-spacing:-.01em} h3{font-size:18px;margin:22px 0 6px}
+  .sub{color:var(--ink2);margin:0 0 18px;max-width:72ch}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+  .grid{display:grid;gap:12px} .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))} .g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))} .g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .tile .n{font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .tile .l{color:var(--ink2);font-size:13.5px}
+  .scope{border-left:4px solid var(--accent);padding:12px 16px;background:var(--panel);border-radius:0 12px 12px 0;margin-top:20px}
+  .scope li{margin:3px 0}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-family:var(--mono);padding:2px 9px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+  .ok{color:var(--good)} .no{color:var(--bad)} .wait{color:var(--warn)}
+  ol.steps{padding-left:22px} ol.steps li{margin:8px 0}
+  table{border-collapse:collapse;width:100%;font-size:14.5px} th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top} th{color:var(--ink2);font-weight:600}
+  .tablewrap{overflow-x:auto}
+  .try{display:flex;gap:8px;flex-wrap:wrap} .try input{flex:1 1 260px;min-width:0;font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+  button{font:inherit;padding:10px 14px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer} button.ghost{background:transparent;color:var(--accent-ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px} .chips button{padding:5px 10px;font-size:13.5px;background:var(--surface);color:var(--ink2);border-color:var(--line)}
+  .result{margin-top:12px;font-size:15px}
+  .lane{display:inline-block;font-family:var(--mono);font-weight:700;padding:2px 10px;border-radius:8px;background:var(--code)}
+  svg text{font-family:var(--sans)} .diagram{width:100%;height:auto}
+  details{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--panel);margin:8px 0} summary{cursor:pointer;font-weight:600}
+  .bar{height:12px;border-radius:0 4px 4px 0;background:var(--accent);min-width:2px}
+  .barrow{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+  .barrow .v{text-align:right;font-variant-numeric:tabular-nums}
+  .queue-item{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;background:var(--surface)}
+  .queue-item pre{white-space:pre-wrap;margin:6px 0 0;font-family:var(--sans);font-size:14px}
+  .muted{color:var(--muted)} .small{font-size:13.5px}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink2);font-size:13.5px}
+  @media (max-width:560px){ .barrow{grid-template-columns:110px 1fr 40px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">AI-FIRST COMPANY · run by Kar, overseen by Simon</div>
+  <h1>A company the AI runs,<br>and a person can audit.</h1>
+  <p class="lede">The AI finds the market, drafts what the company says, qualifies the people who ask, delivers the work and keeps the records. <b>Nothing leaves the company without the owner's approval of its exact words</b>, and <b>every public claim is checked against a committed receipt</b> anyone can fetch. Each piece below was sealed before it was measured — and where it failed, the failure is kept on the page.</p>
+  <div class="scope" id="scope">
+    <b>What is live today, and what waits for Simon</b>
+    <ul class="small">
+      <li><span class="pill ok">✓ live</span> The conductor that sends every job to the right arm, and holds outward, money and deal jobs for approval (try it below).</li>
+      <li><span class="pill ok">✓ live</span> The company's voice on X, key-ready: drafts from receipts, claim-gated in your browser, <a href="https://sjgant80-hub.github.io/kar-voice/">each waiting for approval</a>. Nothing has been posted.</li>
+      <li><span class="pill wait">⏳ Simon</span> Authorising the X connector (his own keys; until then every post is a dry run) and approving each post or reply in his own words.</li>
+      <li><span class="pill wait">⏳ Simon</span> Creating the reach routine in his own Grok Bot from the brief this repo makes (Grok Bot reads X read-only on his account).</li>
+      <li><span class="pill wait">⏳ X</span> A reply bot beyond answering people who summon us needs X's prior written approval. It is not built, and not wanted.</li>
+      <li><span class="pill">demo</span> The dashboard below runs on demo data from a measured rehearsal cycle. No real lead, customer or payment exists in it.</li>
+    </ul>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
+</nav>
+
+<section id="start">
+  <h2>Start here</h2>
+  <p class="sub">Three minutes to see how it works, and how you would check it yourself.</p>
+  <ol class="steps">
+    <li><b>Try the conductor.</b> Type any job — <i>"draft tomorrow's post about the witness receipt"</i>, <i>"send the quote to the lead"</i> — and see which arm it goes to and why. Anything that would leave the company stops at Simon. <a href="#try">Try it ↓</a></li>
+    <li><b>Look at the queue.</b> The company's voice on X shows every draft before it is posted, re-checks each one against its receipt in your browser, and marks it <i>waiting for Simon's approval</i>. <a href="https://sjgant80-hub.github.io/kar-voice/">Open the voice →</a></li>
+    <li><b>Read the dashboard.</b> One full rehearsal cycle — a post, a signal from X, a lead, an offer, a close, a delivery, a new entry in the library — with every approval Simon was asked for. <a href="#dashboard">See it ↓</a></li>
+    <li><b>Check a receipt.</b> Every number here comes from a JSON receipt committed to a public repo, with the claims sealed before the measurement. CI re-measures them on every push. <a href="#receipts">Receipts ↓</a></li>
+  </ol>
+</section>
+
+<section id="dashboard">
+  <h2>Dashboard</h2>
+  <p class="sub">What Simon sees: leads, conversions, content, signals, deliveries and the library — every number derived from the company's journal, a hash chain re-verified in your browser. <span class="pill">demo data</span></p>
+  <div id="dash" class="card"><p class="muted">The rehearsal cycle has not been measured yet: this panel fills from <code>data/cycle-run.json</code> when it lands.</p></div>
+</section>
+
+<section id="try">
+  <h2>Try the conductor</h2>
+  <p class="sub">This box runs the company's real routing code (<code>src/conductor.mjs</code>, mutation-tested) in your browser. Nothing is sent anywhere.</p>
+  <div class="card">
+    <form class="try" id="tryform"><input id="job" aria-label="A job for the company" placeholder="e.g. send the quote to the lead" autocomplete="off" /><button type="submit">Route it</button></form>
+    <div class="chips" id="chips"></div>
+    <div class="result" id="routed" aria-live="polite"></div>
+  </div>
+  <p class="small muted">The five arms: <b>simon</b> (approval — anything outward, money, a deal, a risky step, or a verb it does not know as internal work) · <b>grok</b> (Grok Bot reads X) · <b>deterministic</b> (an organ's own code, no model) · <b>local</b> (a small model on this laptop) · <b>frontier</b> (Claude, for judgement, inside a nightly budget).</p>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <p class="sub">One loop. Kar thinks and gates; Grok Bot reaches; signals come back; Kar reasons, routes and learns; Simon approves the high-stakes steps; Kar converts, delivers and records; the library grows — and the new entry becomes the next post.</p>
+  <div class="card">
+    <svg class="diagram" viewBox="0 0 920 360" role="img" aria-labelledby="loopT loopD"><title id="loopT">The company's loop</title><desc id="loopD">Library, voice with claim gate, Simon's approval, X, Grok Bot, ingest, funnel, delivery, records, back to the library.</desc>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+      <g fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)">
+        <path d="M170,70 H262"/><path d="M420,70 H512"/><path d="M670,70 H752"/><path d="M820,98 V168"/><path d="M752,210 H672"/><path d="M512,210 H422"/><path d="M262,210 H172"/><path d="M95,182 V100"/>
+        <path d="M590,238 V286 H350 V238" stroke-dasharray="5 5"/>
+      </g>
+      <g font-size="14" fill="var(--ink)">
+        <rect x="20" y="42" width="150" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="95" y="66" text-anchor="middle" font-weight="700">The library</text><text x="95" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">proven goods + receipts</text>
+        <rect x="262" y="42" width="158" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="341" y="66" text-anchor="middle" font-weight="700">Voice + claim gate</text><text x="341" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">every number from a receipt</text>
+        <rect x="512" y="42" width="158" height="56" rx="12" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/><text x="591" y="66" text-anchor="middle" font-weight="700">Simon approves</text><text x="591" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">these exact words</text>
+        <rect x="752" y="42" width="140" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="822" y="66" text-anchor="middle" font-weight="700">X</text><text x="822" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">his connector</text>
+        <rect x="752" y="182" width="140" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="822" y="206" text-anchor="middle" font-weight="700">Grok Bot</text><text x="822" y="226" text-anchor="middle" fill="var(--ink2)" font-size="12.5">reads X, read-only</text>
+        <rect x="512" y="182" width="160" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="592" y="206" text-anchor="middle" font-weight="700">Ingest</text><text x="592" y="226" text-anchor="middle" fill="var(--ink2)" font-size="12.5">checked before it is read</text>
+        <rect x="262" y="182" width="160" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="342" y="206" text-anchor="middle" font-weight="700">Funnel</text><text x="342" y="226" text-anchor="middle" fill="var(--ink2)" font-size="12.5">qualify → offer → close</text>
+        <rect x="20" y="182" width="152" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="96" y="206" text-anchor="middle" font-weight="700">Deliver + record</text><text x="96" y="226" text-anchor="middle" fill="var(--ink2)" font-size="12.5">in a hash-chained journal</text>
+        <text x="470" y="306" text-anchor="middle" fill="var(--ink2)" font-size="12.5">replies, offers and closes go back through Simon's approval</text>
+        <text x="470" y="344" text-anchor="middle" fill="var(--muted)" font-size="12.5">The conductor routes every step: organ code · local model · Claude · Grok Bot · Simon</text>
+      </g>
+    </svg>
+  </div>
+  <div id="trace"></div>
+</section>
+
+<section id="blueprint">
+  <h2>Blueprint</h2>
+  <p class="sub">Seven organs, built one at a time, each a small pure kernel with its own tests, mutation gate and sealed claims.</p>
+  <div class="tablewrap card"><table id="organs">
+    <thead><tr><th>Organ</th><th>What it does</th><th>Gate</th><th>Sealed claims</th></tr></thead>
+    <tbody><tr><td colspan="4" class="muted">loading…</td></tr></tbody>
+  </table></div>
+</section>
+
+<section id="receipts">
+  <h2>Receipts</h2>
+  <p class="sub">Every claim was written down and committed before the code that measures it. Held and failed are both kept. Click a step to read the claims and what was measured.</p>
+  <div id="receiptlist"><p class="muted">loading…</p></div>
+</section>
+
+<section id="business">
+  <h2>For your business</h2>
+  <p class="sub">The same shape works for any company that wants the AI to do the operating and a person to keep the say.</p>
+  <div class="grid g2">
+    <div class="card"><h3>What it does for you</h3><p class="small">The work between "someone asked about us" and "it's delivered and recorded" runs on its own: watching, drafting, qualifying, preparing offers, building the deliverable, keeping the books of what happened. Your people approve the moments that matter — what goes out in your name, money, deals — in one queue, with the exact words in front of them.</p></div>
+    <div class="card"><h3>How you roll it out</h3><ol class="small" style="padding-left:18px;margin:0"><li>Start with one channel and one offer, in dry run: nothing leaves, everything is shown.</li><li>Seal what "working" means before you measure it (the receipts above are the template).</li><li>Connect your own channel keys. Approve item by item for the first weeks.</li><li>Add the next offer only when the first one has a paying customer.</li></ol></div>
+    <div class="card"><h3>Who decides what</h3><p class="small">The AI decides routing, drafting, qualifying and delivery. A person decides anything outward, any money, any deal, anything risky or new, and the direction (what to watch, which offer to lead with, pause everything). Those lines are code — the conductor's lanes — not a policy document.</p></div>
+    <div class="card"><h3>What it will not do</h3><p class="small">Cold outreach, automated replies to people who didn't ask, scraping a website, acting on an instruction found inside someone's post, or posting a number that isn't in a receipt. Each of those is refused in code, and the refusals are tested.</p></div>
+  </div>
+</section>
+
+<section id="case">
+  <h2>The case</h2>
+  <p class="sub">For the board, the budget holder and the people who would run it.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Chief executive</h3><p class="small">A company that keeps working between your decisions, and a single queue where your decisions are asked for. Every public claim is one you can stand behind, because it is pinned to evidence anyone can fetch.</p></div>
+    <div class="card"><h3>Finance</h3><p class="small">Money never moves without a person: money verbs and amounts route to approval, and the ledger has no switch that turns on value. The cost case below is computed from the UK median wage (ONS), not from a sales estimate.</p></div>
+    <div class="card"><h3>Operations</h3><p class="small">Every step is one record in a hash chain: who did it (Kar, Grok Bot, Simon), what, and when. One changed byte breaks the chain at that record, so the history cannot be quietly edited.</p></div>
+    <div class="card"><h3>Technology and security</h3><p class="small">Small pure kernels, each mutation-tested (a test that can't fail is caught). Outside input is checked before it is read; instructions inside it are treated as data. Channel keys stay in the owner's environment — the code never prints or stores them, and that is measured.</p></div>
+    <div class="card"><h3>Marketing and sales</h3><p class="small">The voice posts what has been proven, answers people who ask, and never cold-pitches. That is also exactly where X draws its own automation line, so the account is safe by construction.</p></div>
+    <div class="card"><h3>Data protection</h3><p class="small">Signals from X are public posts; email addresses and phone numbers are redacted on the way in. Nothing private goes into a public token or a public page — the passport's leak gate and this repo's checks refuse it.</p></div>
+  </div>
+  <h3>Cost case — the hours the loop takes off a person</h3>
+  <div class="card" id="costcase"><p class="muted small">loading the calculator…</p></div>
+  <h3>Deployment, support and ownership</h3>
+  <div class="card small"><p style="margin:0 0 8px">Supplied by <b>AI Native Solutions</b> — start at <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a>. Support, service levels, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed: no licence fee, and it keeps running without us.</p><p style="margin:0">It runs on your own machine and your own accounts: your channel keys, your Grok Bot, your repos. Claude is used for judgement on your own login inside a nightly budget; small models on your own hardware do the bulk.</p></div>
+  <h3>Risks, answered straight</h3>
+  <div class="card small"><ul style="margin:0;padding-left:18px">
+    <li><b>The router can misjudge wording.</b> Measured: on wording written by a small model after the code was frozen, the first version let 39 of 57 outward jobs past; the fail-closed fix held every seen set but its fresh test failed too, partly on the test model's own mislabelled lines. That is why the router is the fence and the connector is the wall: nothing leaves without an approval of the exact item, whatever the router decided.</li>
+    <li><b>A receipt shows a number, not the words around it.</b> The claim gate proves every number is the receipt's number at a named field; whether the sentence describes it fairly is what the human approval of the exact text is for.</li>
+    <li><b>Grok Bot is xAI's product on the owner's account.</b> It is given a read-only job and a single file to write; Kar re-checks everything it hands back and decides "summoned" itself.</li>
+    <li><b>Approvals are recorded by Kar from the owner's words in chat.</b> They are quoted and bound to the text's hash; they are not a signature by the owner.</li>
+  </ul></div>
+</section>
+
+<section id="paper">
+  <h2>White paper</h2>
+  <div class="card small">
+    <h3 style="margin-top:0">The problem</h3>
+    <p>"AI-first" usually means a person using AI tools. The step after that — the AI doing the operating — stalls on trust: who is accountable for what it says, what it spends, and what it promises? The usual answers are a policy document and a dashboard of what already happened.</p>
+    <h3>The approach</h3>
+    <p>Make the trust lines executable. A conductor routes every job to one of five arms, and the arm called <i>Simon</i> is a queue a person works through. Every outward item carries the hash of its exact text; an approval covers that hash and nothing else. Every public claim names a receipt by repo, commit and file hash, and every number in it must be a field of that receipt. Outside input arrives through a reader that checks shape before content and treats instructions as data. Every event is a record in a hash chain.</p>
+    <h3>The evidence</h3>
+    <p>Each organ was built the same way: write the claims and the test data down and commit them; write the code; mutation-test it (each surviving mutant is a test that cannot fail); measure the claims once; keep the result, held or failed. The receipts section lists every claim with what was measured. Failures are not rewritten: a fix gets its own seal.</p>
+    <h3>What it does not do</h3>
+    <p>It does not decide on its own to speak for the company, move money or agree a deal. It does not contact anyone who didn't ask. It does not read X itself — it hands Grok Bot a read-only brief on the owner's account. It does not claim more than its receipts say.</p>
+  </div>
+</section>
+
+<footer>
+  Built by Kar, the estate's resident AI builder, for Simon. Source: <a href="https://github.com/sjgant80-hub/ai-first-company">github.com/sjgant80-hub/ai-first-company</a> (MIT) · the voice: <a href="https://sjgant80-hub.github.io/kar-voice/">kar-voice</a> · the conductor's base: <a href="https://sjgant80-hub.github.io/kar-mind/#controller">kar-mind</a> · the boot token for Grok Bot: <a href="https://github.com/sjgant80-hub/kar-passport">kar-passport</a> (SYMB-FER, SYMBEYOND AI LLC, 2026). Supplied by AI Native Solutions.<br>
+  Powered by the Konomi architecture, created by Thomas Frumkin.
+</footer>
+</div>
+
+<script type="module">
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const getJSON = async (u) => { try { const r = await fetch(u + (u.includes('?') ? '&' : '?') + 'cb=' + Date.now()); return r.ok ? await r.json() : null; } catch { return null; } };
+
+// ── try the conductor: the real kernel ────────────────────────────────────────
+const { conduct } = await import('./src/conductor.mjs');
+const EXAMPLES = ['draft tomorrow’s post about the witness receipt', 'send the quote to the lead', 'monitor X for mentions of the company', 'run the witness gate', 'summarise the receipt, then share it', 'decide which offer fits this lead', 'take the deposit from the new client', 'cancel the subscription'];
+const LANE_WHY = { simon: 'waits for Simon’s approval', grok: 'Grok Bot’s job (reads X, read-only)', deterministic: 'an organ’s own code runs it — no model', local: 'a small model on this laptop', frontier: 'Claude, for judgement, inside tonight’s budget' };
+function route(words) {
+  const r = conduct({ words }, { left: 100000, ceiling: 30000 });
+  $('#routed').innerHTML = `<span class="lane">${esc(r.lane)}</span> — ${esc(LANE_WHY[r.lane] || '')}${r.wait && r.lane === 'grok' ? ' (Grok Bot not booted here, so it waits)' : ''}<div class="small muted" style="margin-top:4px">why: ${esc(r.why)}</div>`;
+}
+$('#chips').innerHTML = EXAMPLES.map((e) => `<button type="button" data-e="${esc(e)}">${esc(e)}</button>`).join('');
+$('#chips').addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (b) { $('#job').value = b.dataset.e; route(b.dataset.e); } });
+$('#tryform').addEventListener('submit', (ev) => { ev.preventDefault(); const v = $('#job').value.trim(); if (v) route(v); });
+
+// ── receipts and blueprint, from the committed files ─────────────────────────
+const STEPS = [
+  { id: 'step1', organ: 'Conductor', what: 'Kar’s controller, unchanged, plus Grok Bot’s lane and Simon’s lane', gate: 'witness 29/29', prereg: 'data/step1-conductor-prereg.json', run: 'data/step1-conductor-run.json', repo: 'ai-first-company' },
+  { id: 'step1b', organ: 'Conductor, fail-closed', what: 'a first verb it does not know as internal work goes to Simon', gate: 'witness 32/32', prereg: 'data/step1b-prereg.json', run: 'data/step1b-conductor-run.json', repo: 'ai-first-company' },
+  { id: 'step2', organ: 'Voice + claim gate', what: 'every claim against a committed receipt; nothing out without approval of the exact words', gate: 'witness 47/47', prereg: '../kar-voice/data/claimgate-prereg.json', run: '../kar-voice/data/claimgate-run.json', repo: 'kar-voice' },
+  { id: 'step3', organ: 'Reach (Grok Bot)', what: 'a read-only routine brief, booted by a SYMB-FER token; every signal checked before it is read', gate: '', prereg: 'data/step3-reach-prereg.json', run: 'data/step3-reach-run.json', repo: 'ai-first-company' },
+  { id: 'step4', organ: 'Funnel', what: 'signal → qualified → offer → close, with Simon on every outward step', gate: '', prereg: 'data/step4-funnel-prereg.json', run: 'data/step4-funnel-run.json', repo: 'ai-first-company' },
+  { id: 'step5', organ: 'Operations', what: 'closed deal → delivered → recorded → the library grows', gate: '', prereg: 'data/step5-ops-prereg.json', run: 'data/step5-ops-run.json', repo: 'ai-first-company' },
+  { id: 'step6', organ: 'Oversight', what: 'the approval queue, pause, focus and the dashboard', gate: '', prereg: 'data/step6-oversight-prereg.json', run: 'data/step6-oversight-run.json', repo: 'ai-first-company' },
+  { id: 'step7', organ: 'The loop, closed', what: 'one full cycle with Simon asked only for the high-stakes steps', gate: '', prereg: 'data/step7-cycle-prereg.json', run: 'data/cycle-run.json', repo: 'ai-first-company' },
+];
+const runs = await Promise.all(STEPS.map(async (s) => ({ s, pre: await getJSON(s.prereg), run: await getJSON(s.run) })));
+$('#organs tbody').innerHTML = runs.filter((x) => x.pre).map(({ s, run }) => `<tr><td><b>${esc(s.organ)}</b></td><td>${esc(s.what)}</td><td class="mono">${esc((run && run.gate) || s.gate || '—')}</td><td>${run ? `<span class="pill ${run.held === run.of ? 'ok' : 'wait'}">${run.held} of ${run.of} held</span>` : '<span class="pill">sealed, not yet measured</span>'}</td></tr>`).join('');
+$('#receiptlist').innerHTML = runs.filter((x) => x.pre).map(({ s, pre, run }) => {
+  const rows = (pre.claims || []).map((c) => { const m = run && run.claims && run.claims[c.id]; const st = !m ? '<span class="pill">not yet measured</span>' : m.pass ? '<span class="pill ok">✓ held</span>' : '<span class="pill no">✗ FAILED</span>'; return `<tr><td class="mono">${esc(c.id)}</td><td>${esc(c.claim)}</td><td>${st}<div class="small muted">${m ? esc(m.measured) : ''}</div></td></tr>`; }).join('');
+  const head = run ? `${run.held} of ${run.of} held` : 'sealed, not yet measured';
+  const base = s.repo === 'kar-voice' ? 'https://github.com/sjgant80-hub/kar-voice/blob/main/' : 'https://github.com/sjgant80-hub/ai-first-company/blob/main/';
+  const p = (f) => base + f.replace('../kar-voice/', '');
+  return `<details><summary>${esc(s.organ)} — ${esc(head)}</summary><p class="small">${esc(pre.question || '')}</p><div class="tablewrap"><table><thead><tr><th>Claim</th><th>What was claimed</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table></div><p class="small"><a href="${p(s.prereg)}">the seal</a>${run ? ` · <a href="${p(s.run)}">the receipt</a>` : ''}${pre.scope ? ` · scope: ${esc(pre.scope)}` : ''}</p></details>`;
+}).join('');
+
+// ── the cost case: hours × the UK median wage, from the vendored, sourced basis ─
+try {
+  const { costCase, DEFAULT_HOURS } = await import('./src/costcase.mjs');
+  const basis = await getJSON('vendor/sovereign-enterprise/data/basis.json');
+  const box = $('#costcase');
+  const keys = Object.keys(DEFAULT_HOURS);
+  box.innerHTML = `<p class="small" style="margin-top:0">Set the hours a person spends each week on each job the loop does. The cost uses the UK median hourly wage from ONS ASHE 2025 (${esc(String(basis.wageMedianHourly.value))} per hour, <a href="${esc(basis.wageMedianHourly.source)}">source</a>), before employer on-costs — so it is a floor, not a pitch.</p>` +
+    keys.map((k) => `<div class="barrow"><label for="h-${k}">${esc(DEFAULT_HOURS[k].label)}</label><input id="h-${k}" type="range" min="0" max="20" step="0.5" value="${DEFAULT_HOURS[k].hours}" aria-describedby="hv-${k}"><span class="v" id="hv-${k}">${DEFAULT_HOURS[k].hours} h</span></div>`).join('') +
+    `<div class="grid g3" style="margin-top:12px"><div class="tile"><div class="n" id="cc-h">—</div><div class="l">hours a year the loop takes on</div></div><div class="tile"><div class="n" id="cc-c">—</div><div class="l">of a person's time at the median wage, a year</div></div><div class="tile"><div class="n" id="cc-s">—</div><div class="l">approvals a week for the owner, at one cycle each working day (six asks a cycle)</div></div></div>`;
+  const update = () => {
+    const hours = Object.fromEntries(keys.map((k) => [k, Number($('#h-' + k).value)]));
+    keys.forEach((k) => { $('#hv-' + k).textContent = hours[k] + ' h'; });
+    const r = costCase({ hours, wage: basis.wageMedianHourly.value });
+    $('#cc-h').textContent = r.ok ? r.hoursPerYear.toLocaleString('en-GB') : '—';
+    $('#cc-c').textContent = r.ok ? '£' + Math.round(r.costPerYear).toLocaleString('en-GB') : '—';
+    $('#cc-s').textContent = r.ok ? String(r.approvalsPerWeek) : '—';
+  };
+  box.addEventListener('input', update); update();
+} catch { $('#costcase').innerHTML = '<p class="muted small">The cost case lands with the operations step.</p>'; }
+
+// ── the dashboard, from the rehearsal cycle's journal ─────────────────────────
+try {
+  const cyc = await getJSON('data/cycle-run.json');
+  if (cyc) {
+    const { viewOf } = await import('./src/page.mjs');
+    const v = viewOf(cyc);
+    if (!v.ok) throw new Error(v.why);
+    const max = Math.max(1, ...v.funnel.map((f) => f.n));
+    const ok = (b, yes, no) => b ? `<span class="pill ok">✓ ${yes}</span>` : `<span class="pill no">✗ ${no}</span>`;
+    $('#dash').innerHTML =
+      `<div class="small" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${ok(v.verified, `journal re-verified in your browser (${v.entries} entries)`, 'journal does NOT verify')}${ok(v.matches, 'dashboard re-derived here matches the receipt', 'dashboard differs from the receipt')}<span class="pill">${cyc.held} of ${cyc.of} sealed claims held</span></div>` +
+      `<div class="grid g4">${v.tiles.map((t) => `<div class="tile"><div class="n">${esc(t.n)}</div><div class="l">${esc(t.l)}</div></div>`).join('')}</div>` +
+      `<h3>The funnel, this cycle</h3><div role="table" aria-label="Funnel counts">${v.funnel.map((f) => `<div class="barrow" role="row"><span role="cell">${esc(f.l)}</span><div role="cell" title="${esc(f.l)}: ${f.n}"><div class="bar" style="width:${(100 * f.n) / max}%"></div></div><span class="v" role="cell">${f.n}</span></div>`).join('')}</div>` +
+      `<h3>Waiting for Simon</h3>${v.waiting.length ? v.waiting.map((w) => `<div class="queue-item"><span class="pill wait">⏳ waiting</span> <b>${esc(w.item)}</b>${w.about ? ` · ${esc(w.about)}` : ''}<div class="small muted">Approving means quoting its exact words in chat; any change to the words voids the approval.</div></div>`).join('') : '<p class="muted small">Nothing is waiting.</p>'}`;
+    $('#trace').innerHTML = `<details class="card" style="margin-top:12px"><summary>Trace one real run, step by step (${v.trace.length} entries from the cycle's journal)</summary><ol class="small" style="padding-left:22px">${v.trace.map((l) => `<li>${esc(l)}</li>`).join('')}</ol></details>`;
+  }
+} catch (e) { $('#dash').innerHTML = '<p class="muted">The dashboard could not be loaded.</p>'; }
+</script>
+</body>
+</html>

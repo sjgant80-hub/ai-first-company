@@ -22,6 +22,7 @@ test('queue: every ask and where it stands', () => {
   ]);
   const d = j.concat([E('steer', { deny: 'h2', note: 'too pushy' }, 'simon'), E('steer', { withdraw: 'h1' }, 'rehearsal'), E('steer', { deny: 'h3' }, 'grok')]);
   assert.deepEqual(queue(d).map((x) => x.state), ['withdrawn', 'denied', 'waiting']);
+  assert.deepEqual(queue([E('asked', { item: 'post', textSha256: 'h9', about: 'c1', lead: 'L9' })]).map((x) => x.about), ['c1']);
   assert.deepEqual(queue('x'), []);
   assert.deepEqual(queue([null, { kind: 5 }]), []);
 });

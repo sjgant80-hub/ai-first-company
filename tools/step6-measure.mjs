@@ -61,7 +61,7 @@ function measure() {
   const r = { L6: (pickWithFocus(t.L6, 'digi') || {}).id, L1: (pickWithFocus(t.L1, 'digi') || {}).id, L2: (pickWithFocus(t.L2, 'digi') || {}).id, L3: (pickWithFocus(t.L3, 'liveware-pilot') || {}).id, L6other: (pickWithFocus(t.L6, 'liveware-pilot') || { id: null }).id };
   const S4 = { pass: r.L6 === 'digi' && r.L1 === 'liveware-pilot' && r.L2 === 'grow-a-brain' && r.L3 === 'digi' && r.L6other === null, measured: `L6 with focus digi → ${r.L6}; L1 → ${r.L1}; L2 → ${r.L2}; L3 with focus liveware-pilot → ${r.L3}; L6 with focus liveware-pilot → ${r.L6other}` };
   const claims = { S1, S2, S3, S4 };
-  return { kind: 'ai-first-company-step6-oversight-run', seal: SEAL, gate: 'witness oversight 38/38', claims, held: Object.values(claims).filter((x) => x.pass).length, of: 4 };
+  return { kind: 'ai-first-company-step6-oversight-run', seal: SEAL, gate: 'witness oversight 39/39', claims, held: Object.values(claims).filter((x) => x.pass).length, of: 4 };
 }
 
 const cmd = process.argv[2];

@@ -3,6 +3,7 @@
 // Each deliverable's receipt is fetched from GitHub at its pinned commit and hashed; the claim gate (kar-voice's, vendored)
 // decides. Approvals are rehearsal records; nothing is handed to anyone.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { deliver } from '../src/ops.mjs';
@@ -55,7 +56,7 @@ async function measure() {
   const exported = readdirSync(file('src/')).filter((f) => f.endsWith('.mjs')).flatMap((f) => (readFileSync(file('src/' + f), 'utf8').match(/^export\s+(?:async\s+)?(?:function|const)\s+([A-Za-z0-9_]+)/gm) || []).map((m) => m.split(/\s+/).at(-1)));
   const switches = exported.filter((n) => /activate|switchon|enable|turnon|ledgeron|value/i.test(n));
   const sw = conduct({ words: 'switch on the ledger' }, { left: 0, ceiling: 1 });
-  const O4 = { pass: switches.length === 0 && sw.lane === 'simon' && sw.flags.includes('ledger'), measured: `${switches.length} of ${exported.length} exported names turn anything on; 'switch on the ledger' → ${sw.lane} (${sw.flags.join(', ')})` };
+  const O4 = { pass: switches.length === 0 && sw.lane === 'simon' && sw.flags.includes('ledger'), measured: `${switches.length} exported names in src/ turn anything on; 'switch on the ledger' → ${sw.lane} (${sw.flags.join(', ')})` };
   // O5 — twice adds once
   const lib0 = startLibrary();
   const a = deliver({ id: 'D1', handle: deals.D1.handle, offer: deals.D1.offer }, { card: deals.D1.card, gate: await gateOf(deals.D1.card), approve: yes, library: lib0 });
@@ -66,7 +67,8 @@ async function measure() {
   return { kind: 'ai-first-company-step5-ops-run', seal: SEAL, gate: 'witness ops 31/31', claims, held: Object.values(claims).filter((c) => c.pass).length, of: 5, journalVerifies: v.ok, library, journal: chain };
 }
 
-const cmd = process.argv[2];
+// the command line runs only when this file is the program (step 7 imports gateOf from it)
+const cmd = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href ? process.argv[2] : undefined;
 if (cmd === '--check') {
   if (git('show', `${SEAL}:${PREREG}`).replace(/\r\n/g, '\n').trim() !== readFileSync(file(PREREG), 'utf8').replace(/\r\n/g, '\n').trim()) { console.error('✗ the step 5 seal changed since ' + SEAL); process.exit(1); }
   console.error('✓ step 5 seal unchanged since ' + SEAL);

@@ -17,7 +17,7 @@
   },
   "O4": {
    "pass": true,
-   "measured": "0 of 45 exported names turn anything on; 'switch on the ledger' → simon (ledger)"
+   "measured": "0 exported names in src/ turn anything on; 'switch on the ledger' → simon (ledger)"
   },
   "O5": {
    "pass": true,

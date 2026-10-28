@@ -30,7 +30,7 @@ const stateOf = (j, sha) => {
 export function queue(journal) {
   return entries(journal).filter((e) => e.kind === 'asked').map((e) => {
     const d = data(e);
-    return { n: e.n, item: d.item, textSha256: d.textSha256, flags: Array.isArray(d.flags) ? d.flags : [], about: d.lead || d.deal || null, state: stateOf(journal, d.textSha256) };
+    return { n: e.n, item: d.item, textSha256: d.textSha256, flags: Array.isArray(d.flags) ? d.flags : [], about: d.about || d.lead || d.deal || null, state: stateOf(journal, d.textSha256) };
   });
 }
 
