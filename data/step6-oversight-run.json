@@ -1,0 +1,54 @@
+{
+ "kind": "ai-first-company-step6-oversight-run",
+ "seal": "18a0f83",
+ "gate": "witness oversight 38/38",
+ "claims": {
+  "S1": {
+   "pass": true,
+   "measured": "dashboard equals the plain count; the combined journal (65 entries) verifies",
+   "dashboard": {
+    "signals": {
+     "all": 10,
+     "eligible": 9,
+     "market": 1
+    },
+    "leads": {
+     "qualified": 3,
+     "converted": 2
+    },
+    "content": {
+     "drafted": 7,
+     "asked": 9,
+     "approved": 9,
+     "sent": 7
+    },
+    "deliveries": {
+     "handed": 2,
+     "recorded": 2
+    },
+    "library": 7,
+    "queue": {
+     "waiting": 0,
+     "approved": 9,
+     "denied": 0
+    },
+    "steering": 0,
+    "paused": false
+   }
+  },
+  "S2": {
+   "pass": true,
+   "measured": "before true; while paused 0 of 9 approved items may go; after true"
+  },
+  "S3": {
+   "pass": true,
+   "measured": "mayGo false after a later approval; state denied; notes returned 1"
+  },
+  "S4": {
+   "pass": true,
+   "measured": "L6 with focus digi → digi; L1 → liveware-pilot; L2 → grow-a-brain; L3 with focus liveware-pilot → digi; L6 with focus liveware-pilot → null"
+  }
+ },
+ "held": 4,
+ "of": 4
+}
