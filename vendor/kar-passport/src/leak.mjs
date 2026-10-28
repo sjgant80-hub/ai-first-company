@@ -81,9 +81,9 @@ export function scan(text, lists, level, exempt) {
   const out = { hits: [], scanned: 0, exempt: 0, inSig: 0 };
   if (typeof text !== 'string') return out;
   const lines = text.split('\n'), ex = exempt instanceof Set ? exempt : new Set();
-  const b = lines.lastIndexOf('§SIG·BEGIN'), e = b < 0 ? -1 : lines.indexOf('§SIG·END', b + 1);
+  const b = lines.lastIndexOf('§SIG·BEGIN'), e = b === -1 ? -1 : lines.indexOf('§SIG·END', b);
   lines.forEach((line, i) => {
-    if (e > b && i > b && i < e) { out.inSig++; return; }
+    if (e !== -1 && i > b && i < e) { out.inSig++; return; }
     if (ex.has(line)) { out.exempt++; return; }
     out.scanned++;
     for (const h of hitsIn(line, lists, level)) out.hits.push({ n: i + 1, ...h });

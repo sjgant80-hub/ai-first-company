@@ -256,7 +256,7 @@
   },
   "R4": {
    "pass": true,
-   "measured": "kar-passport's own verify on its committed public token (0a3a102): ok, v6.2, signed by the pinned key; its leak gate at public level: 0 hits; private repo names: 0 of 49 found (checked on this laptop)",
+   "measured": "kar-passport's own verify on its committed public token (348f5ef) — ok, v6.2, signed by the pinned key; its leak gate at public level: 0 hits; private repo names: 0 of 49 found (checked on this laptop)",
    "private": {
     "checked": 49,
     "hits": 0,

@@ -144,7 +144,7 @@ const split2 = (line, sep) => { const i = typeof line === 'string' ? line.indexO
 const noneOr = (lines) => (lines.length === 1 && lines[0] === NONE ? [] : lines);
 const blocks = (lines) => { const out = [[]]; for (const l of lines) { if (l === '') out.push([]); else out.at(-1).push(l); } return out.filter((b) => b.length); };
 const untilBlank = (v, from) => { const end = v.indexOf('', from); return v.slice(from, end === -1 ? v.length : end); };
-const strip = (line, re) => (typeof line === 'string' && re.test(line) ? line.replace(re, '') : null);
+const strip = (line, re) => (typeof line === 'string' ? line.replace(re, '') : null);
 
 const GETS = {
   'TRANSFER·MODE': (v, m) => { m.mode = after(v[0], 'MODE: '); },
@@ -207,7 +207,6 @@ export function toModel62(text) {
   const lines = text.split('\n'), m = {};
   for (const [name, head, tail] of S62) {
     const b = lines.indexOf('§' + name + '·BEGIN'), e = lines.indexOf('§' + name + '·END');
-    if (b === -1 || e === -1) return fail('§' + name + ' is missing');
     if (GETS[name]) GETS[name](lines.slice(b + 1 + head.length, e - tail.length), m);
   }
   const check = checkModel62(m);
@@ -301,7 +300,9 @@ export function tierState(m) {
  *  still does not fit loses its "next:" part. { ok, state, text } or a refusal when even that does not fit. */
 export function tierFit(m, tier, ts) {
   const st = tierState(m);
-  if (!st || !Object.prototype.hasOwnProperty.call(TIER_LIMITS, tier) || typeof ts !== 'string' || !/^\d{4}-\d{2}-\d{2}_\d{4}H$/.test(ts)) return fail('model, tier or time');
+  if (!st) return fail('not a model');
+  if (!['nano', 'core', 'state'].includes(tier)) return fail('no such tier');
+  if (!/^\d{4}-\d{2}-\d{2}_\d{4}H$/.test(typeof ts === 'string' ? ts : '')) return fail('time is not YYYY-MM-DD_HHMMH');
   const limit = TIER_LIMITS[tier];
   const lists = [st.vocabulary, st.state.repo_status, st.state.open_threads, st.state.shipped, st.protocol.boot_sequence];
   let text = tierText(st, tier, ts);

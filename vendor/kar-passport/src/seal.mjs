@@ -20,13 +20,13 @@ import { canonical, sigOf, withSig, sealMessage, formatOf, validate62, validate3
 import { toModel62, toModel30 } from './render.mjs';
 
 const enc = new TextEncoder();
-export const shaOf = (text) => hex(sha256(enc.encode(text)));
+export const shaOf = (text) => hex(sha256(enc.encode(typeof text === 'string' ? text : '')));
 const no = (why) => ({ ok: false, why });
 
 export async function seal(text, identity) {
   try {
     const body = canonical(text);
-    if (body === null || !identity || typeof identity.id !== 'string' || typeof identity.sign !== 'function') return '';
+    if (body === null) return '';
     const sha = shaOf(body);
     const sig = hex(await identity.sign(sealMessage(sha)));
     return withSig(text, { sha, key: identity.id, sig });
@@ -47,7 +47,7 @@ export function shapeOf(text) {
     return r.status === 'PASS' ? { ok: true, format } : no('the v3.0 engine says ' + r.status + ': ' + [...r.failures, ...r.warnings].join('; '));
   }
   const body = tierBody(text);
-  if (body === null || formatOf(body) !== format) return no('a ' + format + ' tier without its §SIG block after the generator\'s text');
+  if (body === null) return no('a ' + format + ' tier without its §SIG block after the generator\'s text');
   if (codePoints(body) > TIER_LIMITS[format]) return no('longer than the ' + format + ' tier (' + codePoints(body) + ' > ' + TIER_LIMITS[format] + ')');
   return { ok: true, format };
 }

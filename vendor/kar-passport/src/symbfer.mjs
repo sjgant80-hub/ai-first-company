@@ -274,7 +274,7 @@ const buildSection = (title, items) => (items.length ? [title, ...items.map((i) 
 
 /** generate_nano / generate_core / generate_state for a state of strings and lists of strings; '' for anything else. */
 export function tierText(state, tier, ts) {
-  if (!isObj(state) || typeof ts !== 'string' || !Object.prototype.hasOwnProperty.call(TIER_LIMITS, tier)) return '';
+  if (!isObj(state) || typeof ts !== 'string' || !['nano', 'core', 'state'].includes(tier)) return '';
   const meta = isObj(pyGet(state, '_meta', {})) ? pyGet(state, '_meta', {}) : {};
   const s = isObj(pyGet(state, 'state', {})) ? pyGet(state, 'state', {}) : {};
   const missions = strList(pyGet(s, 'immediate_mission', []));

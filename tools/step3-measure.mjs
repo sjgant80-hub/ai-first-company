@@ -52,7 +52,8 @@ async function measure(previous) {
   const tokenPriv = privateNames
     ? { checked: privateNames.length, hits: named(privateNames, token), leakHits: scan(token, { privateNames, surnames: [], firstNames: [], canaries: [] }, 'public').hits.length, where: 'this laptop' }
     : (previous && previous.claims && previous.claims.R4 && previous.claims.R4.private) || { checked: 0, hits: null, leakHits: null, where: 'not available' };
-  const R4 = { pass: tv.ok === true && tokenPriv.hits === 0 && tokenPriv.leakHits === 0, measured: `kar-passport's own verify on its committed public token (0a3a102): ${tv.ok ? 'ok, ' + tv.format + ', signed by the pinned key' : tv.why}; its leak gate at public level: ${tokenPriv.leakHits} hits; private repo names: ${tokenPriv.hits} of ${tokenPriv.checked} found (checked on ${tokenPriv.where})`, private: tokenPriv,
+  const pin = (readJSON('vendor/VENDOR.json').files.find((f) => f.path === 'vendor/kar-passport/tokens/public.v6.2.txt') || { commit: '?' }).commit.slice(0, 7);
+  const R4 = { pass: tv.ok === true && tokenPriv.hits === 0 && tokenPriv.leakHits === 0, measured: `kar-passport's own verify on its committed public token (${pin}) — ${tv.ok ? 'ok, ' + tv.format + ', signed by the pinned key' : tv.why}; its leak gate at public level: ${tokenPriv.leakHits} hits; private repo names: ${tokenPriv.hits} of ${tokenPriv.checked} found (checked on ${tokenPriv.where})`, private: tokenPriv,
     note: "The leak gate ran with the private repo names from the estate index; the personal-name and canary lists kar-passport reads on its own machine were not available here — kar-passport's own receipt covers those (its claim K2)." };
   // R5 — the brief itself
   // the brief as sealed: its inbox is the private repo the seal's design names (read from the seal, never typed here)
