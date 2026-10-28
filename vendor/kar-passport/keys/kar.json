@@ -1,0 +1,5 @@
+{
+ "kind": "kar-passport.key",
+ "id": "cae07d1836935cc68ce48ba4c94822de168df887adbd6cebab048c8ba4bbc92a",
+ "note": "Kar's passport key: the public half. The seed stays on Kar's machine; every token Kar seals verifies against this."
+}

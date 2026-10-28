@@ -255,23 +255,28 @@
    ]
   },
   "R4": {
-   "pass": null,
-   "measured": "not yet measured: waiting for a pushed kar-passport commit to vendor (the passport is being built in its own session)"
+   "pass": true,
+   "measured": "kar-passport's own verify on its committed public token (0a3a102): ok, v6.2, signed by the pinned key; its leak gate at public level: 0 hits; private repo names: 0 of 49 found (checked on this laptop)",
+   "private": {
+    "checked": 49,
+    "hits": 0,
+    "leakHits": 0,
+    "where": "this laptop"
+   },
+   "note": "The leak gate ran with the private repo names from the estate index; the personal-name and canary lists kar-passport reads on its own machine were not available here — kar-passport's own receipt covers those (its claim K2)."
   },
   "R5": {
    "pass": false,
-   "measured": "word rules: none hit; private repo names: 1 of 49 found (checked on this laptop)",
+   "measured": "word rules: hype; private repo names: 1 of 49 found (checked on this laptop)",
    "private": {
     "checked": 49,
     "hits": 1,
     "where": "this laptop"
    },
-   "note": "The sealed brief names the private inbox repo the seal chose, so it is not published. The published example (data/grok-routine.example.txt) uses a placeholder repo; Simon makes his own brief with the real one on his machine."
+   "note": "The hype hit is the SYMB-FER v6.2 template's own line inside the token (\"It is the only section designed to be overwritten intentionally.\"), protocol text, not a claim. The sealed brief names the private inbox repo the seal chose, so it is not published. The published example (data/grok-routine.example.txt) uses a placeholder repo; Simon makes his own brief with the real one on his machine."
   }
  },
- "held": 2,
+ "held": 3,
  "of": 5,
- "pending": [
-  "R4"
- ]
+ "pending": []
 }

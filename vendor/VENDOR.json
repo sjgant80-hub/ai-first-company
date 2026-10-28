@@ -42,6 +42,69 @@
    "commit": "003e44795bc0ef90c92b7ee6a53160f51be1be79",
    "sourcePath": "data/basis.json",
    "sha256": "83e9c2effa2f81596dcfa7110f030940032c1910cdf928d27d628ae59d73bb42"
+  },
+  {
+   "path": "vendor/kar-passport/src/seal.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "src/seal.mjs",
+   "sha256": "fd7d846e81263b62c98da4b6861c9f9a8673afc223f3bec367c0339c84100674"
+  },
+  {
+   "path": "vendor/kar-passport/src/symbfer.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "src/symbfer.mjs",
+   "sha256": "0d44706afdd2a1b814b12921a3a74a26e2f36b24d7e8dddda2dabf2da0de5ad2"
+  },
+  {
+   "path": "vendor/kar-passport/src/render.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "src/render.mjs",
+   "sha256": "8c2ae0909246f2e6920dc15cc125ad0f9a4392b02350ac6205c0e8ba7204ac1b"
+  },
+  {
+   "path": "vendor/kar-passport/src/template62.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "src/template62.mjs",
+   "sha256": "256486987648d130d5fffd06967ce82879f015b504a2144c4176343e329e7e75"
+  },
+  {
+   "path": "vendor/kar-passport/src/leak.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "src/leak.mjs",
+   "sha256": "953dc060ab3a72b8749f14b930241d0b2985b323921f8f64fee7e098b060b570"
+  },
+  {
+   "path": "vendor/kar-passport/vendor/fall-kit-core/vendor/light/sha256.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "vendor/fall-kit-core/vendor/light/sha256.mjs",
+   "sha256": "cf60afffd36df071b277da214ed61a7b3f4923e443bfadb06656bb7da4756bc1"
+  },
+  {
+   "path": "vendor/kar-passport/vendor/fall-kit-core/identity.mjs",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "vendor/fall-kit-core/identity.mjs",
+   "sha256": "429caa25bf0e104f6a664224d81fd8215d2f6c79aad3323a8acb476f85a3856e"
+  },
+  {
+   "path": "vendor/kar-passport/tokens/public.v6.2.txt",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "tokens/public.v6.2.txt",
+   "sha256": "e61e192aad4a82b76c00fc4b2a7f44b01b4adb1e949bb1e7370261448e8808ca"
+  },
+  {
+   "path": "vendor/kar-passport/keys/kar.json",
+   "from": "sjgant80-hub/kar-passport",
+   "commit": "0a3a102be7159d166b791e6ef7d0bac54829f826",
+   "sourcePath": "keys/kar.json",
+   "sha256": "8563735ebead8bbfc49427f037e6f2d0fb895e5184e174e19074f25f2cdf56ac"
   }
  ]
 }

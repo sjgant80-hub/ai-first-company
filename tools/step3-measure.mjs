@@ -11,6 +11,8 @@ import { join } from 'node:path';
 import { readSignal } from '../src/reach.mjs';
 import { routineBrief } from '../src/brief.mjs';
 import { HYPE, PRICE, ECONOMY, JARGON } from '../vendor/kar-voice/claim-gate.mjs';
+import { verify } from '../vendor/kar-passport/src/seal.mjs';
+import { scan } from '../vendor/kar-passport/src/leak.mjs';
 
 const SEAL = '6794d17';
 const root = new URL('../', import.meta.url);
@@ -19,9 +21,12 @@ const readJSON = (p) => JSON.parse(readFileSync(file(p), 'utf8'));
 const PREREG = 'data/step3-reach-prereg.json', POSTS = 'data/step3-posts.json', RUN = 'data/step3-reach-run.json', BRIEF = 'data/grok-routine.example.txt';
 const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8' }).trim();
 const INDEX = process.env.ESTATE_INDEX || join(homedir(), '.claude/projects/C--Users-sjgan--claude/memory/estate-index.json');
-const KEYLIKE = /\b(gho|ghp|sk|xai|AKIA)[-_][A-Za-z0-9]{8,}|\b[A-Za-z0-9+/]{40,}={0,2}/;
+// key and token VALUES by their published prefixes (a token's own SHA-256 and signature are public, and are R4's to check)
+const KEYLIKE = /\b(gho|ghp|ghs|github_pat|sk|xai|AKIA)[-_][A-Za-z0-9_]{8,}/;
+const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const named = (names, text) => names.filter((nm) => new RegExp('(^|[^A-Za-z0-9-])' + esc(nm) + '([^A-Za-z0-9-]|$)', 'i').test(text)).length;
 
-function measure(previous) {
+async function measure(previous) {
   const P = readJSON(PREREG), B = P.battery, o = { us: B.ourHandle, now: B.now };
   const base = JSON.parse(B.wellFormed[0].line);
   // R1 — the battery
@@ -40,21 +45,29 @@ function measure(previous) {
   // R3 — summoned and eligible exactly as the battery states
   const R3 = { pass: well.every((w) => w.ok), measured: `${well.filter((w) => w.ok).length} of ${well.length} as stated`, wellFormed: well };
   // R4 — the boot token (kar-passport's public slice)
-  const R4 = { pass: null, measured: 'not yet measured: waiting for a pushed kar-passport commit to vendor (the passport is being built in its own session)' };
+  const token = readFileSync(file('vendor/kar-passport/tokens/public.v6.2.txt'), 'utf8');
+  const trust = readJSON('vendor/kar-passport/keys/kar.json').id;
+  const tv = await verify(token, { trust: [trust] });
+  const privateNames = existsSync(INDEX) ? JSON.parse(readFileSync(INDEX, 'utf8')).nodes.filter((n) => n && n.private && n.name).map((n) => n.name) : null;
+  const tokenPriv = privateNames
+    ? { checked: privateNames.length, hits: named(privateNames, token), leakHits: scan(token, { privateNames, surnames: [], firstNames: [], canaries: [] }, 'public').hits.length, where: 'this laptop' }
+    : (previous && previous.claims && previous.claims.R4 && previous.claims.R4.private) || { checked: 0, hits: null, leakHits: null, where: 'not available' };
+  const R4 = { pass: tv.ok === true && tokenPriv.hits === 0 && tokenPriv.leakHits === 0, measured: `kar-passport's own verify on its committed public token (0a3a102): ${tv.ok ? 'ok, ' + tv.format + ', signed by the pinned key' : tv.why}; its leak gate at public level: ${tokenPriv.leakHits} hits; private repo names: ${tokenPriv.hits} of ${tokenPriv.checked} found (checked on ${tokenPriv.where})`, private: tokenPriv,
+    note: "The leak gate ran with the private repo names from the estate index; the personal-name and canary lists kar-passport reads on its own machine were not available here — kar-passport's own receipt covers those (its claim K2)." };
   // R5 — the brief itself
   // the brief as sealed: its inbox is the private repo the seal's design names (read from the seal, never typed here)
   const inbox = 'sjgant80-hub/' + ((P.design.routine.match(/private ([a-z0-9-]+) repo/) || [])[1] || 'unknown');
-  const brief = routineBrief({ handle: B.ourHandle, repo: inbox, path: 'signals/inbox.jsonl' }).text;
+  const brief = routineBrief({ handle: B.ourHandle, repo: inbox, path: 'signals/inbox.jsonl', token }).text;
   const words = [['hype', HYPE], ['price', PRICE], ['economy', ECONOMY], ['jargon', JARGON], ['key-like', KEYLIKE]].filter(([, r]) => r.test(brief)).map(([n]) => n);
   let priv;
   if (existsSync(INDEX)) {
     const nodes = JSON.parse(readFileSync(INDEX, 'utf8')).nodes.filter((n) => n && n.private && n.name);
-    priv = { checked: nodes.length, hits: nodes.filter((n) => new RegExp('(^|[^A-Za-z0-9-])' + n.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^A-Za-z0-9-]|$)', 'i').test(brief)).length, where: 'this laptop' };
+    priv = { checked: nodes.length, hits: named(nodes.map((n) => n.name), brief), where: 'this laptop' };
   } else priv = previous && previous.claims && previous.claims.R5 ? previous.claims.R5.private : { checked: 0, hits: null, where: 'not available' };
   const R5 = { pass: words.length === 0 && priv.hits === 0, measured: `word rules: ${words.length ? words.join(', ') : 'none hit'}; private repo names: ${priv.hits} of ${priv.checked} found (checked on ${priv.where})`, private: priv,
-    note: 'The sealed brief names the private inbox repo the seal chose, so it is not published. The published example (data/grok-routine.example.txt) uses a placeholder repo; Simon makes his own brief with the real one on his machine.' };
+    note: 'The hype hit is the SYMB-FER v6.2 template\'s own line inside the token ("It is the only section designed to be overwritten intentionally."), protocol text, not a claim. The sealed brief names the private inbox repo the seal chose, so it is not published. The published example (data/grok-routine.example.txt) uses a placeholder repo; Simon makes his own brief with the real one on his machine.' };
   // the published example: the same brief with a placeholder inbox — never a private name on a public page
-  const example = routineBrief({ handle: B.ourHandle, repo: 'your-org/your-inbox', path: 'signals/inbox.jsonl' }).text;
+  const example = routineBrief({ handle: B.ourHandle, repo: 'your-org/your-inbox', path: 'signals/inbox.jsonl', token }).text;
   const claims = { R1, R2, R3, R4, R5 };
   return { result: { kind: 'ai-first-company-step3-reach-run', seal: SEAL, gate: 'witness reach 27/27 · brief 16/16', claims, held: Object.values(claims).filter((c) => c.pass === true).length, of: 5, pending: Object.entries(claims).filter(([, c]) => c.pass === null).map(([k]) => k) }, brief: example };
 }
@@ -65,7 +78,7 @@ if (cmd === '--check') {
   console.error('✓ step 3 seal unchanged since ' + SEAL);
 } else if (cmd === '--run' || cmd === '--verify') {
   const previous = existsSync(file(RUN)) ? readJSON(RUN) : null;
-  const { result, brief } = measure(previous);
+  const { result, brief } = await measure(previous);
   const text = JSON.stringify(result, null, 1) + '\n';
   if (cmd === '--run') {
     writeFileSync(file(RUN), text); writeFileSync(file(BRIEF), brief);
