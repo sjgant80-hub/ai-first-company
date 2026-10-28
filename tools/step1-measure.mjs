@@ -4,10 +4,9 @@
 //   node tools/step1-measure.mjs --heldout   ask the local model for the held-out set (once, after the code is committed)
 //   node tools/step1-measure.mjs --run       grade every claim → data/step1-conductor-run.json
 //   node tools/step1-measure.mjs --verify    re-grade from the committed files; fail if anything differs (CI)
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { conduct } from '../src/conductor.mjs';
 
 const SEAL = 'ebe3fae';
 const root = new URL('../', import.meta.url);
@@ -24,15 +23,16 @@ export function parseHeldOut(reply) {
   let into = null;
   for (const raw of String(reply).split(/\r?\n/)) {
     const line = raw.trim();
-    if (/^leaves\s*:?$/i.test(line)) { into = 'leaves'; continue; }
-    if (/^stays\s*:?$/i.test(line)) { into = 'stays'; continue; }
-    const text = line.replace(/^(\d+[.)]|[-*•])\s*/, '').trim();
+    // a heading alone on its line, or a heading in front of the item on the same line ("LEAVES: Offer a refund")
+    const head = line.match(/^\**(leaves|stays)\**\s*:?\**\s*(.*)$/i);
+    if (head) into = head[1].toLowerCase();
+    const text = (head ? head[2] : line).replace(/^(\d+[.)]|[-*•])\s*/, '').trim();
     if (into && text) lists[into].push(text);
   }
   return lists;
 }
 
-export function grade(prereg, heldOut, karTasks, vendor) {
+export function grade(prereg, heldOut, karTasks, vendor, conduct) {
   const S = prereg.sets;
   const lane = (job, o) => conduct(job, o || BUDGET);
   const rows = (arr, want, o) => arr.map((w) => { const r = lane({ words: w }, o); return { words: w, lane: r.lane, wait: r.wait, why: r.why, ok: want(r) }; });
@@ -58,6 +58,12 @@ export function grade(prereg, heldOut, karTasks, vendor) {
   return { claims, rows: { outward, internal, reach, reachBooted, structured, kar, leaves, stays }, vendor };
 }
 
+// The conductor exactly as it was at the commit the receipt names (later fixes are measured by their own seals).
+async function conductorAt(commit) {
+  const tmp = file(`src/.conductor-at-${commit.slice(0, 7)}.mjs`);
+  writeFileSync(tmp, git('show', `${commit}:src/conductor.mjs`) + '\n');
+  try { return (await import(tmp.href)).conduct; } finally { rmSync(tmp, { force: true }); }
+}
 function vendorCheck() {
   return readJSON('vendor/VENDOR.json').files.map((f) => ({ path: f.path, ok: sha(readFileSync(file(f.path))) === f.sha256 }));
 }
@@ -73,25 +79,45 @@ if (cmd === '--check') {
   if (sealed.replace(/\r\n/g, '\n').trim() !== now.replace(/\r\n/g, '\n').trim()) { console.error('✗ the step 1 seal changed since ' + SEAL); process.exit(1); }
   console.error('✓ step 1 seal unchanged since ' + SEAL);
 } else if (cmd === '--heldout') {
-  if (existsSync(file(HELD))) { console.error('✗ the held-out set already exists: it is asked for once'); process.exit(1); }
+  // Asked for after the code is frozen. Ask 1 (2026-10-28) came back with 5 + 5 lines, not the 25 + 25 the sealed prompt asks
+  // for, so — BEFORE any routing of it was looked at — the rule became: ask again with the same prompt until each list holds
+  // 25 lines, keep every ask, drop exact repeats, measure once on the union. The receipt says so.
   const P = readJSON(PREREG);
   const codeCommit = git('log', '-1', '--format=%H', '--', 'src/conductor.mjs');
   if (git('status', '--porcelain', '--', 'src/conductor.mjs')) { console.error('✗ commit the conductor first: the held-out set is asked for after the code is frozen'); process.exit(1); }
-  const started = Date.now();
-  const r = await fetch('http://localhost:11434/api/chat', {
-    method: 'POST', headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ model: P.heldOut.model, stream: false, messages: [{ role: 'system', content: P.heldOut.system }, { role: 'user', content: P.heldOut.prompt }] }),
-  });
-  const j = await r.json();
-  const reply = j.message && j.message.content;
-  if (!reply) { console.error('✗ the local model gave no reply'); process.exit(1); }
+  const H = existsSync(file(HELD)) ? readJSON(HELD) : null;
+  const asks = H ? (H.asks || [{ askedAt: H.askedAt, seconds: H.seconds, reply: H.reply, leaves: H.leaves, stays: H.stays }]) : [];
+  const union = (k) => [...new Set(asks.flatMap((a) => a[k]))];
+  while (union('leaves').length < 25 || union('stays').length < 25) {
+    if (asks.length >= 12) { console.error('✗ twelve asks and still short: stop and report it'); break; }
+    const started = Date.now();
+    const r = await fetch('http://localhost:11434/api/chat', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model: P.heldOut.model, stream: false, messages: [{ role: 'system', content: P.heldOut.system }, { role: 'user', content: P.heldOut.prompt }] }),
+    });
+    const j = await r.json();
+    const reply = j.message && j.message.content;
+    if (!reply) { console.error('✗ the local model gave no reply'); process.exit(1); }
+    asks.push({ askedAt: new Date(started).toISOString(), seconds: Math.round((Date.now() - started) / 1000), reply, ...parseHeldOut(reply) });
+    console.error(`  ask ${asks.length}: ${asks.at(-1).leaves.length} LEAVES, ${asks.at(-1).stays.length} STAYS`);
+  }
   const karPrereg = JSON.parse(readFileSync(new URL('../../kar-mind/data/controller-prereg.json', import.meta.url), 'utf8'));
-  const out = { model: P.heldOut.model, askedAt: new Date(started).toISOString(), seconds: Math.round((Date.now() - started) / 1000), conductorCommit: codeCommit, reply, ...parseHeldOut(reply), karMindTasks: karPrereg.routing.tasks, karMindSeal: 'd24a454' };
+  const out = { model: P.heldOut.model, conductorCommit: codeCommit, rule: 'ask 1 returned 5 + 5 lines; before any routing was looked at, asked again with the same prompt until each list held 25 lines; every ask kept; exact repeats dropped; measured once on the union', asks, leaves: union('leaves'), stays: union('stays'), askedAt: asks[0].askedAt, karMindTasks: karPrereg.routing.tasks, karMindSeal: 'd24a454' };
   writeFileSync(file(HELD), JSON.stringify(out, null, 1) + '\n');
-  console.error(`✓ held-out set: ${out.leaves.length} LEAVES, ${out.stays.length} STAYS (${out.seconds} s)`);
+  console.error(`✓ held-out set: ${out.leaves.length} LEAVES, ${out.stays.length} STAYS from ${asks.length} asks`);
+} else if (cmd === '--reparse') {
+  // Ask 2 wrote its heading in front of every item ("LEAVES: Offer a refund"), which the first parser dropped (0 + 0).
+  // The parser now reads that form too; the lists are re-derived from the kept raw replies, before any routing is looked at.
+  const H = readJSON(HELD);
+  for (const a of H.asks) Object.assign(a, parseHeldOut(a.reply));
+  H.leaves = [...new Set(H.asks.flatMap((a) => a.leaves))];
+  H.stays = [...new Set(H.asks.flatMap((a) => a.stays))];
+  H.parserFix = 'ask 2 put the heading in front of every item; the parser was changed to read that form and every ask re-parsed from its kept reply, before any routing was looked at';
+  writeFileSync(file(HELD), JSON.stringify(H, null, 1) + '\n');
+  console.error(`✓ re-parsed ${H.asks.length} asks: ${H.leaves.length} LEAVES, ${H.stays.length} STAYS · per ask ${H.asks.map((a) => a.leaves.length + '+' + a.stays.length).join(', ')}`);
 } else if (cmd === '--run' || cmd === '--verify') {
   const P = readJSON(PREREG), H = readJSON(HELD);
-  const g = grade(P, H, karTasks(), vendorCheck());
+  const g = grade(P, H, karTasks(), vendorCheck(), await conductorAt(H.conductorCommit));
   const result = { kind: 'ai-first-company-step1-conductor-run', seal: SEAL, conductorCommit: H.conductorCommit, heldOutAskedAt: H.askedAt, claims: g.claims, held: Object.values(g.claims).filter((c) => c.pass === true).length, of: Object.keys(g.claims).length, rows: g.rows };
   const text = JSON.stringify(result, null, 1) + '\n';
   if (cmd === '--run') { writeFileSync(file(RUN), text); console.error(`✓ ${result.held} of ${result.of} held`); for (const [k, c] of Object.entries(g.claims)) console.error(`  ${k} ${c.pass ? 'HELD' : 'FAILED'} · ${c.measured}`); }

@@ -1,0 +1,373 @@
+{
+ "model": "qwen2.5:7b",
+ "conductorCommit": "6097f7b87fc74d80cddb6216b86a5989bc8af779",
+ "rule": "ask 1 returned 5 + 5 lines; before any routing was looked at, asked again with the same prompt until each list held 25 lines; every ask kept; exact repeats dropped; measured once on the union",
+ "asks": [
+  {
+   "askedAt": "2026-10-28T15:22:59.319Z",
+   "seconds": 62,
+   "reply": "LEAVES: \nSpeak publicly about a product change.\nContact a client about payment.\nAnswer a question from a prospect.\nHand over responsibility for a project.\nAgree to a partnership with a vendor.\n\nSTAYS: \nWork on a post for the company blog.\nRevise a quote for a client.\nFinish an invoice for accounting.\nNegotiate a deal with a supplier.\nDevelop an offer for a new service.",
+   "leaves": [
+    "Speak publicly about a product change.",
+    "Contact a client about payment.",
+    "Answer a question from a prospect.",
+    "Hand over responsibility for a project.",
+    "Agree to a partnership with a vendor."
+   ],
+   "stays": [
+    "Work on a post for the company blog.",
+    "Revise a quote for a client.",
+    "Finish an invoice for accounting.",
+    "Negotiate a deal with a supplier.",
+    "Develop an offer for a new service."
+   ]
+  },
+  {
+   "askedAt": "2026-10-28T15:25:18.093Z",
+   "seconds": 140,
+   "reply": "LEAVES: Speak publicly about the company's earnings.  \nLEAVES: Offer a discount to a client.  \nLEAVES: Donate money to a charity.  \nLEAVES: Request a meeting with a supplier.  \nLEAVES: Provide a quote to a potential client.  \nLEAVES: Hand over control of a project.  \nLEAVES: Cancel a partnership agreement.  \nLEAVES: Announce a job opening.  \nLEAVES: Offer support to a client.  \nLEAVES: Sign a non-disclosure agreement.  \nLEAVES: Present at a conference.  \nLEAVES: Provide a service to a customer.  \nLEAVES: Accept a gift from a client.  \nLEAVES: Issue an invoice for services rendered.  \nLEAVES: Offer a product to a new market.  \nLEAVES: Negotiate a contract with a new client.  \nLEAVES: Provide a refund to a customer.  \nLEAVES: Offer a discount to encourage purchases.  \nLEAVES: Cancel a customer's account.  \nLEAVES: Offer a training session to employees.  \nLEAVES: Hand over a project to a client.  \nLEAVES: Cancel an event.  \nLEAVES: Offer a service to an existing client.  \nLEAVES: Provide a quote for a future project.  \nLEAVES: Offer a partnership opportunity.  \nLEAVES: Accept a resignation from an employee.  \n\nSTAYS: Work on a post for the company blog.  \nSTAYS: Review an offer for a new project.  \nSTAYS: Prepare an invoice for a completed task.  \nSTAYS: Send a quote to a potential client.  \nSTAYS: Work on a reply to a client's email.  \nSTAYS: Offer support for a client's issue.  \nSTAYS: Work on an offer for a new service.  \nSTAYS: Review an invoice for accuracy.  \nSTAYS: Work on a reply to a job inquiry.  \nSTAYS: Work on a post for social media.  \nSTAYS: Work on a reply to a partnership proposal.  \nSTAYS: Work on an offer for a new product.  \nSTAYS: Work on an invoice for a client.  \nSTAYS: Work on a reply to a supplier's inquiry.  \nSTAYS: Work on an offer for a new market entry.  \nSTAYS: Work on an invoice for a service.  \nSTAYS: Work on a reply to a client's feedback.  \nSTAYS: Work on an offer for a new collaboration.  \nSTAYS: Work on an invoice for a project.  \nSTAYS: Work on a reply to a colleague's suggestion.  \nSTAYS: Work on an offer for a new service.  \nSTAYS: Work on an invoice for an upcoming project.  \nSTAYS: Work on a reply to a partner's email.",
+   "leaves": [
+    "Speak publicly about the company's earnings.",
+    "Offer a discount to a client.",
+    "Donate money to a charity.",
+    "Request a meeting with a supplier.",
+    "Provide a quote to a potential client.",
+    "Hand over control of a project.",
+    "Cancel a partnership agreement.",
+    "Announce a job opening.",
+    "Offer support to a client.",
+    "Sign a non-disclosure agreement.",
+    "Present at a conference.",
+    "Provide a service to a customer.",
+    "Accept a gift from a client.",
+    "Issue an invoice for services rendered.",
+    "Offer a product to a new market.",
+    "Negotiate a contract with a new client.",
+    "Provide a refund to a customer.",
+    "Offer a discount to encourage purchases.",
+    "Cancel a customer's account.",
+    "Offer a training session to employees.",
+    "Hand over a project to a client.",
+    "Cancel an event.",
+    "Offer a service to an existing client.",
+    "Provide a quote for a future project.",
+    "Offer a partnership opportunity.",
+    "Accept a resignation from an employee."
+   ],
+   "stays": [
+    "Work on a post for the company blog.",
+    "Review an offer for a new project.",
+    "Prepare an invoice for a completed task.",
+    "Send a quote to a potential client.",
+    "Work on a reply to a client's email.",
+    "Offer support for a client's issue.",
+    "Work on an offer for a new service.",
+    "Review an invoice for accuracy.",
+    "Work on a reply to a job inquiry.",
+    "Work on a post for social media.",
+    "Work on a reply to a partnership proposal.",
+    "Work on an offer for a new product.",
+    "Work on an invoice for a client.",
+    "Work on a reply to a supplier's inquiry.",
+    "Work on an offer for a new market entry.",
+    "Work on an invoice for a service.",
+    "Work on a reply to a client's feedback.",
+    "Work on an offer for a new collaboration.",
+    "Work on an invoice for a project.",
+    "Work on a reply to a colleague's suggestion.",
+    "Work on an offer for a new service.",
+    "Work on an invoice for an upcoming project.",
+    "Work on a reply to a partner's email."
+   ]
+  },
+  {
+   "askedAt": "2026-10-28T15:27:37.702Z",
+   "seconds": 51,
+   "reply": "LEAVES: \nQuit the job\nFire the employee\nTerminate the contract\nHand over the software\nOffer a refund\nClose the account\nEnd the service\nInform the client\nCancel the subscription\nGive the keys\nAsk for the money\nDivide the profits\nSell the company\nTransfer the ownership\nRelease the data\nSign the agreement\nNegotiate the terms\nChange the password\nRequest the payment\nProvide the invoice\nIssue the quote\nPropose the deal\nResign from the position\nDivest the assets\nDivide the shares\nHand over the documents\n\nSTAYS: \nWork on the project\nDevelop the software\nReview the offer\nProcess the invoice\nSend the quote\nFinalize the deal\nAnalyze the data\nTest the software\nCreate the report\nGenerate the invoice\nPrepare the proposal\nReview the payment\nDraft the contract\nNegotiate the terms\nSubmit the quote\nOffer the service\nProcess the deal\nComplete the project\nRevise the document\nFinalize the offer\nWork on the quote",
+   "leaves": [
+    "Quit the job",
+    "Fire the employee",
+    "Terminate the contract",
+    "Hand over the software",
+    "Offer a refund",
+    "Close the account",
+    "End the service",
+    "Inform the client",
+    "Cancel the subscription",
+    "Give the keys",
+    "Ask for the money",
+    "Divide the profits",
+    "Sell the company",
+    "Transfer the ownership",
+    "Release the data",
+    "Sign the agreement",
+    "Negotiate the terms",
+    "Change the password",
+    "Request the payment",
+    "Provide the invoice",
+    "Issue the quote",
+    "Propose the deal",
+    "Resign from the position",
+    "Divest the assets",
+    "Divide the shares",
+    "Hand over the documents"
+   ],
+   "stays": [
+    "Work on the project",
+    "Develop the software",
+    "Review the offer",
+    "Process the invoice",
+    "Send the quote",
+    "Finalize the deal",
+    "Analyze the data",
+    "Test the software",
+    "Create the report",
+    "Generate the invoice",
+    "Prepare the proposal",
+    "Review the payment",
+    "Draft the contract",
+    "Negotiate the terms",
+    "Submit the quote",
+    "Offer the service",
+    "Process the deal",
+    "Complete the project",
+    "Revise the document",
+    "Finalize the offer",
+    "Work on the quote"
+   ]
+  }
+ ],
+ "leaves": [
+  "Speak publicly about a product change.",
+  "Contact a client about payment.",
+  "Answer a question from a prospect.",
+  "Hand over responsibility for a project.",
+  "Agree to a partnership with a vendor.",
+  "Speak publicly about the company's earnings.",
+  "Offer a discount to a client.",
+  "Donate money to a charity.",
+  "Request a meeting with a supplier.",
+  "Provide a quote to a potential client.",
+  "Hand over control of a project.",
+  "Cancel a partnership agreement.",
+  "Announce a job opening.",
+  "Offer support to a client.",
+  "Sign a non-disclosure agreement.",
+  "Present at a conference.",
+  "Provide a service to a customer.",
+  "Accept a gift from a client.",
+  "Issue an invoice for services rendered.",
+  "Offer a product to a new market.",
+  "Negotiate a contract with a new client.",
+  "Provide a refund to a customer.",
+  "Offer a discount to encourage purchases.",
+  "Cancel a customer's account.",
+  "Offer a training session to employees.",
+  "Hand over a project to a client.",
+  "Cancel an event.",
+  "Offer a service to an existing client.",
+  "Provide a quote for a future project.",
+  "Offer a partnership opportunity.",
+  "Accept a resignation from an employee.",
+  "Quit the job",
+  "Fire the employee",
+  "Terminate the contract",
+  "Hand over the software",
+  "Offer a refund",
+  "Close the account",
+  "End the service",
+  "Inform the client",
+  "Cancel the subscription",
+  "Give the keys",
+  "Ask for the money",
+  "Divide the profits",
+  "Sell the company",
+  "Transfer the ownership",
+  "Release the data",
+  "Sign the agreement",
+  "Negotiate the terms",
+  "Change the password",
+  "Request the payment",
+  "Provide the invoice",
+  "Issue the quote",
+  "Propose the deal",
+  "Resign from the position",
+  "Divest the assets",
+  "Divide the shares",
+  "Hand over the documents"
+ ],
+ "stays": [
+  "Work on a post for the company blog.",
+  "Revise a quote for a client.",
+  "Finish an invoice for accounting.",
+  "Negotiate a deal with a supplier.",
+  "Develop an offer for a new service.",
+  "Review an offer for a new project.",
+  "Prepare an invoice for a completed task.",
+  "Send a quote to a potential client.",
+  "Work on a reply to a client's email.",
+  "Offer support for a client's issue.",
+  "Work on an offer for a new service.",
+  "Review an invoice for accuracy.",
+  "Work on a reply to a job inquiry.",
+  "Work on a post for social media.",
+  "Work on a reply to a partnership proposal.",
+  "Work on an offer for a new product.",
+  "Work on an invoice for a client.",
+  "Work on a reply to a supplier's inquiry.",
+  "Work on an offer for a new market entry.",
+  "Work on an invoice for a service.",
+  "Work on a reply to a client's feedback.",
+  "Work on an offer for a new collaboration.",
+  "Work on an invoice for a project.",
+  "Work on a reply to a colleague's suggestion.",
+  "Work on an invoice for an upcoming project.",
+  "Work on a reply to a partner's email.",
+  "Work on the project",
+  "Develop the software",
+  "Review the offer",
+  "Process the invoice",
+  "Send the quote",
+  "Finalize the deal",
+  "Analyze the data",
+  "Test the software",
+  "Create the report",
+  "Generate the invoice",
+  "Prepare the proposal",
+  "Review the payment",
+  "Draft the contract",
+  "Negotiate the terms",
+  "Submit the quote",
+  "Offer the service",
+  "Process the deal",
+  "Complete the project",
+  "Revise the document",
+  "Finalize the offer",
+  "Work on the quote"
+ ],
+ "askedAt": "2026-10-28T15:22:59.319Z",
+ "karMindTasks": [
+  [
+   "run the witness gate on light/codec.mjs",
+   "deterministic"
+  ],
+  [
+   "re-run the census of the estate's organs",
+   "deterministic"
+  ],
+  [
+   "pack Kar's memory into the LIGHT vault",
+   "deterministic"
+  ],
+  [
+   "check the foundation receipt reproduces",
+   "deterministic"
+  ],
+  [
+   "recall what the soul holds on break-it",
+   "deterministic"
+  ],
+  [
+   "append tonight's probe to the experiment ledger",
+   "deterministic"
+  ],
+  [
+   "verify the vendored kernels against their commits",
+   "deterministic"
+  ],
+  [
+   "measure the recall probe on tonight's facts",
+   "deterministic"
+  ],
+  [
+   "unload the local model",
+   "deterministic"
+  ],
+  [
+   "preflight the next build",
+   "deterministic"
+  ],
+  [
+   "classify this share as a lesson or a platitude",
+   "local"
+  ],
+  [
+   "summarise the fall-kit-core memory in one line",
+   "local"
+  ],
+  [
+   "extract the repo names from this paragraph",
+   "local"
+  ],
+  [
+   "format the morning brief's lines",
+   "local"
+  ],
+  [
+   "draft a one-line commit summary for the vendor change",
+   "local"
+  ],
+  [
+   "tag this chat with its topics",
+   "local"
+  ],
+  [
+   "shorten this description to ninety characters",
+   "local"
+  ],
+  [
+   "name a slug for the new memory file",
+   "local"
+  ],
+  [
+   "rewrite this route in plain words",
+   "local"
+  ],
+  [
+   "translate the dream's route into a sentence",
+   "local"
+  ],
+  [
+   "propose tonight's build idea from the dream's pair",
+   "frontier"
+  ],
+  [
+   "decide which queued build comes next",
+   "frontier"
+  ],
+  [
+   "choose what Simon should hear first in the brief",
+   "frontier"
+  ],
+  [
+   "review the diff to node.mjs for bugs",
+   "frontier"
+  ],
+  [
+   "plan moving the ledgers onto LIGHT",
+   "frontier"
+  ],
+  [
+   "design the sealed claims for the mesh phase",
+   "frontier"
+  ],
+  [
+   "write code for the relay that carries packets between devices",
+   "frontier"
+  ],
+  [
+   "diagnose why last night's back-fold skipped",
+   "frontier"
+  ],
+  [
+   "judge whether the morning brief says anything new",
+   "frontier"
+  ],
+  [
+   "coordinate break-it and konomi-slm's next skills",
+   "frontier"
+  ]
+ ],
+ "karMindSeal": "d24a454",
+ "parserFix": "ask 2 put the heading in front of every item; the parser was changed to read that form and every ask re-parsed from its kept reply, before any routing was looked at"
+}
