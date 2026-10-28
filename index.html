@@ -23,7 +23,7 @@
   nav.toc{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin:0 -16px;padding:10px 16px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
   nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-size:14px;padding:5px 10px;border-radius:999px;border:1px solid transparent}
   nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--line);color:var(--ink)}
-  section{padding-top:44px} h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 6px;letter-spacing:-.01em} h3{font-size:18px;margin:22px 0 6px}
+  section{padding-top:44px;scroll-margin-top:12px} h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 6px;letter-spacing:-.01em} h3{font-size:18px;margin:22px 0 6px}
   .sub{color:var(--ink2);margin:0 0 18px;max-width:72ch}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
   .grid{display:grid;gap:12px} .g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))} .g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))} .g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
@@ -171,6 +171,10 @@
   </div>
   <h3>Cost case — the hours the loop takes off a person</h3>
   <div class="card" id="costcase"><p class="muted small">loading the calculator…</p></div>
+  <h3>What you pay now for the same work</h3>
+  <div class="card" id="seats"><p class="muted small">loading the comparison…</p></div>
+  <h3>The case for the board</h3>
+  <div class="card small"><p style="margin:0">The company's routine work runs on its own; the decisions that carry the company's name, money or commitments come to one person, in one queue, with the exact words in front of them. Every claim the company makes in public is pinned to evidence anyone can fetch, so a claim cannot drift from what was proven. Every step is in a record that cannot be quietly edited. It is measured the way it is sold: the claims were written down before the code, the failures are on the page, and anyone can re-run the checks. The software is yours (MIT), runs on your machines and accounts, and keeps running without the supplier.</p></div>
   <h3>Deployment, support and ownership</h3>
   <div class="card small"><p style="margin:0 0 8px">Supplied by <b>AI Native Solutions</b> — start at <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a>. Support, service levels, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed: no licence fee, and it keeps running without us.</p><p style="margin:0">It runs on your own machine and your own accounts: your channel keys, your Grok Bot, your repos. Claude is used for judgement on your own login inside a nightly budget; small models on your own hardware do the bulk.</p></div>
   <h3>Risks, answered straight</h3>
@@ -258,7 +262,17 @@ try {
     $('#cc-s').textContent = r.ok ? String(r.approvalsPerWeek) : '—';
   };
   box.addEventListener('input', update); update();
-} catch { $('#costcase').innerHTML = '<p class="muted small">The cost case lands with the operations step.</p>'; }
+  // what a team pays now for the seats the loop does without: sourced seat prices, a year
+  const { seatsNow } = await import('./src/costcase.mjs');
+  const sb = $('#seats');
+  sb.innerHTML = `<p class="small" style="margin-top:0">A sales-and-marketing team typically runs a CRM seat and an AI-assistant seat per person. Set the head count; the prices are the vendors' own published list prices (each linked), a year.</p><div class="barrow"><label for="seat-n">People with both seats</label><input id="seat-n" type="range" min="0" max="25" step="1" value="3"><span class="v" id="seat-v">3</span></div><div id="seat-out"></div><p class="small muted" style="margin-bottom:0">What replaces them here: the conductor, the voice and the journal run on your own machine (MIT, no licence fee); the reach arm is the Grok Bot the owner already has; Claude for judgement runs on the owner's own login inside a nightly budget.</p>`;
+  const seatUpdate = () => {
+    const n = Number($('#seat-n').value); $('#seat-v').textContent = String(n);
+    const r = seatsNow(basis, { crm: n, copilot: n });
+    $('#seat-out').innerHTML = r.ok ? `<div class="tablewrap"><table><thead><tr><th>Seat</th><th>List price</th><th>Seats</th><th>A year</th></tr></thead><tbody>${r.lines.map((l) => `<tr><td><a href="${esc(l.source)}">${esc(l.product)}</a></td><td>£${esc(l.perMonth)} a user a month</td><td>${l.seats}</td><td>£${Math.round(l.perYear).toLocaleString('en-GB')}</td></tr>`).join('')}<tr><th colspan="3">Seats, a year</th><th>£${Math.round(r.perYear).toLocaleString('en-GB')}</th></tr></tbody></table></div>` : '<p class="muted small">—</p>';
+  };
+  sb.addEventListener('input', seatUpdate); seatUpdate();
+} catch { $('#costcase').innerHTML = '<p class="muted small">The cost case could not be loaded.</p>'; }
 
 // ── the dashboard, from the rehearsal cycle's journal ─────────────────────────
 try {

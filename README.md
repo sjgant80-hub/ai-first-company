@@ -20,7 +20,7 @@ approval of its exact words**, and **every public claim is checked against a com
 | 6 | Oversight | `src/oversight.mjs` | 39/39 | 4 of 4 |
 | 7 | The loop, closed | `src/cycle.mjs` | 26/26 | 6 of 6 |
 
-Plus `src/costcase.mjs` (15/15) and `src/page.mjs` (15/15). Seals: `data/step*-prereg.json`; receipts: `data/step*-run.json`
+Plus `src/costcase.mjs` (29/29, the cost case and the seat comparison) and `src/page.mjs` (15/15). Seals: `data/step*-prereg.json`; receipts: `data/step*-run.json`
 and `data/cycle-run.json`; every tool `tools/step*-measure.mjs --check | --verify`. CI re-measures every seal and receipt and
 mutation-tests every kernel on each push (`.github/workflows/gate.yml`).
 

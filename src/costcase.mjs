@@ -27,4 +27,20 @@ export function costCase(input) {
   } catch { return { ok: false, why: 'the inputs could not be read' }; }
 }
 
-export default { DEFAULT_HOURS, costCase };
+// What a team pays now for the seats this loop does without, a year, from the vendored basis (each price with its source).
+//   seatsNow(basis, { crm, copilot }) → { ok, lines: [{ key, product, perMonth, seats, perYear, source }], perYear } | { ok: false, why }
+export const SEATS = Object.freeze(['crm', 'copilot']);
+export function seatsNow(basis, seats) {
+  try {
+    if (basis === null || typeof basis !== 'object' || seats === null || typeof seats !== 'object') return { ok: false, why: 'a basis and seat counts' };
+    const lines = [];
+    for (const k of SEATS) {
+      const b = basis['seat.' + k], n = seats[k];
+      if (b === null || typeof b !== 'object' || !ok(b.value) || !Number.isInteger(n) || n < 0) return { ok: false, why: 'seat.' + k + ': a sourced price and a whole number of seats' };
+      lines.push({ key: k, product: b.product, perMonth: b.value, seats: n, perYear: Math.round(b.value * 12 * n * 100) / 100, source: b.source });
+    }
+    return { ok: true, lines, perYear: Math.round(lines.reduce((a, l) => a + l.perYear, 0) * 100) / 100 };
+  } catch { return { ok: false, why: 'the basis could not be read' }; }
+}
+
+export default { DEFAULT_HOURS, costCase, SEATS, seatsNow };

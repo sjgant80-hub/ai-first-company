@@ -1,7 +1,34 @@
 // costcase.test.mjs — hours × the median wage, a floor; bad inputs refused, never thrown.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { costCase, DEFAULT_HOURS } from '../src/costcase.mjs';
+import { costCase, DEFAULT_HOURS, seatsNow, SEATS } from '../src/costcase.mjs';
+import { readFileSync } from 'node:fs';
+
+const BASIS = JSON.parse(readFileSync(new URL('../vendor/sovereign-enterprise/data/basis.json', import.meta.url), 'utf8'));
+
+test('seatsNow: the sourced seat prices, a year', () => {
+  assert.deepEqual([...SEATS], ['crm', 'copilot']);
+  const r = seatsNow(BASIS, { crm: 3, copilot: 2 });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.lines.map((l) => [l.key, l.perMonth, l.seats, l.perYear]), [['crm', 80, 3, 2880], ['copilot', 23.1, 2, 554.4]]);
+  assert.equal(r.perYear, 3434.4);
+  assert.equal(r.lines[0].product, 'Salesforce Pro Suite');
+  assert.match(r.lines[1].source, /^https:\/\/www\.microsoft\.com\//);
+  assert.equal(seatsNow(BASIS, { crm: 0, copilot: 0 }).perYear, 0);
+  assert.equal(seatsNow({ 'seat.crm': { value: 1.005 }, 'seat.copilot': { value: 0 } }, { crm: 1, copilot: 1 }).lines[0].perYear, 12.06);
+});
+
+test('seatsNow refuses what it cannot price', () => {
+  assert.deepEqual(seatsNow(null, { crm: 1, copilot: 1 }), { ok: false, why: 'a basis and seat counts' });
+  assert.deepEqual(seatsNow(BASIS, null), { ok: false, why: 'a basis and seat counts' });
+  assert.deepEqual(seatsNow(BASIS, { crm: 1.5, copilot: 1 }), { ok: false, why: 'seat.crm: a sourced price and a whole number of seats' });
+  assert.deepEqual(seatsNow(BASIS, { crm: -1, copilot: 1 }), { ok: false, why: 'seat.crm: a sourced price and a whole number of seats' });
+  assert.deepEqual(seatsNow(BASIS, { crm: 1 }), { ok: false, why: 'seat.copilot: a sourced price and a whole number of seats' });
+  assert.deepEqual(seatsNow({ 'seat.crm': null }, { crm: 1, copilot: 1 }), { ok: false, why: 'seat.crm: a sourced price and a whole number of seats' });
+  assert.deepEqual(seatsNow({ 'seat.crm': { value: -5 } }, { crm: 1, copilot: 1 }), { ok: false, why: 'seat.crm: a sourced price and a whole number of seats' });
+  const evil = {}; Object.defineProperty(evil, 'seat.crm', { get() { throw new Error('x'); } });
+  assert.deepEqual(seatsNow(evil, { crm: 1, copilot: 1 }), { ok: false, why: 'the basis could not be read' });
+});
 
 const H = Object.fromEntries(Object.entries(DEFAULT_HOURS).map(([k, v]) => [k, v.hours]));
 
