@@ -1,0 +1,752 @@
+{
+ "kind": "ai-first-company-step4-funnel-run",
+ "seal": "d79ce44",
+ "gate": "witness funnel 35/35 · journal 18/18",
+ "claims": {
+  "G1": {
+   "pass": true,
+   "measured": "6 of 6 leads as stated",
+   "leads": [
+    {
+     "id": "L1",
+     "stage": "converted",
+     "offer": "liveware-pilot",
+     "asked": 3,
+     "ok": true
+    },
+    {
+     "id": "L2",
+     "stage": "converted",
+     "offer": "grow-a-brain",
+     "asked": 3,
+     "ok": true
+    },
+    {
+     "id": "L3",
+     "stage": "replied",
+     "offer": "digi",
+     "asked": 1,
+     "ok": true
+    },
+    {
+     "id": "L4",
+     "stage": "market",
+     "offer": null,
+     "asked": 0,
+     "ok": true
+    },
+    {
+     "id": "L5",
+     "stage": "no-offer",
+     "offer": null,
+     "asked": 0,
+     "ok": true
+    },
+    {
+     "id": "L6",
+     "stage": "no-offer",
+     "offer": null,
+     "asked": 0,
+     "ok": true
+    }
+   ]
+  },
+  "G2": {
+   "pass": true,
+   "measured": "0 drafts for L4"
+  },
+  "G3": {
+   "pass": true,
+   "measured": "0 offer drafts for L5 and L6"
+  },
+  "G4": {
+   "pass": true,
+   "measured": "7 of 7 drafts pass the word rules and link only to estate pages"
+  },
+  "G5": {
+   "pass": true,
+   "measured": "7 sends, 0 without an approval of their text; journal verifies (48 records); a one-byte change caught at its own record 48 of 48 times"
+  }
+ },
+ "held": 5,
+ "of": 5,
+ "journal": [
+  {
+   "n": 0,
+   "at": "2026-10-28T12:00:00.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L1",
+    "id": "s3",
+    "handle": "fixture_cy",
+    "text": "@example_co we parse untrusted partner files all day, could your gateway sit in front of that?",
+    "eligible": true
+   },
+   "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+   "hash": "c2736f080093c797ef6fe7ae411f707400cbf2befb7c9831e46d136b574703ee"
+  },
+  {
+   "n": 1,
+   "at": "2026-10-28T12:00:01.000Z",
+   "kind": "qualified",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "id": "s3",
+    "offer": "liveware-pilot"
+   },
+   "prev": "c2736f080093c797ef6fe7ae411f707400cbf2befb7c9831e46d136b574703ee",
+   "hash": "69808ec281af965b37035bd939923524a9c600f3e064931f02f13733b06f72c0"
+  },
+  {
+   "n": 2,
+   "at": "2026-10-28T12:00:02.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "reply",
+    "text": "@fixture_cy Thanks for asking. That is the liveware pilot: https://sjgant80-hub.github.io/break-it/\nEvery claim on that page links to a receipt you can re-run yourself.",
+    "textSha256": "65971bc8f6ed308ee8d491c55acdef71e494d6702a4b93bad3884df1aac2b8d3",
+    "wordsOk": true
+   },
+   "prev": "69808ec281af965b37035bd939923524a9c600f3e064931f02f13733b06f72c0",
+   "hash": "a72d3465722707eaa76f7c5e02de26c904fe29dea4e30d49662ff034f16e61d6"
+  },
+  {
+   "n": 3,
+   "at": "2026-10-28T12:00:03.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "reply",
+    "textSha256": "65971bc8f6ed308ee8d491c55acdef71e494d6702a4b93bad3884df1aac2b8d3",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "a72d3465722707eaa76f7c5e02de26c904fe29dea4e30d49662ff034f16e61d6",
+   "hash": "f7f1433b6215d28a683924f6aac81ec1df4000c0e516fe1bc98ca5d3f2b30a5f"
+  },
+  {
+   "n": 4,
+   "at": "2026-10-28T12:00:04.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L1",
+    "item": "reply",
+    "textSha256": "65971bc8f6ed308ee8d491c55acdef71e494d6702a4b93bad3884df1aac2b8d3"
+   },
+   "prev": "f7f1433b6215d28a683924f6aac81ec1df4000c0e516fe1bc98ca5d3f2b30a5f",
+   "hash": "cf8ea4cd928efd2744393bbde5712cf15ed747c6c617d367853718e80cd7ae4c"
+  },
+  {
+   "n": 5,
+   "at": "2026-10-28T12:00:05.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "reply",
+    "textSha256": "65971bc8f6ed308ee8d491c55acdef71e494d6702a4b93bad3884df1aac2b8d3",
+    "dryRun": true
+   },
+   "prev": "cf8ea4cd928efd2744393bbde5712cf15ed747c6c617d367853718e80cd7ae4c",
+   "hash": "810f9612357770abbc28e4af8263228fe2e45c64a8817bbafea2d19379d626d0"
+  },
+  {
+   "n": 6,
+   "at": "2026-10-28T12:00:06.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L1",
+    "handle": "fixture_cy",
+    "text": "@example_co yes please, how do we start?",
+    "eligible": true
+   },
+   "prev": "810f9612357770abbc28e4af8263228fe2e45c64a8817bbafea2d19379d626d0",
+   "hash": "de49989d35413a3df41553fc4dcc71bf2d437765cc8c4c23bda5edd16c100c14"
+  },
+  {
+   "n": 7,
+   "at": "2026-10-28T12:00:07.000Z",
+   "kind": "engaged",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "handle": "fixture_cy"
+   },
+   "prev": "de49989d35413a3df41553fc4dcc71bf2d437765cc8c4c23bda5edd16c100c14",
+   "hash": "e31ee2b966861ccff84be13cf8532865d55fca8ba69979a46e4c3cf1308fe734"
+  },
+  {
+   "n": 8,
+   "at": "2026-10-28T12:00:08.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "offer",
+    "text": "@fixture_cy Here is how the liveware pilot starts: https://sjgant80-hub.github.io/break-it/\nSay go ahead here when you are ready, and we will set it up with you.",
+    "textSha256": "be2f890853684a798fcdd5e0234c2400b1e50759a54d6bb45399d0554d631aed",
+    "wordsOk": true
+   },
+   "prev": "e31ee2b966861ccff84be13cf8532865d55fca8ba69979a46e4c3cf1308fe734",
+   "hash": "7250a996025bbedfc1c45635e9cfe6b9056b3f699975ec94af6d65858e68a2da"
+  },
+  {
+   "n": 9,
+   "at": "2026-10-28T12:00:09.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "offer",
+    "textSha256": "be2f890853684a798fcdd5e0234c2400b1e50759a54d6bb45399d0554d631aed",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "7250a996025bbedfc1c45635e9cfe6b9056b3f699975ec94af6d65858e68a2da",
+   "hash": "f063f4aea310a02595d42e326780ba15a0ef778900867aaffed0959844c9fbdb"
+  },
+  {
+   "n": 10,
+   "at": "2026-10-28T12:00:10.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L1",
+    "item": "offer",
+    "textSha256": "be2f890853684a798fcdd5e0234c2400b1e50759a54d6bb45399d0554d631aed"
+   },
+   "prev": "f063f4aea310a02595d42e326780ba15a0ef778900867aaffed0959844c9fbdb",
+   "hash": "16e62937fc5040480f517a2c3b41d088a6d135190358f92390bb54b71adf51dd"
+  },
+  {
+   "n": 11,
+   "at": "2026-10-28T12:00:11.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "offer",
+    "textSha256": "be2f890853684a798fcdd5e0234c2400b1e50759a54d6bb45399d0554d631aed",
+    "dryRun": true
+   },
+   "prev": "16e62937fc5040480f517a2c3b41d088a6d135190358f92390bb54b71adf51dd",
+   "hash": "0364daae88ee7b10c80f0cf3486ce2ab046b11d46d41bd38c3764c25ac955db9"
+  },
+  {
+   "n": 12,
+   "at": "2026-10-28T12:00:12.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L1",
+    "handle": "fixture_cy",
+    "text": "@example_co let's go ahead with the pilot",
+    "eligible": true
+   },
+   "prev": "0364daae88ee7b10c80f0cf3486ce2ab046b11d46d41bd38c3764c25ac955db9",
+   "hash": "461325068851d5a79ac4881620d71341230dca099b7a0d03d7ec4ea3237eb714"
+  },
+  {
+   "n": 13,
+   "at": "2026-10-28T12:00:13.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "close",
+    "text": "Close: liveware-pilot with @fixture_cy, as offered.",
+    "textSha256": "1d144b1043f7271545ad83a7d5c0e5319d4834236c1b2c4bd61db44b7f04762e",
+    "wordsOk": true
+   },
+   "prev": "461325068851d5a79ac4881620d71341230dca099b7a0d03d7ec4ea3237eb714",
+   "hash": "9c413598b2004fd95365a3cec9fa6b670dfbc71c60ed97a8d43ed5d820908e8a"
+  },
+  {
+   "n": 14,
+   "at": "2026-10-28T12:00:14.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "close",
+    "textSha256": "1d144b1043f7271545ad83a7d5c0e5319d4834236c1b2c4bd61db44b7f04762e",
+    "flags": [
+     "deal"
+    ]
+   },
+   "prev": "9c413598b2004fd95365a3cec9fa6b670dfbc71c60ed97a8d43ed5d820908e8a",
+   "hash": "59e22ce325c98a089013be2a50972e9b67803773c9b65586683d1c8d6e4c7cd4"
+  },
+  {
+   "n": 15,
+   "at": "2026-10-28T12:00:15.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L1",
+    "item": "close",
+    "textSha256": "1d144b1043f7271545ad83a7d5c0e5319d4834236c1b2c4bd61db44b7f04762e"
+   },
+   "prev": "59e22ce325c98a089013be2a50972e9b67803773c9b65586683d1c8d6e4c7cd4",
+   "hash": "35bebda1c0ee180e85c8181debe7df5f3b5dc697506aeadabef386ae7c7dfcde"
+  },
+  {
+   "n": 16,
+   "at": "2026-10-28T12:00:16.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "item": "close",
+    "textSha256": "1d144b1043f7271545ad83a7d5c0e5319d4834236c1b2c4bd61db44b7f04762e",
+    "dryRun": true
+   },
+   "prev": "35bebda1c0ee180e85c8181debe7df5f3b5dc697506aeadabef386ae7c7dfcde",
+   "hash": "fb35a41646c6550011d96641ea1ee7cfb10f3f63ef612f561bf49775a66060ab"
+  },
+  {
+   "n": 17,
+   "at": "2026-10-28T12:00:17.000Z",
+   "kind": "converted",
+   "by": "kar",
+   "data": {
+    "lead": "L1",
+    "handle": "fixture_cy",
+    "offer": "liveware-pilot"
+   },
+   "prev": "fb35a41646c6550011d96641ea1ee7cfb10f3f63ef612f561bf49775a66060ab",
+   "hash": "4169e95f7f9abc6a6ab98e679601aab63c816636248e648261f0df2f33ff85aa"
+  },
+  {
+   "n": 18,
+   "at": "2026-10-28T12:00:18.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L2",
+    "id": "s7",
+    "handle": "fixture_gu",
+    "text": "@example_co can I own a model trained on my own spreadsheets?",
+    "eligible": true
+   },
+   "prev": "4169e95f7f9abc6a6ab98e679601aab63c816636248e648261f0df2f33ff85aa",
+   "hash": "7eac85f230e14c9e08f5750e211ed404c17d66e5ce1219bb6691e47e416b3d61"
+  },
+  {
+   "n": 19,
+   "at": "2026-10-28T12:00:19.000Z",
+   "kind": "qualified",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "id": "s7",
+    "offer": "grow-a-brain"
+   },
+   "prev": "7eac85f230e14c9e08f5750e211ed404c17d66e5ce1219bb6691e47e416b3d61",
+   "hash": "651533f72b2a52ec600596e1d12e9d20b76bf2731f849aee66d3c74e469eba53"
+  },
+  {
+   "n": 20,
+   "at": "2026-10-28T12:00:20.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "reply",
+    "text": "@fixture_gu Thanks for asking. That is grow a brain from your own data: https://sjgant80-hub.github.io/konomi-slm/brain.html\nEvery claim on that page links to a receipt you can re-run yourself.",
+    "textSha256": "31e580a39dbb5f8e8fe21e162b7207c4daf5f6dd6c360fb6e9f5a6c477b8d2ca",
+    "wordsOk": true
+   },
+   "prev": "651533f72b2a52ec600596e1d12e9d20b76bf2731f849aee66d3c74e469eba53",
+   "hash": "8e13628046f71f8bd9fec2bd3024225d732bbf4ecd17bb54ea751aa61f71984e"
+  },
+  {
+   "n": 21,
+   "at": "2026-10-28T12:00:21.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "reply",
+    "textSha256": "31e580a39dbb5f8e8fe21e162b7207c4daf5f6dd6c360fb6e9f5a6c477b8d2ca",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "8e13628046f71f8bd9fec2bd3024225d732bbf4ecd17bb54ea751aa61f71984e",
+   "hash": "ecbd7cdf07dc38504472f98a5e3856031f6d6729beb08cef7265908e5b5a5b14"
+  },
+  {
+   "n": 22,
+   "at": "2026-10-28T12:00:22.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L2",
+    "item": "reply",
+    "textSha256": "31e580a39dbb5f8e8fe21e162b7207c4daf5f6dd6c360fb6e9f5a6c477b8d2ca"
+   },
+   "prev": "ecbd7cdf07dc38504472f98a5e3856031f6d6729beb08cef7265908e5b5a5b14",
+   "hash": "b185b22d41d928c190799a760b661ddf1e6a506c7a5d99e99221b9c87cc3ced9"
+  },
+  {
+   "n": 23,
+   "at": "2026-10-28T12:00:23.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "reply",
+    "textSha256": "31e580a39dbb5f8e8fe21e162b7207c4daf5f6dd6c360fb6e9f5a6c477b8d2ca",
+    "dryRun": true
+   },
+   "prev": "b185b22d41d928c190799a760b661ddf1e6a506c7a5d99e99221b9c87cc3ced9",
+   "hash": "7fedc31100ccd17c56bbef6f12ccd37a5f5a59d1c315cf4f5afe6e941ba641e1"
+  },
+  {
+   "n": 24,
+   "at": "2026-10-28T12:00:24.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L2",
+    "handle": "fixture_gu",
+    "text": "@example_co sounds good, how do I start?",
+    "eligible": true
+   },
+   "prev": "7fedc31100ccd17c56bbef6f12ccd37a5f5a59d1c315cf4f5afe6e941ba641e1",
+   "hash": "c56422c5f9f06a9facb0cb4688121dac573140a8ee31853c3c97b936328b4611"
+  },
+  {
+   "n": 25,
+   "at": "2026-10-28T12:00:25.000Z",
+   "kind": "engaged",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "handle": "fixture_gu"
+   },
+   "prev": "c56422c5f9f06a9facb0cb4688121dac573140a8ee31853c3c97b936328b4611",
+   "hash": "359e8fc32f1f5f8763a618841e5913f487e6b4426cc62b48be9d5a3596f69ea3"
+  },
+  {
+   "n": 26,
+   "at": "2026-10-28T12:00:26.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "offer",
+    "text": "@fixture_gu Here is how grow a brain from your own data starts: https://sjgant80-hub.github.io/konomi-slm/brain.html\nSay go ahead here when you are ready, and we will set it up with you.",
+    "textSha256": "840c2a1656668c7a68985c044ade0ff3e718d0143ca10e6d74462550d4b4765a",
+    "wordsOk": true
+   },
+   "prev": "359e8fc32f1f5f8763a618841e5913f487e6b4426cc62b48be9d5a3596f69ea3",
+   "hash": "12c80de0655e2c32680c3d858061bc3ca83651b8d831ac9e6af148c469cbcf37"
+  },
+  {
+   "n": 27,
+   "at": "2026-10-28T12:00:27.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "offer",
+    "textSha256": "840c2a1656668c7a68985c044ade0ff3e718d0143ca10e6d74462550d4b4765a",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "12c80de0655e2c32680c3d858061bc3ca83651b8d831ac9e6af148c469cbcf37",
+   "hash": "01f2b400ee0b6f71639dbc5b0d1af3ab734c96eba36b62d9309a2cd653a37f02"
+  },
+  {
+   "n": 28,
+   "at": "2026-10-28T12:00:28.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L2",
+    "item": "offer",
+    "textSha256": "840c2a1656668c7a68985c044ade0ff3e718d0143ca10e6d74462550d4b4765a"
+   },
+   "prev": "01f2b400ee0b6f71639dbc5b0d1af3ab734c96eba36b62d9309a2cd653a37f02",
+   "hash": "1ecf67bb16e1ecf2bf904cea3ed22f269f9f5c5966da271715f6418de2b7997b"
+  },
+  {
+   "n": 29,
+   "at": "2026-10-28T12:00:29.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "offer",
+    "textSha256": "840c2a1656668c7a68985c044ade0ff3e718d0143ca10e6d74462550d4b4765a",
+    "dryRun": true
+   },
+   "prev": "1ecf67bb16e1ecf2bf904cea3ed22f269f9f5c5966da271715f6418de2b7997b",
+   "hash": "7b4f8d07a152997be266d73cdadd0ec3e5e558398d89b4b3fa45e488c5c842bd"
+  },
+  {
+   "n": 30,
+   "at": "2026-10-28T12:00:30.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L2",
+    "handle": "fixture_gu",
+    "text": "@example_co yes, go ahead",
+    "eligible": true
+   },
+   "prev": "7b4f8d07a152997be266d73cdadd0ec3e5e558398d89b4b3fa45e488c5c842bd",
+   "hash": "8ab53f4c7e293858312750e93a7212f039413d7da84a710520f3ed7b0e9933eb"
+  },
+  {
+   "n": 31,
+   "at": "2026-10-28T12:00:31.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "close",
+    "text": "Close: grow-a-brain with @fixture_gu, as offered.",
+    "textSha256": "360d69852460545651cbdbc45336a069ec150a872dc1d2578b747e63f5c4b317",
+    "wordsOk": true
+   },
+   "prev": "8ab53f4c7e293858312750e93a7212f039413d7da84a710520f3ed7b0e9933eb",
+   "hash": "bdaa5c52720cd7ca025b680a6d9cf78a2fa68e315f88c65590d35211bc464b8b"
+  },
+  {
+   "n": 32,
+   "at": "2026-10-28T12:00:32.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "close",
+    "textSha256": "360d69852460545651cbdbc45336a069ec150a872dc1d2578b747e63f5c4b317",
+    "flags": [
+     "deal"
+    ]
+   },
+   "prev": "bdaa5c52720cd7ca025b680a6d9cf78a2fa68e315f88c65590d35211bc464b8b",
+   "hash": "5c9b9f2eaa484b7b219fffb5fbf0f7d707ab6445657efd97df29f40fededd60d"
+  },
+  {
+   "n": 33,
+   "at": "2026-10-28T12:00:33.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L2",
+    "item": "close",
+    "textSha256": "360d69852460545651cbdbc45336a069ec150a872dc1d2578b747e63f5c4b317"
+   },
+   "prev": "5c9b9f2eaa484b7b219fffb5fbf0f7d707ab6445657efd97df29f40fededd60d",
+   "hash": "43b613929a672ca60a87293ceb74f6910aa0009d088c11e2893821ed85ca24b8"
+  },
+  {
+   "n": 34,
+   "at": "2026-10-28T12:00:34.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "item": "close",
+    "textSha256": "360d69852460545651cbdbc45336a069ec150a872dc1d2578b747e63f5c4b317",
+    "dryRun": true
+   },
+   "prev": "43b613929a672ca60a87293ceb74f6910aa0009d088c11e2893821ed85ca24b8",
+   "hash": "e277632361ad62904dab74e941f818023aa2927101ba97bc3d5718b3e0ea9e76"
+  },
+  {
+   "n": 35,
+   "at": "2026-10-28T12:00:35.000Z",
+   "kind": "converted",
+   "by": "kar",
+   "data": {
+    "lead": "L2",
+    "handle": "fixture_gu",
+    "offer": "grow-a-brain"
+   },
+   "prev": "e277632361ad62904dab74e941f818023aa2927101ba97bc3d5718b3e0ea9e76",
+   "hash": "7d89a58bc075a1b6653e9a8732fceeca85b4e1135e1599f6e2dfb4442f717a09"
+  },
+  {
+   "n": 36,
+   "at": "2026-10-28T12:00:36.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L3",
+    "id": "s8",
+    "handle": "fixture_ha",
+    "text": "@example_co are the collectible AI cards out yet?",
+    "eligible": true
+   },
+   "prev": "7d89a58bc075a1b6653e9a8732fceeca85b4e1135e1599f6e2dfb4442f717a09",
+   "hash": "6530ca3a3f91ba15662b7d8265ffdcb5272f3d873cbc6f9bc688d78cf5560c2f"
+  },
+  {
+   "n": 37,
+   "at": "2026-10-28T12:00:37.000Z",
+   "kind": "qualified",
+   "by": "kar",
+   "data": {
+    "lead": "L3",
+    "id": "s8",
+    "offer": "digi"
+   },
+   "prev": "6530ca3a3f91ba15662b7d8265ffdcb5272f3d873cbc6f9bc688d78cf5560c2f",
+   "hash": "fb2cb597286d8cf23bfac40fb15e1327fdf3e8f23fb098fc33deca3a7088ce17"
+  },
+  {
+   "n": 38,
+   "at": "2026-10-28T12:00:38.000Z",
+   "kind": "drafted",
+   "by": "kar",
+   "data": {
+    "lead": "L3",
+    "item": "reply",
+    "text": "@fixture_ha Thanks for asking. That is DIGI cards: https://sjgant80-hub.github.io/digi-card/\nEvery claim on that page links to a receipt you can re-run yourself.",
+    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45",
+    "wordsOk": true
+   },
+   "prev": "fb2cb597286d8cf23bfac40fb15e1327fdf3e8f23fb098fc33deca3a7088ce17",
+   "hash": "1e048263a913a8801ba8bddb3a5bbb5aded8f00f831b802a630f681c25b14d00"
+  },
+  {
+   "n": 39,
+   "at": "2026-10-28T12:00:39.000Z",
+   "kind": "asked",
+   "by": "kar",
+   "data": {
+    "lead": "L3",
+    "item": "reply",
+    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45",
+    "flags": [
+     "outward"
+    ]
+   },
+   "prev": "1e048263a913a8801ba8bddb3a5bbb5aded8f00f831b802a630f681c25b14d00",
+   "hash": "020a86690c7bc4508e3081a5464ce9fd2504748e0f9cb4bac88be6e8027cccc8"
+  },
+  {
+   "n": 40,
+   "at": "2026-10-28T12:00:40.000Z",
+   "kind": "approved",
+   "by": "rehearsal",
+   "data": {
+    "lead": "L3",
+    "item": "reply",
+    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45"
+   },
+   "prev": "020a86690c7bc4508e3081a5464ce9fd2504748e0f9cb4bac88be6e8027cccc8",
+   "hash": "f26de0c3536aed92e4472595c47dbddd5bb1e39098f5190b927814dfdf80de43"
+  },
+  {
+   "n": 41,
+   "at": "2026-10-28T12:00:41.000Z",
+   "kind": "sent",
+   "by": "kar",
+   "data": {
+    "lead": "L3",
+    "item": "reply",
+    "textSha256": "1b432cc97e295be3c7660f3308ae44eba877d9b12bbc3de06568b54f6bd64c45",
+    "dryRun": true
+   },
+   "prev": "f26de0c3536aed92e4472595c47dbddd5bb1e39098f5190b927814dfdf80de43",
+   "hash": "89ece9139b45d2a6642f662c7495c2f9cf1c3b05bd26ce55411719c6562cdfd6"
+  },
+  {
+   "n": 42,
+   "at": "2026-10-28T12:00:42.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L4",
+    "id": "s2",
+    "handle": "fixture_bo",
+    "text": "is there a way to own a model trained on my own spreadsheets?",
+    "eligible": false
+   },
+   "prev": "89ece9139b45d2a6642f662c7495c2f9cf1c3b05bd26ce55411719c6562cdfd6",
+   "hash": "0277c1089a7700ac70e742b6785f96e90a1db8f9f45fdd6263cdc6b2b9ec41c6"
+  },
+  {
+   "n": 43,
+   "at": "2026-10-28T12:00:43.000Z",
+   "kind": "market",
+   "by": "kar",
+   "data": {
+    "lead": "L4",
+    "id": "s2"
+   },
+   "prev": "0277c1089a7700ac70e742b6785f96e90a1db8f9f45fdd6263cdc6b2b9ec41c6",
+   "hash": "2dc6831184c4b7b0e5efbc9063df1c35e907e592a5783fac5d920386d2bd292d"
+  },
+  {
+   "n": 44,
+   "at": "2026-10-28T12:00:44.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L5",
+    "id": "s9",
+    "handle": "fixture_io",
+    "text": "@example_co hello!",
+    "eligible": true
+   },
+   "prev": "2dc6831184c4b7b0e5efbc9063df1c35e907e592a5783fac5d920386d2bd292d",
+   "hash": "3b4ad91f1e6175a230138149fa2f74654ef72f15355fa1c0b9e831095414c10e"
+  },
+  {
+   "n": 45,
+   "at": "2026-10-28T12:00:45.000Z",
+   "kind": "no-offer",
+   "by": "kar",
+   "data": {
+    "lead": "L5",
+    "id": "s9"
+   },
+   "prev": "3b4ad91f1e6175a230138149fa2f74654ef72f15355fa1c0b9e831095414c10e",
+   "hash": "b682d7241632e6884d9a950029055d01ae27c2943f27ae7f8660f1e8afb7ac85"
+  },
+  {
+   "n": 46,
+   "at": "2026-10-28T12:00:46.000Z",
+   "kind": "signal",
+   "by": "grok",
+   "data": {
+    "lead": "L6",
+    "id": "s10",
+    "handle": "fixture_ju",
+    "text": "@example_co could my own model collect cards?",
+    "eligible": true
+   },
+   "prev": "b682d7241632e6884d9a950029055d01ae27c2943f27ae7f8660f1e8afb7ac85",
+   "hash": "96f90bf7892e0435c4c6f2ec99ebf283f2e3887e6174e4ef6c3ba7f08d05c389"
+  },
+  {
+   "n": 47,
+   "at": "2026-10-28T12:00:47.000Z",
+   "kind": "no-offer",
+   "by": "kar",
+   "data": {
+    "lead": "L6",
+    "id": "s10"
+   },
+   "prev": "96f90bf7892e0435c4c6f2ec99ebf283f2e3887e6174e4ef6c3ba7f08d05c389",
+   "hash": "5376b1af0a74881822118c4aa106fe675de49b6db47a0e6824625e4f1d3cd13a"
+  }
+ ]
+}

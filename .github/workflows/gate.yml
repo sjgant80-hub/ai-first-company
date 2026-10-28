@@ -1,0 +1,50 @@
+name: gate
+
+# Every sealed claim re-measured on a clean machine, and every kernel mutation-tested (nothing baselined).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  claims:
+    name: unit suites + every seal + every receipt re-measured
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # each seal is checked against its sealing commit; step 1 re-grades with the conductor at its own commit
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: unit suites
+        run: node --test test/*.test.mjs
+      - name: seals unchanged, receipts re-measured
+        run: |
+          for s in step1 step1b step3 step4; do node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; done
+          for s in step5 step6 step7; do if [ -f tools/$s-measure.mjs ]; then node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; fi; done
+
+  witness:
+    name: mutation gate (witness)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ai-first-company
+      - name: clone the witness gate
+        run: git clone --depth 1 https://github.com/sjgant80-hub/witness.git witness
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: witness every kernel (refuse anything short of clean)
+        working-directory: ai-first-company
+        run: |
+          gate() { node ../witness/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
+          for k in conductor brief reach journal funnel; do gate $k; done
+          for k in ops oversight cycle costcase page; do if [ -f "src/$k.mjs" ] && [ -f "test/$k.test.mjs" ]; then gate $k; fi; done

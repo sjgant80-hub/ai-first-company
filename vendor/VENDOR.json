@@ -21,6 +21,13 @@
    "commit": "f9e7af28850d3800c3dbc1e5a0f36df93f619dde",
    "sourcePath": "core/vendor/light/sha256.mjs",
    "sha256": "cf60afffd36df071b277da214ed61a7b3f4923e443bfadb06656bb7da4756bc1"
+  },
+  {
+   "path": "vendor/kar-voice/claim-gate.mjs",
+   "from": "sjgant80-hub/kar-voice",
+   "commit": "75a563a031e64a3c82ef8ed79363cd3be00caf76",
+   "sourcePath": "claim-gate.mjs",
+   "sha256": "e7dacd6fe9a4373e3c3147759187cf939a99789dcd5cb8b3173de05f1948fa73"
   }
  ]
 }
