@@ -14,7 +14,7 @@ approval of its exact words**, and **every public claim is checked against a com
 | 1 | Conductor (kar-mind's controller, unchanged, + Grok Bot's and Simon's lanes) | `src/conductor.mjs` | witness 29/29 → 32/32 | 5 of 7 (C6, C7 failed and kept) |
 | 1b | Conductor, fail-closed | `src/conductor.mjs` | 32/32 | 1 of 3 (B2, B3 failed and kept) |
 | 2 | The voice + claim gate (in [kar-voice](https://github.com/sjgant80-hub/kar-voice)) | `claim-gate.mjs` | 47/47 | 5 of 6 (V3 failed and kept) |
-| 3 | Reach: Grok Bot's routine brief and the signal reader | `src/brief.mjs`, `src/reach.mjs` | 16/16, 27/27 | 2 of 5 (R2, R5 failed; R4 waits for the passport) |
+| 3 | Reach: Grok Bot's routine brief and the signal reader | `src/brief.mjs`, `src/reach.mjs` | 16/16, 27/27 | 3 of 5 (R2, R5 failed and kept; R4 held on kar-passport's token) |
 | 4 | Funnel + the journal | `src/funnel.mjs`, `src/journal.mjs` | 35/35, 18/18 | 5 of 5 |
 | 5 | Operations | `src/ops.mjs` | 31/31 | 5 of 5 |
 | 6 | Oversight | `src/oversight.mjs` | 39/39 | 4 of 4 |
