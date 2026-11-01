@@ -140,11 +140,14 @@ async function heldout() {
 
 async function judgeAll() {
   if (existsSync(file(JUDGE))) { console.error('✗ already judged, and kept: ' + JUDGE); process.exit(1); }
-  const H = readJSON(HELD), cache = {};
+  // each reply is kept as it comes (the first run died at 10 of 60 when its session ended, and kept nothing); a run
+  // that is stopped resumes from the replies already kept, never asking again for one it has
+  const PART = 'data/team3-judge.partial.json';
+  const H = readJSON(HELD), cache = existsSync(file(PART)) ? readJSON(PART) : {}, texts = H.overclaim.concat(H.honest);
   let n = 0;
-  for (const t of H.overclaim.concat(H.honest)) { const line = postLine(t); await judgeOf(line.what, cache); n++; if (n % 10 === 0) console.error(`  ${n} of 60 judged`); }
+  for (const t of texts) { const line = postLine(t); await judgeOf(line.what, cache); writeFileSync(file(PART), JSON.stringify(cache, null, 1) + '\n'); n++; if (n % 10 === 0) console.error(`  ${n} of ${texts.length} judged`); }
   writeFileSync(file(JUDGE), JSON.stringify({ model: MODEL, config: CONFIG, options: OPTIONS, judged: new Date().toISOString().slice(0, 10), replies: cache }, null, 1) + '\n');
-  console.error('✓ 60 judge replies kept');
+  console.error(`✓ ${Object.keys(cache).length} judge replies kept`);
 }
 
 // S and R: the team's real feed, audited for real (Kar's machine: the feed is in the private shared repo)
