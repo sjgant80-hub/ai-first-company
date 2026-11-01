@@ -1,0 +1,47 @@
+{
+ "kind": "ai-first-company-team-witness",
+ "witness": "v0.6 (d43f6c3), uncapped (--cap 1000), nothing baselined",
+ "kernels": {
+  "src/feed.mjs": {
+   "total": 137,
+   "killed": 137,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "ba2f03b"
+  },
+  "src/rollup.mjs": {
+   "total": 38,
+   "killed": 38,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "ba2f03b"
+  },
+  "src/roster.mjs (step 2)": {
+   "total": 72,
+   "killed": 72,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "b05c7f6"
+  },
+  "src/cards.mjs": {
+   "total": 15,
+   "killed": 15,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "b05c7f6"
+  },
+  "src/roster.mjs (step 2b)": {
+   "total": 72,
+   "killed": 72,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "6e7cd2b"
+  }
+ },
+ "note": "feed.mjs first ran 137 of 138: the one survivor was a dead count (redaction hits counted per class, only the class names used); it was removed and the gate re-run clean before the code was committed."
+}
