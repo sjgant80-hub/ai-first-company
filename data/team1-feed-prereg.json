@@ -1,0 +1,46 @@
+{
+ "kind": "ai-first-company-team1-feed-prereg",
+ "v": 1,
+ "sealed": "2026-11-01",
+ "question": "Can every bot on the team write to ONE shared feed that (a) never keeps a key, token, email or card number, (b) flags any 'done' that has no receipt link, (c) shows who did what by a signature per persona, (d) lets Simon pause one persona or the whole team, and (e) rolls up each day for Simon with what NEEDS SIMON at the top — and is every team law tied to the check that enforces it?",
+ "why": "Simon's bot-team spec (2026-11-01). §8 build order step 1: FEED + RULES. §3: .estate/feed.jsonl, one line per action {ts, agent, kind: task|handoff|build|receipt|listing|post|lead|decision|blocker|note, what, link, needs_owner, receipt_sha256?}; handoffs name the next persona; AGENT_FEED.md is Kar's daily rollup grouped by persona with a NEEDS SIMON list at the top; the writer AUTO-REDACTS keys, tokens, emails and card numbers; a 'done' with no receipt link is auto-flagged. §4: RULES.md, the ten team laws. §6: a key per persona so actions are signed; a kill switch that pauses any persona or the whole team.",
+ "design": {
+  "where": "Kernels in this public repo (src/feed.mjs, src/rollup.mjs), carrying no private names. The live feed file and the team law in prose live in the team's private shared repo, named only in local config, never here.",
+  "line": "{ ts (ISO 8601), agent, kind, what, link, needs_owner, receipt_sha256? } plus, where they apply: to (a handoff's next persona), ref (the id of the line this one is about), verdict, quote (Simon's own words on a decision), flags (set by the writer, never by the caller), sig (Ed25519 over the line without sig). A line's id is the SHA-256 of its canonical text without sig.",
+  "agents": "kar, builder, money-time, reach, scout, client-lead, card-keeper, auditor (the §1 roster) and simon (the owner, who decides).",
+  "redaction": "what, link and quote are redacted before anything is stored: provider keys by their published shapes, bearer tokens, JWTs, secret-named assignments and URL parameters, private-key blocks, email addresses, and card numbers (13 to 19 digits, optionally grouped by spaces or dashes, that pass the Luhn check and start like a card). Hashes, commit ids, card-of-the-day codes, post ids inside links, @handles and ssh remotes (git@host:path) are not secrets and are left alone. Each redaction adds a flag naming its class.",
+  "done": "A line claims done when its kind is build or receipt, or its what uses one of the sealed done words (doneWords in tools/team1-corpus.mjs) not negated by a not, no, never, isn't, wasn't, yet or until just before it. A done claim with no link is flagged no-receipt.",
+  "outward": "post and listing lines always need the owner: needs_owner is set true whatever the caller sent, flagged needs-owner-forced if it sent false.",
+  "kill": "A pause line (kind decision, verdict pause, ref a persona id or 'team') by simon, kar or the auditor pauses; only a signed simon line unpauses (pausing is always safe, resuming is the owner's). A paused persona's new lines are kept but flagged while-paused. Simon's lines count only when signed by his key.",
+  "rollup": "rollup(lines, { date }) → a markdown section: NEEDS SIMON first (every needs_owner line not yet answered by a signed simon decision), then FLAGGED, then one group per persona in roster order. insert(md, section) puts it above the first ## heading of AGENT_FEED.md, replacing an earlier rollup of the same date, and leaves every other section as it was."
+ },
+ "corpus": {
+  "generator": "tools/team1-corpus.mjs, seed 20261101",
+  "sha256": "3a22faa08e8e20a4c22e4bfe601911bb4428c57493bb92172bb8605bed45eeec",
+  "counts": { "planted": 240, "clean": 240, "claims": 60, "nonclaims": 30 },
+  "real": "this repo's README.md lines and every sealed claim of steps 1 to 7, read at the commit that seals this file: 62 lines, sha256 e9a47853ed0fabc3c228151d9ca4bfca1b49918cdc3d4a177690e1e8a169d2a8"
+ },
+ "heldout": {
+  "F3b": {
+   "when": "generated AFTER src/feed.mjs is committed, once, and kept",
+   "model": "qwen2.5:7b via local Ollama, temperature 0.9, seed 11, num_predict 2000",
+   "finished": "Write 40 different one-line status updates that an AI worker on a small software team might post to a shared work log, each reporting a piece of work as FINISHED (for example built, shipped, fixed, passed, published, delivered, live). Vary the wording widely. No links. One update per line, no numbering, nothing else.",
+   "unfinished": "Write 40 different one-line status updates that an AI worker on a small software team might post to a shared work log, each reporting work as STARTED, IN PROGRESS, PLANNED, WAITING or BLOCKED, with nothing finished. Vary the wording widely. No links. One update per line, no numbering, nothing else.",
+   "labels": "the prompt that produced the line (the first 40 non-empty lines of each reply, numbering stripped)"
+  }
+ },
+ "claims": [
+  { "id": "F1", "claim": "Every planted secret is gone from what the writer stores: for all 240 planted lines (60 keys, 60 tokens, 60 emails, 60 card numbers), the stored what contains no 12-character run of the secret.", "pass": "240 of 240" },
+  { "id": "F2", "claim": "Nothing that is not a secret is touched: the 240 generated look-alikes (hashes, commits, card-of-the-day codes, post links, timestamps, counts, versions, a card-shaped number failing the check digit, the words key/token/secret/password in plain prose, @handles, ssh remotes, package names, dates) and the 62 real public lines are stored exactly as sent.", "pass": "302 of 302 unchanged" },
+  { "id": "F2b", "claim": "On the team's real private log (STATUS.md and AGENT_FEED.md as they stand at measurement), every change the redactor makes is a true key, token, email or card number, judged line by line. Only counts and the corpus SHA-256 are published; CI cannot re-run this one.", "pass": "zero false redactions" },
+  { "id": "F3", "claim": "A done with no receipt link is flagged: 60 done claims with no link are all flagged no-receipt; the same 60 with a link are not; 30 lines that claim nothing (started, drafting, blocked, not done yet, never shipped…) are not.", "pass": "60 of 60, 0 of 60, 0 of 30" },
+  { "id": "F3b", "claim": "Held-out wording (the local 7B, generated after the writer is committed): of 40 finished updates with no link at least 34 are flagged; of 40 unfinished ones at most 6 are.", "pass": ">= 34 of 40 and <= 6 of 40" },
+  { "id": "F4", "claim": "The writer is total: 3,000 fuzzed inputs (random values, wrong types, missing and extra fields) raise nothing; each is either refused with a reason or stored as a line that reads back identical; an unknown agent, an unknown kind, a handoff whose to is not a persona, an empty what and a ts that is not ISO 8601 are each refused.", "pass": "0 throws; all refusals reasoned; all accepted lines round-trip; the five named refusals" },
+  { "id": "F5", "claim": "Who did what is signed: with a fresh Ed25519 key per identity (the 8 personas and simon), 20 lines each all verify (180); changing any one field of any signed line breaks it; a line naming one agent but signed by another's key fails.", "pass": "180 of 180 verify; every one-field change fails; every cross-key line fails" },
+  { "id": "F6", "claim": "The rollup is the feed's own: on a generated rehearsal night (every persona, needs-owner lines answered by signed, unsigned and no simon decisions, flagged lines), its NEEDS SIMON list, its FLAGGED list and each persona group equal an independent plain count written in the measure, and NEEDS SIMON comes before every persona group; inserting it into a copy of AGENT_FEED.md leaves every other section byte for byte.", "pass": "all equal; order holds; other sections unchanged" },
+  { "id": "F7", "claim": "The kill switch: a pause of one persona by simon, kar or the auditor stops that persona (mayAct false; its next line flagged while-paused) and no other; a pause of 'team' stops all; an unpause by kar or an unsigned simon line changes nothing; a signed simon unpause restores.", "pass": "every case as stated" },
+  { "id": "F8", "claim": "RULES + CHECK: each of the ten team laws (data/team-law.json) names the check that enforces it — a function exported by this repo that exists now, a later step's check named as such (re-checked when that step is measured), or 'no code' with the plain reason.", "pass": "10 of 10 mapped; every named function exists" }
+ ],
+ "scope": "Step 1 builds the writer, the rollup and the law. It does not run on Grok's box (Grok Bot is an outside agent; it gets its card and feed instructions in the shared repo) and nothing in it goes outward. Simon's lines count only when signed by his own key, which he makes himself; until then his decisions in the real feed stay unsigned and change nothing, by design.",
+ "kept": "Every result is kept as measured, held or failed. Nothing is re-sealed to pass."
+}
