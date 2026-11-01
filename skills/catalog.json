@@ -1,0 +1,92 @@
+{
+ "kind": "ai-first-company-skill-catalog",
+ "v": 1,
+ "skills": [
+  {
+   "name": "audit-feed",
+   "version": "1.0.0",
+   "owner": "auditor",
+   "callers": [
+    "auditor"
+   ],
+   "description": "The auditor's pass over the shared feed - every line that needs a verdict gets PASS, FLAG or FAIL with evidence, signed with the auditor's key.",
+   "named": "audit-feed",
+   "path": "skills/audit-feed",
+   "sha256": "cd0418e7e1eb1205d262c508a961064326b5560552b5ac3a055f1964ce818d68",
+   "has": {
+    "SKILL.md": true,
+    "scripts": true,
+    "tests": true,
+    "receipt.json": true
+   }
+  },
+  {
+   "name": "check-fence",
+   "version": "1.0.0",
+   "owner": "kar",
+   "callers": [
+    "kar",
+    "builder",
+    "money-time",
+    "reach",
+    "scout",
+    "client-lead",
+    "card-keeper",
+    "auditor"
+   ],
+   "description": "Ask before acting - may this bot use this tool now, given the auditor's PASS and Simon's signed go?",
+   "named": "check-fence",
+   "path": "skills/check-fence",
+   "sha256": "c68614580d95c1a715d2727db6b96b3838025535fc430e419825ba031c1087c1",
+   "has": {
+    "SKILL.md": true,
+    "scripts": true,
+    "tests": true,
+    "receipt.json": true
+   }
+  },
+  {
+   "name": "daily-rollup",
+   "version": "1.0.0",
+   "owner": "kar",
+   "callers": [
+    "kar"
+   ],
+   "description": "Kar's daily rollup of the shared feed for AGENT_FEED.md - NEEDS SIMON first, then what was flagged, then each bot's lines.",
+   "named": "daily-rollup",
+   "path": "skills/daily-rollup",
+   "sha256": "f882eba5e9789e80db186eb38cc82f4703a11e4adbde02d4d1c04f253a236de8",
+   "has": {
+    "SKILL.md": true,
+    "scripts": true,
+    "tests": true,
+    "receipt.json": true
+   }
+  },
+  {
+   "name": "write-feed-line",
+   "version": "1.0.0",
+   "owner": "kar",
+   "callers": [
+    "kar",
+    "builder",
+    "money-time",
+    "reach",
+    "scout",
+    "client-lead",
+    "card-keeper",
+    "auditor"
+   ],
+   "description": "Add one line to the team's shared feed through the writer, which removes secrets, flags a done with no receipt and signs the line with your key.",
+   "named": "write-feed-line",
+   "path": "skills/write-feed-line",
+   "sha256": "553396bc16849b60a7c2ea82c7e1563fe349ac0a7209c8463036af0a3bfad060",
+   "has": {
+    "SKILL.md": true,
+    "scripts": true,
+    "tests": true,
+    "receipt.json": true
+   }
+  }
+ ]
+}

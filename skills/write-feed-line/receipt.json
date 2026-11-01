@@ -1,0 +1,9 @@
+{
+ "skill": "write-feed-line",
+ "ran": "node skills/write-feed-line/scripts/write-feed-line.mjs --agent scout --kind lead --what \"a firm asked about owning its model; reply to ops@example.com\" --link https://e.example/lead --ts 2026-11-01T09:00:00Z",
+ "on": "a scratch feed",
+ "exit": 0,
+ "printed": [
+  "✓ {\"ts\":\"2026-11-01T09:00:00Z\",\"agent\":\"scout\",\"kind\":\"lead\",\"what\":\"a firm asked about owning its model; reply to [redacted:email]\",\"link\":\"https://e.example/lead\",\"needs_owner\":false,\"flags\":[\"redacted:email\"]}  (unsigned: no key for scout)"
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "skill": "check-fence",
+ "ran": "node skills/check-fence/scripts/check-fence.mjs reach post.publish",
+ "on": "a scratch feed",
+ "exit": 1,
+ "printed": [
+  "{\"bot\":\"reach\",\"tool\":\"post.publish\",\"auditorPass\":false,\"simonGo\":false,\"ok\":false,\"why\":\"needs Simon's go\"}"
+ ]
+}

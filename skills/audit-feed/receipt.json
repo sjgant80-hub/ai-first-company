@@ -1,0 +1,11 @@
+{
+ "skill": "audit-feed",
+ "ran": "node skills/audit-feed/scripts/audit-feed.mjs",
+ "on": "a scratch feed",
+ "exit": 0,
+ "printed": [
+  "FAIL 44e2c947cf5e scout note: messaged a lead",
+  "       ok   tools: on the list: feed.write",
+  "       FAIL tools: dm.send: forbidden"
+ ]
+}

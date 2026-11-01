@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: '22'
       - name: unit suites
-        run: node --test test/*.test.mjs
+        run: node --test test/*.test.mjs skills/*/tests/*.test.mjs
       - name: seals unchanged, receipts re-measured
         run: |
           for s in step1 step1b step3 step4; do node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; done
@@ -37,6 +37,10 @@ jobs:
           # step 4 touches the team's private shared repo: CI checks its seal and that its receipt adds up
           node tools/team4-measure.mjs --check
           if [ -f data/team4-wire-run.json ]; then node tools/team4-measure.mjs --verify; fi
+          # step 6: the skill library's index is the folders' own, and its receipt re-measures
+          node tools/skills.mjs --check
+          node tools/team6-measure.mjs --check
+          if [ -f data/team6-skills-run.json ]; then node tools/team6-measure.mjs --verify; fi
       - name: every offer link the funnel drafts into a reply is alive (a renamed repo once broke one)
         run: |
           node --input-type=module -e "
@@ -69,4 +73,4 @@ jobs:
         run: |
           git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git ../witness-v0.6
           gate6() { node ../witness-v0.6/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
-          for k in feed rollup roster cards auditor; do gate6 $k; done
+          for k in feed rollup roster cards auditor skills; do gate6 $k; done

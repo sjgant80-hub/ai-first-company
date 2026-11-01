@@ -1,0 +1,10 @@
+# The bot team's skills
+
+> One folder per skill, pinned by SHA-256. A bot may use a skill only if it is one of the skill's callers and the auditor has passed the skill at its current hash; a changed skill must pass again.
+
+## Skills
+
+- [audit-feed](skills/audit-feed/SKILL.md) v1.0.0: The auditor's pass over the shared feed - every line that needs a verdict gets PASS, FLAG or FAIL with evidence, signed with the auditor's key. · owner auditor · callers auditor · sha256 cd0418e7e1eb1205d262c508a961064326b5560552b5ac3a055f1964ce818d68
+- [check-fence](skills/check-fence/SKILL.md) v1.0.0: Ask before acting - may this bot use this tool now, given the auditor's PASS and Simon's signed go? · owner kar · callers kar, builder, money-time, reach, scout, client-lead, card-keeper, auditor · sha256 c68614580d95c1a715d2727db6b96b3838025535fc430e419825ba031c1087c1
+- [daily-rollup](skills/daily-rollup/SKILL.md) v1.0.0: Kar's daily rollup of the shared feed for AGENT_FEED.md - NEEDS SIMON first, then what was flagged, then each bot's lines. · owner kar · callers kar · sha256 f882eba5e9789e80db186eb38cc82f4703a11e4adbde02d4d1c04f253a236de8
+- [write-feed-line](skills/write-feed-line/SKILL.md) v1.0.0: Add one line to the team's shared feed through the writer, which removes secrets, flags a done with no receipt and signs the line with your key. · owner kar · callers kar, builder, money-time, reach, scout, client-lead, card-keeper, auditor · sha256 553396bc16849b60a7c2ea82c7e1563fe349ac0a7209c8463036af0a3bfad060

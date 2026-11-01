@@ -1,0 +1,21 @@
+{
+ "skill": "daily-rollup",
+ "ran": "node skills/daily-rollup/scripts/daily-rollup.mjs --date 2026-11-01",
+ "on": "a scratch feed",
+ "exit": 0,
+ "printed": [
+  "## Kar's rollup · 2026-11-01",
+  "",
+  "### NEEDS SIMON (1)",
+  "",
+  "- 08:00 **Money time** [listing] kar-tally listing draft · https://e.example/d · `bd3e7557a27a` · ⚑ needs-owner-forced · auditor: not yet audited",
+  "",
+  "### Flagged (1)",
+  "",
+  "- 08:00 **Money time** [listing] kar-tally listing draft · https://e.example/d · `bd3e7557a27a` · ⚑ needs-owner-forced",
+  "",
+  "### Money time (1)",
+  "",
+  "- 08:00 **Money time** [listing] kar-tally listing draft · https://e.example/d · `bd3e7557a27a` · ⚑ needs-owner-forced"
+ ]
+}
