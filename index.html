@@ -64,6 +64,7 @@
     <b>What is live today, and what waits for Simon</b>
     <ul class="small">
       <li><span class="pill ok">✓ live</span> The conductor that sends every job to the right arm, and holds outward, money and deal jobs for approval (try it below).</li>
+      <li><span class="pill ok">✓ live</span> The bot team (from 1 Nov 2026): eight fenced roles, one redacted and signed feed, and a separate auditor that puts only what it passed in front of Simon. <a href="#team">See it ↓</a></li>
       <li><span class="pill ok">✓ live</span> The company's voice on X, key-ready: drafts from receipts, claim-gated in your browser, <a href="https://sjgant80-hub.github.io/kar-voice/">each waiting for approval</a>. Nothing has been posted.</li>
       <li><span class="pill wait">⏳ Simon</span> Authorising the X connector (his own keys; until then every post is a dry run) and approving each post or reply in his own words.</li>
       <li><span class="pill wait">⏳ Simon</span> Creating the reach routine in his own Grok Bot from the brief this repo makes (Grok Bot reads X read-only on his account).</li>
@@ -74,7 +75,7 @@
 </header>
 
 <nav class="toc" aria-label="On this page">
-  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
+  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#team">The bot team</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
 </nav>
 
 <section id="start">
@@ -103,6 +104,54 @@
     <div class="result" id="routed" aria-live="polite"></div>
   </div>
   <p class="small muted">The five arms: <b>simon</b> (approval — anything outward, money, a deal, a risky step, or a verb it does not know as internal work) · <b>grok</b> (Grok Bot reads X) · <b>deterministic</b> (an organ's own code, no model) · <b>local</b> (a small model on this laptop) · <b>frontier</b> (Claude, for judgement, inside a nightly budget).</p>
+</section>
+
+<section id="team">
+  <h2>The bot team</h2>
+  <p class="sub">Since 1 November 2026 the company runs as eight bots with one role each. They all write to one shared feed, and a separate auditor stands between them and Simon. Nothing public, paid or risky happens without Simon's signed go. The team is measured by what is verified, earned and backed by a receipt, never by how busy it looks.</p>
+  <div class="grid g2">
+    <div class="card"><h3 style="margin-top:0">What it is, in plain words</h3><p class="small">Each bot has a card: its job, the tools it may use and on what condition, what it must never do, and what it owns. Every action is one line in a shared feed. Before a line is stored, the writer removes keys, tokens, emails and card numbers, and flags any "done" with no receipt. The bot's own key signs the line, so the feed shows who did what. A separate <b>auditor</b> checks each claim against its receipt, re-runs the tests, compares the tools a bot used with its card, and reads every draft for promises, crypto talk and jargon. Only what it <b>PASSes</b> is put to Simon.</p></div>
+    <div class="card"><h3 style="margin-top:0">How a day runs</h3><ol class="small" style="padding-left:20px;margin:0">
+      <li><b>Night.</b> The bots work and write to the feed; the auditor reviews every build, listing, post draft and deliverable. <span class="pill wait">⏳ Simon</span> <span class="muted">(running it with the laptop closed needs a cloud schedule, which is his call)</span></li>
+      <li><b>Morning.</b> Kar's rollup puts <i>NEEDS SIMON</i> at the top: the items the auditor passed, ready for approval, then the held-back ones with their reasons. Simon approves in one pass, and each decision is a line signed with his own key. <span class="pill wait">⏳ Simon's key</span></li>
+      <li><b>Day.</b> Approved items go out. Without a signed go, the auditor fails the act.</li>
+      <li><b>Weekly.</b> Kar's report, from the feed's own lines.</li>
+      <li><b>Any time.</b> The kill switch: Kar or the auditor can pause one bot or the whole team, and only Simon can unpause.</li>
+    </ol></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <svg class="diagram" viewBox="0 0 920 230" role="img" aria-labelledby="teamT teamD"><title id="teamT">How work moves through the bot team</title><desc id="teamD">Eight bots write signed lines to one feed; the auditor judges each with evidence; only PASSed items reach Simon's morning approval; approved items go out; flagged and failed items are held back with reasons.</desc>
+      <g fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)"><path d="M180,70 H252"/><path d="M420,70 H492"/><path d="M660,70 H732"/><path d="M576,98 V150"/></g>
+      <g font-size="14" fill="var(--ink)">
+        <rect x="20" y="40" width="160" height="60" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="100" y="65" text-anchor="middle" font-weight="700">Eight bots</text><text x="100" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">one role each, fenced</text>
+        <rect x="252" y="40" width="168" height="60" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="336" y="65" text-anchor="middle" font-weight="700">One shared feed</text><text x="336" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">redacted · signed · append-only</text>
+        <rect x="492" y="40" width="168" height="60" rx="12" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/><text x="576" y="65" text-anchor="middle" font-weight="700">The auditor</text><text x="576" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">PASS · FLAG · FAIL + evidence</text>
+        <rect x="732" y="40" width="168" height="60" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="816" y="65" text-anchor="middle" font-weight="700">Simon, mornings</text><text x="816" y="86" text-anchor="middle" fill="var(--ink2)" font-size="12.5">PASSed items, signed go</text>
+        <rect x="472" y="150" width="208" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="576" y="174" text-anchor="middle" font-weight="700">Held back</text><text x="576" y="194" text-anchor="middle" fill="var(--ink2)" font-size="12.5">FLAG / FAIL, with the reasons</text>
+      </g>
+    </svg>
+  </div>
+  <h3>The eight cards</h3>
+  <div class="tablewrap card"><table id="roster"><thead><tr><th>Bot</th><th>Its job</th><th>Runs on</th><th>May use</th><th>Never</th></tr></thead><tbody><tr><td colspan="5" class="muted">loading…</td></tr></tbody></table></div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card"><h3 style="margin-top:0">Try the fence</h3><p class="small muted">Here the real code (<code>src/roster.mjs</code>, mutation-tested) answers in your browser: may this bot use this tool?</p>
+      <div class="try"><select id="fbot" aria-label="Bot"></select><select id="ftool" aria-label="Tool"></select></div>
+      <div class="small" style="margin-top:8px"><label><input type="checkbox" id="fpass"> the auditor's signed PASS</label> · <label><input type="checkbox" id="fgo"> Simon's signed go</label></div>
+      <div class="result" id="fence" aria-live="polite"></div></div>
+    <div class="card"><h3 style="margin-top:0">Try the auditor</h3><p class="small muted">Paste a draft post. The auditor's deterministic checks (<code>src/auditor.mjs</code>) run here. Its second read, by a small local model, runs on Kar's machine, and that model can only add flags.</p>
+      <form id="auditform"><textarea id="draft" rows="3" aria-label="A draft post" style="width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)" placeholder="e.g. Save £500 a month with our AI, guaranteed."></textarea><button type="submit" style="margin-top:8px">Audit it</button></form>
+      <div class="chips" id="achips"></div>
+      <div class="result" id="verdict" aria-live="polite"></div></div>
+  </div>
+  <h3>Receipts for the team</h3>
+  <p class="small muted">Each step's claims were committed before its code, then measured once. Both the held and the failed claims are kept. CI re-measures every receipt on each push.</p>
+  <div id="teamreceipts"><p class="muted">loading…</p></div>
+  <div class="scope"><b>What waits on Simon</b><ul class="small">
+    <li><span class="pill wait">⏳ Simon</span> Making his own key, so his morning decisions are signed lines (<code>node tools/team.mjs keygen simon</code>, run by him, with his own passphrase).</li>
+    <li><span class="pill wait">⏳ Simon</span> The nightly run with the laptop closed (a cloud schedule), and then two weeks of measuring the team's five targets (T1–T5).</li>
+    <li><span class="pill wait">⏳ Grok Bot</span> Money time, Reach, Card Keeper and Scout run on Grok Bot's computer. Their cards and feed instructions are in the team's shared repo; each makes its own key there.</li>
+    <li><span class="pill wait">⏳ Simon</span> Recording which partners agreed to be named. Until then the auditor flags any mention.</li>
+  </ul></div>
 </section>
 
 <section id="how">
@@ -320,6 +369,44 @@ try {
     $('#trace').innerHTML = `<details class="card" style="margin-top:12px"><summary>Trace one real run, step by step (${v.trace.length} entries from the cycle's journal)</summary><ol class="small" style="padding-left:22px">${v.trace.map((l) => `<li>${esc(l)}</li>`).join('')}</ol></details>`;
   }
 } catch (e) { $('#dash').innerHTML = '<p class="muted">The dashboard could not be loaded.</p>'; }
+
+// ── the bot team: its cards, the fence and the auditor, the real kernels ──────
+try {
+  const R = await getJSON('data/roster.json');
+  const { may } = await import('./src/roster.mjs' + BUST);
+  const { audit } = await import('./src/auditor.mjs' + BUST);
+  const name = (t) => (typeof t === 'string' ? t : t.tool);
+  const cond = (t) => (typeof t === 'string' ? '' : ' <span class="muted">(' + t.when.map((w) => (w === 'simon-go' ? "Simon's go" : "auditor's PASS")).join(' + ') + ')</span>');
+  $('#roster tbody').innerHTML = R.personas.map((p) => `<tr><td><b>${esc(p.name)}</b></td><td class="small">${esc(p.role)}</td><td class="small">${esc(p.runs_on)}<br><span class="muted">${esc(p.runtime.model)}</span></td><td class="small">${p.tools.map((t) => `<code>${esc(name(t))}</code>${cond(t)}`).join(' ')}</td><td class="small">${p.forbidden.map((t) => `<code>${esc(t)}</code>`).join(' ')}</td></tr>`).join('');
+  $('#fbot').innerHTML = R.personas.map((p) => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+  $('#ftool').innerHTML = Object.entries(R.tools).map(([id, t]) => `<option value="${esc(id)}">${esc(id)} — ${esc(t.what)}</option>`).join('');
+  $('#fbot').value = 'reach'; $('#ftool').value = 'post.publish';
+  const fence = () => {
+    const r = may(R, $('#fbot').value, $('#ftool').value, { auditorPass: $('#fpass').checked, simonGo: $('#fgo').checked });
+    $('#fence').innerHTML = r.ok ? '<span class="pill ok">✓ allowed</span>' : `<span class="pill no">✗ refused</span> <span class="small">${esc(r.why)}</span>`;
+  };
+  for (const id of ['#fbot', '#ftool', '#fpass', '#fgo']) $(id).addEventListener('change', fence);
+  fence();
+  const EX = ['Save £500 a month with our AI — guaranteed.', 'Our checker reads your JSON against its schema and tells you what is wrong.', 'Join the token presale before launch.', 'The best tool on the market: 10x your revenue.', 'It checked 40 of 40 claims last week.'];
+  const run = (text) => {
+    const r = audit({ ts: new Date().toISOString(), agent: 'reach', kind: 'post', what: text, link: '', needs_owner: true, flags: [], id: 'draft' }, {}, { roster: R, lines: [], consent: { partners: [] } });
+    const cls = r.verdict === 'PASS' ? 'ok' : r.verdict === 'FLAG' ? 'wait' : 'no';
+    const reasons = r.checks.filter((c) => c.result !== 'ok');
+    $('#verdict').innerHTML = `<span class="pill ${cls}">${r.verdict}</span> ${r.verdict === 'PASS' ? '<span class="small">would be put to Simon for approval</span>' : '<span class="small">held back from Simon, with these reasons:</span>'}` + (reasons.length ? `<ul class="small">${reasons.map((c) => `<li><b>${esc(c.result)}</b> ${esc(c.evidence)}</li>`).join('')}</ul>` : '');
+  };
+  $('#achips').innerHTML = EX.map((e, i) => `<button type="button" data-i="${i}">${esc(e.slice(0, 38))}…</button>`).join('');
+  $('#achips').addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (!b) return; $('#draft').value = EX[+b.dataset.i]; run(EX[+b.dataset.i]); });
+  $('#auditform').addEventListener('submit', (ev) => { ev.preventDefault(); if ($('#draft').value.trim()) run($('#draft').value.trim()); });
+  const STEPS = [['data/team1-feed-run.json', 'Step 1 · one shared feed and the team law'], ['data/team2-roster-run.json', 'Step 2 · the eight roles as a fence'], ['data/team2b-run.json', "Step 2b · the fence's fix (the fuzz found 36 throws)"], ['data/team3-auditor-run.json', 'Step 3 · the auditor']];
+  const blocks = [];
+  for (const [u, title] of STEPS) {
+    const r = await getJSON(u);
+    if (!r) { blocks.push(`<details><summary>${esc(title)} <span class="pill wait">not measured yet</span></summary></details>`); continue; }
+    const rows = Object.entries(r.claims).map(([k, c]) => `<li><span class="pill ${c.pass ? 'ok' : 'no'}">${c.pass ? '✓ held' : '✗ failed'}</span> <b>${esc(k)}</b> ${esc(c.measured)}</li>`).join('');
+    blocks.push(`<details><summary>${esc(title)} — <span class="${r.held === r.of ? 'ok' : 'wait'}">${r.held} of ${r.of} held</span></summary><p class="small muted">Sealed at <code>${esc(r.seal)}</code> · <a href="${esc(u)}">the receipt</a></p><ul class="small" style="padding-left:18px">${rows}</ul></details>`);
+  }
+  $('#teamreceipts').innerHTML = blocks.join('');
+} catch (e) { $('#teamreceipts').innerHTML = '<p class="muted">The team section could not be loaded: reload the page.</p>'; }
 </script>
 </body>
 </html>

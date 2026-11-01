@@ -224,7 +224,7 @@ async function heldout() {
 // F2b: the team's real log. Every change the redactor makes is printed HERE (this terminal only) for Kar to judge;
 // the receipt keeps the counts and the corpus hash, never a line.
 function privateRun(judged) {
-  const cfg = (() => { try { return JSON.parse(readFileSync(join(homedir(), '.si-didy', 'continuity.json'), 'utf8')).repo || ''; } catch { return ''; } })();
+  const cfg = (() => { try { return JSON.parse(readFileSync(join(homedir(), '.team-feed', 'config.json'), 'utf8')).repo || ''; } catch { return ''; } })();
   const repo = process.env.KAR_CONTINUITY || cfg;
   if (!repo) { console.error('✗ no local continuity config'); process.exit(1); }
   const text = ['STATUS.md', 'plans/AGENT_FEED.md'].map((f) => readFileSync(join(repo, f), 'utf8').replace(/\r\n/g, '\n')).join('\n');

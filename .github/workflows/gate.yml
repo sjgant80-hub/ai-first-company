@@ -28,6 +28,12 @@ jobs:
         run: |
           for s in step1 step1b step3 step4; do node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; done
           for s in step5 step6 step7; do if [ -f tools/$s-measure.mjs ]; then node tools/$s-measure.mjs --check; node tools/$s-measure.mjs --verify; fi; done
+      - name: the bot team — every seal unchanged, every receipt re-measured (step 2 with roster.mjs at its own commit)
+        run: |
+          node tools/team1-measure.mjs --check && node tools/team1-measure.mjs --verify
+          node tools/team2-measure.mjs --check && node tools/team2-measure.mjs --verify
+          node tools/team2b-measure.mjs --check && node tools/team2b-measure.mjs --verify
+          if [ -f data/team3-auditor-run.json ]; then node tools/team3-measure.mjs --check && node tools/team3-measure.mjs --verify; fi
       - name: every offer link the funnel drafts into a reply is alive (a renamed repo once broke one)
         run: |
           node --input-type=module -e "
@@ -55,3 +61,9 @@ jobs:
           gate() { node ../witness/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
           for k in conductor brief reach journal funnel; do gate $k; done
           for k in ops oversight cycle costcase page; do if [ -f "src/$k.mjs" ] && [ -f "test/$k.test.mjs" ]; then gate $k; fi; done
+      - name: witness the bot team's kernels with witness v0.6, pinned (refuse anything short of clean)
+        working-directory: ai-first-company
+        run: |
+          git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git ../witness-v0.6
+          gate6() { node ../witness-v0.6/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
+          for k in feed rollup roster cards auditor; do gate6 $k; done

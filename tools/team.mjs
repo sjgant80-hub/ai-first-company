@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // team.mjs — the bot team's feed on this machine: write a line, roll up the day, verify who wrote what, make a key.
-// The feed lives in the team's private shared repo, named only in local config (~/.si-didy/continuity.json { repo }, or
-// KAR_CONTINUITY), never here. Private keys live in ~/.si-didy/team-keys/ and never leave this machine; public keys are
+// The feed lives in the team's private shared repo, named only in local config (~/.team-feed/config.json { repo }, or
+// KAR_CONTINUITY), never here. Private keys live in ~/.team-feed/keys/ and never leave this machine; public keys are
 // in the shared repo's team/keys.json so every reader can check every line.
 //   node tools/team.mjs add --agent kar --kind note --what "…" [--link L] [--needs-owner] [--receipt SHA] [--to P]
 //                           [--ref ID] [--verdict V] [--quote Q] [--evidence E]… [--ts ISO] [--push]
+//                           [--receipt-file data/x-run.json]   (fills --link and --receipt from a committed receipt)
 //   node tools/team.mjs pause <persona|team> --agent kar|auditor [--push]       (only Simon unpauses: see decide)
 //   node tools/team.mjs rollup [--date YYYY-MM-DD] [--write] [--push]
 //   node tools/team.mjs verify                                                  signatures, and the feed only ever grew
@@ -14,14 +15,14 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { generateKeyPairSync, createPrivateKey, createPublicKey, sign, verify } from 'node:crypto';
+import { generateKeyPairSync, createPrivateKey, createPublicKey, sign, verify, createHash } from 'node:crypto';
 import { AGENTS, PERSONAS, entry, read, append, appendOnly, signingText } from '../src/feed.mjs';
 import { rollup, insert } from '../src/rollup.mjs';
 
-const cfg = () => { try { return JSON.parse(readFileSync(join(homedir(), '.si-didy', 'continuity.json'), 'utf8')).repo || ''; } catch { return ''; } };
+const cfg = () => { try { return JSON.parse(readFileSync(join(homedir(), '.team-feed', 'config.json'), 'utf8')).repo || ''; } catch { return ''; } };
 export const REPO = process.env.KAR_CONTINUITY || cfg();
 const FEED = join(REPO, '.estate', 'feed.jsonl'), KEYS = join(REPO, 'team', 'keys.json'), ROLL = join(REPO, 'plans', 'AGENT_FEED.md');
-const KEYDIR = join(homedir(), '.si-didy', 'team-keys');
+const KEYDIR = join(homedir(), '.team-feed', 'keys');
 const git = (args) => spawnSync('git', args, { cwd: REPO, encoding: 'utf8', timeout: 60000 });
 const london = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const text = (p) => (existsSync(p) ? readFileSync(p, 'utf8').replace(/\r\n/g, '\n') : '');
@@ -68,6 +69,18 @@ export function add(input, { push = false } = {}) {
   return { ok: true, line, signed: Boolean(s), pushed };
 }
 
+/** a receipt committed in this repo → the link pinned to the last commit that touched it, and the SHA-256 of its bytes
+ *  there: what the auditor re-hashes, so a build line cannot drift from its receipt */
+export function pinnedReceipt(path) {
+  const here = new URL('../', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
+  const run = (a, enc = 'utf8') => spawnSync('git', a, { cwd: here, encoding: enc });
+  const commit = (run(['log', '-n1', '--format=%H', '--', path]).stdout || '').trim();
+  if (!/^[0-9a-f]{40}$/.test(commit)) { console.error('✗ ' + path + ' is not committed in this repo'); process.exit(1); }
+  const bytes = run(['show', `${commit}:${path}`], 'buffer').stdout;
+  const origin = (run(['remote', 'get-url', 'origin']).stdout || '').trim().replace(/\.git$/, '').replace(/^git@github\.com:/, 'https://github.com/');
+  return { link: `${origin}/blob/${commit}/${path}`, receipt_sha256: createHash('sha256').update(bytes).digest('hex') };
+}
+
 function args(argv) {
   const o = { evidence: [] };
   for (let i = 0; i < argv.length; i++) {
@@ -77,6 +90,7 @@ function args(argv) {
     else if (a === '--write') o.write = true;
     else if (a === '--evidence') { o.evidence.push(v); i++; }
     else if (a === '--receipt') { o.receipt_sha256 = v; i++; }
+    else if (a === '--receipt-file') { Object.assign(o, pinnedReceipt(v)); i++; }
     else if (a.startsWith('--')) { o[a.slice(2)] = v; i++; }
     else (o._ = o._ || []).push(a);
   }
@@ -88,7 +102,7 @@ const isMain = process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('
 if (isMain) {
   const [cmd, ...rest] = process.argv.slice(2);
   const o = args(rest);
-  if (!REPO && cmd !== 'keygen') { console.error('✗ no local config naming the shared repo (~/.si-didy/continuity.json)'); process.exit(1); }
+  if (!REPO && cmd !== 'keygen') { console.error('✗ no local config naming the shared repo (~/.team-feed/config.json)'); process.exit(1); }
   if (cmd === 'add' || cmd === 'pause') {
     const { push, write, _, ...input } = o;
     if (cmd === 'pause') Object.assign(input, { kind: 'decision', verdict: 'pause', ref: (_ || [])[0], what: input.what || 'pause ' + (_ || [])[0] });

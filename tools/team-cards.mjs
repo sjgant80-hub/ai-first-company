@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // team-cards.mjs — write each bot's card into the team's private shared repo (team/<id>.md) from data/roster.json, or
-// check that the cards there are still the roster's. The repo is named only in local config (~/.si-didy/continuity.json
+// check that the cards there are still the roster's. The repo is named only in local config (~/.team-feed/config.json
 // { repo }, or KAR_CONTINUITY), never here.
 //   node tools/team-cards.mjs           write the eight cards
 //   node tools/team-cards.mjs --check   every card equals the roster's card, byte for byte (exit 1 if any is stale)
@@ -11,7 +11,7 @@ import { createHash } from 'node:crypto';
 import { PERSONAS } from '../src/feed.mjs';
 import { card } from '../src/cards.mjs';
 
-const cfg = () => { try { return JSON.parse(readFileSync(join(homedir(), '.si-didy', 'continuity.json'), 'utf8')).repo || ''; } catch { return ''; } };
+const cfg = () => { try { return JSON.parse(readFileSync(join(homedir(), '.team-feed', 'config.json'), 'utf8')).repo || ''; } catch { return ''; } };
 export const REPO = process.env.KAR_CONTINUITY || cfg();
 export const rosterText = () => readFileSync(new URL('../data/roster.json', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 export const shaOf = (t) => createHash('sha256').update(t).digest('hex');

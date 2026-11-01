@@ -24,6 +24,25 @@ Plus `src/costcase.mjs` (29/29, the cost case and the seat comparison) and `src/
 and `data/cycle-run.json`; every tool `tools/step*-measure.mjs --check | --verify`. CI re-measures every seal and receipt and
 mutation-tests every kernel on each push (`.github/workflows/gate.yml`).
 
+## The bot team (Simon's spec, 1 November 2026)
+
+The company runs as eight bots, one role each (Kar the conductor, Builder, Money time, Reach, Scout, Client lead, Card
+Keeper, and a separate Auditor), writing to one shared feed. Anything public, paid or risky waits for Simon's signed go.
+The feed, the persona cards and the team law live in the team's private shared repo; the code that checks them is here.
+On the page: [the bot team](https://sjgant80-hub.github.io/ai-first-company/#team) (its cards, a live fence and a live
+auditor, and every receipt).
+
+| Step | What | Code | Mutation gate (witness v0.6) | Sealed claims |
+|---|---|---|---|---|
+| 1 | One shared feed (redacts keys, tokens, emails, card numbers; flags a done with no receipt; a key per bot; the kill switch) + Kar's rollup + the ten laws mapped to their checks | `src/feed.mjs`, `src/rollup.mjs`, `data/team-law.json` | 137/137, 38/38 | 9 of 10 (F3b failed and kept) |
+| 2 | The eight roles as a fence: `may(bot, tool, { auditorPass, simonGo })`, and each bot's card written from the roster | `data/roster.json`, `src/roster.mjs`, `src/cards.mjs` | 72/72, 15/15 | 5 of 6 (P5 failed and kept) |
+| 2b | P5's fix (the fuzz found 36 throws the gate missed) | `src/roster.mjs` | 72/72 | 4 of 4 |
+| 3 | The auditor: receipts re-hashed and read, the seal before the code, `--verify` re-run on a clean copy, every tool through the fence (only signed PASSes and signed go's count), the words of anything going out; a local model may only add flags | `src/auditor.mjs`, `tools/audit.mjs` | 71/71 | see `data/team3-auditor-run.json` |
+
+Tools: `tools/team.mjs` (write a line, pause, roll up, verify, make a key, Simon's signed decision), `tools/audit.mjs`
+(the auditor's own process), `tools/team-cards.mjs` (the cards). Seals `data/team*-prereg.json`, receipts
+`data/team*-run.json`, witness results `data/team-witness.json`; CI re-measures every receipt and re-gates every kernel.
+
 ## Live today vs waiting
 
 - Live: the conductor, the claim gate, the voice's queue (nothing posted), the dashboard on a rehearsal cycle.

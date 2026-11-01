@@ -4,7 +4,7 @@
 //
 //   audit(line, facts, ctx)  → { verdict: 'PASS' | 'FLAG' | 'FAIL', checks: [{ check, result: 'ok' | 'FLAG' | 'FAIL', evidence }] }
 //       facts: { receipt: { found, sha256, text }, seal: { named, ancestor }, rerun: { ran, exit, cmd }, judge: [{ label, quote }] }
-//       ctx:   { roster, lines (read from the feed, with signed), consent: { partners: [{ name, consent }] } }
+//       ctx:   { roster, lines (read from the feed, with signed), consent: { partners: [{ name, consent }] }, jargon: [word] }
 //   auditable(line, ctx)     → does this line get a verdict? (builds, receipts, listings, posts, needs-owner lines, done
 //                              claims, lines naming the tools they used, lines whose own tool is off the bot's list)
 //   pinOf(link)              → { repo, commit, path } for a link pinned to a commit, or null
@@ -33,7 +33,7 @@ export const CRYPTO = /\b(?:crypto\w*|bitcoin|btc|ethereum|eth|solana|nfts?|web3
 export const HYPE = /\b(?:guarantee[sd]?|guaranteeing|100\s?% (?:accurate|safe|secure|reliable|proven|guaranteed|success)|never fails?|zero (?:risk|bugs|errors|downtime)|bulletproof|unhackable|best[- ]in[- ]class|the best|number one|world'?s (?:best|first|leading|most)|industry[- ]leading|market[- ]leading|revolutionary|game[- ]chang\w+|the only|first ever|unmatched|unbeatable|risk[- ]free|always works)\b|#1\b/i;
 export const MONEY = /[£$€]\s?\d[\d,.]*/;
 export const NUMBER = /\b\d+(?:\.\d+)?\s?%|\b\d+x\b|\b\d[\d,]*\s*(?:of|\/)\s*\d+|\b\d[\d,.]*\s*(?:hours?|minutes?|days?|weeks?|users?|customers?|clients?|businesses|companies|teams|times|faster|more|less)\b/i;
-export const JARGON = /\b(?:konomif\w*|sididy|si-didy|karma-didy|wisp|the estate|organs?|spiral)\b|[κφ]/i;
+export const JARGON = /\b(?:konomif\w*|karma-didy|wisp|the estate|organs?|spiral)\b|[κφ]/i;   // more in-house words come in ctx.jargon (kept private)
 
 const quote = (re, t) => { const m = re.exec(t); return m ? m[0] : null; };
 
@@ -47,7 +47,8 @@ function words(line, ctx) {
   const m = quote(MONEY, t); if (m) out.push({ check: 'words', result: 'FLAG', evidence: `a money amount: "${m}" (prices are Simon's)` });
   const n = quote(NUMBER, t); if (n && !str(line.link)) out.push({ check: 'words', result: 'FLAG', evidence: `a number with no receipt: "${n}"` });
   for (const p of list(isObj(ctx.consent) ? ctx.consent.partners : [])) if (p.consent !== true && str(p.name) && t.toLowerCase().includes(p.name.toLowerCase())) out.push({ check: 'words', result: 'FLAG', evidence: `names ${p.name} without recorded consent` });
-  const j = quote(JARGON, t); if (j) out.push({ check: 'words', result: 'FLAG', evidence: `in-house jargon: "${j}"` });
+  const own = (Array.isArray(ctx.jargon) ? ctx.jargon : []).find((w) => str(w) && t.toLowerCase().includes(w.toLowerCase()));
+  const j = quote(JARGON, t) || own; if (j) out.push({ check: 'words', result: 'FLAG', evidence: `in-house jargon: "${j}"` });
   const long = t.split(/(?<=[.!?])\s+/).find((s) => s.split(/\s+/).filter(Boolean).length > 40);
   if (long) out.push({ check: 'words', result: 'FLAG', evidence: 'a sentence over 40 words' });
   return out;

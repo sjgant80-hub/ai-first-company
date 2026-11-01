@@ -114,6 +114,11 @@ test('the words of anything going out', () => {
   assert.deepEqual(W('Made with Gary W. Floyd and Acme Ltd.'), ['FLAG words: names Gary W. Floyd without recorded consent']);
   assert.deepEqual(W('Grown from the estate.'), ['FLAG words: in-house jargon: "the estate"']);
   assert.deepEqual(W('Thanks κ.'), ['FLAG words: in-house jargon: "κ"']);
+  const J = (what, jargon) => why(audit(L({ agent: 'reach', kind: 'post', what, needs_owner: true }), {}, { roster, lines: [], jargon }));
+  assert.deepEqual(J('Built on Zorbo.', ['', 'zorbo']), ['FLAG receipt: a done with no receipt link', 'FLAG words: in-house jargon: "zorbo"']);
+  assert.deepEqual(J('Made on Zorbo from the estate.', ['zorbo']), ['FLAG words: in-house jargon: "the estate"']);
+  assert.deepEqual(J('Plain words.', ['', 5]), []);
+  assert.deepEqual(J('Plain words.', 'plain'), []);
   const forty = Array(40).fill('word').join(' ') + '.', fortyOne = Array(41).fill('word').join(' ') + '.';
   assert.deepEqual(W(forty + ' Short.'), []);
   assert.deepEqual(W(fortyOne + ' Short.'), ['FLAG words: a sentence over 40 words']);
