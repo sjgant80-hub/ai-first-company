@@ -1,0 +1,7 @@
+{
+ "F2b": {
+  "pass": true,
+  "measured": "198 real log lines (sha256 b2a6965d41ee0da536a8213c716523f5924e6192bedd1f8b64302bf9407dbf53); 0 changed, redactions by class {}; judged line by line by Kar: 0 false. Nothing was changed, so there was nothing to judge false: on this log the writer touched none of its post links, commit ids, card codes, seals, @handles or counts. It also had no real secret in it, so this measures false alarms only, not recall."
+ },
+ "judgedAt": "2026-11-01"
+}

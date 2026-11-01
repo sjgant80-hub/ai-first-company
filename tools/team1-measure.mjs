@@ -206,9 +206,15 @@ async function heldout() {
   if (existsSync(file(HELD))) { console.error('✗ already generated, and kept: ' + HELD); process.exit(1); }
   const P = readJSON(PREREG).heldout.F3b;
   const ask = async (prompt) => {
-    const res = await fetch('http://127.0.0.1:11434/api/generate', { method: 'POST', body: JSON.stringify({ model: 'qwen2.5:7b', prompt, stream: false, options: { temperature: 0.9, seed: 11, num_predict: 2000 } }) });
-    const j = await res.json();
-    return String(j.response || '').split(/\r?\n/).map((l) => l.replace(/^\s*(?:\d+[.)]|[-*•])\s*/, '').trim()).filter(Boolean).slice(0, 40);
+    // streamed: on a CPU-only laptop the whole reply takes longer than fetch waits for headers
+    const res = await fetch('http://127.0.0.1:11434/api/generate', { method: 'POST', body: JSON.stringify({ model: 'qwen2.5:7b', prompt, stream: true, options: { temperature: 0.9, seed: 11, num_predict: 2000 } }) });
+    let reply = '', buf = '';
+    for await (const chunk of res.body) {
+      buf += Buffer.from(chunk).toString('utf8');
+      const parts = buf.split('\n'); buf = parts.pop();
+      for (const p of parts) if (p.trim()) reply += JSON.parse(p).response || '';
+    }
+    return reply.split(/\r?\n/).map((l) => l.replace(/^\s*(?:\d+[.)]|[-*•])\s*/, '').trim()).filter(Boolean).slice(0, 40);
   };
   const out = { model: 'qwen2.5:7b', options: { temperature: 0.9, seed: 11, num_predict: 2000 }, generated: new Date().toISOString().slice(0, 10), after: git('rev-parse', '--short', 'HEAD'), finished: await ask(P.finished), unfinished: await ask(P.unfinished) };
   writeFileSync(file(HELD), JSON.stringify(out, null, 1) + '\n');

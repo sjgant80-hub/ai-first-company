@@ -1,0 +1,115 @@
+{
+ "kind": "ai-first-company-team1-feed-run",
+ "seal": "9f75b07",
+ "corpus": "3a22faa08e8e20a4c22e4bfe601911bb4428c57493bb92172bb8605bed45eeec",
+ "claims": {
+  "F1": {
+   "pass": true,
+   "measured": "240 of 240 planted secrets gone (keys 60/60, tokens 60/60, emails 60/60, cards 60/60)"
+  },
+  "F2": {
+   "pass": true,
+   "measured": "240 of 240 look-alikes and 62 of 62 real public lines unchanged"
+  },
+  "F2b": {
+   "pass": true,
+   "measured": "198 real log lines (sha256 b2a6965d41ee0da536a8213c716523f5924e6192bedd1f8b64302bf9407dbf53); 0 changed, redactions by class {}; judged line by line by Kar: 0 false. Nothing was changed, so there was nothing to judge false: on this log the writer touched none of its post links, commit ids, card codes, seals, @handles or counts. It also had no real secret in it, so this measures false alarms only, not recall.",
+   "ci": false
+  },
+  "F3": {
+   "pass": true,
+   "measured": "no link: 60 of 60 flagged; with a link: 0 of 60; claiming nothing: 0 of 30"
+  },
+  "F3b": {
+   "pass": false,
+   "measured": "finished 32 of 39 flagged; unfinished 0 of 40 flagged (local qwen2.5:7b, generated 2026-11-01)",
+   "missed": [
+    "Integrated user feedback improvements into the product.",
+    "Launched the new feature on the staging server.",
+    "Updated the database schema to the latest version.",
+    "Integrated the payment gateway into the application.",
+    "Integrated the chatbot into the customer support system.",
+    "Integrated the analytics tool into the dashboard.",
+    "Integrated the real-time notifications feature."
+   ],
+   "wrongly": []
+  },
+  "F4": {
+   "pass": true,
+   "measured": "3000 fuzzed: 0 threw, 2672 refused (0 without a reason), 328 accepted, 328 of them read back identical; named refusals 5 of 5"
+  },
+  "F5": {
+   "pass": true,
+   "measured": "180 of 180 verify; 1305 of 1305 one-field changes fail; 72 of 72 cross-key lines fail"
+  },
+  "F6": {
+   "pass": true,
+   "measured": "102 rehearsal lines; rollup blocks equal the plain count {\"NEEDS SIMON\":22,\"Flagged\":24,\"Kar\":8,\"Builder\":9,\"Money time\":9,\"Reach\":9,\"Scout\":9,\"Client lead\":9,\"Card Keeper\":9,\"Auditor\":9,\"Simon\":22}; NEEDS SIMON comes first; inserted twice into a copy of AGENT_FEED.md, every other section unchanged"
+  },
+  "F7": {
+   "pass": true,
+   "measured": "13 of 13 cases as stated",
+   "cases": [
+    {
+     "label": "pause by simon stops reach",
+     "ok": true
+    },
+    {
+     "label": "pause by simon leaves the others",
+     "ok": true
+    },
+    {
+     "label": "reach's next line flagged while-paused (simon)",
+     "ok": true
+    },
+    {
+     "label": "pause by kar stops reach",
+     "ok": true
+    },
+    {
+     "label": "pause by kar leaves the others",
+     "ok": true
+    },
+    {
+     "label": "reach's next line flagged while-paused (kar)",
+     "ok": true
+    },
+    {
+     "label": "pause by auditor stops reach",
+     "ok": true
+    },
+    {
+     "label": "pause by auditor leaves the others",
+     "ok": true
+    },
+    {
+     "label": "reach's next line flagged while-paused (auditor)",
+     "ok": true
+    },
+    {
+     "label": "pause team stops all",
+     "ok": true
+    },
+    {
+     "label": "unpause by kar changes nothing",
+     "ok": true
+    },
+    {
+     "label": "unsigned simon unpause changes nothing",
+     "ok": true
+    },
+    {
+     "label": "signed simon unpause restores",
+     "ok": true
+    }
+   ]
+  },
+  "F8": {
+   "pass": true,
+   "measured": "10 laws, 10 mapped with every named function present; laws with a later step's check (re-checked then): 1, 2, 3, 4, 5, 7, 8",
+   "missing": []
+  }
+ },
+ "held": 9,
+ "of": 10
+}
