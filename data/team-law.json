@@ -1,0 +1,84 @@
+{
+ "kind": "ai-first-company-team-law",
+ "v": 1,
+ "from": "Simon's bot-team spec, 2026-11-01, §4 (RULES.md, the team law). Each law names the check that enforces it: code in this repo that exists now, a later build step's check (re-checked when that step is measured), or no code, with the plain reason.",
+ "laws": [
+  {
+   "n": 1,
+   "law": "One role per bot. Work passes between bots through the feed.",
+   "checks": [
+    { "at": "src/feed.mjs", "fn": "entry", "how": "a handoff line is refused unless it names the next persona" },
+    { "step": 2, "how": "each persona's allowed tools and owned outputs (the roster)" }
+   ]
+  },
+  {
+   "n": 2,
+   "law": "Seal what 'done' means first, before the work.",
+   "checks": [
+    { "step": 3, "how": "the auditor fails a build whose receipt does not name a seal committed before its code" }
+   ]
+  },
+  {
+   "n": 3,
+   "law": "Every claim links a receipt anyone can re-run.",
+   "checks": [
+    { "at": "src/feed.mjs", "fn": "claimsDone", "how": "a done with no link is flagged no-receipt by the writer" },
+    { "step": 3, "how": "the auditor re-hashes the receipt and re-runs its tests" }
+   ]
+  },
+  {
+   "n": 4,
+   "law": "Using a tool that is not on your list is a FLAG.",
+   "checks": [
+    { "step": 3, "how": "the auditor compares the tools a bot used with its allow-list" }
+   ]
+  },
+  {
+   "n": 5,
+   "law": "The auditor checks every build, listing, post draft and deliverable.",
+   "checks": [
+    { "at": "src/rollup.mjs", "fn": "auditOf", "how": "every NEEDS SIMON item shows the auditor's verdict, or 'not yet audited'" },
+    { "step": 3, "how": "the auditor's verdict lines" }
+   ]
+  },
+  {
+   "n": 6,
+   "law": "NEEDS SIMON, never automatic: publishing, posting, client sends, prices, payments, terms, releases to main, money, legal, personal data.",
+   "checks": [
+    { "at": "src/feed.mjs", "fn": "entry", "how": "post and listing lines always need the owner, whatever the bot sent" },
+    { "at": "src/feed.mjs", "fn": "answered", "how": "only Simon's signed decisions count as his answer" },
+    { "at": "src/oversight.mjs", "fn": "mayGo", "how": "an outward step goes only when its exact text is approved and nothing is paused" },
+    { "at": "src/conductor.mjs", "fn": "flagsOf", "how": "a job that leaves or commits the company, or that cannot be read, goes to Simon (fails closed)" }
+   ]
+  },
+  {
+   "n": 7,
+   "law": "Plain language.",
+   "checks": [
+    { "step": 3, "how": "the auditor's plain-language check (jargon list, then the local model's read)" }
+   ]
+  },
+  {
+   "n": 8,
+   "law": "No earnings claims, no crypto wording, no partner names without their consent.",
+   "checks": [
+    { "step": 3, "how": "the auditor's overclaim, crypto-wording and consent checks" }
+   ]
+  },
+  {
+   "n": 9,
+   "law": "Follow every platform's rules. A blocked login or a CAPTCHA goes to Simon; it is never worked around.",
+   "checks": [
+    { "none": "No code in this repo operates a platform: the bots that do (on Grok Bot's computer) carry this law in their persona cards. What code can do, it does: a blocker line that needs the owner reaches the top of the rollup.", "at": "src/rollup.mjs", "fn": "needsSimon" }
+   ]
+  },
+  {
+   "n": 10,
+   "law": "Failures stay on the record.",
+   "checks": [
+    { "at": "src/feed.mjs", "fn": "appendOnly", "how": "a write that removes or changes an earlier feed line is refused" },
+    { "at": "src/journal.mjs", "fn": "verify", "how": "the company journal is a hash chain: a changed entry breaks it" }
+   ]
+  }
+ ]
+}
