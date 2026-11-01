@@ -1,0 +1,52 @@
+{
+ "kind": "ai-first-company-team4-wire-run",
+ "seal": "9777f2f",
+ "ci": false,
+ "at": "2026-11-01",
+ "claims": {
+  "W1": {
+   "pass": true,
+   "measured": "Kar's rollup is above every Grok Bot sync; NEEDS SIMON first (0 waiting); the 2 other sections unchanged byte for byte; writing it again changed nothing"
+  },
+  "W2": {
+   "pass": true,
+   "measured": "2 of 2 builder lines re-hash at their pinned commit; verdicts PASS, PASS",
+   "verdicts": [
+    {
+     "id": "585db154d6e3",
+     "verdict": "PASS",
+     "evidence": [
+      "receipt ok: re-hashed 225bcf9ab49f at 18bd9cd:data/team3-auditor-run.json",
+      "seal ok: sealed at e4f3b9d, before the code",
+      "tools ok: on the list: branch.write"
+     ]
+    },
+    {
+     "id": "78b10807ad99",
+     "verdict": "PASS",
+     "evidence": [
+      "receipt ok: re-hashed d9bd74cc0b3d at 18bd9cd:data/team-witness.json",
+      "tools ok: on the list: feed.write"
+     ]
+    }
+   ]
+  },
+  "W3": {
+   "pass": true,
+   "measured": "2 new builder lines; the first audit run wrote 2 signed verdicts (1 and 1 on the new lines), the second wrote 0"
+  },
+  "W4": {
+   "pass": true,
+   "measured": "a fresh clone of the public repo writing to a scratch shared repo (no git, so nothing can be pushed): the Money time listing stored, needs_owner true, flags needs-owner-forced; the Card Keeper receipt stored; the rollup shows Money time and Card Keeper; the auditor judged 2 of 2 with the tools check ok",
+   "auditor": [
+    "PASS ea5347aac38b money-time listing: kar-tally Agensi listing draft ready for review",
+    "       ok   tools: on the list: listing.draft",
+    "FLAG c8f3fd3f8202 card-keeper receipt: Forged and verified the card of the day",
+    "       FLAG receipt: the receipt link is not pinned to a commit: https://e.example/cards/today",
+    "       ok   tools: on the list: feed.write"
+   ]
+  }
+ },
+ "held": 4,
+ "of": 4
+}
