@@ -1,0 +1,14 @@
+{
+ "kind": "ai-first-company-team2b-prereg",
+ "v": 1,
+ "sealed": "2026-11-01",
+ "question": "Step 2's P5 failed: 36 of 3,000 fuzzed calls threw, though the mutation gate was clean. The cause, found after the receipt was kept: problems() calls .includes on a persona's forbidden list without checking that it is a list (a number, true or an object there throws). Once that one line is fixed, is the fence total, on the same fuzz and on a fresh one, with nothing else changed?",
+ "fix": "src/roster.mjs problems(): read a persona's forbidden list only when it is a list, as may() already does. A test with forbidden set to a number, true and an object is added first.",
+ "claims": [
+  { "id": "B1", "claim": "Step 2's own fuzz (seed 2026, 3,000 calls to problems, toolOf and may) on the fixed kernel: nothing throws and may() says yes to no unknown persona or tool.", "pass": "0 throws, 0 yes" },
+  { "id": "B2", "claim": "A fresh fuzz the kernel has never met (seed 2027, 3,000 calls, same generator): nothing throws, no yes to an unknown.", "pass": "0 throws, 0 yes" },
+  { "id": "B3", "claim": "The fix changes nothing else: P1, P2, P3, P4 and P6 measured on the fixed kernel give exactly step 2's results.", "pass": "5 of 5 identical" },
+  { "id": "B4", "claim": "The fixed roster.mjs stays mutation-clean under witness v0.6, nothing baselined.", "pass": "every mutant killed" }
+ ],
+ "kept": "Step 2's receipt stays as measured (5 of 6, P5 failed); its --verify keeps re-measuring it with the kernel at step 2's own commit. This fold is measured once and kept, held or failed."
+}
