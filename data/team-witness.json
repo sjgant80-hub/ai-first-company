@@ -57,6 +57,14 @@
    "clean": true,
    "score": 1,
    "at": "962be23"
+  },
+  "src/skills.mjs": {
+   "total": 27,
+   "killed": 27,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "7551702"
   }
  },
  "note": "feed.mjs first ran 137 of 138: the one survivor was a dead count (redaction hits counted per class, only the class names used); it was removed and the gate re-run clean before the code was committed. auditor.mjs first ran 70 of 71: no test fed it evidence that was not a tool pointer; the test was added and the gate re-run clean before the code was committed."

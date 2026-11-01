@@ -1,0 +1,36 @@
+{
+ "kind": "ai-first-company-team6-skills-run",
+ "seal": "34f57f6",
+ "catalog": "58306e7fe29833af91979d8947653970ba806c7b4d89741b5511a35eaedf8785",
+ "claims": {
+  "K1": {
+   "pass": true,
+   "measured": "4 of 4 skills whole (audit-feed: owner auditor, 1 caller; check-fence: owner kar, 8 callers; daily-rollup: owner kar, 1 caller; write-feed-line: owner kar, 8 callers); problems 0",
+   "problems": []
+  },
+  "K2": {
+   "pass": true,
+   "measured": "catalog.json is what the folders make; llms.txt is; 4 of 4 pins equal their folder's hash; llms.txt lists 4 skills, exactly the catalog"
+  },
+  "K3": {
+   "pass": true,
+   "measured": "16 of 16 one-byte changes (every file of every skill) refused even with the old PASS; 16 of 16 usable again once undone"
+  },
+  "K4": {
+   "pass": true,
+   "measured": "44 of 44 as stated (each persona × skill with a signed PASS, plus an unsigned, a forged and an other-hash PASS per skill)",
+   "bad": []
+  },
+  "K5": {
+   "pass": true,
+   "measured": "the auditor's skill check re-ran each skill's tests and wrote 4 lines: PASS, PASS, PASS, PASS, 4 signed PASSes bound to each skill's hash; 4 of 4 skills now usable by every one of their callers (measured on Kar's machine; the feed is private)",
+   "ci": false
+  },
+  "K6": {
+   "pass": true,
+   "measured": "3000 fuzzed calls: 0 threw; 0 said yes without a PASS"
+  }
+ },
+ "held": 6,
+ "of": 6
+}

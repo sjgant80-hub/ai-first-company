@@ -1,0 +1,15 @@
+{
+ "pass": true,
+ "measured": "the auditor's skill check re-ran each skill's tests and wrote 4 lines: PASS, PASS, PASS, PASS, 4 signed PASSes bound to each skill's hash; 4 of 4 skills now usable by every one of their callers (measured on Kar's machine; the feed is private)",
+ "printed": [
+  "PASS audit-feed v1.0.0 @ cd0418e7e1eb: its tests re-run and pass (1), its folder is whole, its pin is current",
+  "   → written, signed",
+  "PASS check-fence v1.0.0 @ c68614580d95: its tests re-run and pass (3), its folder is whole, its pin is current",
+  "   → written, signed",
+  "PASS daily-rollup v1.0.0 @ f882eba5e978: its tests re-run and pass (1), its folder is whole, its pin is current",
+  "   → written, signed",
+  "PASS write-feed-line v1.0.0 @ 553396bc1684: its tests re-run and pass (2), its folder is whole, its pin is current",
+  "   → written, signed"
+ ],
+ "at": "2026-11-01"
+}
