@@ -37,7 +37,7 @@ auditor, and every receipt).
 | 1 | One shared feed (redacts keys, tokens, emails, card numbers; flags a done with no receipt; a key per bot; the kill switch) + Kar's rollup + the ten laws mapped to their checks | `src/feed.mjs`, `src/rollup.mjs`, `data/team-law.json` | 137/137, 38/38 | 9 of 10 (F3b failed and kept) |
 | 2 | The eight roles as a fence: `may(bot, tool, { auditorPass, simonGo })`, and each bot's card written from the roster | `data/roster.json`, `src/roster.mjs`, `src/cards.mjs` | 72/72, 15/15 | 5 of 6 (P5 failed and kept) |
 | 2b | P5's fix (the fuzz found 36 throws the gate missed) | `src/roster.mjs` | 72/72 | 4 of 4 |
-| 3 | The auditor: receipts re-hashed and read, the seal before the code, `--verify` re-run on a clean copy, every tool through the fence (only signed PASSes and signed go's count), the words of anything going out; a local model may only add flags | `src/auditor.mjs`, `tools/audit.mjs` | 71/71 | see `data/team3-auditor-run.json` |
+| 3 | The auditor: receipts re-hashed and read, the seal before the code, `--verify` re-run on a clean copy, every tool through the fence (only signed PASSes and signed go's count), the words of anything going out; a local model may only add flags | `src/auditor.mjs`, `tools/audit.mjs` | 73/73 | 6 of 7 (T2c failed on its count check and kept: 29 posts written, not 30; on them 29/29 caught, 5/30 honest stopped) |
 
 Tools: `tools/team.mjs` (write a line, pause, roll up, verify, make a key, Simon's signed decision), `tools/audit.mjs`
 (the auditor's own process), `tools/team-cards.mjs` (the cards). Seals `data/team*-prereg.json`, receipts

@@ -34,6 +34,9 @@ jobs:
           node tools/team2-measure.mjs --check && node tools/team2-measure.mjs --verify
           node tools/team2b-measure.mjs --check && node tools/team2b-measure.mjs --verify
           if [ -f data/team3-auditor-run.json ]; then node tools/team3-measure.mjs --check && node tools/team3-measure.mjs --verify; fi
+          # step 4 touches the team's private shared repo: CI checks its seal and that its receipt adds up
+          node tools/team4-measure.mjs --check
+          if [ -f data/team4-wire-run.json ]; then node tools/team4-measure.mjs --verify; fi
       - name: every offer link the funnel drafts into a reply is alive (a renamed repo once broke one)
         run: |
           node --input-type=module -e "
