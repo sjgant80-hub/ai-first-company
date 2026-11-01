@@ -1,0 +1,143 @@
+{
+ "kind": "ai-first-company-team2-roster-run",
+ "seal": "04231c8",
+ "roster": "f03ca752877711001b8bdf91ed6467bf2bcf50a10917138a895e36b0cea2754f",
+ "claims": {
+  "P1": {
+   "pass": true,
+   "measured": "8 of 8 whole; personas [\"kar\",\"builder\",\"money-time\",\"reach\",\"scout\",\"client-lead\",\"card-keeper\",\"auditor\"]; problems 0",
+   "problems": []
+  },
+  "P2": {
+   "pass": true,
+   "measured": "21 of 21 clauses hold",
+   "clauses": [
+    {
+     "id": "K1",
+     "ok": true,
+     "why": "post.publish forbidden; reply.publish forbidden; listing.submit forbidden; release.publish forbidden"
+    },
+    {
+     "id": "K2",
+     "ok": true,
+     "why": "money.spend forbidden"
+    },
+    {
+     "id": "K3",
+     "ok": true,
+     "why": "code.push forbidden; main.merge forbidden"
+    },
+    {
+     "id": "K4",
+     "ok": true,
+     "why": "verdict.write forbidden; decision.approve forbidden"
+    },
+    {
+     "id": "B1",
+     "ok": true,
+     "why": "main.merge refused without auditor-pass + simon-go: true; allowed with it: true"
+    },
+    {
+     "id": "B2",
+     "ok": true,
+     "why": "release.publish refused without auditor-pass + simon-go: true; allowed with it: true"
+    },
+    {
+     "id": "M1",
+     "ok": true,
+     "why": "listing.submit refused without simon-go: true; allowed with it: true"
+    },
+    {
+     "id": "M2",
+     "ok": true,
+     "why": "price.set refused without simon-go: true; allowed with it: true"
+    },
+    {
+     "id": "M3",
+     "ok": true,
+     "why": "terms.accept refused without simon-go: true; allowed with it: true"
+    },
+    {
+     "id": "M4",
+     "ok": true,
+     "why": "content rule no-earnings-claims"
+    },
+    {
+     "id": "M5",
+     "ok": true,
+     "why": "content rule no-crypto-wording"
+    },
+    {
+     "id": "R1",
+     "ok": true,
+     "why": "post.publish refused without simon-go: true; allowed with it: true; reply.publish refused without simon-go: true; allowed with it: true"
+    },
+    {
+     "id": "R2",
+     "ok": true,
+     "why": "dm.send forbidden"
+    },
+    {
+     "id": "S1",
+     "ok": true,
+     "why": "dm.send forbidden; reply.publish forbidden; post.publish forbidden; email.send forbidden; client.send forbidden"
+    },
+    {
+     "id": "S2",
+     "ok": true,
+     "why": "scout tools read or logging"
+    },
+    {
+     "id": "C1",
+     "ok": true,
+     "why": "quote.send forbidden"
+    },
+    {
+     "id": "C2",
+     "ok": true,
+     "why": "contract.sign forbidden"
+    },
+    {
+     "id": "C3",
+     "ok": true,
+     "why": "promise.make forbidden"
+    },
+    {
+     "id": "CK1",
+     "ok": true,
+     "why": "card.sign refused without auditor-pass: true; allowed with it: true"
+    },
+    {
+     "id": "A1",
+     "ok": true,
+     "why": "branch.write forbidden; code.push forbidden; main.merge forbidden; release.publish forbidden; seal.write forbidden; card.forge forbidden; listing.draft forbidden; post.draft forbidden; reply.draft forbidden; pack.build forbidden; agreement.draft forbidden"
+    },
+    {
+     "id": "A2",
+     "ok": true,
+     "why": "auditor runtime qwen2.5:7b differs"
+    }
+   ]
+  },
+  "P3": {
+   "pass": true,
+   "measured": "120 of 120 persona × outward-tool pairs refused without Simon's go (with the auditor's PASS); verdict.write allowed for [\"auditor\"]"
+  },
+  "P4": {
+   "pass": true,
+   "measured": "24 outputs, 0 owned twice; 0 needed kinds refused",
+   "twice": [],
+   "cannot": []
+  },
+  "P5": {
+   "pass": false,
+   "measured": "3000 fuzzed calls: 36 threw; 0 said yes to an unknown persona or tool"
+  },
+  "P6": {
+   "pass": true,
+   "measured": "8 of 8 regenerate identical, stamped f03ca7528777; a one-byte roster change makes 8 of 8 stale; the shared repo's cards: 8 of 8 equal to roster f03ca7528777 (checked on Kar's machine 2026-11-01; CI cannot see the private repo)"
+  }
+ },
+ "held": 5,
+ "of": 6
+}
