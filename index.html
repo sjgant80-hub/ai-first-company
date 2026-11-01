@@ -397,7 +397,7 @@ try {
   $('#achips').innerHTML = EX.map((e, i) => `<button type="button" data-i="${i}">${esc(e.slice(0, 38))}…</button>`).join('');
   $('#achips').addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (!b) return; $('#draft').value = EX[+b.dataset.i]; run(EX[+b.dataset.i]); });
   $('#auditform').addEventListener('submit', (ev) => { ev.preventDefault(); if ($('#draft').value.trim()) run($('#draft').value.trim()); });
-  const STEPS = [['data/team1-feed-run.json', 'Step 1 · one shared feed and the team law'], ['data/team2-roster-run.json', 'Step 2 · the eight roles as a fence'], ['data/team2b-run.json', "Step 2b · the fence's fix (the fuzz found 36 throws)"], ['data/team3-auditor-run.json', 'Step 3 · the auditor']];
+  const STEPS = [['data/team1-feed-run.json', 'Step 1 · one shared feed and the team law'], ['data/team2-roster-run.json', 'Step 2 · the eight roles as a fence'], ['data/team2b-run.json', "Step 2b · the fence's fix (the fuzz found 36 throws)"], ['data/team3-auditor-run.json', 'Step 3 · the auditor'], ['data/team4-wire-run.json', 'Step 4 · the existing bots wired in (measured on Kar’s machine: the feed is private)'], ['data/team6-skills-run.json', 'Step 6 · the skill library (four skills, each pinned by hash and passed by the auditor)']];
   const blocks = [];
   for (const [u, title] of STEPS) {
     const r = await getJSON(u);

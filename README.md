@@ -38,9 +38,12 @@ auditor, and every receipt).
 | 2 | The eight roles as a fence: `may(bot, tool, { auditorPass, simonGo })`, and each bot's card written from the roster | `data/roster.json`, `src/roster.mjs`, `src/cards.mjs` | 72/72, 15/15 | 5 of 6 (P5 failed and kept) |
 | 2b | P5's fix (the fuzz found 36 throws the gate missed) | `src/roster.mjs` | 72/72 | 4 of 4 |
 | 3 | The auditor: receipts re-hashed and read, the seal before the code, `--verify` re-run on a clean copy, every tool through the fence (only signed PASSes and signed go's count), the words of anything going out; a local model may only add flags | `src/auditor.mjs`, `tools/audit.mjs` | 73/73 | 6 of 7 (T2c failed on its count check and kept: 29 posts written, not 30; on them 29/29 caught, 5/30 honest stopped) |
+| 4 | The existing bots wired in: Kar's rollup on top of AGENT_FEED.md, the Builder's lines pinned to their receipts (`--receipt-file`), the auditor judging each new line once, Grok Bot's path tried from a fresh clone | `tools/team.mjs`, `tools/audit.mjs` | (kernels above) | 4 of 4 (on Kar's machine; the feed is private) |
+| 5 | Scout, Reach and Client lead: their cards and fences came with step 2 and were tested in step 3; Client lead's key made here. Scout and Reach make theirs on Grok Bot's computer | — | — | no new code, nothing to seal |
+| 6 | The skill library: a folder per skill (SKILL.md, script, tests, sample receipt), owner and callers, pinned by hash; a changed skill is unusable until the auditor passes it again; one index (`skills/catalog.json`, `skills/llms.txt`) | `src/skills.mjs`, `tools/skills.mjs`, `skills/` | 27/27 | 6 of 6 |
 
 Tools: `tools/team.mjs` (write a line, pause, roll up, verify, make a key, Simon's signed decision), `tools/audit.mjs`
-(the auditor's own process), `tools/team-cards.mjs` (the cards). Seals `data/team*-prereg.json`, receipts
+(the auditor's own process), `tools/team-cards.mjs` (the cards), `tools/skills.mjs` (the skill library). Seals `data/team*-prereg.json`, receipts
 `data/team*-run.json`, witness results `data/team-witness.json`; CI re-measures every receipt and re-gates every kernel.
 
 ## Live today vs waiting
