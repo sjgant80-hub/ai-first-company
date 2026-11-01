@@ -1,0 +1,22 @@
+{
+ "kind": "ai-first-company-team6-skills-prereg",
+ "v": 1,
+ "sealed": "2026-11-01",
+ "question": "Can the team's skills be taught once — a folder each, an owner and the bots allowed to call it, pinned by hash so that a changed skill is unusable until the auditor passes it again — with one index (catalog.json and llms.txt) that is the folders' own?",
+ "why": "Simon's bot-team spec (2026-11-01). §8 step 6: the SKILL LIBRARY. §2: a folder each, SKILL.md (frontmatter), scripts, tests, a sample receipt; an owning persona and an allowed-callers list; versioned and hash-pinned, a changed skill must pass the auditor again; one index, catalog.json plus llms.txt.",
+ "design": {
+  "skills": "skills/<name>/ in this public repo: SKILL.md (frontmatter: name, version, owner, callers, description), scripts/<name>.mjs, tests/<name>.test.mjs, receipt.json (a sample of what it prints). The first four are the team's own: write-feed-line (owner kar, every bot may call it), check-fence (owner kar, every bot), audit-feed (owner auditor, the auditor alone), daily-rollup (owner kar, kar alone).",
+  "kernel": "src/skills.mjs, pure: frontmatter(md); folderSha(files) — SHA-256 over the sorted 'path sha256' lines of a skill's files; problems(catalog, roster); entryFor(folder) → the catalog entry a folder makes; usable(entry, sha, persona, verdicts) → { ok, why }: the pin must equal the folder's hash now, the persona must be a caller, and a signed auditor PASS must name this skill at this hash (ref 'skill:<name>@<sha256>'); llms(catalog) → llms.txt.",
+  "index": "tools/skills.mjs builds catalog.json and llms.txt from the folders (--check: they are what the folders make). tools/skills.mjs --audit is the auditor's skill check: it re-runs each skill's tests and checks its folder, and writes a signed PASS or FAIL line into the feed for that skill at its hash."
+ },
+ "claims": [
+  { "id": "K1", "claim": "Every skill is a whole folder: SKILL.md whose frontmatter names it, its version, an owner among the eight personas and callers among them, plus scripts, tests and a sample receipt; problems(catalog) is empty.", "pass": "4 of 4 whole; no problems" },
+  { "id": "K2", "claim": "One index, the folders' own: catalog.json and llms.txt regenerate byte for byte from the folders, every pin equals its folder's hash, and llms.txt lists exactly the catalog.", "pass": "both identical; every pin equal" },
+  { "id": "K3", "claim": "A changed skill must pass again: for every skill, a one-byte change to any one of its files makes usable() refuse it even with its old PASS; with the change undone it is usable again.", "pass": "every file of every skill" },
+  { "id": "K4", "claim": "Callers are fenced: with its PASS and its pin current, every persona that is not among a skill's callers is refused it, and every caller may use it; a PASS that is unsigned, or names another hash, counts for nothing.", "pass": "every persona × skill as stated" },
+  { "id": "K5", "claim": "The auditor passes the real library: its skill check re-runs each skill's tests (all pass) and writes one signed PASS per skill at its hash into the team's feed; each skill is then usable by its callers. Measured on Kar's machine (the feed is private).", "pass": "4 of 4 PASS, signed, usable" },
+  { "id": "K6", "claim": "Total: 3,000 fuzzed calls to frontmatter, folderSha, problems, usable and llms throw nothing, and usable() never says yes without a PASS.", "pass": "0 throws; 0 yes without a PASS" }
+ ],
+ "scope": "The first library holds the team's own four skills. The nine Agensi skills keep their own repos and receipts; adding them to this catalog is a later fold. No skill sends anything outward.",
+ "kept": "Every result is kept as measured, held or failed."
+}
