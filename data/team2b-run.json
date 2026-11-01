@@ -1,0 +1,24 @@
+{
+ "kind": "ai-first-company-team2b-run",
+ "seal": "bb72e78",
+ "claims": {
+  "B1": {
+   "pass": true,
+   "measured": "seed 2026: 3000 fuzzed calls: 0 threw; 0 said yes to an unknown persona or tool"
+  },
+  "B2": {
+   "pass": true,
+   "measured": "seed 2027: 3000 fuzzed calls: 0 threw; 0 said yes to an unknown persona or tool"
+  },
+  "B3": {
+   "pass": true,
+   "measured": "5 of 5 identical to step 2 (P1, P2, P3, P4, P6)"
+  },
+  "B4": {
+   "pass": true,
+   "measured": "witness v0.6 (d43f6c3) on the fixed src/roster.mjs: 72 of 72 mutants killed, nothing baselined"
+  }
+ },
+ "held": 4,
+ "of": 4
+}

@@ -49,6 +49,7 @@ test('problems: each fault named', () => {
   one((r) => { P(r, 'kar').tools = 'feed.read'; }, ['persona kar: no tools']);
   one((r) => { P(r, 'kar').forbidden = []; }, ['persona kar: no forbidden actions']);
   one((r) => { P(r, 'kar').forbidden = ['']; }, ['persona kar: no forbidden actions', 'persona kar: unknown forbidden tool ']);
+  for (const v of [1, true, {}]) one((r) => { P(r, 'kar').forbidden = v; }, ['persona kar: no forbidden actions']);
   one((r) => { P(r, 'kar').owns = []; }, ['persona kar: owns nothing']);
   one((r) => { P(r, 'kar').owns = 'x'; }, ['persona kar: owns nothing']);
   one((r) => { P(r, 'kar').content = 'plain'; }, ['persona kar: content rules are not words']);

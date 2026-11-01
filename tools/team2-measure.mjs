@@ -4,14 +4,16 @@
 //   node tools/team2-measure.mjs --private   P6's third part, on Kar's machine: the shared repo's cards are the roster's
 //   node tools/team2-measure.mjs --run       every claim → data/team2-roster-run.json
 //   node tools/team2-measure.mjs --verify    re-measure; must equal the committed receipt
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdtempSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { PERSONAS, KINDS } from '../src/feed.mjs';
-import { problems, may, toolOf } from '../src/roster.mjs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { PERSONAS } from '../src/feed.mjs';
 import { stampOf } from '../src/cards.mjs';
 import { cardsFor, rosterText, stale, shaOf } from './team-cards.mjs';
 
-const SEAL = '04231c8';
+const SEAL = '04231c8', CODE = 'b05c7f6';   // step 2 is re-measured with roster.mjs as it was at its own commit
 const root = new URL('../', import.meta.url);
 const file = (p) => new URL(p, root);
 const readJSON = (p) => JSON.parse(readFileSync(file(p), 'utf8'));
@@ -26,7 +28,15 @@ const subsets = (xs) => xs.reduce((acc, x) => acc.concat(acc.map((s) => s.concat
 const ctxOf = (conds) => ({ auditorPass: conds.includes('auditor-pass'), simonGo: conds.includes('simon-go') });
 const ALL = { auditorPass: true, simonGo: true };
 
-function measure() {
+/** roster.mjs as it was at a commit (its one import pointed at today's feed.mjs, whose persona and kind lists it reads) */
+export async function kernelAt(commit) {
+  const src = git('show', `${commit}:src/roster.mjs`).replace("from './feed.mjs'", 'from ' + JSON.stringify(new URL('src/feed.mjs', root).href));
+  const p = join(mkdtempSync(join(tmpdir(), 'roster-')), 'roster.mjs');
+  writeFileSync(p, src);
+  return import(pathToFileURL(p).href);
+}
+
+export function measure({ problems, may, toolOf }, seed = 2026) {
   const R = readJSON('data/roster.json'), P = readJSON(PREREG);
   const persona = (id) => R.personas.find((p) => p.id === id);
   // P1
@@ -65,7 +75,7 @@ function measure() {
   for (const id of PERSONAS) for (const line of [{ kind: 'task' }, { kind: 'note' }, { kind: 'blocker' }, ...ROLE[id]]) if (!may(R, id, toolOf(line), {}).ok) cannot.push(`${id}: ${JSON.stringify(line)}`);
   const P4 = { pass: twice.length === 0 && cannot.length === 0, measured: `${Object.keys(owners).length} outputs, ${twice.length} owned twice; ${cannot.length} needed kinds refused`, twice, cannot };
   // P5 — total
-  const r = rng(2026), int = (n) => Math.floor(r() * n), pick = (a) => a[int(a.length)];
+  const r = rng(seed), int = (n) => Math.floor(r() * n), pick = (a) => a[int(a.length)];
   const junk = () => pick([null, undefined, 0, 1, true, '', 'x', 'kar', 'post.publish', [], {}, { tools: 5 }, { personas: [null] }, { auditorPass: true }, { kind: 'post' }, { kind: 'decision', verdict: 'approve' }, NaN, 'constructor', '__proto__']);
   const bent = () => { const c = JSON.parse(JSON.stringify(R)); const p = pick(c.personas); const f = pick(['tools', 'forbidden', 'owns', 'runtime', 'id', 'name', 'content']); p[f] = junk(); if (r() < 0.3) c.tools[pick(Object.keys(c.tools))] = junk(); return c; };
   let throws = 0, yesToUnknown = 0, calls = 0;
@@ -88,7 +98,8 @@ function measure() {
   return { kind: 'ai-first-company-team2-roster-run', seal: SEAL, roster: sha, claims, held: Object.values(claims).filter((x) => x.pass).length, of: 6 };
 }
 
-const cmd = process.argv[2];
+const isMain = process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('tools/team2-measure.mjs');
+const cmd = isMain ? process.argv[2] : undefined;
 if (cmd === '--check') {
   if (git('show', `${SEAL}:${PREREG}`).replace(/\r\n/g, '\n').trim() !== readFileSync(file(PREREG), 'utf8').replace(/\r\n/g, '\n').trim()) { console.error('✗ the step 2 seal changed since ' + SEAL); process.exit(1); }
   console.error('✓ step 2 seal unchanged since ' + SEAL);
@@ -98,7 +109,7 @@ if (cmd === '--check') {
   writeFileSync(file(PRIV), JSON.stringify(out, null, 1) + '\n');
   console.error(`✓ the shared repo's cards: ${out.equal} of 8 equal to the roster`);
 } else if (cmd === '--run' || cmd === '--verify') {
-  const result = measure();
+  const result = measure(await kernelAt(CODE));
   const out = JSON.stringify(result, null, 1) + '\n';
   if (cmd === '--run') { writeFileSync(file(RUN), out); console.error(`✓ ${result.held} of 6 held`); for (const [k, x] of Object.entries(result.claims)) console.error(`  ${k} ${x.pass ? 'HELD' : 'FAILED'} · ${x.measured}`); }
   else { if (readFileSync(file(RUN), 'utf8').replace(/\r\n/g, '\n') !== out) { console.error('✗ step 2 does not re-measure to the committed receipt'); process.exit(1); } console.error(`✓ step 2 re-measured: ${result.held} of 6 held, identical to the committed receipt`); }

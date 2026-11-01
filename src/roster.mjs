@@ -44,7 +44,7 @@ export function problems(roster) {
       const n = nameOf(t), cls = classOf(roster, n), when = whenOf(t);
       if (!cls) { out.push(`${who}: unknown tool ${n}`); continue; }
       if (isObj(t) && !(when.length > 0 && when.every((c) => CONDITIONS.includes(c)))) out.push(`${who}: ${n} has a condition that is not one of ${CONDITIONS.join(', ')}`);
-      if ((p.forbidden || []).includes(n)) out.push(`${who}: ${n} is both allowed and forbidden`);
+      if (Array.isArray(p.forbidden) && p.forbidden.includes(n)) out.push(`${who}: ${n} is both allowed and forbidden`);
       if (cls === 'outward' && !when.includes('simon-go')) out.push(`${who}: outward ${n} without Simon's go`);
       if (cls === 'gated' && !when.includes('auditor-pass')) out.push(`${who}: gated ${n} without the auditor's PASS`);
       if (n === 'verdict.write' && p.id !== 'auditor') out.push(`${who}: only the auditor writes verdicts`);
