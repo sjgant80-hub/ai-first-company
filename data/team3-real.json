@@ -1,0 +1,64 @@
+{
+ "S": {
+  "pass": true,
+  "measured": "files changed by the audit: public repo 0, shared repo [\" M .estate/feed.jsonl\"]; 4 new lines, every one a verdict signed by the auditor's key; model calls 0 (it calls qwen2.5:7b, config auditor-v1, never the builder's model); re-judged on the same facts: identical"
+ },
+ "R": {
+  "pass": true,
+  "measured": "4 of 4 auditable lines judged, each with evidence: FLAG, FLAG, PASS, FLAG; 3 of 3 build receipts re-run (node tools/team1-measure.mjs --verify at a866079 → exit 0; node tools/team2-measure.mjs --verify at 3d313d0 → exit 0; node tools/team2b-measure.mjs --verify at 6e7cd2b → exit 0)",
+  "verdicts": [
+   {
+    "line": "c1797ed2dbf2",
+    "agent": "builder",
+    "kind": "build",
+    "verdict": "FLAG",
+    "evidence": [
+     "receipt ok: re-hashed f59555e9622c at a866079:data/team1-feed-run.json",
+     "receipt FLAG: the line says 137 of 137; the receipt does not show it",
+     "receipt FLAG: the line says 38 of 38; the receipt does not show it",
+     "seal ok: sealed at 9f75b07, before the code",
+     "rerun ok: re-ran: node tools/team1-measure.mjs --verify at a866079",
+     "tools ok: on the list: branch.write"
+    ]
+   },
+   {
+    "line": "aca0691e5097",
+    "agent": "builder",
+    "kind": "build",
+    "verdict": "FLAG",
+    "evidence": [
+     "receipt ok: re-hashed 4b37c006412b at 3d313d0:data/team2-roster-run.json",
+     "receipt FLAG: the line says 72 of 72; the receipt does not show it",
+     "receipt FLAG: the line says 15 of 15; the receipt does not show it",
+     "receipt FLAG: the line says 36 of 3000; the receipt does not show it",
+     "seal ok: sealed at 04231c8, before the code",
+     "rerun ok: re-ran: node tools/team2-measure.mjs --verify at 3d313d0",
+     "tools ok: on the list: branch.write"
+    ]
+   },
+   {
+    "line": "ce8578450251",
+    "agent": "builder",
+    "kind": "build",
+    "verdict": "PASS",
+    "evidence": [
+     "receipt ok: re-hashed 6f51b7b19c46 at 6e7cd2b:data/team2b-run.json",
+     "seal ok: sealed at bb72e78, before the code",
+     "rerun ok: re-ran: node tools/team2b-measure.mjs --verify at 6e7cd2b",
+     "tools ok: on the list: branch.write"
+    ]
+   },
+   {
+    "line": "5607e32f7c4c",
+    "agent": "kar",
+    "kind": "handoff",
+    "verdict": "FLAG",
+    "evidence": [
+     "receipt FLAG: the receipt link is not pinned to a commit: https://github.com/sjgant80-hub/ai-first-company",
+     "tools ok: on the list: feed.write"
+    ]
+   }
+  ]
+ },
+ "at": "2026-11-01"
+}

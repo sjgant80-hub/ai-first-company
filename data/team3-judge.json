@@ -1,0 +1,839 @@
+{
+ "model": "qwen2.5:7b",
+ "config": "auditor-v1",
+ "options": {
+  "temperature": 0,
+  "seed": 7,
+  "num_predict": 300
+ },
+ "judged": "2026-11-01",
+ "replies": {
+  "773dca8bfcbdb0d5207c45c967f8705662e1574b3ca22a53298e9ac69aa3256c": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"guaranteed to increase profits by 500% in just one month!\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "guaranteed to increase profits by 500% in just one month!"
+    }
+   ]
+  },
+  "6bd6595c48268b5c37b9a7dab8834498370cc1d0ced6ffe30368eeb63babf3a3": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Unlock the future of automation with our exclusive AI tools\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Unlock the future of automation with our exclusive AI tools"
+    }
+   ]
+  },
+  "9b1398e58a8580ea75d9c43e3a1b6c969341f6a7b1452b5cf55a5e4a26b70f8c": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"crafted to outperform all others.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "crafted to outperform all others."
+    }
+   ]
+  },
+  "e14059a08db19b6396b5b1482a4ea3b1214052ab4626fe5d4a95ff5db8f43675": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Discover the only AI tool that can predict market trends with 100% accuracy.\"\nASSUMPTION: \"Start seeing profits rise today!\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Discover the only AI tool that can predict market trends with 100% accuracy."
+    },
+    {
+     "label": "ASSUMPTION",
+     "quote": "Start seeing profits rise today!"
+    }
+   ]
+  },
+  "584a113214aef5b4f4db8ba53934d7f6916ab8b8fd6156bc2b1090062581c0c9": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Introducing the ultimate AI software—your ticket to an ROI of 1,500% in 90 days.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Introducing the ultimate AI software—your ticket to an ROI of 1,500% in 90 days."
+    }
+   ]
+  },
+  "3dc7d0be22dbd12dc9e84a38b11979d8e0fb99c772cf5ceb3f6eed2f44f719c3": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Our AI software is the first and only solution to automate your entire workflow, saving you over 80% of your time.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Our AI software is the first and only solution to automate your entire workflow, saving you over 80% of your time."
+    }
+   ]
+  },
+  "976dd672b9690e538ed5dced4c12262b9d4952430c88764e30176870c39caa7b": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"promising a 750% return on investment within the first year.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "promising a 750% return on investment within the first year."
+    }
+   ]
+  },
+  "6ec297b7f668a73eec72a553d606254f5b8363196f6e39885f24d99b8fb66e89": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"delivering results like never before\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "delivering results like never before"
+    }
+   ]
+  },
+  "705f2c5ba899c2b5294a8e00e47ec21d19075551e27b3ba918aa685ef244246d": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"increase productivity by 2,000%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "increase productivity by 2,000%."
+    }
+   ]
+  },
+  "90f1a84a65f62b6fc7e393f3b1de45a04c50010ca0f0eae7416be68512377184": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Experience the ultimate in AI, designed to save you over 500 hours per year.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Experience the ultimate in AI, designed to save you over 500 hours per year."
+    }
+   ]
+  },
+  "f474e6cb8674f3c623a46cad7c4228314b81bae455ace1481a5d19ef92ee9b5e": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Our AI platform is the only one that guarantees a 300% increase in sales within 6 months.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Our AI platform is the only one that guarantees a 300% increase in sales within 6 months."
+    }
+   ]
+  },
+  "d3644eedf893c53319dfe177fc15676f6c3ea7b4f7588789862729f405daa14f": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"promises to reduce errors by 99.9%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "promises to reduce errors by 99.9%."
+    }
+   ]
+  },
+  "df40c8c9f5655ce5a518df5facdb39aef8578968a00218b27b6425afbb9e70f1": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"now recognized as the best in the industry.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "now recognized as the best in the industry."
+    }
+   ]
+  },
+  "2507a627727ff863b7de6c9abbf0c8f1499f2553cb1704d6736d6fec548aaa92": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Get ready for a 400% boost in productivity with our AI software, unmatched in its capabilities.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Get ready for a 400% boost in productivity with our AI software, unmatched in its capabilities."
+    }
+   ]
+  },
+  "e7848898a7e86471dc7c43b1c9736a488f063c7e7e7f4b73ebae16502a09ecf5": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"which guarantees a 1,200% ROI in just 12 months.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "which guarantees a 1,200% ROI in just 12 months."
+    }
+   ]
+  },
+  "b35658754e057598f1d3e631c9fd7a5dfc6847f2a380a09ba3272cd02d6bb991": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Discover the unparalleled efficiency of our AI tools, designed to boost your profits by 800%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Discover the unparalleled efficiency of our AI tools, designed to boost your profits by 800%."
+    }
+   ]
+  },
+  "163d44a2e28908f5432647791ddd936460ed0628a49a70ee264a1dd2c1fcc6c2": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"promises a 500% increase in customer satisfaction.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "promises a 500% increase in customer satisfaction."
+    }
+   ]
+  },
+  "ace8bb826a6a05478ee114fa80572b817344d5b35bb8cef15805b0bcbdb8d5fb": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"delivering unparalleled results\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "delivering unparalleled results"
+    }
+   ]
+  },
+  "2ed28efd845676cafbba4db9cf4d489d3107e1294cb2faf8b4d6769df58bba35": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"the only solution to increase profits by 600%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "the only solution to increase profits by 600%."
+    }
+   ]
+  },
+  "c2cb8350c5644ca1b4c72d27ed91f55c13185d25346509cf8175863fac0315de": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Discover the best AI software on the market\"\nOVERCLAIM: \"designed to increase your business's efficiency by 80%\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Discover the best AI software on the market"
+    },
+    {
+     "label": "OVERCLAIM",
+     "quote": "designed to increase your business's efficiency by 80%"
+    }
+   ]
+  },
+  "c9fe094a9ff3b0759396ba769426718ea1d9706f703dd48f53a0447e5e41fa3e": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"promising a 900% return on investment in just one year.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "promising a 900% return on investment in just one year."
+    }
+   ]
+  },
+  "0e432409a149e89e017985a50434a2f363497a85be8adcd549d5390e6237ed0c": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"increase sales by 500%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "increase sales by 500%."
+    }
+   ]
+  },
+  "5cde1546e9023f5635700ac2b115b2373d796addb3695773d4074b60173fec31": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"guarantees a 2,500% increase in productivity.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "guarantees a 2,500% increase in productivity."
+    }
+   ]
+  },
+  "24a7eb43f3ca673776cb47768dba63f546a23d5a7f6e5fc6c6059b26cd8d2e3a": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"the only solution to reduce costs by 90%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "the only solution to reduce costs by 90%."
+    }
+   ]
+  },
+  "8595b5a0348beda2a22ff2d2ae1f25f564d4eb95ab83a4509d0959cb249245a1": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"the ultimate solution for a 1,000% increase in efficiency.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "the ultimate solution for a 1,000% increase in efficiency."
+    }
+   ]
+  },
+  "6d7a20f9969022754ac3cd2da2460dd6a2a8119fade48f28a3fe397f25f46ff2": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"promising a 600% increase in revenue.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "promising a 600% increase in revenue."
+    }
+   ]
+  },
+  "69ee9ed33373ebf9281814875916a32f327ea6b64a8e9a8d706173eef6c0e42b": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"the best solution to boost your business by 1,200%.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "the best solution to boost your business by 1,200%."
+    }
+   ]
+  },
+  "dcafb1ff55515567d6bfe8c70c9bfe7d61b43668b7ba7b5f2fb335678e9bd9b3": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"guarantee a 700% increase in profits.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "guarantee a 700% increase in profits."
+    }
+   ]
+  },
+  "632188e25a4ac81a0aa9d4500a569b080e38472416e17fd26e5685351cfaf1dd": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"the only solution to save you 800 hours per year.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "the only solution to save you 800 hours per year."
+    }
+   ]
+  },
+  "2aadbde785939a0a259c4dd0740e4f278056d2a0bf290a26abcc34eaa0bedb8d": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "79cba31c4d95c5fee1701c65c946b369b79bb687541a4467e16f6bfd117ddfb8": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "262382e837a57c5ae502d6d3463dda1291f17019f0e6798a3f491b568c0fee77": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "edb3a6d98c9170de319caf3745e67bf9e77fddbe0e69015dc6de52c8d42fa061": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"simplifies complex data tasks\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "simplifies complex data tasks"
+    }
+   ]
+  },
+  "9343523dd61ea3a8c806543b96efa8d2ab13440e044dfa43468de090b14d6022": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "d40df02508aeaf51a8d70ac4420cefed866c6e4f4dc79062e293ebff727f4e2c": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "8a962563fcbc8737702f64a2d51f79d6b8b236ca1f6bafae2341845564d6a248": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "f5c503b46f25e42dcd33081acd681c05c33e50db6b4b9b41cd9b3dc43b5daef6": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "d89495d1bbe50c1684b91c0082dec436cc60de8de868dba8432350d73c9bee80": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"making complex data simple to understand\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "making complex data simple to understand"
+    }
+   ]
+  },
+  "1c17b1a2f835b46e2bbe1be9dfd9d605f186f44a99d4769ac8f4102ec912352c": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "69efd200f34f80bdec36637fa1c7891115d1d03e305c23e4a7614ca59832b65c": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "bb55589899dd902b603cd763047806bc10067aa26bfe01ddef2c90a092d1215d": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "2f44cee90ef98e96dd61f2d41eb21ea732a25f765c9d6ed1b335f795914afdbe": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Gain a competitive edge with our AI tool, which transforms raw data into valuable insights.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Gain a competitive edge with our AI tool, which transforms raw data into valuable insights."
+    }
+   ]
+  },
+  "46a27f2d2db22494bc9685883ecff581f544ec028a459bd356e27597b58b5ee1": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "7339d43c49a71e6a8d693d620e037cab88943077c450645c9ce870b968ac2071": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "f4835ae8d85ae03ad2d05693c2d41e5e69de95a93ae1bcce532210469f76aab1": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "05afa7ab1dbc982edde5ff6b7c568021149e6b17089ee1f62ab8987aa0050541": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "73144a9b382d64d2e35a5bb004e6158e4cf304299f775d5b123b60934017650e": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "78da72ecaa7c9ce81717547b78b7ecc39987d275299926dee16cf95a00dadfc0": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "02057fdd610606d0de92ba4ffc86cd61db7d8f2eeaf2a9c1f2ee36ec0e886120": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "d756c1f049980ecadd31de33dff9b17febdbece1a1f71fb73d7cdc3cb6cf91d4": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "09a6177e0763f5bf3c217a835b9a59a0ae68a86e4107d6881489e0598b60469d": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "49a22d1036810212ce92d9ad2a5999729c86fa4b7dd74cae7692d2a355b95fa2": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "73ff44d25b76ce2505460d4c4a58ded576f84f575a75467cfeef951ed482c422": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "defad95c464d4d1e8b634aae5afe690a14f9688bf96106226d43f24cd3e58b6d": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"uncover valuable insights from your data effortlessly\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "uncover valuable insights from your data effortlessly"
+    }
+   ]
+  },
+  "4646abd20673831a24280d482f000ff57d74cd81691bc3ba496dbafa4ea73051": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "OVERCLAIM: \"Gain a competitive edge with our AI tool, which simplifies data analysis and interpretation.\"",
+   "flags": [
+    {
+     "label": "OVERCLAIM",
+     "quote": "Gain a competitive edge with our AI tool, which simplifies data analysis and interpretation."
+    }
+   ]
+  },
+  "32ea259af6b60f83a651eb50f241b3afc9669d69106f8daad120440dc279752e": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "e92f3dcb2e8799bf454f56c411ad5294f5ac40ef34db8ca6163bde929846a44b": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "3a6e1c863209b3ff0c3d6c4f9b11eaaead20a63bfbcae9d6ff0e94a56b73e93f": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  },
+  "95572d00481d788af19dc9059d8ca63c59936cea9be0dc71924bd2aede020d2e": {
+   "model": "qwen2.5:7b",
+   "config": "auditor-v1",
+   "options": {
+    "temperature": 0,
+    "seed": 7,
+    "num_predict": 300
+   },
+   "reply": "NONE",
+   "flags": []
+  }
+ }
+}

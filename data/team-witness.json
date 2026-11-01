@@ -41,7 +41,23 @@
    "clean": true,
    "score": 1,
    "at": "6e7cd2b"
+  },
+  "src/auditor.mjs": {
+   "total": 71,
+   "killed": 71,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "665171b"
+  },
+  "src/auditor.mjs (private words moved out)": {
+   "total": 73,
+   "killed": 73,
+   "survived": 0,
+   "clean": true,
+   "score": 1,
+   "at": "962be23"
   }
  },
- "note": "feed.mjs first ran 137 of 138: the one survivor was a dead count (redaction hits counted per class, only the class names used); it was removed and the gate re-run clean before the code was committed."
+ "note": "feed.mjs first ran 137 of 138: the one survivor was a dead count (redaction hits counted per class, only the class names used); it was removed and the gate re-run clean before the code was committed. auditor.mjs first ran 70 of 71: no test fed it evidence that was not a tool pointer; the test was added and the gate re-run clean before the code was committed."
 }
