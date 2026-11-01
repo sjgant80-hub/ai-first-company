@@ -1,0 +1,21 @@
+{
+ "kind": "ai-first-company-team4-wire-prereg",
+ "v": 1,
+ "sealed": "2026-11-01",
+ "question": "Are the existing bots wired into the team, as far as they can be without Simon: Kar's rollup in AGENT_FEED.md, the Builder's lines pinned to their receipts by construction, the auditor judging each new line exactly once — and is the path ready for Grok Bot's two existing roles (Money time, Card Keeper) to write the same feed from their own computer?",
+ "why": "Simon's bot-team spec (2026-11-01), §8 step 4: wire the existing bots (Kar, Builder, Money time, Card Keeper). Grok Bot is an outside agent this session cannot operate, so its roles are wired up to the point where Grok Bot itself acts.",
+ "design": {
+  "kar": "node tools/team.mjs rollup --write puts Kar's rollup of the real feed (src/rollup.mjs) above the first ## heading of AGENT_FEED.md in the shared repo; Grok Bot's sync sections stay as written.",
+  "builder": "node tools/team.mjs add --receipt-file <path> fills the link (pinned to the last commit that touched the receipt) and receipt_sha256 (of the bytes there) itself.",
+  "auditor": "node tools/audit.mjs --write judges every auditable line that has no signed verdict yet, and writes each verdict signed.",
+  "grok": "The cards for Money time and Card Keeper (team/money-time.md, team/card-keeper.md) carry how to write the feed from Grok Bot's computer. A dry run follows them on a scratch copy of the shared repo: a clone of this public repo, KAR_CONTINUITY pointed at the copy, the writer run as each role with no key."
+ },
+ "claims": [
+  { "id": "W1", "claim": "Kar's rollup of the real feed is in AGENT_FEED.md: its section is above every Grok Bot sync, NEEDS SIMON comes first, every sync section is unchanged byte for byte, and writing the rollup again the same day changes nothing.", "pass": "all four" },
+  { "id": "W2", "claim": "Builder lines written with --receipt-file re-hash at their pinned commit: every one the auditor judges has its receipt check ok (found, hash equal).", "pass": "every builder line written this step" },
+  { "id": "W3", "claim": "The auditor judges each new auditable line once: after this step's lines, one audit run writes exactly one signed verdict per new auditable line, and a second run writes none.", "pass": "one each, then none" },
+  { "id": "W4", "claim": "The path for Grok Bot's roles works before Grok Bot uses it: following its card on a scratch copy, a Money time listing line and a Card Keeper receipt line are stored by the writer (the listing forced to wait for Simon), appear under their roles in the rollup, and are judged by the auditor with the tools check ok; nothing is pushed.", "pass": "both stored, rolled up and judged with tools ok; nothing pushed" }
+ ],
+ "scope": "No bot outside this machine is operated. Grok Bot's roles start writing when Grok Bot makes its keys and follows its cards; Simon's signed decisions wait on his own key.",
+ "kept": "Every result is kept as measured, held or failed."
+}
