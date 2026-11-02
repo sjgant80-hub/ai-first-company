@@ -1,0 +1,30 @@
+{
+ "note": "A filled example of the mint-a-department intake + design that src/baseline.mjs agreement(intake, design) turns into a signed baseline agreement. Not a real client. price is a placeholder Simon sets; the kernel never reads it for the decision.",
+ "intake": {
+  "job": "invoice triage",
+  "data": "six months of the client's incoming invoices, labelled by the account they belong to",
+  "currentTool": "a VA sorting them by hand with a spreadsheet",
+  "client": "Acme (example)",
+  "supplier": "AI-Native Solutions",
+  "metric": "share of invoices sorted to the correct account",
+  "kind": "rate",
+  "baseline": 0.6,
+  "direction": "higher"
+ },
+ "design": {
+  "minImprovement": 0.1,
+  "minSample": 500,
+  "zCrit": 1.96,
+  "price": "set-by-simon"
+ },
+ "example_delivery_that_beats_it": {
+  "testId": "mint:invoice triage",
+  "control": { "n": 1000, "hits": 600 },
+  "variant": { "n": 1000, "hits": 760 }
+ },
+ "example_delivery_that_does_not": {
+  "testId": "mint:invoice triage",
+  "control": { "n": 1000, "hits": 600 },
+  "variant": { "n": 1000, "hits": 620 }
+ }
+}

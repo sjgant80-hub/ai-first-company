@@ -1,0 +1,34 @@
+{
+ "kind": "ai-first-company-mint1-baseline-run",
+ "seal": "1041ee6",
+ "deliveries": 400,
+ "charged": 91,
+ "claims": {
+  "B1": {
+   "pass": true,
+   "measured": "complete agreement built, signable delivery-free: true; 12/12 malformed refused with a reason"
+  },
+  "B2": {
+   "pass": true,
+   "measured": "0 of 400 outcomes moved by a delivery-side field (want 0); the agreement's own test rules the verdict"
+  },
+  "B3": {
+   "pass": true,
+   "measured": "400 deliveries: 91 charged 'due' == 91 that beat the signed baseline; 309 waived; charged-but-not-beaten: 0"
+  },
+  "B4": {
+   "pass": true,
+   "measured": "400 outcome receipts, every one re-derives from (agreement test, delivery, verdict): true"
+  },
+  "B5": {
+   "pass": true,
+   "measured": "3000 fuzzed calls: 0 threw, 3000 handled; 80 repeats all identical: true"
+  },
+  "B6": {
+   "pass": true,
+   "measured": "400 cases × 6 prices: charge, beatsBaseline and receipt identical at every price: true"
+  }
+ },
+ "held": 6,
+ "of": 6
+}
