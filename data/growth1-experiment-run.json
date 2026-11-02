@@ -1,0 +1,48 @@
+{
+ "kind": "ai-first-company-growth1-experiment-run",
+ "seal": "0b341b0",
+ "corpus": {
+  "rate": 200,
+  "mean": 200
+ },
+ "claims": {
+  "E1": {
+   "pass": true,
+   "measured": "120/120 malformed tests refused, 120/120 malformed results refused, 60/60 whole pairs accepted"
+  },
+  "E2": {
+   "pass": true,
+   "measured": "108 under-sampled cases, 108 INSUFFICIENT, 0 PROMOTE"
+  },
+  "E3": {
+   "pass": true,
+   "measured": "67 significant below-margin cases, 67 DROP, 0 PROMOTE"
+  },
+  "E4": {
+   "pass": true,
+   "measured": "4 above-margin cases whose stat does not reach zCrit, 4 DROP, 0 PROMOTE"
+  },
+  "E5": {
+   "pass": true,
+   "measured": "129 wrong-direction/tie cases, 129 DROP, 0 PROMOTE"
+  },
+  "E6": {
+   "pass": true,
+   "measured": "400 cases: the kernel's PROMOTE set equals the independently-recomputed sample&margin&stat>=zCrit set, both ways; 91 PROMOTE, 201 DROP, 108 INSUFFICIENT"
+  },
+  "E7": {
+   "pass": true,
+   "measured": "91 skills == 91 PROMOTEs; every receipt re-derives: true; every entry carries test+data+receipt: true; 309 non-PROMOTEs on the log"
+  },
+  "E8": {
+   "pass": true,
+   "measured": "3000 fuzzed calls: 0 threw, 3000 handled; 80 repeats all identical: true"
+  },
+  "E9": {
+   "pass": true,
+   "measured": "400 cases × 5 proposers: decision, stat and receipt identical whoever proposed: true"
+  }
+ },
+ "held": 9,
+ "of": 9
+}
