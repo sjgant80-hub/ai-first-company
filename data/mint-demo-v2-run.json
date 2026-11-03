@@ -1,0 +1,42 @@
+{
+ "kind": "ai-first-company-mint-demo-v2-run",
+ "seal": "3620ff0",
+ "dataset": {
+  "file": "data/mint-demo-car.data",
+  "sha256": "b703a9ac69f11e64ce8c223c0a40de4d2e9d769f7fb20be5f8f2e8a619893d83"
+ },
+ "teacher": {
+  "model": "qwen2.5:7b",
+  "temperature": 0.2,
+  "seed": 7
+ },
+ "splitSizes": {
+  "train": 864,
+  "gate": 432,
+  "final": 432
+ },
+ "trainMajority": "unacc",
+ "baselineAccuracy": 0.703704,
+ "grownAccuracy": 0.703704,
+ "improvement": 0,
+ "rulesParsed": 7,
+ "rulesKept": [],
+ "nonMajorityKept": 0,
+ "charge": "waived",
+ "decision": "DROP",
+ "receipt": "8b84bd2c127486eb14094c3eab079f6abcdc7f2b871877b314d345b84fecd6c4",
+ "claims": {
+  "V1": {
+   "pass": false,
+   "measured": "grown 70.4% vs baseline 70.4% on 432 held-out rows = +0.0 pts; charge waived"
+  },
+  "V2": {
+   "pass": false,
+   "measured": "7 rules parsed, 0 kept; 0 of them predict a non-majority class (acc/good/vgood)"
+  }
+ },
+ "held": 0,
+ "of": 2,
+ "teacherPrompt": "You are distilling decision rules for UCI Car Evaluation. Each car has six features and a class.\nFeatures and allowed values:\n  buying: vhigh, high, med, low\n  maint: vhigh, high, med, low\n  doors: 2, 3, 4, 5more\n  persons: 2, 4, more\n  lug_boot: small, med, big\n  safety: low, med, high\nClasses: unacc, acc, good, vgood.\n40 labelled examples (feature values comma-separated, then the class):\nlow,high,5more,more,small,med => acc\nmed,low,2,more,med,med => acc\nhigh,vhigh,2,more,small,high => unacc\nmed,high,3,2,big,high => unacc\nmed,low,3,2,big,med => unacc\nhigh,med,5more,2,small,med => unacc\nvhigh,low,2,more,big,low => unacc\nlow,high,5more,2,big,med => unacc\nhigh,low,3,4,med,med => unacc\nlow,vhigh,5more,2,med,low => unacc\nhigh,high,4,2,big,med => unacc\nhigh,high,3,4,small,high => acc\nmed,med,3,2,big,high => unacc\nmed,low,4,4,med,high => vgood\nvhigh,vhigh,5more,4,small,high => unacc\nvhigh,med,2,more,small,med => unacc\nhigh,low,2,2,big,high => unacc\nlow,high,2,more,big,med => acc\nvhigh,vhigh,2,4,med,low => unacc\nhigh,med,2,2,med,med => unacc\nhigh,low,5more,4,med,high => acc\nmed,vhigh,3,more,big,high => acc\nvhigh,med,4,more,big,high => acc\nlow,low,3,2,med,high => unacc\nhigh,med,4,4,med,med => acc\nvhigh,med,2,2,small,low => unacc\nvhigh,low,4,2,big,high => unacc\nlow,high,2,more,big,low => unacc\nvhigh,vhigh,2,more,big,med => unacc\nvhigh,low,4,more,big,high => acc\nlow,vhigh,3,2,med,med => unacc\nmed,vhigh,4,4,med,low => unacc\nlow,vhigh,2,4,small,low => unacc\nhigh,vhigh,4,2,med,med => unacc\nvhigh,high,2,4,med,high => unacc\nlow,vhigh,4,2,small,med => unacc\nvhigh,high,5more,more,small,med => unacc\nhigh,med,5more,more,big,low => unacc\nlow,vhigh,4,2,med,high => unacc\nmed,med,3,4,small,high => acc\n\nMost cars are unacc, so simple one-feature rules only restate that. Give rules that identify WHEN A CAR IS ACCEPTABLE too (acc, good, vgood) — these usually need two or three conditions together (for example high safety AND enough persons).\nAnswer with ONLY rules, one per line, each EXACTLY in the form (1 to 3 conditions joined by AND):\nFEATURE == VALUE => CLASS\nFEATURE == VALUE AND FEATURE == VALUE => CLASS\nFEATURE == VALUE AND FEATURE == VALUE AND FEATURE == VALUE => CLASS\nUse only the listed feature names, values and classes. No prose, no numbering.",
+ "teacherReply": "buying == vhigh AND safety == high => acc\nmaint == vhigh AND doors == 5more => acc\nlug_boot == big AND safety == high => acc\npersons == 4 AND safety == high => acc\nbuying == med AND maint == med AND doors == 5more AND safety == high => acc\nbuying == high AND lug_boot == big AND safety == high => acc\nbuying == vhigh AND maint == vhigh AND safety == high => vgood\nbuying == med AND maint == med AND persons == 4 AND safety == high => vgood\nbuying == low AND maint == low AND doors == 5more AND safety == high => good\ndoors == 5more AND persons == 4 AND safety == high => good"
+}
