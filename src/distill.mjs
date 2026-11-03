@@ -67,8 +67,8 @@ export function majorityOf(rows) {
   } catch { return null; }
 }
 
-/** the allowed values per feature: fixed by the run, or every value the TRAIN split holds (sorted) */
-export function valuesOf(spec, train) {
+/** each feature's domain (its allowed values): fixed by the run, or every value the TRAIN split holds (sorted) */
+export function domainOf(spec, train) {
   try {
     if (spec.values !== 'train') return isObj(spec.values) ? spec.values : {};
     const v = {};
@@ -152,11 +152,11 @@ export function distil(spec, split, reply) {
   if (!Array.isArray(spec.names) || !Array.isArray(spec.classes)) return { ok: false, why: 'a run spec names its features and classes' };
   if (!isObj(split) || !Array.isArray(split.train) || !Array.isArray(split.gate) || !Array.isArray(split.final)) return { ok: false, why: 'a split holds train, gate and final rows' };
   const majority = majorityOf(split.train);
-  const rules = parseRules(reply, spec, valuesOf(spec, split.train));
+  const rules = parseRules(reply, spec, domainOf(spec, split.train));
   const kept = gateRules(rules, split.gate, spec);
   const s = score(spec, split.final, kept, majority);
   if (!s.ok) return s;
   return { ...s, splitSizes: { train: split.train.length, gate: split.gate.length, final: split.final.length }, trainMajority: majority, rulesParsed: rules.length, kept, rulesKept: kept.map((r) => keptLine(r, spec)) };
 }
 
-export default { RUNS, SPLIT_SEED, rng, datasetOk, rowsOf, splitOf, majorityOf, valuesOf, parseRules, gateRules, classify, keptLine, flipped, score, distil };
+export default { RUNS, SPLIT_SEED, rng, datasetOk, rowsOf, splitOf, majorityOf, domainOf, parseRules, gateRules, classify, keptLine, flipped, score, distil };

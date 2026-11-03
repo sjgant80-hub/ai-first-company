@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { RUNS, SPLIT_SEED, rng, datasetOk, rowsOf, splitOf, majorityOf, valuesOf, parseRules, gateRules, classify, keptLine, flipped, score, distil } from '../src/distill.mjs';
+import { RUNS, SPLIT_SEED, rng, datasetOk, rowsOf, splitOf, majorityOf, domainOf, parseRules, gateRules, classify, keptLine, flipped, score, distil } from '../src/distill.mjs';
 
 const read = (p) => readFileSync(new URL('../' + p, import.meta.url), 'utf8');
 const IDS = ['v1', 'v2', 'v3'];
@@ -106,13 +106,13 @@ test('majorityOf · the commonest class, the first seen on a tie, none for no ro
   for (const g of [[], null, 'ab', [null], 5]) assert.equal(majorityOf(g), null);
 });
 
-test('valuesOf · the run\'s fixed values, or the sorted values the TRAIN split holds', () => {
-  assert.equal(valuesOf(RUNS.v1, []), CARV);
-  assert.deepEqual(valuesOf(RUNS.v3, [{ odor: 'n' }, { odor: 'a' }, { odor: 'n' }]).odor, ['a', 'n']);
-  assert.ok(valuesOf(RUNS.v3, SPLIT.v3.train)['stalk-root'].includes('?'));
-  assert.deepEqual(valuesOf(null, []), {});
-  assert.deepEqual(valuesOf({ values: 5 }, []), {});
-  assert.deepEqual(valuesOf({ values: 'train', names: ['x'] }, 'x'), {});
+test('domainOf · the run\'s fixed values, or the sorted values the TRAIN split holds', () => {
+  assert.equal(domainOf(RUNS.v1, []), CARV);
+  assert.deepEqual(domainOf(RUNS.v3, [{ odor: 'n' }, { odor: 'a' }, { odor: 'n' }]).odor, ['a', 'n']);
+  assert.ok(domainOf(RUNS.v3, SPLIT.v3.train)['stalk-root'].includes('?'));
+  assert.deepEqual(domainOf(null, []), {});
+  assert.deepEqual(domainOf({ values: 5 }, []), {});
+  assert.deepEqual(domainOf({ values: 'train', names: ['x'] }, 'x'), {});
 });
 
 // ── reading the teacher ───────────────────────────────────────────────────────────────────────────────────────
@@ -144,7 +144,7 @@ test('parseRules · ANDed conditions up to the run\'s limit; one bad part refuse
 });
 
 test('parseRules · the mushroom spec reads hyphenated names and the ? value; garbage reads nothing', () => {
-  const v = valuesOf(RUNS.v3, SPLIT.v3.train);
+  const v = domainOf(RUNS.v3, SPLIT.v3.train);
   assert.deepEqual(parseRules('stalk-root == ? => p\nspore-print-color == h => p', RUNS.v3, v), [rule('stalk-root', '?', 'p'), rule('spore-print-color', 'h', 'p')]);
   assert.deepEqual(parseRules('odor == n => edible', RUNS.v3, v), []);
   for (const [r, s, vals] of [[5, RUNS.v1, CARV], ['x', null, CARV], ['safety == low => unacc', RUNS.v1, null], ['safety == low => unacc', { ...RUNS.v1, feature: '[' }, CARV]]) assert.deepEqual(parseRules(r, s, vals), []);
@@ -241,7 +241,7 @@ test('distil · a reply with no usable rule grows nothing: the baseline itself, 
 
 test('totality · no function throws on garbage', () => {
   const G = [undefined, null, 0, -1, NaN, Infinity, '', 'x', '\u0000=>', [], [null], [{}], {}, { conds: null }, { names: [], classes: [] }, true, () => 1, new Date(0)];
-  const fns = [rng, datasetOk, rowsOf, splitOf, majorityOf, valuesOf, parseRules, gateRules, classify, keptLine, flipped];
+  const fns = [rng, datasetOk, rowsOf, splitOf, majorityOf, domainOf, parseRules, gateRules, classify, keptLine, flipped];
   for (const f of fns) for (const a of G) for (const b of G) assert.doesNotThrow(() => f(a, b, a));
   for (const a of G) for (const b of G) { assert.doesNotThrow(() => score(a, b, a, b)); assert.doesNotThrow(() => distil(a, b, a)); }
   for (const a of G) assert.doesNotThrow(() => rng(a)());
