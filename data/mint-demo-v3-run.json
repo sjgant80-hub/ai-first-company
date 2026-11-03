@@ -1,0 +1,55 @@
+{
+ "kind": "ai-first-company-mint-demo-v3-run",
+ "seal": "9ec04b0",
+ "dataset": {
+  "file": "data/mint-demo-mushroom.data",
+  "sha256": "e65d082030501a3ebcbcd7c9f7c71aa9d28fdfff463bf4cf4716a3fe13ac360e"
+ },
+ "teacher": {
+  "model": "qwen2.5:7b",
+  "temperature": 0.2,
+  "seed": 7
+ },
+ "splitSizes": {
+  "train": 4062,
+  "gate": 2031,
+  "final": 2031
+ },
+ "trainMajority": "e",
+ "baselineAccuracy": 0.514525,
+ "grownAccuracy": 0.934023,
+ "improvement": 0.419498,
+ "rulesParsed": 55,
+ "rulesKept": [
+  "gill-color==b=>p (p=1.00,fires=426)",
+  "population==a=>e (p=1.00,fires=113)",
+  "population==n=>e (p=1.00,fires=108)",
+  "habitat==w=>e (p=1.00,fires=38)",
+  "veil-color==n=>e (p=1.00,fires=24)",
+  "veil-color==o=>e (p=1.00,fires=20)",
+  "gill-color==o=>e (p=1.00,fires=15)",
+  "spore-print-color==y=>e (p=1.00,fires=15)",
+  "spore-print-color==h=>p (p=0.98,fires=404)",
+  "habitat==m=>e (p=0.97,fires=64)",
+  "gill-color==u=>e (p=0.86,fires=117)",
+  "population==c=>e (p=0.83,fires=75)",
+  "ring-type==p=>e (p=0.80,fires=1005)"
+ ],
+ "charge": "due",
+ "decision": "PROMOTE",
+ "receipt": "801202316f57b4870b833603751b6d3035e4d327bdaf476a8cebcc25fd09bb49",
+ "claims": {
+  "M1": {
+   "pass": true,
+   "measured": "grown 93.4% vs baseline 51.5% on 2031 held-out rows = +41.9 pts; charge due"
+  },
+  "M2": {
+   "pass": true,
+   "measured": "55 rules parsed, 13 survived the gate (precision>=0.80, fires>=15)"
+  }
+ },
+ "held": 2,
+ "of": 2,
+ "teacherPrompt": "You are distilling decision rules for UCI Mushroom (classify a mushroom edible or poisonous).\nClasses: e = edible, p = poisonous.\nFeatures and their values (comma-separated, in the order used in the rows):\n  cap-shape: b, c, f, k, s, x\n  cap-surface: f, g, s, y\n  cap-color: b, c, e, g, n, p, r, u, w, y\n  bruises: f, t\n  odor: a, c, f, l, m, n, p, s, y\n  gill-attachment: a, f\n  gill-spacing: c, w\n  gill-size: b, n\n  gill-color: b, e, g, h, k, n, o, p, r, u, w, y\n  stalk-shape: e, t\n  stalk-root: ?, b, c, e, r\n  stalk-surface-above-ring: f, k, s, y\n  stalk-surface-below-ring: f, k, s, y\n  stalk-color-above-ring: b, c, e, g, n, o, p, w, y\n  stalk-color-below-ring: b, c, e, g, n, o, p, w, y\n  veil-type: p\n  veil-color: n, o, w, y\n  ring-number: n, o, t\n  ring-type: e, f, l, n, p\n  spore-print-color: b, h, k, n, o, r, u, w, y\n  population: a, c, n, s, v, y\n  habitat: d, g, l, m, p, u, w\n40 labelled examples (the 22 feature values in order, then the class):\nf,f,g,f,f,f,c,b,h,e,b,k,k,b,b,p,w,o,l,h,v,g => p\nf,y,g,f,f,f,c,b,p,e,b,k,k,b,p,p,w,o,l,h,y,d => p\nf,y,e,t,n,f,c,b,w,t,b,s,s,g,g,p,w,o,p,n,v,d => e\nf,f,y,f,f,f,c,b,p,e,b,k,k,p,p,p,w,o,l,h,v,d => p\nb,y,w,t,n,f,c,b,w,e,b,s,s,w,w,p,w,t,p,r,v,m => p\nx,y,w,t,l,f,c,b,k,e,c,s,s,w,w,p,w,o,p,k,s,m => e\nk,y,e,f,y,f,c,n,b,t,?,s,s,p,p,p,w,o,e,w,v,p => p\nf,s,w,f,n,f,w,b,h,t,e,f,s,w,w,p,w,o,e,n,a,g => e\nf,f,g,f,f,f,c,b,p,e,b,k,k,b,p,p,w,o,l,h,v,d => p\nb,y,y,f,n,f,w,n,y,e,c,y,y,y,y,p,y,o,e,w,c,l => p\nx,s,n,f,f,f,c,n,b,t,?,k,s,w,p,p,w,o,e,w,v,p => p\nf,f,y,f,f,f,c,b,g,e,b,k,k,p,n,p,w,o,l,h,v,g => p\nx,f,g,t,n,f,c,b,u,t,b,s,s,w,g,p,w,o,p,k,v,d => e\nf,y,n,t,n,f,c,b,n,t,b,s,s,p,p,p,w,o,p,n,y,d => e\nf,y,g,t,n,f,c,b,n,t,b,s,s,w,g,p,w,o,p,k,v,d => e\nx,y,g,f,f,f,c,b,g,e,b,k,k,b,n,p,w,o,l,h,y,d => p\nx,f,w,f,n,f,w,b,k,t,e,s,f,w,w,p,w,o,e,k,s,g => e\nf,y,n,t,n,f,c,b,u,t,b,s,s,g,p,p,w,o,p,k,v,d => e\nk,s,n,f,f,f,c,n,b,t,?,k,s,p,p,p,w,o,e,w,v,d => p\nf,s,e,f,y,f,c,n,b,t,?,s,s,w,p,p,w,o,e,w,v,d => p\nx,y,g,t,n,f,c,b,u,t,b,s,s,w,g,p,w,o,p,k,v,d => e\nf,y,g,f,f,f,c,b,p,e,b,k,k,p,n,p,w,o,l,h,v,g => p\nx,y,n,t,n,f,c,b,w,t,b,s,s,g,p,p,w,o,p,k,y,d => e\nx,f,g,t,n,f,c,b,w,t,b,s,s,p,w,p,w,o,p,n,y,d => e\nf,y,g,t,n,f,c,b,p,t,b,s,s,g,g,p,w,o,p,k,y,d => e\nx,f,g,f,f,f,c,b,p,e,b,k,k,b,n,p,w,o,l,h,v,g => p\nk,y,e,f,s,f,c,n,b,t,?,s,s,p,p,p,w,o,e,w,v,l => p\nk,f,g,f,n,f,w,b,g,e,?,k,k,w,w,p,w,t,p,w,n,g => e\nx,s,w,f,c,f,c,n,p,e,b,s,s,w,w,p,w,o,p,k,s,d => p\nf,s,n,f,n,f,w,b,n,t,e,f,s,w,w,p,w,o,e,k,a,g => e\nk,s,e,f,s,f,c,n,b,t,?,k,k,p,p,p,w,o,e,w,v,d => p\nf,y,y,f,f,f,c,b,h,e,b,k,k,p,p,p,w,o,l,h,v,d => p\nf,f,w,f,n,f,w,b,p,t,e,s,s,w,w,p,w,o,e,k,a,g => e\nx,f,g,f,n,f,w,b,w,e,?,s,k,w,w,p,w,t,p,w,s,g => e\nx,y,n,t,p,f,c,n,n,e,e,s,s,w,w,p,w,o,p,k,v,u => p\nf,y,n,f,f,f,c,n,b,t,?,s,s,p,p,p,w,o,e,w,v,l => p\nx,s,w,t,p,f,c,n,w,e,e,s,s,w,w,p,w,o,p,n,v,u => p\nx,f,g,f,n,f,w,b,h,t,e,f,s,w,w,p,w,o,e,n,s,g => e\nx,y,n,t,p,f,c,n,w,e,e,s,s,w,w,p,w,o,p,n,v,u => p\nb,y,y,t,l,f,c,b,g,e,c,s,s,w,w,p,w,o,p,k,s,m => e\n\nFind the single features whose value decides the class. Answer with ONLY rules, one per line, each EXACTLY:\nFEATURE == VALUE => CLASS\nUse only the feature names and values listed above and classes e or p. No prose, no numbering.",
+ "teacherReply": "cap-shape == x => p\ncap-color == b => p\ncap-color == c => p\ncap-color == e => p\ncap-color == g => p\ncap-color == n => p\ncap-color == o => e\ncap-color == p => e\ncap-color == w => e\ncap-color == y => e\ngill-color == b => p\ngill-color == e => p\ngill-color == g => p\ngill-color == h => p\ngill-color == k => p\ngill-color == n => p\ngill-color == o => e\ngill-color == p => e\ngill-color == r => e\ngill-color == u => e\ngill-color == w => e\ngill-color == y => e\nstalk-root == ? => e\nveil-color == n => e\nveil-color == o => e\nveil-color == w => e\nveil-color == y => e\nring-number == n => e\nring-number == o => e\nring-type == e => e\nring-type == f => e\nring-type == l => e\nring-type == n => e\nring-type == p => e\nspore-print-color == b => p\nspore-print-color == h => p\nspore-print-color == k => p\nspore-print-color == n => p\nspore-print-color == o => e\nspore-print-color == r => e\nspore-print-color == u => e\nspore-print-color == w => e\nspore-print-color == y => e\npopulation == a => e\npopulation == c => e\npopulation == n => e\npopulation == s => e\npopulation == v => e\npopulation == y => e\nhabitat == d => e\nhabitat == g => e\nhabitat == l => e\nhabitat == m => e\nhabitat == p => e\nhabitat == u => e\nhabitat == w => e"
+}
