@@ -1,0 +1,21 @@
+{
+ "kind": "ai-first-company-mint-demo-v3-prereg",
+ "v": 1,
+ "sealed": "2026-11-03",
+ "follows": "v1 + v2 were kept nulls on UCI Car Evaluation: the local 7B's single-feature rules only restated the majority class, and its conjunctions did not survive the gate (the gate correctly refused non-generalizing patterns). This v3 tests the SAME mechanism on UCI Mushroom, where the signal lives in single features (odor) — the case single-feature distillation is for. v1 and v2 stay on the record.",
+ "question": "On UCI Mushroom (public), does a local teacher's single-feature rules, kept only when they beat the baseline on a GATE split, give a grown deterministic classifier that beats the majority baseline on a FINAL held-out it never saw during selection, by at least 0.08 accuracy and significantly, with a signed receipt via the baseline-agreement engine?",
+ "why": "The positive the offer needs, on an appropriate dataset, after two honest car nulls: teacher distillation → gated patterns → beats a baseline on held-out, sovereign (local teacher). Same thesis: inference paid once at build; patterns run free after.",
+ "design": {
+  "dataset": "UCI Mushroom (agaricus-lepiota), data/mint-demo-mushroom.data, sha256 e65d082030501a3ebcbcd7c9f7c71aa9d28fdfff463bf4cf4716a3fe13ac360e, 8124 rows. Column 1 is the class (e=edible, p=poisonous); columns 2-23 are 22 named categorical features. The allowed values per feature are derived from the TRAIN split (nothing about the feature meanings is given to the teacher — it learns from the labelled examples).",
+  "split": "seed 20261103, mulberry32 shuffle, 50% TRAIN / 25% GATE / 25% FINAL. The FINAL split is never used to propose or select a rule.",
+  "baseline": "predict the TRAIN-majority class for every row (edible); baseline accuracy = the fraction of the final split that is the majority class.",
+  "teacher": "qwen2.5:7b via local Ollama, temperature 0.2, seed 7, run ONCE and kept. Prompt: the 22 feature names, their TRAIN values, the two classes (e=edible, p=poisonous), and 40 labelled TRAIN rows (seed-sampled); answer with only rules 'FEATURE == VALUE => CLASS'. Single-feature rules; the teacher's rules are the only candidates.",
+  "gate": "a rule is kept iff, on the GATE split, it fires on >= 15 rows and its precision >= 0.80. The grown classifier: highest-precision firing kept rule, else the majority class. Pure, deterministic.",
+  "receipt": "scored on the FINAL split; a sealed baseline test { metric: 'accuracy', kind: 'rate', baseline: the final majority rate, direction: 'higher', minImprovement: 0.08, minSample: the final size, alpha: 0.05, zCrit: 1.96 } judged by src/baseline.mjs outcome(); control = baseline correct, variant = grown correct. beatsBaseline → the signed receipt."
+ },
+ "claims": [
+  { "id": "M1", "claim": "The grown rule-set beats the majority baseline on the FINAL held-out by at least 0.08 accuracy, significant (stat >= 1.96), so outcome.charge == 'due'. Teacher reply, kept rules, accuracies and receipt recorded.", "pass": "final accuracy - baseline accuracy >= 0.08 AND charge == 'due'" },
+  { "id": "M2", "claim": "The distillation is real and the final split clean: at least one teacher rule survives the gate, and the final split is scored only once.", "pass": ">= 1 rule kept; final split used only for the final score" }
+ ],
+ "notProven": "The mechanism on one public dataset, not any client's job, not people-affecting decisions. The teacher step is non-deterministic (reply run once and kept); the gated search, score and receipt on that recorded reply are deterministic and re-runnable. A null here would be a third kept result and I would stop dataset-switching and report that the local 7B cannot distil a beating rule-set on these public sets (recommending a stronger teacher) — no fishing."
+}

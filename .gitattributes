@@ -1,3 +1,4 @@
 vendor/** -text
 *.json -text
 data/mint-demo-car.data -text
+data/mint-demo-mushroom.data -text
