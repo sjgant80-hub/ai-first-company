@@ -77,4 +77,4 @@ jobs:
         run: |
           git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git ../witness-v0.6
           gate6() { node ../witness-v0.6/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
-          for k in feed rollup roster cards auditor skills experiment baseline; do gate6 $k; done
+          for k in feed rollup roster cards auditor skills experiment baseline distill; do gate6 $k; done
