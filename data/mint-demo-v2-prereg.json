@@ -1,0 +1,21 @@
+{
+ "kind": "ai-first-company-mint-demo-v2-prereg",
+ "v": 1,
+ "sealed": "2026-11-03",
+ "follows": "v1 (seal 364f29a, run f1802f5) was a KEPT null: single-feature rules could only restate the majority class (unacc) on car, so the grown set tied the 70% baseline (+0.0, charge waived). Diagnosed cause: beating a majority baseline on car needs CONJUNCTIONS that identify the acceptable cars. This v2 is the fix, sealed before it runs; v1 stays on the record.",
+ "question": "With the SAME public dataset and splits, if the teacher may propose CONJUNCTION rules (up to three ANDed conditions) and is steered to identify the acceptable cars (acc/good/vgood), do the gated, distilled rules — pure, deterministic — then beat the majority baseline on the FINAL held-out it never saw during selection, by at least 0.08 accuracy and significantly, with a signed receipt via the baseline-agreement engine?",
+ "why": "The positive the offer needs: teacher distillation → gated patterns → beats a HARD baseline on held-out, sovereign (local teacher), on the same pinned public data as the v1 null. Same thesis: the teacher's inference is paid once at build time; the distilled conjunctions run free at CPU cost.",
+ "design": {
+  "dataset": "UCI Car Evaluation, data/mint-demo-car.data, sha256 b703a9ac69f11e64ce8c223c0a40de4d2e9d769f7fb20be5f8f2e8a619893d83 (the same file and sha as v1).",
+  "split": "identical to v1: seed 20261103, mulberry32 shuffle then 50% TRAIN / 25% GATE / 25% FINAL. The FINAL split is never used to propose or select a rule.",
+  "baseline": "predict the TRAIN-majority class (unacc) for every row; baseline accuracy = the fraction of the final split that is unacc.",
+  "teacher": "qwen2.5:7b via local Ollama (sovereign), temperature 0.2, seed 7, run ONCE and its raw reply kept. Prompt: the task, the six features with allowed values, the four classes, 40 labelled TRAIN rows (seed-sampled), and an explicit instruction to give rules that identify WHEN A CAR IS ACCEPTABLE (acc/good/vgood), not only when it is unacceptable. Format: each line exactly 'F == v [AND F == v [AND F == v]] => CLASS'. Only the listed features/values/classes.",
+  "gate": "a conjunction rule is kept iff, on the GATE split, it fires (all its conditions match) on >= 12 rows and its precision >= 0.80. The grown classifier: among kept rules that fire on a row, take the highest-precision one; else the majority class. Pure, deterministic.",
+  "receipt": "the grown classifier is scored on the FINAL split; a sealed baseline test { metric: 'accuracy', kind: 'rate', baseline: the final majority rate, direction: 'higher', minImprovement: 0.08, minSample: the final size, alpha: 0.05, zCrit: 1.96 } is judged by src/baseline.mjs outcome(): control = baseline correct, variant = grown correct, on the same final rows. beatsBaseline → the signed receipt."
+ },
+ "claims": [
+  { "id": "V1", "claim": "The grown conjunction rule-set beats the majority baseline on the FINAL held-out by at least 0.08 accuracy, significant (stat >= 1.96), so outcome.charge == 'due'. Teacher reply, kept rules, accuracies and receipt recorded.", "pass": "final accuracy - baseline accuracy >= 0.08 AND charge == 'due'" },
+  { "id": "V2", "claim": "The fix is real: at least one kept rule predicts a NON-majority class (acc/good/vgood) — the distilled patterns actually find the acceptable cars, which is what v1 could not do — and the final split was scored only once.", "pass": ">= 1 kept rule predicts a non-unacc class; final split used only for the final score" }
+ ],
+ "notProven": "The mechanism on one public dataset, not any client's job. The teacher step is non-deterministic (its reply is run once and kept); the gated search, the score and the receipt on that recorded reply are deterministic and re-runnable. If it does not beat the baseline, that is a second kept null — no re-roll."
+}
