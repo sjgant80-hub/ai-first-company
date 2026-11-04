@@ -77,6 +77,15 @@ test('the page explains itself, sells straight, and carries the credits', () => 
   assert.deepEqual([...prose.matchAll(/crypto/gi)].length, 1);
 });
 
+test('the page loads nothing from another site and keeps nothing in the browser', () => {
+  assert.equal(/<script[^>]+src=/i.test(PAGE), false);
+  assert.equal(/<link[^>]+href=/i.test(PAGE), false);
+  assert.equal(/@import/i.test(PAGE), false);
+  for (const bad of ['localStorage', 'sessionStorage', 'indexedDB', 'document.cookie', 'sendBeacon']) assert.equal(PAGE.includes(bad), false, bad);
+  // every fetch and module import the page makes is a path in this repo (relative), never another origin
+  for (const m of PAGE.matchAll(/(?:fetch|import)\(\s*([^)\s,]+)/g)) assert.doesNotMatch(m[1], /^['"`]?(https?:)?\/\//, m[1]);
+});
+
 test('the README opens with the live page', () => {
   const top = read('README.md').split('\n').slice(0, 4).join('\n');
   assert.match(top, /https:\/\/sjgant80-hub\.github\.io\/ai-first-company\//);
