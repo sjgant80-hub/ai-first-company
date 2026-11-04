@@ -1,0 +1,200 @@
+{
+ "kind": "ai-first-company-kernel-witness",
+ "witness": "v0.6, pinned (git clone --branch v0.6), --cap 1000, nothing baselined",
+ "ranOn": "GitHub Actions (ubuntu-latest), the gate workflow",
+ "run": 41892773758,
+ "runUrl": "https://github.com/sjgant80-hub/ai-first-company/actions/runs/41892773758",
+ "at": "cc3a884",
+ "kernels": {
+  "conductor": {
+   "total": 32,
+   "killed": 32,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "2334f5b83078be7dc39d830e4b7f01ecb094fdaa5baf7da7598b564a24a2773e",
+   "test": "ab678de0ef0e5c06a899015a1d7be71015da880665b417cfffb12546ad7a6672"
+  },
+  "brief": {
+   "total": 16,
+   "killed": 16,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "563d2afd1f0db22076f64552a9c2c9778bc798a8e2d3efeed1e7716cdc457617",
+   "test": "5342443534ff093b5f813ded0d92158b1860f951baead6782f096e8f4c815219"
+  },
+  "reach": {
+   "total": 27,
+   "killed": 27,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "6c710fff694bb9956cb0c5bb2757b77801fe9654a9b58c9c9feb9c0586a5af95",
+   "test": "176d3d992fcceeba7445610a5d01d80eb16e46f6df1871bbcd7dec7a9534fc21"
+  },
+  "journal": {
+   "total": 18,
+   "killed": 18,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "6077dbc8b605143334f6ad028ab9bdbca9d5a75120310d4c7861a3807dfe4992",
+   "test": "09e6993f90f5bb07d08ec1b1a58b0d547e6d77bad05b561ed3dfecfae85825a0"
+  },
+  "funnel": {
+   "total": 35,
+   "killed": 35,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "8aab3e449578d7bbe8cd4b2a6eccbf7317931cf0b80d5cceab63680355e8f602",
+   "test": "feed068e465b19d234862853f49fe18cfda8262cb8cec5938cddb02b720f38e2"
+  },
+  "ops": {
+   "total": 31,
+   "killed": 31,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "ec8ab9ba2c15f34106408b1f282a5081c1ec6c18417da6f6d097f2f4b33a3eaa",
+   "test": "f036d1817b7fb2115e6185921476ba2e3a8090e8357a2fa02d40dd7375938edd"
+  },
+  "oversight": {
+   "total": 39,
+   "killed": 39,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "b3ebf40c0d93b9a8af214cadfe762e79524b4e0768ef74a41309db26defc7751",
+   "test": "1e4c0b627e7ce51f545e869aa01cef76aede0c5abd7509fdaaef976ee0238867"
+  },
+  "cycle": {
+   "total": 26,
+   "killed": 26,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "af635212dcc11db5098985b92ea79e488b69175c02c5ee2344cdbecf374f4946",
+   "test": "da517efc37b587d25c5dff6e521ea00119bbdb8c16f85fdc87ae90e6ee006d1a"
+  },
+  "costcase": {
+   "total": 53,
+   "killed": 53,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "10efb8c3731812ed5fe5211e6909626736ff673b7ff473d6ae5b19be1b4e63f0",
+   "test": "a56812d285d218f9a83c02f32b1726f593f71bd0528ac1fef79da83e47bfda1a"
+  },
+  "page": {
+   "total": 15,
+   "killed": 15,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "eed3a0477720257ee2f086d174ac9c9e2b2ac57405ad2d117dee1ebee8c0bdd7",
+   "test": "72a22399391fce4f28ae103269095cb1e8bb8accc8238ba1c41908f7a321bd16"
+  },
+  "feed": {
+   "total": 137,
+   "killed": 137,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "85032f51e527fd61dbe81137b909e76ba643938fcd1ad7668c6bf032d29e346b",
+   "test": "d46e94f500ecd71e9999c3cc53ac0d13102185f234396145d3f5f660a0e2f4ad"
+  },
+  "rollup": {
+   "total": 38,
+   "killed": 38,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "edf5f5a8df09b791f5c0e269540fc00bbf9c4b383a64a37bc86dfeb3a179bd3f",
+   "test": "a7e995bbc91839aa6a3d1387c7ad3085632351b8565d1a6403ce29774629663b"
+  },
+  "roster": {
+   "total": 72,
+   "killed": 72,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "161c40f2b9d323f0d02e1d7010b2c91d59f60a1622883fdbac7177e932d62bef",
+   "test": "3710c48c152e4114ddf800848349115f3e197c4a2c917f4098270bba22628ef2"
+  },
+  "cards": {
+   "total": 15,
+   "killed": 15,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "104888e498b6bb13b24f8e7f87c6bdad091b8dc8de3cf2fa5060d0756891ed83",
+   "test": "ff1b9b6fe4905de97e79188d455852fa78115c80629113110614c193ed1819bc"
+  },
+  "auditor": {
+   "total": 73,
+   "killed": 73,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "6b7e49db4da297fd840d4a66653e2f89a19e3082c02adbf67307b92a80d57690",
+   "test": "22c2cac777219d61a7678b3c3c5d1c4d6206916fa91feb86541a9a055b34951d"
+  },
+  "skills": {
+   "total": 27,
+   "killed": 27,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "66b64c891c9c28fa3a19ea39a6646fc3f3ca6fb13dea15af2ed82061ac6feaaa",
+   "test": "eb38dfaa3a5bd6c686a89215927f5cd5a0d931e7b68807dc98659c53448e045b"
+  },
+  "experiment": {
+   "total": 82,
+   "killed": 82,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "e75a63da05b4aa36fffa6b4af9354190ee8bad052c82675556b2aaf936301496",
+   "test": "7a0c92b252ac9ae9a8c3ff53d037656cb975ec9e8e4ef847b9290c6de3a99b5e"
+  },
+  "baseline": {
+   "total": 13,
+   "killed": 13,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "a4b4504cd4d53d4fc46c58e268a0b367485560de6376b6dfc0f3c81ee4f515eb",
+   "test": "3280035a4ba7aca011cd49e11a5eefaff35ce2ead855aa654cad1666078af26b"
+  },
+  "distill": {
+   "total": 33,
+   "killed": 33,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "28eaacc439a15e28d53a92eb563953a2f94edce6df3d11666b561dd15dbaa48b",
+   "test": "34ec02cf780329cd368e5ef936c8141ca5b87137058d55a680766d10e66ac425"
+  }
+ }
+}

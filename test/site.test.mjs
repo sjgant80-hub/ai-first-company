@@ -4,7 +4,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { gatedKernels } from '../tools/kernel-witness.mjs';
+import { gatedKernels, resultsOf } from '../tools/kernel-witness.mjs';
 
 const at = (p) => new URL('../' + p, import.meta.url);
 const read = (p) => readFileSync(at(p), 'utf8');
@@ -17,6 +17,39 @@ test('every kernel in src/ has its own test file and is witnessed in CI', () => 
   assert.deepEqual([...gated].sort(), KERNELS);
   assert.equal(new Set(gated).size, gated.length);
   for (const k of KERNELS) assert.equal(existsSync(at(`test/${k}.test.mjs`)), true, k);
+});
+
+// a GitHub Actions log as `gh run view --log` prints it, with the interleaving seen on run 41892773758: the next
+// kernel's header and this kernel's summary line land inside this kernel's JSON
+const J = 'mutation gate (witness v0.6, pinned)\twitness the kernels\t2026-11-04T19:01:12.4969594Z ';
+const block = (n, k) => ['{', `  "total": ${n},`, '  "capped": false,', `  "killed": ${k},`, '  "survived": [', '    { "line": 3 }', '  ],', '  "ignored": [],', '  "score": 1,', `  "clean": ${n === k}`, '}'];
+const logOf = (lines) => lines.map((l) => J + l).join('\r\n');
+test('resultsOf pairs each kernel with its own result, by order, through interleaved lines', () => {
+  const clean = (n) => ['{', `  "total": ${n},`, '  "capped": false,', `  "killed": ${n},`, '  "survived": [],', '  "ignored": [],', '  "clean": true', '}'];
+  const lines = ['mutation gate: src/journal.mjs · tests: node --test test/journal.test.mjs …', '', '✓ 18/18 killed — no test-theatre.', '{',
+    'mutation gate: src/funnel.mjs · tests: node --test test/funnel.test.mjs …', ...clean(18).slice(1), ...clean(35).slice(0, 4), '', '✓ 35/35 killed — no test-theatre.', ...clean(35).slice(4)];
+  const other = 'unit suites\tseals\t2026-11-04T19:00:00.0000000Z {';
+  assert.deepEqual(resultsOf(other + '\n' + logOf(lines)), {
+    journal: { total: 18, killed: 18, survived: 0, ignored: 0, capped: false, clean: true },
+    funnel: { total: 35, killed: 35, survived: 0, ignored: 0, capped: false, clean: true },
+  });
+  // a survivor is carried through as not clean (the receipt check then refuses it)
+  const dirty = resultsOf(logOf(['mutation gate: src/x.mjs · tests', ...block(5, 4)]));
+  assert.deepEqual(dirty, { x: { total: 5, killed: 4, survived: 1, ignored: 0, capped: false, clean: false } });
+  // a kernel with no result, or a summary that disagrees with its result, is an error, never a guess
+  assert.throws(() => resultsOf(logOf(['mutation gate: src/x.mjs · tests', 'mutation gate: src/y.mjs · tests', ...clean(3)])), /2 kernels started but 1 results/);
+  assert.throws(() => resultsOf(logOf(['mutation gate: src/x.mjs · tests', '✓ 4/4 killed', ...clean(3)])), /disagree/);
+  assert.throws(() => resultsOf(logOf(['mutation gate: src/x.mjs · tests', ...clean(3)])), /1 clean results but 0 summary lines/);
+});
+
+test('the receipt the page reads is whole: every gated kernel, clean, pinned to the source and test that were gated', () => {
+  const r = JSON.parse(read('data/kernel-witness.json'));
+  assert.deepEqual(Object.keys(r.kernels).sort(), KERNELS);
+  assert.match(r.runUrl, /^https:\/\/github\.com\/sjgant80-hub\/ai-first-company\/actions\/runs\/\d+$/);
+  for (const [k, e] of Object.entries(r.kernels)) {
+    assert.equal(e.clean && e.survived === 0 && e.ignored === 0 && e.capped === false && e.killed === e.total && e.total > 0, true, k);
+    assert.match(e.src, /^[0-9a-f]{64}$/); assert.match(e.test, /^[0-9a-f]{64}$/);
+  }
 });
 
 test('the witness gate CI runs is the pinned v0.6 release, and only that', () => {
@@ -52,9 +85,7 @@ test('everything the page loads from this repo exists', () => {
   const paths = new Set();
   for (const m of PAGE.matchAll(/['"]\.?\/?((?:data|src|tools|vendor)\/[\w./-]+\.(?:json|mjs|data|txt))['"]/g)) paths.add(m[1]);
   assert.equal(paths.size > 20, true);
-  // the one file the page may find absent: the gate's counts, which are read from a CI run's log after that run ends
-  // (tools/kernel-witness.mjs); the page says "gated in CI on every push" until it lands
-  for (const p of paths) if (p !== 'data/kernel-witness.json') assert.equal(existsSync(at(p)), true, p);
+  for (const p of paths) assert.equal(existsSync(at(p)), true, p);
   for (const m of PAGE.matchAll(/blob\/main\/([\w./-]+)"/g)) if (!m[1].includes('$')) assert.equal(existsSync(at(m[1])), true, m[1]);
 });
 

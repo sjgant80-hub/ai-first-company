@@ -20,7 +20,7 @@ approval of its exact words**, and **every public claim is checked against a com
 | 6 | Oversight | `src/oversight.mjs` | 39/39 | 4 of 4 |
 | 7 | The loop, closed | `src/cycle.mjs` | 26/26 | 6 of 6 |
 
-Plus `src/costcase.mjs` (29/29, the cost case and the seat comparison) and `src/page.mjs` (15/15). Seals: `data/step*-prereg.json`; receipts: `data/step*-run.json`
+Plus `src/costcase.mjs` (53/53, the cost case, the seat comparison and the years view) and `src/page.mjs` (15/15). Seals: `data/step*-prereg.json`; receipts: `data/step*-run.json`
 and `data/cycle-run.json`; every tool `tools/step*-measure.mjs --check | --verify`. CI re-measures every seal and receipt and
 mutation-tests every kernel on each push (`.github/workflows/gate.yml`).
 
@@ -73,6 +73,10 @@ gated, if the witness clone is unpinned, if any kernel or vendored module reache
 process or the environment, or if any module imports from a package registry. The counts the page's blueprint shows are
 read from a CI run's own log by `tools/kernel-witness.mjs` into `data/kernel-witness.json`, and the page checks in the
 reader's browser that each file it serves hashes to the file that was gated.
+
+The current receipt: CI run [41892773758](https://github.com/sjgant80-hub/ai-first-company/actions/runs/41892773758)
+at `cc3a884`, 19 kernels, 782 of 782 mutants caught, 0 survived, nothing baselined (the growth gate `experiment`
+82/82, the guarantee's `baseline` 13/13 and `distill` 33/33).
 
 ## Live today vs waiting
 

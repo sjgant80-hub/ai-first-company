@@ -24,24 +24,36 @@ export function gatedKernels(yml) {
   return out;
 }
 
-// one witness result per kernel from a GitHub Actions log: "mutation gate: src/<k>.mjs" then a JSON block { ... }
+// one witness result per kernel from a GitHub Actions log (`gh run view <id> --log`: job, step, timestamp, text).
+// Only the witness job's lines are read. Witness writes its header ("mutation gate: src/<k>.mjs") and its one-line
+// summary ("✓ n/n killed") to stderr at once, and its JSON result to stdout through `tee`, so the next kernel's header
+// can land inside this kernel's JSON. The kernels run one after another, so the k-th JSON block is the k-th header's:
+// headers and blocks are paired by order, never by position, and each clean block must match its own summary line.
 export function resultsOf(log) {
-  const lines = String(log).split('\n').map((l) => l.replace(/\r$/, '').replace(/^[^\t]*\t[^\t]*\t\S+ ?/, ''));
-  const out = {};
-  let cur = null, buf = null;
-  for (const l of lines) {
+  const rows = String(log).split('\n').map((l) => l.replace(/\r$/, ''))
+    .filter((l) => /^mutation gate\b[^\t]*\t/.test(l))
+    .map((l) => l.replace(/^[^\t]*\t[^\t]*\t\S+ ?/, ''));
+  const heads = [], blocks = [], ticks = [];
+  let buf = null;
+  for (const l of rows) {
     const head = l.match(/^mutation gate: src\/([a-z0-9-]+)\.mjs/);
-    if (head) { cur = head[1]; buf = null; continue; }
-    if (cur && l === '{') { buf = ['{']; continue; }
-    if (cur && buf) {
-      if (!/^(\s|\}|\])/.test(l)) continue;           // witness's stderr summary line can land inside its stdout JSON
-      buf.push(l);
-      if (l === '}') {
-        const j = JSON.parse(buf.join('\n'));
-        out[cur] = { total: j.total, killed: j.killed, survived: j.survived.length, ignored: j.ignored.length, capped: j.capped, clean: j.clean };
-        cur = null; buf = null;
-      }
-    }
+    if (head) { heads.push(head[1]); continue; }
+    const tick = l.match(/^✓ (\d+)\/(\d+) killed/);
+    if (tick) { ticks.push([Number(tick[1]), Number(tick[2])]); continue; }
+    if (!buf) { if (l === '{') buf = ['{']; continue; }
+    if (!/^(\s|\}|\])/.test(l)) continue;             // a stderr line or a blank inside the stdout JSON
+    buf.push(l);
+    if (l === '}') { blocks.push(JSON.parse(buf.join('\n'))); buf = null; }
+  }
+  if (heads.length !== blocks.length) throw new Error(`${heads.length} kernels started but ${blocks.length} results in the log`);
+  const out = {};
+  heads.forEach((k, i) => {
+    const j = blocks[i];
+    out[k] = { total: j.total, killed: j.killed, survived: j.survived.length, ignored: j.ignored.length, capped: j.capped, clean: j.clean };
+  });
+  if (blocks.every((j) => j.clean === true)) {
+    if (ticks.length !== blocks.length) throw new Error(`${blocks.length} clean results but ${ticks.length} summary lines`);
+    heads.forEach((k, i) => { if (ticks[i][0] !== out[k].killed || ticks[i][1] !== out[k].total) throw new Error(`src/${k}.mjs: its result and its summary line disagree`); });
   }
   return out;
 }
