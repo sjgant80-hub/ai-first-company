@@ -51,7 +51,13 @@
   .queue-item pre{white-space:pre-wrap;margin:6px 0 0;font-family:var(--sans);font-size:14px}
   .muted{color:var(--muted)} .small{font-size:13.5px}
   footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink2);font-size:13.5px}
-  @media (max-width:560px){ .barrow{grid-template-columns:110px 1fr 40px} }
+  .scrollx{overflow-x:auto} .scrollx svg{min-width:660px}
+  .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;margin:8px 0;align-items:end}
+  .field label{display:block;font-size:13px;color:var(--ink2);margin-bottom:2px}
+  .field input,.field select{width:100%;font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+  .hash{font-family:var(--mono);font-size:12.5px;word-break:break-all}
+  .try select{max-width:100%;min-width:0}
+  @media (max-width:560px){ .barrow{grid-template-columns:110px 1fr 40px} .pill{white-space:normal} }
 </style>
 </head>
 <body>
@@ -66,6 +72,8 @@
       <li><span class="pill ok">✓ live</span> The conductor that sends every job to the right arm, and holds outward, money and deal jobs for approval (try it below).</li>
       <li><span class="pill ok">✓ live</span> The bot team (from 1 Nov 2026): eight fenced roles, one redacted and signed feed, and a separate auditor that puts only what it passed in front of Simon. <a href="#team">See it ↓</a></li>
       <li><span class="pill ok">✓ live</span> The company's voice on X, key-ready: drafts from receipts, claim-gated in your browser, <a href="https://sjgant80-hub.github.io/kar-voice/">each waiting for approval</a>. Nothing has been posted.</li>
+      <li><span class="pill ok">✓ live</span> The growth gate (from 2 Nov 2026): a marketing technique becomes a skill only when it beats the channel's own sealed baseline, and the verdict comes from the numbers, never from who proposed it. Its sealed battery re-runs in your browser. <a href="#growth">See it ↓</a></li>
+      <li><span class="pill ok">✓ live</span> The guarantee engine (from 2 Nov 2026): one fixed test both sides sign before any work, and the delivery judged against it alone: the charge is due only when the delivery beats the signed baseline. Three real runs on public data, two of them losses, all kept. <a href="#guarantee">See it ↓</a></li>
       <li><span class="pill wait">⏳ Simon</span> Authorising the X connector (his own keys; until then every post is a dry run) and approving each post or reply in his own words.</li>
       <li><span class="pill wait">⏳ Simon</span> Creating the reach routine in his own Grok Bot from the brief this repo makes (Grok Bot reads X read-only on his account).</li>
       <li><span class="pill wait">⏳ X</span> A reply bot beyond answering people who summon us needs X's prior written approval. It is not built, and not wanted.</li>
@@ -75,17 +83,20 @@
 </header>
 
 <nav class="toc" aria-label="On this page">
-  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#team">The bot team</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
+  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#team">The bot team</a><a href="#growth">Growth gate</a><a href="#guarantee">The guarantee</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
 </nav>
 
 <section id="start">
   <h2>Start here</h2>
-  <p class="sub">Three minutes to see how it works, and how you would check it yourself.</p>
+  <p class="sub">Five minutes to see how it works, and how you would check it yourself. Nothing on this page sends anything anywhere: every box runs the company's own code in your browser.</p>
   <ol class="steps">
     <li><b>Try the conductor.</b> Type any job — <i>"draft tomorrow's post about the witness receipt"</i>, <i>"send the quote to the lead"</i> — and see which arm it goes to and why. Anything that would leave the company stops at Simon. <a href="#try">Try it ↓</a></li>
     <li><b>Look at the queue.</b> The company's voice on X shows every draft before it is posted, re-checks each one against its receipt in your browser, and marks it <i>waiting for Simon's approval</i>. <a href="https://sjgant80-hub.github.io/kar-voice/">Open the voice →</a></li>
     <li><b>Read the dashboard.</b> One full rehearsal cycle — a post, a signal from X, a lead, an offer, a close, a delivery, a new entry in the library — with every approval Simon was asked for. <a href="#dashboard">See it ↓</a></li>
+    <li><b>Try the growth gate.</b> Enter how a new post did against the usual one. The gate says <i>PROMOTE</i> (it becomes a skill), <i>DROP</i> (kept on the record) or <i>INSUFFICIENT</i> (not enough data yet), and why. <a href="#growth">Try it ↓</a></li>
+    <li><b>Try the guarantee.</b> Move what a delivery scored against the worked example's signed baseline and watch the charge switch between <i>due</i> and <i>waived</i>. Then read the three real runs, losses included. <a href="#guarantee">Try it ↓</a></li>
     <li><b>Check a receipt.</b> Every number here comes from a JSON receipt committed to a public repo, with the claims sealed before the measurement. CI re-measures them on every push. <a href="#receipts">Receipts ↓</a></li>
+    <li><b>Set your own numbers.</b> The cost case takes your hours, your wage, your seat count and your years, and computes the rest from sourced public figures, each linked. <a href="#costcase">Cost case ↓</a></li>
   </ol>
 </section>
 
@@ -154,6 +165,82 @@
   </ul></div>
 </section>
 
+<section id="growth">
+  <h2>The growth gate</h2>
+  <p class="sub">How the company learns to market itself without fooling itself. A technique (a hook, a posting time, a format) becomes a skill the team reuses only when it beats the channel's own baseline on a test written down before the run: on the sealed metric, by at least the sealed margin, with enough people in each arm, and with an effect too large to be luck. The verdict comes from the numbers alone, never from who proposed the idea, and every dropped technique stays on the record.</p>
+  <div class="grid g2">
+    <div class="card"><h3 style="margin-top:0">Try the gate</h3><p class="small muted">The real kernel (<code>src/experiment.mjs</code>, mutation-tested) runs here. The usual post is the control; the new technique is the variant. A "hit" is whatever the sealed metric counts, for example a click through to a receipt.</p>
+      <form id="gform">
+        <div class="fgrid">
+          <div class="field"><label for="g-cn">Usual: people shown</label><input id="g-cn" type="number" min="1" step="1" value="1200"></div>
+          <div class="field"><label for="g-ch">Usual: hits</label><input id="g-ch" type="number" min="0" step="1" value="60"></div>
+          <div class="field"><label for="g-vn">New: people shown</label><input id="g-vn" type="number" min="1" step="1" value="1200"></div>
+          <div class="field"><label for="g-vh">New: hits</label><input id="g-vh" type="number" min="0" step="1" value="96"></div>
+        </div>
+        <div class="fgrid">
+          <div class="field"><label for="g-m">Sealed margin (points)</label><input id="g-m" type="number" min="0.1" step="0.1" value="2"></div>
+          <div class="field"><label for="g-s">Sealed sample, each arm</label><input id="g-s" type="number" min="2" step="1" value="1000"></div>
+          <div class="field"><label for="g-z">Sealed confidence bar</label><select id="g-z"><option value="1.645">1.645 (one-sided, 5%)</option><option value="1.96" selected>1.96 (two-sided, 5%)</option><option value="2.326">2.326 (one-sided, 1%)</option></select></div>
+        </div>
+      </form>
+      <div class="result" id="g-out" aria-live="polite"></div></div>
+    <div class="card"><h3 style="margin-top:0">Where it sits, and what it has judged so far</h3><p class="small">The Analyst, a read-only role, runs this gate on the channel's own measured numbers. The organ that proposed a technique cannot pass it: changing who proposed it changes nothing in the verdict (claim E9 below). A promoted skill carries its test, its data and a receipt (a SHA-256 of all three), so anyone can re-derive why it exists.</p>
+      <p class="small">So far it has judged only its sealed 400-case battery, which your browser re-runs below. No technique has been tested on a real audience yet: that needs posts, and nothing is posted until Simon connects X with his own keys and approves each post. <span class="pill wait">⏳ Simon</span></p>
+      <p class="small muted" style="margin-bottom:0">Why a critical value and not a p-value: the gate is plain arithmetic and a square root, so a clean machine can re-check every number, and the mutation gate can reach every line. The organ seals the bar for its own method before the run.</p></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div class="scrollx"><svg class="diagram" viewBox="0 0 920 250" role="img" aria-labelledby="gT gD"><title id="gT">The growth gate, decision by decision</title><desc id="gD">A sealed test, then three checks in order: enough data in each arm, a lift at least the sealed margin in the sealed direction, and an effect at least the sealed critical value. Failing the first gives INSUFFICIENT; failing either of the others gives DROP; passing all three gives PROMOTE, a versioned skill with its test, data and receipt. The counts are the sealed battery, re-run in this browser.</desc>
+      <g fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)"><path d="M150,58 H178"/><path d="M345,58 H373"/><path d="M540,58 H568"/><path d="M735,58 H763"/><path d="M262,86 V148"/><path d="M457,86 V148"/><path d="M652,86 V148"/><path d="M837,86 V148"/></g>
+      <g font-size="12" fill="var(--muted)"><text x="359" y="50" text-anchor="middle">yes</text><text x="554" y="50" text-anchor="middle">yes</text><text x="749" y="50" text-anchor="middle">yes</text><text x="272" y="122">no</text><text x="467" y="122">no</text><text x="662" y="122">no</text></g>
+      <g font-size="14" fill="var(--ink)">
+        <rect x="10" y="30" width="140" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="80" y="54" text-anchor="middle" font-weight="700">Sealed test</text><text x="80" y="74" text-anchor="middle" fill="var(--ink2)" font-size="12.5">written before the run</text>
+        <rect x="180" y="30" width="165" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="262" y="54" text-anchor="middle" font-weight="700">Enough data?</text><text x="262" y="74" text-anchor="middle" fill="var(--ink2)" font-size="12.5">sealed sample, each arm</text>
+        <rect x="375" y="30" width="165" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="457" y="54" text-anchor="middle" font-weight="700">Beats the margin?</text><text x="457" y="74" text-anchor="middle" fill="var(--ink2)" font-size="12.5">the right way, by enough</text>
+        <rect x="570" y="30" width="165" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="652" y="54" text-anchor="middle" font-weight="700">Not luck?</text><text x="652" y="74" text-anchor="middle" fill="var(--ink2)" font-size="12.5">effect ≥ sealed bar</text>
+        <rect x="765" y="30" width="145" height="56" rx="12" fill="var(--panel)" stroke="var(--good)" stroke-width="2"/><text x="837" y="54" text-anchor="middle" font-weight="700">PROMOTE</text><text x="837" y="74" text-anchor="middle" fill="var(--ink2)" font-size="12.5" id="g-n-pro">—</text>
+        <rect x="180" y="150" width="165" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="262" y="174" text-anchor="middle" font-weight="700">INSUFFICIENT</text><text x="262" y="194" text-anchor="middle" fill="var(--ink2)" font-size="12.5" id="g-n-ins">—</text>
+        <rect x="375" y="150" width="165" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="457" y="174" text-anchor="middle" font-weight="700">DROP, kept</text><text x="457" y="194" text-anchor="middle" fill="var(--ink2)" font-size="12.5" id="g-n-mar">—</text>
+        <rect x="570" y="150" width="165" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="652" y="174" text-anchor="middle" font-weight="700">DROP, kept</text><text x="652" y="194" text-anchor="middle" fill="var(--ink2)" font-size="12.5" id="g-n-sig">—</text>
+        <rect x="765" y="150" width="145" height="56" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="837" y="174" text-anchor="middle" font-weight="700">A skill</text><text x="837" y="194" text-anchor="middle" fill="var(--ink2)" font-size="12.5">test + data + receipt</text>
+        <text x="460" y="236" text-anchor="middle" fill="var(--muted)" font-size="12.5" id="g-foot">The counts fill from the sealed battery, re-run in your browser.</text>
+      </g>
+    </svg></div>
+    <div class="small" id="g-battery" aria-live="polite" style="margin-top:8px"><span class="muted">Re-running the sealed battery…</span></div>
+  </div>
+  <div id="g-receipt" style="margin-top:12px"></div>
+</section>
+
+<section id="guarantee">
+  <h2>The guarantee engine</h2>
+  <p class="sub">The same gate, used to sell. One painful process becomes a small system the client owns, on their own hardware. Before any work, both sides sign one fixed test: the metric, the level the client reaches today (the baseline), the smallest improvement that counts, how much data the test needs, and the confidence bar. The delivery is judged against that signed test alone, so the goalpost cannot move. The engine says the charge is <b>due</b> only when the delivery beats the signed baseline, and <b>waived</b> when it does not. The price never enters the decision (claim B6 below).</p>
+  <div class="card">
+    <div class="scrollx"><svg class="diagram" viewBox="0 0 920 270" role="img" aria-labelledby="mT mD"><title id="mT">The guarantee, traced from the positive run</title><desc id="mD">Intake, then a test both sides sign before work, then the system grown: a teacher model proposes rules and a gate keeps only those that hold up on a gate split. It is scored once on a final split nobody used to build it, judged against the signed test alone, and the charge comes out due or waived with a re-runnable receipt. The numbers are the positive run's committed receipt.</desc>
+      <g fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)"><path d="M290,62 H318"/><path d="M600,62 H628"/><path d="M770,98 V160"/><path d="M628,198 H602"/><path d="M318,198 H292"/></g>
+      <g font-size="14" fill="var(--ink)">
+        <rect x="10" y="26" width="280" height="72" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="150" y="50" text-anchor="middle" font-weight="700">1 · Intake</text><text x="150" y="70" text-anchor="middle" fill="var(--ink2)" font-size="12.5">the job, the data, today's level</text><text x="150" y="88" text-anchor="middle" fill="var(--muted)" font-size="12" id="m-1">—</text>
+        <rect x="320" y="26" width="280" height="72" rx="12" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/><text x="460" y="50" text-anchor="middle" font-weight="700">2 · The signed test</text><text x="460" y="70" text-anchor="middle" fill="var(--ink2)" font-size="12.5">both sign these bytes before work</text><text x="460" y="88" text-anchor="middle" fill="var(--muted)" font-size="12" id="m-2">—</text>
+        <rect x="630" y="26" width="280" height="72" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="770" y="50" text-anchor="middle" font-weight="700">3 · Grow the system</text><text x="770" y="70" text-anchor="middle" fill="var(--ink2)" font-size="12.5">a teacher proposes; a gate keeps what holds</text><text x="770" y="88" text-anchor="middle" fill="var(--muted)" font-size="12" id="m-3">—</text>
+        <rect x="630" y="162" width="280" height="72" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="770" y="186" text-anchor="middle" font-weight="700">4 · Score it once</text><text x="770" y="206" text-anchor="middle" fill="var(--ink2)" font-size="12.5">on a final split nobody built it on</text><text x="770" y="224" text-anchor="middle" fill="var(--muted)" font-size="12" id="m-4">—</text>
+        <rect x="320" y="162" width="280" height="72" rx="12" fill="var(--surface)" stroke="var(--line)"/><text x="460" y="186" text-anchor="middle" font-weight="700">5 · The verdict</text><text x="460" y="206" text-anchor="middle" fill="var(--ink2)" font-size="12.5">against the signed test alone</text><text x="460" y="224" text-anchor="middle" fill="var(--muted)" font-size="12" id="m-5">—</text>
+        <rect x="10" y="162" width="280" height="72" rx="12" fill="var(--panel)" stroke="var(--good)" stroke-width="2"/><text x="150" y="186" text-anchor="middle" font-weight="700">6 · Due or waived</text><text x="150" y="206" text-anchor="middle" fill="var(--ink2)" font-size="12.5">with a re-runnable receipt</text><text x="150" y="224" text-anchor="middle" fill="var(--muted)" font-size="12" id="m-6">—</text>
+        <text x="460" y="260" text-anchor="middle" fill="var(--muted)" font-size="12.5">The numbers in grey are the positive run's committed receipt (data/mint-demo-v3-run.json).</text>
+      </g>
+    </svg></div>
+  </div>
+  <h3>Three real runs, the losses kept</h3>
+  <p class="small muted">Each run was sealed before it ran, on a public dataset, with a small model on Kar's own machine as the teacher, its reply recorded once. The first two did not beat the baseline, so the engine waived the charge; nothing was re-rolled. CI re-derives all three from the recorded replies on every push, and <a href="https://sjgant80-hub.github.io/liveware/#t11">Liveware re-derives them in your browser and attacks each receipt</a>.</p>
+  <div class="tablewrap card"><table id="m-runs"><thead><tr><th>Run</th><th>Public data</th><th>Baseline</th><th>Grown</th><th>Change</th><th>Rules kept</th><th>Charge</th><th>Claims</th></tr></thead><tbody><tr><td colspan="8" class="muted">loading…</td></tr></tbody></table></div>
+  <p class="small"><button type="button" class="ghost" id="m-rederive">Re-derive the positive run here</button> <span id="m-rederived" class="small" aria-live="polite"></span></p>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card"><h3 style="margin-top:0">Try the guarantee</h3><p class="small muted">The worked example from the repo (<code>data/mint-intake-example.json</code>, not a real client): <span id="m-ex">loading…</span> The real kernel (<code>src/baseline.mjs</code>) decides here.</p>
+      <div class="barrow"><label for="m-hits" id="m-hl">What the delivery got right</label><input id="m-hits" type="range" min="0" max="0" step="5" value="0"><span class="v" id="m-hv">—</span></div>
+      <div class="result" id="m-out" aria-live="polite"></div></div>
+    <div class="card"><h3 style="margin-top:0">What is signed, and what is not</h3><p class="small">Signed before work: the test, the two parties, the job and the money-back clause, as one canonical text both sides sign. A delivery can carry any extra fields it likes, including a different metric or a lower target; the verdict reads only the signed test (claim B2 below).</p>
+      <p class="small" style="margin-bottom:0">Not on this page: a price, a deposit or the exact wording of the money-back terms. Those are Simon's to set, and so is publishing the intake form and taking any client's data. <span class="pill wait">⏳ Simon</span> Until he decides, this section shows the engine and its evidence and offers nothing for sale.</p></div>
+  </div>
+  <div id="m-receipt" style="margin-top:12px"></div>
+</section>
+
 <section id="how">
   <h2>How it works</h2>
   <p class="sub">One loop. Kar thinks and gates; Grok Bot reaches; signals come back; Kar reasons, routes and learns; Simon approves the high-stakes steps; Kar converts, delivers and records; the library grows — and the new entry becomes the next post.</p>
@@ -183,11 +270,13 @@
 
 <section id="blueprint">
   <h2>Blueprint</h2>
-  <p class="sub">Seven organs, built one at a time, each a small pure kernel with its own tests, mutation gate and sealed claims.</p>
+  <p class="sub">Every organ is one small pure kernel in <code>src/</code> with its own test file, built one at a time. The mutation gate (witness, pinned to its v0.6 release) changes one operator at a time and the tests must catch every change; a test that cannot fail is caught, and nothing is excused. The counts are read from the CI run that gated this code, and your browser checks that each file it is serving hashes to the file that was gated.</p>
+  <p class="small" id="bp-head"><span class="muted">loading the gate's receipt…</span></p>
   <div class="tablewrap card"><table id="organs">
-    <thead><tr><th>Organ</th><th>What it does</th><th>Gate</th><th>Sealed claims</th></tr></thead>
+    <thead><tr><th>Organ</th><th>What it does</th><th>Mutation gate</th><th>Sealed claims</th></tr></thead>
     <tbody><tr><td colspan="4" class="muted">loading…</td></tr></tbody>
   </table></div>
+  <p class="small muted">Around the kernels: <code>tools/</code> holds each step's measure tool (<code>--check</code> the seal is unchanged, <code>--verify</code> the receipt re-measures), the team's own processes and the skill library's index; <code>data/</code> holds every seal and receipt; <code>vendor/</code> holds what came from other repos (kar-mind's controller, kar-voice's claim gate and voice, kar-passport's token, fall-kit's SHA-256, sovereign-enterprise's sourced figures), each byte-identical to its source commit and re-hashed by <code>test/vendor.test.mjs</code>. No kernel and no vendored module touches the network, the disk or the environment; <code>test/site.test.mjs</code> checks that on every push. <a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/.github/workflows/gate.yml">The CI workflow</a>.</p>
 </section>
 
 <section id="receipts">
@@ -217,15 +306,27 @@
     <div class="card"><h3>Technology and security</h3><p class="small">Small pure kernels, each mutation-tested (a test that can't fail is caught). Outside input is checked before it is read; instructions inside it are treated as data. Channel keys stay in the owner's environment — the code never prints or stores them, and that is measured.</p></div>
     <div class="card"><h3>Marketing and sales</h3><p class="small">The voice posts what has been proven, answers people who ask, and never cold-pitches. That is also exactly where X draws its own automation line, so the account is safe by construction.</p></div>
     <div class="card"><h3>Data protection</h3><p class="small">Signals from X are public posts; email addresses and phone numbers are redacted on the way in. Nothing private goes into a public token or a public page — the passport's leak gate and this repo's checks refuse it.</p></div>
+    <div class="card"><h3>Procurement</h3><p class="small">One supplier, AI Native Solutions; the software is MIT-licensed, with no licence fee and no lock-in: the code, the receipts and the journal sit in your own repositories and keep running if you stop using the supplier. The outside services it touches are ones you contract directly, on your own accounts (listed below under "Who else sees your data"). Support, service levels, warranty and liability are written into each deployment's agreement.</p></div>
+    <div class="card"><h3>The growth and sales teams</h3><p class="small">Marketing gets a gate that only keeps what worked on your own audience (<a href="#growth">the growth gate</a>), so outside advice is a hypothesis to test, not a rule. Sales gets an offer it can stand behind: the client signs the test before the work, and the charge follows the result (<a href="#guarantee">the guarantee engine</a>).</p></div>
   </div>
   <h3>Cost case — the hours the loop takes off a person</h3>
   <div class="card" id="costcase"><p class="muted small">loading the calculator…</p></div>
   <h3>What you pay now for the same work</h3>
   <div class="card" id="seats"><p class="muted small">loading the comparison…</p></div>
+  <h3>Over the years, for the budget holder</h3>
+  <div class="card" id="years"><p class="muted small">loading the years view…</p></div>
   <h3>The case for the board</h3>
   <div class="card small"><p style="margin:0">The company's routine work runs on its own; the decisions that carry the company's name, money or commitments come to one person, in one queue, with the exact words in front of them. Every claim the company makes in public is pinned to evidence anyone can fetch, so a claim cannot drift from what was proven. Every step is in a record that cannot be quietly edited. It is measured the way it is sold: the claims were written down before the code, the failures are on the page, and anyone can re-run the checks. The software is yours (MIT), runs on your machines and accounts, and keeps running without the supplier.</p></div>
   <h3>Deployment, support and ownership</h3>
-  <div class="card small"><p style="margin:0 0 8px">Supplied by <b>AI Native Solutions</b> — start at <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a>. Support, service levels, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed: no licence fee, and it keeps running without us.</p><p style="margin:0">It runs on your own machine and your own accounts: your channel keys, your Grok Bot, your repos. Claude is used for judgement on your own login inside a nightly budget; small models on your own hardware do the bulk.</p></div>
+  <div class="card small"><p style="margin:0 0 8px">Supplied by <b>AI Native Solutions</b> — start at <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a> and get in touch through the site. Support, service levels, warranty and liability are agreed per deployment, in each deployment's agreement. The software is MIT-licensed: no licence fee, and it keeps running without us.</p><p style="margin:0 0 8px">It runs on your own machine and your own accounts: your channel keys, your Grok Bot, your repos. Claude is used for judgement on your own login inside a nightly budget; small models on your own hardware do the bulk.</p><p style="margin:0"><b>If you stop.</b> Nothing you hold stops with us. The code, the seals, the receipts, the journal and the feed are files in your own repositories; the kernels need only Node; the checks re-run on your own CI. There is no licence server, no account with us and no call home.</p></div>
+  <h3>Who else sees your data</h3>
+  <div class="card small"><ul style="margin:0;padding-left:18px">
+    <li><b>X</b> (your developer account): the exact posts and replies you approve, when you turn the live switch on. Nothing before that.</li>
+    <li><b>xAI's Grok Bot</b> (your own Grok account): a read-only brief, and it writes public posts that mention you into one file in your own repo.</li>
+    <li><b>Anthropic's Claude</b> (your own login): the judgement jobs the conductor routes to it, inside the nightly budget. Bulk wording runs on a small model on your own machine, which sends nothing anywhere.</li>
+    <li><b>GitHub</b> (your own organisation): the repositories, the pages and the CI that re-checks every receipt.</li>
+    <li><b>The supplier</b>: nothing by default. The software has no call home; what a deployment shares with AI Native Solutions is written into its agreement.</li>
+  </ul></div>
   <h3>What it runs on, and what it costs to run</h3>
   <div class="card small"><ul style="margin:0;padding-left:18px">
     <li><b>A machine you own:</b> Node 22 for the kernels; Ollama with a 7B model (about 5 GB of memory) for the bulk wording work; a GitHub account for the pages, the receipts and the CI that re-checks them.</li>
@@ -246,7 +347,13 @@
     <li><b>How does "fail closed" work, and how often does it fail?</b> A job runs on its own only if its first verb is a known piece of internal work (draft, review, compile, measure…); any other verb waits for the owner. Every outward, money or deal word sends a job to the owner wherever it appears. On the sets it was built against it routes every case right; on fresh wording, the small model used to write test jobs mislabelled too many of its own lines for the test to say — both results are in the receipts (<a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/data/step1-conductor-run.json">first version</a>, <a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/data/step1b-conductor-run.json">fail-closed</a>), every test job listed with where it went. Its failure points are wording it has never seen; behind it, nothing can leave without the owner's approval of the exact item, whatever the router decided.</li>
     <li><b>When does the dry run end?</b> When the owner decides: he adds his own X keys and turns the live switch on. Until both, nothing changes and nothing leaves.</li>
     <li><b>Can we change what it says?</b> Yes. Posts, replies and offers are plain templates in the code, written from your receipts and your offer pages; you edit them. Every draft, edited or not, still passes the claim gate and still needs the owner's approval of its exact words.</li>
-    <li><b>Can I set my own numbers?</b> Yes: the hours, your own wage and your seat count above all recompute in the page, with the same code the receipts were measured with.</li>
+    <li><b>Can I set my own numbers?</b> Yes: the hours, your own wage, your seat count, the years and the power draw above all recompute in the page, with the same mutation-tested code that is in the repo.</li>
+    <li><b>What do my people actually do each day?</b> Work one queue. Each item shows its exact words; they approve it, deny it with a note, or leave it waiting. They can pause one bot or the whole team, and set the focus (which offer to lead with, what to watch), which only breaks ties. Everything else, from reading to drafting to recording, runs without them; the measured cycle above shows how many asks one loop makes.</li>
+    <li><b>What do they need to learn?</b> No code. The queue, the pause and the focus are the controls. The kernels, the receipts and the CI are there for whoever audits it, inside or outside the company.</li>
+    <li><b>How do we contract, and who supports it?</b> With AI Native Solutions: start at <a href="https://www.ai-nativesolutions.com">ai-nativesolutions.com</a> and get in touch through the site. Support, service levels, warranty and liability are written into each deployment's agreement. The licence is MIT, so the code is yours either way.</li>
+    <li><b>Does it hold a security certification?</b> This page claims none (no ISO 27001, SOC 2 or Cyber Essentials). What it gives you instead is evidence you can re-run: every kernel mutation-tested on GitHub's machines on every push, every claim sealed before it was measured, every vendored file re-hashed. If your policy needs a certification for a deployment, that goes into the deployment's agreement.</li>
+    <li><b>Does it install anything?</b> Nothing from a package registry: there is no <code>package.json</code>, and every module imports only Node's own built-ins or files in the repo, which <code>test/site.test.mjs</code> checks on every push. You need Node 22 for the kernels and, for the bulk wording work, Ollama with a 7B model.</li>
+    <li><b>Can we see it work on our own process before we commit?</b> The guarantee engine is built for that: one process, a test signed before any work, the delivery judged against it alone. The three public runs above show both outcomes. The commercial terms for a client run are not on this page yet (Simon's decision).</li>
   </ul></div>
   <h3>Risks, answered straight</h3>
   <div class="card small"><ul style="margin:0;padding-left:18px">
@@ -266,6 +373,8 @@
     <p>Make the trust lines executable. A conductor routes every job to one of five arms, and the arm called <i>Simon</i> is a queue a person works through. Every outward item carries the hash of its exact text; an approval covers that hash and nothing else. Every public claim names a receipt by repo, commit and file hash, and every number in it must be a field of that receipt. Outside input arrives through a reader that checks shape before content and treats instructions as data. Every event is a record in a hash chain.</p>
     <h3>The evidence</h3>
     <p>Each organ was built the same way: write the claims and the test data down and commit them; write the code; mutation-test it (each surviving mutant is a test that cannot fail); measure the claims once; keep the result, held or failed. The receipts section lists every claim with what was measured. Failures are not rewritten: a fix gets its own seal.</p>
+    <h3>One gate for learning and for selling</h3>
+    <p>A company run by an AI has two ways to fool itself: believing a marketing trick works because someone said so, and promising a client a result nobody will check. Both are answered by the same kernel. A sealed test (metric, baseline, margin, sample, critical value, direction) is written before the run; the verdict is arithmetic on the measured arms and nothing else. For growth, a technique that passes becomes a versioned skill carrying its data and receipt, and one that fails is logged. For sales, the client signs that same kind of test before work, and the delivery's measured result decides whether the charge is due. The first design used an exact p-value; the mutation gate found that its numerical internals hid changes no test could catch, so the critical value moved into the sealed test and the gate became plain arithmetic that any machine re-checks. The guarantee was then run three times on public data: twice the grown system did not beat the baseline and the charge was waived, and once it did, by a margin the receipt records. All three receipts are kept.</p>
     <h3>What it does not do</h3>
     <p>It does not decide on its own to speak for the company, move money or agree a deal. It does not contact anyone who didn't ask. It does not read X itself — it hands Grok Bot a read-only brief on the owner's account. It does not claim more than its receipts say.</p>
   </div>
@@ -307,9 +416,77 @@ const STEPS = [
   { id: 'step5', organ: 'Operations', what: 'closed deal → delivered → recorded → the library grows', gate: '', prereg: 'data/step5-ops-prereg.json', run: 'data/step5-ops-run.json', repo: 'ai-first-company' },
   { id: 'step6', organ: 'Oversight', what: 'the approval queue, pause, focus and the dashboard', gate: '', prereg: 'data/step6-oversight-prereg.json', run: 'data/step6-oversight-run.json', repo: 'ai-first-company' },
   { id: 'step7', organ: 'The loop, closed', what: 'one full cycle with Simon asked only for the high-stakes steps', gate: '', prereg: 'data/step7-cycle-prereg.json', run: 'data/cycle-run.json', repo: 'ai-first-company' },
+  { id: 'growth1', organ: 'The growth gate', what: 'a technique becomes a skill only when it beats the sealed baseline', prereg: 'data/growth1-experiment-prereg.json', run: 'data/growth1-experiment-run.json', repo: 'ai-first-company' },
+  { id: 'mint1', organ: 'The guarantee engine', what: 'one signed test, the delivery judged against it alone', prereg: 'data/mint1-baseline-prereg.json', run: 'data/mint1-baseline-run.json', repo: 'ai-first-company' },
+  { id: 'mintv1', organ: 'The guarantee, run 1 (car, single-feature rules)', what: '', prereg: 'data/mint-demo-prereg.json', run: 'data/mint-demo-run.json', repo: 'ai-first-company' },
+  { id: 'mintv2', organ: 'The guarantee, run 2 (car, combined rules)', what: '', prereg: 'data/mint-demo-v2-prereg.json', run: 'data/mint-demo-v2-run.json', repo: 'ai-first-company' },
+  { id: 'mintv3', organ: 'The guarantee, run 3 (mushroom)', what: '', prereg: 'data/mint-demo-v3-prereg.json', run: 'data/mint-demo-v3-run.json', repo: 'ai-first-company' },
 ];
 const runs = await Promise.all(STEPS.map(async (s) => ({ s, pre: await getJSON(s.prereg), run: await getJSON(s.run) })));
-$('#organs tbody').innerHTML = runs.filter((x) => x.pre).map(({ s, run }) => `<tr><td><b>${esc(s.organ)}</b></td><td>${esc(s.what)}</td><td class="mono">${esc((run && run.gate) || s.gate || '—')}</td><td>${run ? `<span class="pill ${run.held === run.of ? 'ok' : 'wait'}">${run.held} of ${run.of} held</span>` : '<span class="pill">sealed, not yet measured</span>'}</td></tr>`).join('');
+const runOf = (id) => (runs.find((x) => x.s.id === id) || {}).run || null;
+const preOf = (id) => (runs.find((x) => x.s.id === id) || {}).pre || null;
+
+// ── the blueprint: every kernel, its tests, the gate's counts from a CI run's log, and a hash check here ─────────
+const KERNELS = [
+  ['The company loop', [
+    ['conductor', 'Routes every job to one of five arms; anything outward, money, a deal, a risky step or a verb it does not know as internal work goes to Simon', ['data/step1-conductor-run.json', 'data/step1b-conductor-run.json']],
+    ['brief', 'Writes Grok Bot’s read-only routine brief, opened by kar-passport’s public SYMB-FER token', ['data/step3-reach-run.json']],
+    ['reach', 'Reads what Grok Bot hands back: the shape is checked before the content, and instructions inside a post are data', ['data/step3-reach-run.json']],
+    ['funnel', 'A signal becomes qualified, then an offer, then a close; the person’s own words pick the offer, and every outward step waits for Simon', ['data/step4-funnel-run.json']],
+    ['journal', 'The hash chain every step is written into: one changed byte breaks it at that record', ['data/step4-funnel-run.json']],
+    ['ops', 'A closed deal is delivered, pinned to its receipt, recorded, and the library grows', ['data/step5-ops-run.json']],
+    ['oversight', 'The approval queue, pause, the owner’s focus and the dashboard, all read from the journal', ['data/step6-oversight-run.json']],
+    ['cycle', 'One whole loop, with Simon asked only for the high-stakes steps', ['data/cycle-run.json']],
+    ['page', 'This page’s dashboard and trace, re-derived from the cycle’s journal in your browser', []],
+    ['costcase', 'The cost case, the seat comparison and the years view, from sourced figures', []],
+  ]],
+  ['The bot team', [
+    ['feed', 'The one shared feed: redacts keys, tokens, emails and card numbers; flags a done with no receipt; one key per bot; the kill switch', ['data/team1-feed-run.json']],
+    ['rollup', 'Kar’s morning rollup: NEEDS SIMON first, then what the auditor held back, with reasons', ['data/team1-feed-run.json']],
+    ['roster', 'The eight roles as a fence: may this bot use this tool, on what condition', ['data/team2-roster-run.json', 'data/team2b-run.json']],
+    ['cards', 'Each bot’s card, written from the roster and stamped with its hash', ['data/team2-roster-run.json']],
+    ['auditor', 'The separate judge: receipts re-hashed, the seal before the code, tools against the fence, the words of anything going out', ['data/team3-auditor-run.json']],
+    ['skills', 'The skill library: a changed skill is unusable until the auditor passes it at its new hash', ['data/team6-skills-run.json']],
+  ]],
+  ['Growth', [
+    ['experiment', 'The growth gate: PROMOTE only on enough data, the sealed margin and the sealed critical value, from the numbers alone', ['data/growth1-experiment-run.json']],
+  ]],
+  ['The guarantee', [
+    ['baseline', 'The signed baseline agreement: the bytes both sign before work, and the verdict against that test alone', ['data/mint1-baseline-run.json']],
+    ['distill', 'Everything after the teacher speaks: read its rules, keep only what holds on the gate split, score once on the final split, sign', ['data/mint-demo-run.json', 'data/mint-demo-v2-run.json', 'data/mint-demo-v3-run.json']],
+  ]],
+];
+try {
+  const { hashOf } = await import('./src/journal.mjs' + BUST);
+  const kw = await getJSON('data/kernel-witness.json');
+  const getText = async (u) => { try { const r = await fetch(u + '?cb=' + Date.now()); return r.ok ? await r.text() : null; } catch { return null; } };
+  const lf = (t) => t.replace(/\r\n/g, '\n');
+  const allRuns = {};
+  for (const [, ks] of KERNELS) for (const [, , rs] of ks) for (const u of rs) if (!(u in allRuns)) allRuns[u] = null;
+  await Promise.all(Object.keys(allRuns).map(async (u) => { allRuns[u] = await getJSON(u); }));
+  let same = 0, changed = 0, total = 0, killed = 0;
+  const rows = [];
+  for (const [group, ks] of KERNELS) {
+    rows.push(`<tr><th colspan="4" style="padding-top:14px">${esc(group)}</th></tr>`);
+    for (const [k, what, rs] of ks) {
+      const e = kw && kw.kernels && kw.kernels[k];
+      let gate = '<span class="pill">gated in CI on every push</span>';
+      if (e) {
+        const [src, tst] = await Promise.all([getText(`src/${k}.mjs`), getText(`test/${k}.test.mjs`)]);
+        const fresh = src !== null && tst !== null && hashOf(lf(src)) === e.src && hashOf(lf(tst)) === e.test;
+        if (fresh) same++; else changed++;
+        total += e.total; killed += e.killed;
+        gate = `<span class="pill ${e.clean && e.survived === 0 ? 'ok' : 'no'}">${e.killed} of ${e.total} caught · ${e.survived} survived</span><div class="small ${fresh ? 'ok' : 'wait'}">${fresh ? '✓ the file served here is the file that was gated' : 'changed since that run: CI re-gates it on every push'}</div>`;
+      }
+      const claims = rs.map((u) => allRuns[u]).filter(Boolean).map((r) => `<span class="pill ${r.held === r.of ? 'ok' : 'wait'}">${r.held} of ${r.of}</span>`).join(' ') || '<span class="muted small">no measured claim: unit tests and the gate</span>';
+      rows.push(`<tr><td><a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/src/${esc(k)}.mjs"><code>${esc(k)}</code></a><div class="small"><a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/test/${esc(k)}.test.mjs">its tests</a></div></td><td class="small">${esc(what)}</td><td>${gate}</td><td>${claims}</td></tr>`);
+    }
+  }
+  $('#organs tbody').innerHTML = rows.join('');
+  $('#bp-head').innerHTML = kw
+    ? `<span class="pill ok">✓ ${killed} of ${total} changes caught across ${Object.keys(kw.kernels).length} kernels, none excused</span> <span class="pill ${changed ? 'wait' : 'ok'}">${same} of ${same + changed} files served here match the gated code</span> <span class="muted">from <a href="${esc(kw.runUrl)}">CI run ${esc(String(kw.run))}</a> at commit <code>${esc(kw.at)}</code>, witness ${esc(kw.witness.split(',')[0])}</span>`
+    : '<span class="muted">Every kernel is mutation-tested in CI on every push (<a href="https://github.com/sjgant80-hub/ai-first-company/actions/workflows/gate.yml">the runs</a>); the counts appear here once a run’s log is recorded.</span>';
+} catch { $('#organs tbody').innerHTML = '<tr><td colspan="4" class="muted">The blueprint could not be loaded: reload the page.</td></tr>'; }
 $('#receiptlist').innerHTML = runs.filter((x) => x.pre).map(({ s, pre, run }) => {
   const rows = (pre.claims || []).map((c) => { const m = run && run.claims && run.claims[c.id]; const st = !m ? '<span class="pill">not yet measured</span>' : m.pass ? '<span class="pill ok">✓ held</span>' : '<span class="pill no">✗ FAILED</span>'; return `<tr><td class="mono">${esc(c.id)}</td><td>${esc(c.claim)}</td><td>${st}<div class="small muted">${m ? esc(m.measured) : ''}</div></td></tr>`; }).join('');
   const head = run ? `${run.held} of ${run.of} held` : 'sealed, not yet measured';
@@ -318,13 +495,121 @@ $('#receiptlist').innerHTML = runs.filter((x) => x.pre).map(({ s, pre, run }) =>
   return `<details><summary>${esc(s.organ)} — ${esc(head)}</summary><p class="small">${esc(pre.question || '')}</p><div class="tablewrap"><table><thead><tr><th>Claim</th><th>What was claimed</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table></div><p class="small"><a href="${p(s.prereg)}">the seal</a>${run ? ` · <a href="${p(s.run)}">the receipt</a>` : ''}${pre.scope ? ` · scope: ${esc(pre.scope)}` : ''}</p></details>`;
 }).join('');
 
+// ── the growth gate: the real kernel, the sealed battery re-run here, the receipt ─────────────────────────────
+try {
+  const X = await import('./src/experiment.mjs' + BUST);
+  const gTry = () => {
+    const n = (id) => Number($(id).value);
+    const test = { id: 'try', channel: 'x', technique: 'new post', metric: 'hits', kind: 'rate', baseline: 0.05, direction: 'higher', minImprovement: n('#g-m') / 100, minSample: n('#g-s'), alpha: 0.05, zCrit: n('#g-z') };
+    const result = { testId: 'try', control: { n: n('#g-cn'), hits: n('#g-ch') }, variant: { n: n('#g-vn'), hits: n('#g-vh') } };
+    const v = X.verdict(test, result);
+    if (v.ok === false) { $('#g-out').innerHTML = `<span class="pill no">refused</span> <span class="small">${esc(v.why)}</span>`; return; }
+    const cls = v.decision === X.PROMOTE ? 'ok' : v.decision === X.DROP ? 'no' : 'wait';
+    const say = { PROMOTE: 'it becomes a versioned skill, carrying this test, these numbers and the receipt', DROP: 'it is not a skill; it stays on the record with its numbers', INSUFFICIENT: 'not enough data to say either way; nothing is promoted' }[v.decision];
+    $('#g-out').innerHTML = `<span class="pill ${cls}">${esc(v.decision)}</span> <span class="small">${esc(say)}</span><div class="small" style="margin-top:6px">why: ${esc(v.why)}</div><div class="small muted">lift ${esc(String(Math.round(v.improvement * 1e4) / 100))} points · effect ${esc(String(v.stat))} · receipt <span class="hash">${esc(X.receiptOf(test, result, v).slice(0, 24))}…</span></div>`;
+  };
+  $('#gform').addEventListener('input', gTry); $('#gform').addEventListener('submit', (ev) => ev.preventDefault()); gTry();
+
+  const gRun = runOf('growth1'), gPre = preOf('growth1');
+  if (gRun && gPre) {
+    const rows = gPre.claims.map((c) => { const m = gRun.claims[c.id]; return `<li><span class="pill ${m && m.pass ? 'ok' : 'no'}">${m && m.pass ? '✓ held' : '✗ failed'}</span> <b>${esc(c.id)}</b> ${esc(m ? m.measured : '')}</li>`; }).join('');
+    $('#g-receipt').innerHTML = `<details class="card"><summary>The gate’s receipt — ${gRun.held} of ${gRun.of} sealed claims held</summary><p class="small">${esc(gPre.question)}</p><ul class="small" style="padding-left:18px">${rows}</ul><p class="small"><a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/data/growth1-experiment-prereg.json">the seal</a> (committed before the code, at <code>${esc(gRun.seal)}</code>) · <a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/data/growth1-experiment-run.json">the receipt</a> · re-measured by CI on every push</p></details>`;
+  }
+  // the sealed battery: the same seeded generator the measure tool uses, then the kernel's verdict on every case
+  const { corpus } = await import('./tools/growth1-corpus.mjs' + BUST);
+  const { cases } = corpus();
+  const tally = { ins: 0, mar: 0, sig: 0, pro: 0 };
+  let pb = { skills: [], log: [] };
+  for (const c of cases) {
+    const v = X.verdict(c.test, c.result);
+    if (v.decision === X.INSUFFICIENT) tally.ins++;
+    else if (v.decision === X.PROMOTE) tally.pro++;
+    else if (v.improvement < c.test.minImprovement) tally.mar++;
+    else tally.sig++;
+    pb = X.promote(pb, c.test, c.result);
+  }
+  const drop = tally.mar + tally.sig;
+  $('#g-n-ins').textContent = `${tally.ins} of ${cases.length} cases`;
+  $('#g-n-mar').textContent = `${tally.mar} of ${cases.length} cases`;
+  $('#g-n-sig').textContent = `${tally.sig} of ${cases.length} cases`;
+  $('#g-n-pro').textContent = `${tally.pro} of ${cases.length} cases`;
+  $('#g-foot').textContent = `The sealed battery of ${cases.length} cases, re-run in your browser just now by the same kernel.`;
+  const e6 = gRun && gRun.claims.E6 ? gRun.claims.E6.measured : '';
+  const agrees = e6.includes(`${tally.pro} PROMOTE, ${drop} DROP, ${tally.ins} INSUFFICIENT`);
+  const skillsOk = pb.skills.length === tally.pro && pb.log.length === cases.length - tally.pro;
+  $('#g-battery').innerHTML = `${agrees ? '<span class="pill ok">✓ re-derived here, matches the receipt</span>' : '<span class="pill no">✗ differs from the receipt</span>'} <span class="pill ${skillsOk ? 'ok' : 'no'}">${pb.skills.length} skills · ${pb.log.length} on the record</span> <span class="muted">${tally.pro} PROMOTE · ${drop} DROP · ${tally.ins} INSUFFICIENT, from the seeded generator in <code>tools/growth1-corpus.mjs</code>. The receipt (claim E6): ${esc(e6)}.</span>`;
+} catch (e) { $('#g-battery').innerHTML = '<span class="muted">The growth gate could not be loaded: reload the page.</span>'; }
+
+// ── the guarantee engine: the three runs from their receipts, the worked example on the real kernel ───────────
+try {
+  const B = await import('./src/baseline.mjs' + BUST);
+  const { hashOf } = await import('./src/journal.mjs' + BUST);
+  const pct = (x) => (Math.round(x * 1000) / 10).toFixed(1) + '%';
+  const pts = (x) => (x >= 0 ? '+' : '') + (Math.round(x * 1000) / 10).toFixed(1) + ' pts';
+  const R = { v1: runOf('mintv1'), v2: runOf('mintv2'), v3: runOf('mintv3') };
+  const NAME = { v1: 'UCI Car Evaluation', v2: 'UCI Car Evaluation', v3: 'UCI Mushroom' };
+  const HOW = { v1: 'single-feature rules', v2: 'rules of up to three conditions', v3: 'single-feature rules' };
+  const FILE = { v1: 'data/mint-demo-run.json', v2: 'data/mint-demo-v2-run.json', v3: 'data/mint-demo-v3-run.json' };
+  $('#m-runs tbody').innerHTML = ['v1', 'v2', 'v3'].filter((k) => R[k]).map((k, i) => {
+    const r = R[k], rows = r.splitSizes.train + r.splitSizes.gate + r.splitSizes.final;
+    return `<tr><td><b>${i + 1}</b><div class="small muted">${esc(HOW[k])}</div></td><td class="small">${esc(NAME[k])}<br><span class="muted">${rows.toLocaleString('en-GB')} rows; exam ${r.splitSizes.final.toLocaleString('en-GB')}</span></td><td>${pct(r.baselineAccuracy)}</td><td>${pct(r.grownAccuracy)}</td><td>${pts(r.improvement)}</td><td>${r.rulesKept.length} of ${r.rulesParsed}</td><td><span class="pill ${r.charge === 'due' ? 'ok' : 'wait'}">${esc(r.charge)}</span></td><td><span class="pill ${r.held === r.of ? 'ok' : 'no'}">${r.held} of ${r.of} held</span><div class="small"><a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/${esc(FILE[k])}">receipt</a></div></td></tr>`;
+  }).join('');
+  const v3 = R.v3;
+  if (v3) {
+    const all = v3.splitSizes.train + v3.splitSizes.gate + v3.splitSizes.final;
+    $('#m-1').textContent = `UCI Mushroom, ${all.toLocaleString('en-GB')} public rows`;
+    $('#m-2').textContent = `baseline ${pct(v3.baselineAccuracy)}, the commonest class`;
+    $('#m-3').textContent = `${v3.rulesKept.length} of ${v3.rulesParsed} proposed rules kept`;
+    $('#m-4').textContent = `${pct(v3.grownAccuracy)} on ${v3.splitSizes.final.toLocaleString('en-GB')} unseen rows`;
+    $('#m-5').textContent = `${v3.decision}: ${pts(v3.improvement)}`;
+    $('#m-6').textContent = `${v3.charge} · receipt ${v3.receipt.slice(0, 12)}…`;
+  }
+  // re-derive the positive run here: the pinned public dataset, the teacher's reply recorded once, the same kernel
+  $('#m-rederive').addEventListener('click', async () => {
+    const out = $('#m-rederived');
+    out.textContent = 'fetching the pinned dataset and re-running…';
+    try {
+      const D = await import('./src/distill.mjs' + BUST);
+      const spec = D.RUNS.v3;
+      const text = await (await fetch(spec.dataset)).text();
+      if (!D.datasetOk(text, spec)) { out.innerHTML = '<span class="pill no">✗ the dataset does not match its pinned hash</span>'; return; }
+      const d = D.distil(spec, D.splitOf(D.rowsOf(text, spec)), v3.teacherReply);
+      const same = d.ok && d.receipt === v3.receipt && d.charge === v3.charge && d.grownAccuracy === v3.grownAccuracy;
+      out.innerHTML = same ? `<span class="pill ok">✓ identical</span> dataset hash checked, ${d.rulesKept.length} rules kept, ${pct(d.grownAccuracy)} on the exam, charge ${esc(d.charge)}, receipt <span class="hash">${esc(d.receipt.slice(0, 24))}…</span> = the committed one` : `<span class="pill no">✗ differs from the committed receipt</span>`;
+    } catch { out.innerHTML = '<span class="pill no">could not re-run here: reload the page</span>'; }
+  });
+  const m1 = runOf('mint1'), m1p = preOf('mint1');
+  if (m1 && m1p) {
+    const rows = m1p.claims.map((c) => { const m = m1.claims[c.id]; return `<li><span class="pill ${m && m.pass ? 'ok' : 'no'}">${m && m.pass ? '✓ held' : '✗ failed'}</span> <b>${esc(c.id)}</b> ${esc(m ? m.measured : '')}</li>`; }).join('');
+    $('#m-receipt').innerHTML = `<details class="card"><summary>The engine’s receipt — ${m1.held} of ${m1.of} sealed claims held</summary><p class="small">${esc(m1p.question)}</p><ul class="small" style="padding-left:18px">${rows}</ul><p class="small"><a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/data/mint1-baseline-prereg.json">the seal</a> (committed before the code, at <code>${esc(m1.seal)}</code>) · <a href="https://github.com/sjgant80-hub/ai-first-company/blob/main/data/mint1-baseline-run.json">the receipt</a> · re-measured by CI on every push</p></details>`;
+  }
+  // the worked example, on the real kernel (its placeholder price is left out: the decision never reads a price)
+  const ex = await getJSON('data/mint-intake-example.json');
+  if (ex) {
+    const { price, ...design } = ex.design;
+    const a = B.agreement(ex.intake, design);
+    const win = ex.example_delivery_that_beats_it, N = win.variant.n;
+    $('#m-ex').textContent = `${ex.intake.job}. Today, with ${ex.intake.currentTool}, the ${ex.intake.metric} is ${pct(ex.intake.baseline)}. The signed test asks for at least ${Math.round(design.minImprovement * 1000) / 10} points more, on at least ${design.minSample.toLocaleString('en-GB')} cases, at the ${design.zCrit} bar.`;
+    const sl = $('#m-hits');
+    sl.min = String(Math.round(N * ex.intake.baseline * 0.8)); sl.max = String(N); sl.value = String(win.variant.hits);
+    $('#m-hl').textContent = `What the delivery got right, of ${N.toLocaleString('en-GB')}`;
+    const mTry = () => {
+      const hits = Number(sl.value); $('#m-hv').textContent = String(hits);
+      if (!a.ok) { $('#m-out').innerHTML = `<span class="pill no">${esc(a.why)}</span>`; return; }
+      const o = B.outcome(a.agreement, { testId: a.agreement.test.id, control: win.control, variant: { n: N, hits } });
+      $('#m-out').innerHTML = o.ok ? `<span class="pill ${o.charge === 'due' ? 'ok' : 'wait'}">charge ${esc(o.charge)}</span> <span class="small">${o.beatsBaseline ? 'the delivery beats the signed baseline' : 'the delivery does not beat the signed baseline'}</span><div class="small" style="margin-top:6px">why: ${esc(o.why)}</div><div class="small muted">what both signed before work: <span class="hash">${esc(hashOf(B.signable(a.agreement)).slice(0, 24))}…</span> · this outcome’s receipt: <span class="hash">${esc(o.receipt.slice(0, 24))}…</span></div>` : `<span class="pill no">${esc(o.why)}</span>`;
+    };
+    sl.addEventListener('input', mTry); mTry();
+  }
+} catch (e) { $('#m-out').innerHTML = '<span class="muted">The guarantee engine could not be loaded: reload the page.</span>'; }
+
 // ── the cost case: hours × the UK median wage, from the vendored, sourced basis ─
 try {
   const { costCase, DEFAULT_HOURS, seatsNow } = await import('./src/costcase.mjs' + BUST);
   const basis = await getJSON('vendor/sovereign-enterprise/data/basis.json');
   const box = $('#costcase');
   const keys = Object.keys(DEFAULT_HOURS);
-  box.innerHTML = `<p class="small" style="margin-top:0">Set the hours a person spends each week on each job the loop does. The cost uses the UK median hourly wage from ONS ASHE 2025 (${esc(String(basis.wageMedianHourly.value))} per hour, <a href="${esc(basis.wageMedianHourly.source)}">source</a>), before employer on-costs — so it is a floor, not a pitch.</p>` +
+  box.innerHTML = `<p class="small" style="margin-top:0">Set the hours a person spends each week on each job the loop does. The cost uses the UK median hourly wage from ONS ASHE 2025 (£${esc(String(basis.wageMedianHourly.value))} per hour, <a href="${esc(basis.wageMedianHourly.source)}">source</a>), before employer on-costs — so it is a floor, not a pitch.</p>` +
     keys.map((k) => `<div class="barrow"><label for="h-${k}">${esc(DEFAULT_HOURS[k].label)}</label><input id="h-${k}" type="range" min="0" max="20" step="0.5" value="${DEFAULT_HOURS[k].hours}" aria-describedby="hv-${k}"><span class="v" id="hv-${k}">${DEFAULT_HOURS[k].hours} h</span></div>`).join('') +
     `<div class="barrow"><label for="wage">Your own hourly wage, if you know it (£)</label><input id="wage" type="number" min="0" max="500" step="0.01" value="${esc(String(basis.wageMedianHourly.value))}" style="font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)"><span class="v"></span></div>` +
     `<div class="grid g3" style="margin-top:12px"><div class="tile"><div class="n" id="cc-h">—</div><div class="l">hours a year the loop takes on</div></div><div class="tile"><div class="n" id="cc-c">—</div><div class="l">of a person's time at that wage, a year</div></div><div class="tile"><div class="n" id="cc-s">—</div><div class="l">approvals a week for the owner, at one cycle each working day (six asks a cycle)</div></div></div>`;
@@ -349,6 +634,33 @@ try {
   };
   sb.addEventListener('input', seatUpdate); seatUpdate();
   } catch { $('#seats').innerHTML = '<p class="muted small">The comparison could not be loaded: reload the page.</p>'; }
+  // the years view: the same hours, wage and seats as above, plus the electricity it uses, each with CPI after year one
+  try {
+    const { yearsCase } = await import('./src/costcase.mjs' + BUST);
+    const yb = $('#years');
+    const src = (k, label) => `<a href="${esc(basis[k].source)}">${label}</a>`;
+    yb.innerHTML = `<p class="small" style="margin-top:0">The hours, the wage and the seats are the ones you set above. Add how many years, and the extra power the machine draws to run it (the default is the laptop chip's base power from ${src('laptopExtraWatts', "Intel's specification")}, on all day, every day). Electricity is priced at ${esc(String(basis.electricityPencePerKwh.value))}p a kWh (${src('electricityPencePerKwh', 'DESNZ, non-domestic')}); every later year rises by UK CPI, ${esc(String(Math.round(basis.cpi.value * 1000) / 10))}% (${src('cpi', 'ONS')}).</p>` +
+      `<div class="barrow"><label for="y-n">Years</label><input id="y-n" type="range" min="1" max="10" step="1" value="3"><span class="v" id="y-v">3</span></div>` +
+      `<div class="barrow"><label for="y-w">Extra watts, always on</label><input id="y-w" type="range" min="0" max="200" step="5" value="${esc(String(basis.laptopExtraWatts.value))}"><span class="v" id="y-wv">${esc(String(basis.laptopExtraWatts.value))}</span></div>` +
+      `<div class="grid g4" style="margin-top:12px"><div class="tile"><div class="n" id="y-t">—</div><div class="l">the time it takes on, at your wage</div></div><div class="tile"><div class="n" id="y-s">—</div><div class="l">the seats it does without</div></div><div class="tile"><div class="n" id="y-p">—</div><div class="l">the electricity it uses</div></div><div class="tile"><div class="n" id="y-net">—</div><div class="l" id="y-netl">the difference</div></div></div>` +
+      `<p class="small muted" style="margin-bottom:0">Not in these figures, because they are not in the sourced basis: your existing Grok and Claude subscriptions, X's own per-post charge if you post, the owner's approval time (shown above as approvals a week), employer on-costs on the wage (so the time is a floor), and any price for the work itself, which is agreed per deployment.</p>`;
+    const gbp = (x) => '£' + Math.round(x).toLocaleString('en-GB');
+    const yUpdate = () => {
+      const n = Number($('#y-n').value), w = Number($('#y-w').value);
+      $('#y-v').textContent = String(n); $('#y-wv').textContent = String(w);
+      const own = Number($('#wage').value);
+      const hours = Object.fromEntries(Object.keys(DEFAULT_HOURS).map((k) => [k, Number($('#h-' + k).value)]));
+      const seatN = $('#seat-n') ? Number($('#seat-n').value) : 0;
+      const r = yearsCase(basis, { hours, wage: Number.isFinite(own) && own >= 0 ? own : basis.wageMedianHourly.value, seats: { crm: seatN, copilot: seatN }, watts: w, years: n });
+      $('#y-t').textContent = r.ok ? gbp(r.over.time) : '—';
+      $('#y-s').textContent = r.ok ? gbp(r.over.seats) : '—';
+      $('#y-p').textContent = r.ok ? gbp(r.over.power) : '—';
+      $('#y-net').textContent = r.ok ? gbp(r.net) : '—';
+      $('#y-netl').textContent = r.ok ? `over ${n} year${n === 1 ? '' : 's'}: the time and the seats, less the electricity` : (r.why || '');
+    };
+    for (const id of ['#years', '#costcase', '#seats']) $(id).addEventListener('input', yUpdate);
+    yUpdate();
+  } catch { $('#years').innerHTML = '<p class="muted small">The years view could not be loaded: reload the page.</p>'; }
 } catch { $('#costcase').innerHTML = '<p class="muted small">The cost case could not be loaded: reload the page.</p>'; }
 
 // ── the dashboard, from the rehearsal cycle's journal ─────────────────────────

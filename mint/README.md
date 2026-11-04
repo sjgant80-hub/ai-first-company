@@ -35,4 +35,4 @@ price never touches the decision — measured over a 400-delivery battery.
 - Any **public use** of the intake form or terms, and collecting a client's data, is a NEEDS-SIMON action.
 
 Credits: the Konomi architecture and the LIGHT language — Thomas Frumkin; GEP / behavioural ideas — Gary W. Floyd
-(CC BY 4.0), where used. Supplier on buyer-facing pages: AI-Native Solutions.
+(CC BY 4.0), where used. Supplier on buyer-facing pages: AI Native Solutions (https://www.ai-nativesolutions.com).

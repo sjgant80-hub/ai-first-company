@@ -46,11 +46,43 @@ Tools: `tools/team.mjs` (write a line, pause, roll up, verify, make a key, Simon
 (the auditor's own process), `tools/team-cards.mjs` (the cards), `tools/skills.mjs` (the skill library). Seals `data/team*-prereg.json`, receipts
 `data/team*-run.json`, witness results `data/team-witness.json`; CI re-measures every receipt and re-gates every kernel.
 
+## The growth gate and the guarantee engine (2 and 3 November 2026)
+
+One kernel answers two ways a company run by an AI can fool itself. On the page:
+[the growth gate](https://sjgant80-hub.github.io/ai-first-company/#growth) (try it, and its sealed battery re-runs in your
+browser) and [the guarantee engine](https://sjgant80-hub.github.io/ai-first-company/#guarantee) (the three real runs, one
+re-derived in your browser from the pinned public dataset, and the worked example on the real kernel).
+
+| What | Code | Sealed claims | Receipt |
+|---|---|---|---|
+| The growth gate: a technique becomes a versioned skill only when it beats the channel's sealed baseline (enough data in each arm, the sealed margin in the sealed direction, an effect at least the sealed critical value), whoever proposed it | `src/experiment.mjs` | 9 of 9 held (seal `6413751`, re-sealed `0b341b0` before any code) | `data/growth1-experiment-run.json` |
+| The guarantee engine: one fixed test both sides sign before work; the delivery is judged against that test alone, and the charge is due only when it beats the signed baseline (the price never enters the decision) | `src/baseline.mjs` (reuses `src/experiment.mjs`) | 6 of 6 held (seal `1041ee6`) | `data/mint1-baseline-run.json` |
+| Run 1, UCI Car, single-feature rules from a local teacher model | `src/distill.mjs`, `tools/mint-demo.mjs` | 1 of 2 held: did not beat the baseline, charge waived (kept) | `data/mint-demo-run.json` |
+| Run 2, UCI Car, rules of up to three conditions | `src/distill.mjs`, `tools/mint-demo-v2.mjs` | 0 of 2 held: no rule survived the gate, charge waived (kept) | `data/mint-demo-v2-run.json` |
+| Run 3, UCI Mushroom, single-feature rules | `src/distill.mjs`, `tools/mint-demo-v3.mjs` | 2 of 2 held: beat the baseline, charge due | `data/mint-demo-v3-run.json` |
+
+Each run was sealed before it ran; the teacher's reply was recorded once, and CI re-derives every receipt from it (no
+model call). The commercial side (the price, the money-back wording, the payment flow, and publishing the intake form
+in `mint/`) is Simon's decision and is not on the page.
+
+## The gate, for every kernel
+
+Every kernel in `src/` has its own test file and is mutation-tested on GitHub's runner by witness, pinned to its v0.6
+release, on every push; nothing is baselined. `test/site.test.mjs` fails the build if a kernel is added without being
+gated, if the witness clone is unpinned, if any kernel or vendored module reaches the network, the disk, a child
+process or the environment, or if any module imports from a package registry. The counts the page's blueprint shows are
+read from a CI run's own log by `tools/kernel-witness.mjs` into `data/kernel-witness.json`, and the page checks in the
+reader's browser that each file it serves hashes to the file that was gated.
+
 ## Live today vs waiting
 
-- Live: the conductor, the claim gate, the voice's queue (nothing posted), the dashboard on a rehearsal cycle.
+- Live: the conductor, the claim gate, the voice's queue (nothing posted), the dashboard on a rehearsal cycle, the bot
+  team's fence and auditor, the growth gate and the guarantee engine (each runs its real kernel in the reader's browser).
 - Waiting for Simon: authorising the X connector with his own keys (dry run until then); approving each post or reply in his
   own words; creating the Grok Bot routine from `data/grok-routine.example.txt` with his own handle and inbox repo.
+  For the guarantee: the price, the exact money-back wording, the payment flow, and any public use of the intake form
+  and terms or collection of a client's data. For the bot team: his own signing key, a cloud schedule for the night run,
+  the consent list, and keys per role for the bots that run on Grok Bot's computer.
 - Waiting for X: an AI reply bot beyond answering people who summon us needs X's prior written approval — not built.
 
 Supplied by AI Native Solutions — https://www.ai-nativesolutions.com. MIT. SYMB-FER is SYMBEYOND AI LLC's protocol

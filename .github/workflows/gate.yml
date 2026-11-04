@@ -45,6 +45,11 @@ jobs:
           node tools/growth1-measure.mjs --check && node tools/growth1-measure.mjs --verify
           # mint-a-department step 1: the baseline-agreement seal is unchanged and its receipt re-measures
           node tools/mint1-measure.mjs --check && node tools/mint1-measure.mjs --verify
+          # mint-a-department step 2: the three teacher-distillation runs (two kept nulls, one positive) — each seal and
+          # pinned public dataset unchanged, each receipt re-derived from the teacher reply recorded once (no model call)
+          for t in mint-demo mint-demo-v2 mint-demo-v3; do node tools/$t.mjs --check && node tools/$t.mjs --verify; done
+          # the mutation gate's counts the page shows: whole, clean, and read from a CI run's own log
+          node tools/kernel-witness.mjs --check
       - name: every offer link the funnel drafts into a reply is alive (a renamed repo once broke one)
         run: |
           node --input-type=module -e "
@@ -54,27 +59,25 @@ jobs:
           process.exit(bad ? 1 : 0);"
 
   witness:
-    name: mutation gate (witness)
+    name: mutation gate (witness v0.6, pinned)
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
           path: ai-first-company
-      - name: clone the witness gate
-        run: git clone --depth 1 https://github.com/sjgant80-hub/witness.git witness
+      - name: clone the witness gate, pinned to v0.6 (every kernel is gated by the same tagged release)
+        run: git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git witness-v0.6
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: witness every kernel (refuse anything short of clean)
+      - name: witness the company loop's kernels (refuse anything short of clean; nothing baselined)
         working-directory: ai-first-company
         run: |
-          gate() { node ../witness/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
-          for k in conductor brief reach journal funnel; do gate $k; done
-          for k in ops oversight cycle costcase page; do if [ -f "src/$k.mjs" ] && [ -f "test/$k.test.mjs" ]; then gate $k; fi; done
-      - name: witness the bot team's kernels with witness v0.6, pinned (refuse anything short of clean)
+          gate6() { node ../witness-v0.6/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
+          for k in conductor brief reach journal funnel ops oversight cycle costcase page; do gate6 $k; done
+      - name: witness the bot team's, the growth gate's and the guarantee's kernels (refuse anything short of clean)
         working-directory: ai-first-company
         run: |
-          git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git ../witness-v0.6
           gate6() { node ../witness-v0.6/witness.mjs mutate "src/$1.mjs" --cap 1000 --timeout 120000 --test node --test "test/$1.test.mjs" | tee "$1.out"; grep -q '"clean": true' "$1.out" || { echo "::error::mutants survived in src/$1.mjs"; exit 1; }; }
           for k in feed rollup roster cards auditor skills experiment baseline distill; do gate6 $k; done
