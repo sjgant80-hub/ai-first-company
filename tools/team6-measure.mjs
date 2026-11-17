@@ -4,7 +4,9 @@
 //   node tools/team6-measure.mjs --private   K5, once, on Kar's machine: the auditor's skill check on the real feed
 //   node tools/team6-measure.mjs --run       every claim → data/team6-skills-run.json
 //   node tools/team6-measure.mjs --verify    re-measure; must equal the committed receipt
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdtempSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { generateKeyPairSync, sign, verify as edVerify } from 'node:crypto';
 import { AGENTS, PERSONAS, entry, read, append, signingText } from '../src/feed.mjs';
@@ -101,8 +103,21 @@ if (cmd === '--check') {
   if (git('show', `${SEAL}:${PREREG}`).replace(/\r\n/g, '\n').trim() !== readFileSync(file(PREREG), 'utf8').replace(/\r\n/g, '\n').trim()) { console.error('✗ the step 6 seal changed since ' + SEAL); process.exit(1); }
   console.error('✓ step 6 seal unchanged since ' + SEAL);
 } else if (cmd === '--private') await privateRun();
-else if (cmd === '--run' || cmd === '--verify') {
+else if (cmd === '--verify') {
+  // step 6 describes the skill library as it was measured (four skills). A skill added later (check-draft, 17 Nov) must
+  // not break that record, nor be silently counted into it. So, like step 2's roster.mjs, step 6 is re-measured at its own
+  // commit: a temporary worktree there runs that commit's own --verify against that commit's receipt. Separately, the
+  // receipt committed today must be byte-for-byte the one measured then.
+  const MEASURED = '4992c1f';
+  if (lf(git('show', `${MEASURED}:${RUN}`)) !== lf(readFileSync(file(RUN), 'utf8'))) { console.error('✗ the step 6 receipt changed since it was measured at ' + MEASURED); process.exit(1); }
+  const dir = mkdtempSync(join(tmpdir(), 'team6-at-' + MEASURED + '-'));
+  try {
+    git('worktree', 'add', '--detach', '--quiet', dir, MEASURED);
+    const r = spawnSync(process.execPath, ['tools/team6-measure.mjs', '--verify'], { cwd: dir, encoding: 'utf8', timeout: 900000 });
+    if (r.status !== 0) { console.error('✗ step 6 does not re-measure at its own commit ' + MEASURED + ': ' + String(r.stderr).trim().split('\n').pop()); process.exit(1); }
+    console.error(String(r.stderr).trim().split('\n').pop() + ' (at its own commit ' + MEASURED + '; the receipt unchanged since)');
+  } finally { try { git('worktree', 'remove', '--force', dir); } catch { rmSync(dir, { recursive: true, force: true }); } }
+} else if (cmd === '--run') {
   const result = measure(), out = JSON.stringify(result, null, 1) + '\n';
-  if (cmd === '--run') { writeFileSync(file(RUN), out); console.error(`✓ ${result.held} of 6 held`); for (const [k, x] of Object.entries(result.claims)) console.error(`  ${k} ${x.pass ? 'HELD' : 'FAILED'} · ${x.measured}`); }
-  else { if (lf(readFileSync(file(RUN), 'utf8')) !== out) { console.error('✗ step 6 does not re-measure to the committed receipt'); process.exit(1); } console.error(`✓ step 6 re-measured: ${result.held} of 6 held, identical to the committed receipt`); }
+  writeFileSync(file(RUN), out); console.error(`✓ ${result.held} of 6 held`); for (const [k, x] of Object.entries(result.claims)) console.error(`  ${k} ${x.pass ? 'HELD' : 'FAILED'} · ${x.measured}`);
 } else if (cmd) { console.error('team6-measure — --check | --private | --run | --verify'); process.exit(2); }
