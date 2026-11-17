@@ -1,0 +1,37 @@
+{
+ "kind": "ai-first-company-draftgate-prereg",
+ "v": 1,
+ "sealed": "2026-11-17",
+ "question": "Can the auditor check a reach draft (a post or a listing) BEFORE it goes out, so that Grok's 'Kar is the gate' (plans/GROK_MISSION.md §4) runs as a tool and not only by hand?",
+ "why": "On 17 Nov Simon's charter told Grok to post three claims that do not stand: '600+ MCPs' (the index has 385 named, 138 cannot install), '86.3% vs 1.3%' (the 1.3% baseline crashed on 25 of 80; a fair re-run is pending), and a third claim that is true but must not be said yet. Kar caught all three by hand. The auditor already reads outward words (earnings, crypto, hype, money, jargon, a number with no link); it does not yet check the numbers against what the link shows, a licence claim against the repo, or claims that are true but must not be said yet.",
+ "design": {
+  "holds": "ctx.holds: [{ match, why }] from the PRIVATE estate-continuity team/holds.json (like team/jargon.json: the public code never names a hold). A draft whose words match a hold's regular expression (case-insensitive) FAILs with that hold's reason.",
+  "licence": "facts.licence: { repo, found }. A draft that says MIT (or 'open source licence') while the linked repo has no LICENSE file FAILs.",
+  "backing": "facts.linked: { found, text }, the bytes of the draft's link (a GitHub blob pinned to a commit is read raw at that commit). Every number in the draft must appear in those bytes: as text, or as a JSON number. A percentage is also backed by a backed 'a of b' in the same draft whose 100·a/b rounds to it (one decimal). Numbers joined to letters (0.5B, 7B, v2, 1c6264b) are names, not counts. A number not found FLAGs. A link that cannot be read FLAGs. A draft with numbers and no link keeps today's FLAG.",
+  "holdsTest": "The real holds are private, so this public seal never quotes one. B3 uses a made-up hold ('codename bluebird') passed as ctx.holds in the test. The same run also loads the real private list and reports, in the private repo only, that each real hold FAILs a draft written to match it.",
+  "skill": "skills/check-draft: node skills/check-draft/scripts/check-draft.mjs --text '…' [--link URL] [--kind post|listing] → the verdict JSON; exit 0 only on PASS. Grok runs it before every post or listing; a FLAG or FAIL goes to Kar, not out.",
+  "unchanged": "Every existing check, its words and its verdict rules are kept; the new checks only add FLAG or FAIL reasons, so nothing that FLAGs or FAILs today can PASS."
+ },
+ "drafts": {
+  "bad": [
+   { "id": "B1", "text": "Our estate ships 600+ MCP servers you can run today.", "link": null, "mustBe": "not PASS", "by": "a number with no receipt (600), and the hold on '600+ MCP'" },
+   { "id": "B2", "text": "A 0.5B model inside a verified library got 86.3% vs raw 7B at 1.3% on 80 held-out legal complaints.", "link": "https://github.com/sjgant80-hub/slm-suite/blob/d6f8fdb6a9820fb36e4d8edd7ff5e3b9e6b1e960/data/record.json", "mustBe": "FAIL", "by": "the hold on the 1.3% comparison" },
+   { "id": "B3", "text": "Our next launch, codename Bluebird, ships in June.", "link": null, "mustBe": "FAIL", "by": "a hold (the public test uses this made-up hold, codename bluebird; the real hold list is private and checked privately, see design.holdsTest)" },
+   { "id": "B4", "text": "bonded-pair, MIT licensed: the monolith scored 89.9, the ensemble 88.7, the pair 86.3.", "link": "https://github.com/sjgant80-hub/bonded-pair", "mustBe": "FAIL", "by": "an MIT claim on a repo with no LICENSE" },
+   { "id": "B5", "text": "Routing across ten domains: on its final exam the library answered 276 of 290 correctly, against 98 for the cheap baseline.", "link": "https://github.com/sjgant80-hub/pattern-libraries/blob/6de8cb0ae821f0543a2cba966831266143b1da28/data/clinc/nights/cycle-1.json", "mustBe": "not PASS", "by": "a number the linked record does not show (276; the record says 275)" },
+   { "id": "B6", "text": "witness on vercel/ms: 15/17 mutants killed. Get the skill from $5.", "link": "https://github.com/sjgant80-hub/witness/blob/68d95e253915779a136e804b7e4aab0d81b7acd2/README.md", "mustBe": "not PASS", "by": "a money amount (prices are Simon's)" }
+  ],
+  "good": [
+   { "id": "G1", "text": "witness on vercel/ms, pinned at its own commit: 15/17 mutants killed, 2 survivors its tests never pin.", "link": "https://github.com/sjgant80-hub/witness/blob/68d95e253915779a136e804b7e4aab0d81b7acd2/README.md", "mustBe": "PASS" },
+   { "id": "G2", "text": "slm-suite: the stack was exactly right or rightly abstained on 69 of 80 held-out complaints (86.3%).", "link": "https://github.com/sjgant80-hub/slm-suite/blob/d6f8fdb6a9820fb36e4d8edd7ff5e3b9e6b1e960/data/record.json", "mustBe": "PASS" },
+   { "id": "G3", "text": "Routing across ten domains: on its final exam the library answered 275 of 290 correctly, against 98 for the cheap baseline.", "link": "https://github.com/sjgant80-hub/pattern-libraries/blob/6de8cb0ae821f0543a2cba966831266143b1da28/data/clinc/nights/cycle-1.json", "mustBe": "PASS" }
+  ]
+ },
+ "claims": [
+  { "id": "D1", "claim": "Every bad draft is held: B2, B3 and B4 FAIL; B1, B5 and B6 do not PASS. Each is caught by the check its 'by' names (that check's reason is among the draft's findings).", "pass": "6 of 6 held, each by its named check" },
+  { "id": "D2", "claim": "At least 2 of the 3 good drafts PASS (a strict number check may refuse an honest one; the count is kept either way).", "pass": "≥ 2 of 3 PASS" },
+  { "id": "D3", "claim": "The auditor's kernel stays clean under witness, uncapped, with its new checks tested.", "pass": "witness clean on src/auditor.mjs" },
+  { "id": "D4", "claim": "Reported, not passed or failed: the gate run over Grok's posts named in AGENT_FEED (17 Nov sync) with the links they cite, every FLAG or FAIL hand-checked by Kar as right or wrong.", "pass": "reported" }
+ ],
+ "scope": "Six bad and three good drafts written before the code, plus Grok's real posts as a report. It checks numbers, licences and held claims; it does not judge whether a sentence's meaning matches the receipt beyond its numbers."
+}
