@@ -74,6 +74,7 @@
       <li><span class="pill ok">✓ live</span> The company's voice on X, key-ready: drafts from receipts, claim-gated in your browser, <a href="https://sjgant80-hub.github.io/kar-voice/">each waiting for approval</a>. Nothing has been posted.</li>
       <li><span class="pill ok">✓ live</span> The growth gate (from 2 Nov 2026): a marketing technique becomes a skill only when it beats the channel's own sealed baseline, and the verdict comes from the numbers, never from who proposed it. Its sealed battery re-runs in your browser. <a href="#growth">See it ↓</a></li>
       <li><span class="pill ok">✓ live</span> The guarantee engine (from 2 Nov 2026): one fixed test both sides sign before any work, and the delivery judged against it alone: the charge is due only when the delivery beats the signed baseline. Three real runs on public data, two of them losses, all kept. <a href="#guarantee">See it ↓</a></li>
+      <li><span class="pill ok">✓ live</span> The Origination Engine (from 17 Nov 2026): Kar finds the gaps himself, keeps only those with attested demand, and puts each one to the cheapest test before anything is built. <a href="#origin">The ledger</a>.</li>
       <li><span class="pill wait">⏳ Simon</span> Authorising the X connector (his own keys; until then every post is a dry run) and approving each post or reply in his own words.</li>
       <li><span class="pill wait">⏳ Simon</span> Creating the reach routine in his own Grok Bot from the brief this repo makes (Grok Bot reads X read-only on his account).</li>
       <li><span class="pill wait">⏳ X</span> A reply bot beyond answering people who summon us needs X's prior written approval. It is not built, and not wanted.</li>
@@ -83,7 +84,7 @@
 </header>
 
 <nav class="toc" aria-label="On this page">
-  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#team">The bot team</a><a href="#growth">Growth gate</a><a href="#guarantee">The guarantee</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
+  <a href="#start">Start here</a><a href="#dashboard">Dashboard</a><a href="#try">Try the conductor</a><a href="#team">The bot team</a><a href="#growth">Growth gate</a><a href="#guarantee">The guarantee</a><a href="#origin">Origination</a><a href="#how">How it works</a><a href="#blueprint">Blueprint</a><a href="#receipts">Receipts</a><a href="#business">For your business</a><a href="#case">The case</a><a href="#paper">White paper</a>
 </nav>
 
 <section id="start">
@@ -239,6 +240,16 @@
       <p class="small" style="margin-bottom:0">Not on this page: a price, a deposit or the exact wording of the money-back terms. Those are Simon's to set, and so is publishing the intake form and taking any client's data. <span class="pill wait">⏳ Simon</span> Until he decides, this section shows the engine and its evidence and offers nothing for sale.</p></div>
   </div>
   <div id="m-receipt" style="margin-top:12px"></div>
+</section>
+
+<section id="origin">
+  <h2>The Origination Engine</h2>
+  <p class="sub">Kar invents the catalogue himself. Ideas are free; the gate is evidence. A gap goes forward only with <b>attested demand</b> inside the estate's own forest (sovereign AI, agent tooling, verification, small models for a niche, the trust layer). That means 3 or more linked, dated sources, from 2 or more places, of 2 or more kinds (people looking, people complaining, or people paying for a workaround). Each survivor then gets the <b>cheapest demand test</b>, written down before it runs. The market's answer decides: build or kill. A test too few people saw is <i>unrun</i>, never a kill.</p>
+  <div class="card">
+    <div class="small muted" id="originsum">Loading the ledger…</div>
+    <div class="scrollx"><table class="small" id="origintable"></table></div>
+    <p class="small muted">The table is judged in your browser by the real gate (<code>src/origin.mjs</code>, mutation-tested), from <a href="data/origin-ledger.json">the ledger</a>. The rules were sealed before the code: <a href="data/origin-prereg.json">data/origin-prereg.json</a>. Each source is a link and one short line, never copied text. Tests that take money, set a price or collect personal data need Simon's recorded approval.</p>
+  </div>
 </section>
 
 <section id="how">
@@ -722,6 +733,20 @@ try {
   }
   $('#teamreceipts').innerHTML = blocks.join('');
 } catch (e) { $('#teamreceipts').innerHTML = '<p class="muted">The team section could not be loaded: reload the page.</p>'; }
+// the Origination Engine: the ledger, judged here by the real gate
+try {
+  const O = await import('./src/origin.mjs' + BUST), L = await getJSON('data/origin-ledger.json');
+  if (!L) throw new Error('no ledger');
+  const today = new Date().toISOString().slice(0, 10), f = O.funnel(L.ideas, today);
+  const STAGE = { daydream: 'daydream: not enough evidence', attested: 'attested, no test yet', testing: 'under test', build: 'BUILD: the market answered', kill: 'killed (cost £0 unless shown)', unrun: 'unrun: too few saw it' };
+  $('#originsum').innerHTML = esc(f.scanned + ' gaps scanned (first scan ' + L.scanned + ') · ' + (f.testing + f.build + f.kill + f.unrun + f.attested) + ' attested · ' + f.testing + ' under test · ' + f.build + ' to build · ' + f.kill + ' killed · ' + f.unrun + ' unrun · ' + f.daydream + ' daydream · spent £' + f.spent);
+  $('#origintable').innerHTML = '<thead><tr><th>Gap</th><th>Evidence</th><th>Stage</th><th>The test</th></tr></thead><tbody>' + L.ideas.map((i) => {
+    const a = O.attest(i, i.scanned), st = O.stageOf(i, today);
+    const ev = i.evidence.map((e) => '<li><a href="' + esc(e.url) + '">' + esc(e.kind) + ', ' + esc(e.date) + '</a>: ' + esc(e.said) + '</li>').join('');
+    const t = i.test ? esc('bar ' + i.test.bar + ' ' + i.test.metric + ' with at least ' + i.test.exposure.min + ' ' + i.test.exposure.metric + ', ' + i.test.opens + ' to ' + i.test.closes + ', £' + i.test.cost) + (i.result ? '<div>result: ' + esc(JSON.stringify(i.result)) + '</div>' : '') : '<span class="muted">none</span>';
+    return '<tr><td><b>' + esc(i.title) + '</b><div class="muted">' + esc(i.forest.join(', ')) + (i.edge ? ' · our edge: ' + esc(i.edge) : '') + '</div></td><td><ul class="small">' + ev + '</ul><div class="muted">' + esc(a.counted.items + ' items, ' + a.counted.hosts + ' sources, ' + a.counted.kinds + ' kinds') + (a.ok ? '' : ' · ' + esc(a.why.join('; '))) + '</div></td><td><span class="pill ' + (st === 'build' ? 'ok' : st === 'daydream' || st === 'kill' ? 'no' : 'wait') + '">' + esc(STAGE[st]) + '</span></td><td>' + t + '</td></tr>';
+  }).join('') + '</tbody>';
+} catch (e) { $('#originsum').textContent = 'The ledger could not be loaded: reload the page.'; }
 </script>
 </body>
 </html>

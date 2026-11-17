@@ -74,9 +74,10 @@ process or the environment, or if any module imports from a package registry. Th
 read from a CI run's own log by `tools/kernel-witness.mjs` into `data/kernel-witness.json`, and the page checks in the
 reader's browser that each file it serves hashes to the file that was gated.
 
-The current receipt: CI run [41892773758](https://github.com/sjgant80-hub/ai-first-company/actions/runs/41892773758)
-at `cc3a884`, 19 kernels, 782 of 782 mutants caught, 0 survived, nothing baselined (the growth gate `experiment`
-82/82, the guarantee's `baseline` 13/13 and `distill` 33/33).
+The current receipt: CI run [44133273829](https://github.com/sjgant80-hub/ai-first-company/actions/runs/44133273829)
+at `a6db836`, 20 kernels, 873 of 873 mutants caught, 0 survived, nothing baselined (the growth gate `experiment`
+82/82, the guarantee's `baseline` 13/13, `distill` 33/33, the auditor with its draft gate 99/99 and the Origination
+Engine's `origin` 65/65).
 
 ## Live today vs waiting
 

@@ -2,9 +2,9 @@
  "kind": "ai-first-company-kernel-witness",
  "witness": "v0.6, pinned (git clone --branch v0.6), --cap 1000, nothing baselined",
  "ranOn": "GitHub Actions (ubuntu-latest), the gate workflow",
- "run": 41892773758,
- "runUrl": "https://github.com/sjgant80-hub/ai-first-company/actions/runs/41892773758",
- "at": "cc3a884",
+ "run": 44133273829,
+ "runUrl": "https://github.com/sjgant80-hub/ai-first-company/actions/runs/44133273829",
+ "at": "a6db836",
  "kernels": {
   "conductor": {
    "total": 32,
@@ -147,14 +147,14 @@
    "test": "ff1b9b6fe4905de97e79188d455852fa78115c80629113110614c193ed1819bc"
   },
   "auditor": {
-   "total": 73,
-   "killed": 73,
+   "total": 99,
+   "killed": 99,
    "survived": 0,
    "ignored": 0,
    "capped": false,
    "clean": true,
-   "src": "6b7e49db4da297fd840d4a66653e2f89a19e3082c02adbf67307b92a80d57690",
-   "test": "22c2cac777219d61a7678b3c3c5d1c4d6206916fa91feb86541a9a055b34951d"
+   "src": "693cd23c7f792a3a9aa50f97c2cd5ab5a140f89a57a08c56021c4a59aa5c516b",
+   "test": "b2d3e9cc3481894c2d2e73749144740c4bb3b9ed4e8e455fc7f46f097c3fbc44"
   },
   "skills": {
    "total": 27,
@@ -195,6 +195,16 @@
    "clean": true,
    "src": "28eaacc439a15e28d53a92eb563953a2f94edce6df3d11666b561dd15dbaa48b",
    "test": "34ec02cf780329cd368e5ef936c8141ca5b87137058d55a680766d10e66ac425"
+  },
+  "origin": {
+   "total": 65,
+   "killed": 65,
+   "survived": 0,
+   "ignored": 0,
+   "capped": false,
+   "clean": true,
+   "src": "69c6ba83fdbfab0ae45b94775b128915572d23e0fc23de45da9b97cf10b19425",
+   "test": "ffde1353172cddb415f6d75c3e30d7b66c5076217b3ee745473bd2b5a83bf33b"
   }
  }
 }
