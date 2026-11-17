@@ -21,6 +21,28 @@
    }
   },
   {
+   "name": "check-draft",
+   "version": "1.0.0",
+   "owner": "auditor",
+   "callers": [
+    "reach",
+    "money-time",
+    "card-keeper",
+    "kar",
+    "auditor"
+   ],
+   "description": "Before a post or listing goes out - every number on its link, no MIT claim without a LICENSE, nothing on the hold list, the team's words law.",
+   "named": "check-draft",
+   "path": "skills/check-draft",
+   "sha256": "e4a81f6ae63475391123be2f685f46a0d218578ee2c7afa6fc6d84bc51cc507e",
+   "has": {
+    "SKILL.md": true,
+    "scripts": true,
+    "tests": true,
+    "receipt.json": true
+   }
+  },
+  {
    "name": "check-fence",
    "version": "1.0.0",
    "owner": "kar",

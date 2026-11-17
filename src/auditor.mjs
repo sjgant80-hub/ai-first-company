@@ -13,6 +13,10 @@
 //   verdicts(lines)          → { [ref]: the auditor's latest SIGNED verdict on it }
 //   forApproval(lines)       → the open needs-owner lines whose latest signed verdict is PASS: all that goes to Simon
 //   heldBack(lines)          → the other open needs-owner lines, with the verdict that holds them
+//   counts(text)             → the standalone numbers in a draft (0.5B, v2 and commit hashes are names, not counts)
+//   shows(text, count, draft) → does a link's text back this number (as written, a JSON number, or a percentage of one)
+//   on posts and listings it also checks holds (ctx.holds, private), a licence claim (facts.licence) and that every
+//   number is on the link (facts.linked) — data/draftgate-prereg.json
 import { claimsDone, answered } from './feed.mjs';
 import { may, toolOf } from './roster.mjs';
 
@@ -81,6 +85,8 @@ export function backed(receipt, a, b) {
 
 function receipt(line, facts) {
   if (!claimsDone(line.kind, line.what) && line.receipt_sha256 === undefined) return [];
+  // a post or listing whose link was read is judged number by number against it (draft() below), not by this rule
+  if (OUT_KINDS.includes(line.kind) && isObj(facts.linked) && facts.linked.found === true) return [];
   if (!str(line.link)) return [{ check: 'receipt', result: 'FLAG', evidence: 'a done with no receipt link' }];
   const pin = pinOf(line.link);
   if (!pin) return [{ check: 'receipt', result: 'FLAG', evidence: 'the receipt link is not pinned to a commit: ' + line.link }];
@@ -131,6 +137,59 @@ function tools(line, ctx) {
   return out;
 }
 
+// ── a reach draft before it goes out (data/draftgate-prereg.json) ───────────────────────────────────────────────
+// counts(text) → every standalone number in the text, as written (commas dropped), each with its % sign if it has one;
+// a number joined to letters (0.5B, 7B, v2, a commit hash) is a name, not a count
+export function counts(text) {
+  return [...str(text).matchAll(/(?<![\w.,#])(\d[\d,]*(?:\.\d+)?)(?![\w]|[.,]\d)(\s?%)?/g)].map((m) => ({ n: m[1].replace(/,/g, ''), pct: m[2] !== undefined }));
+}
+const numbersIn = (v, out = []) => { if (typeof v === 'number') out.push(v); else if (Array.isArray(v)) for (const x of v) numbersIn(x, out); else if (isObj(v)) for (const x of Object.values(v)) numbersIn(x, out); return out; };
+const decimals = (s) => (s.includes('.') ? s.split('.')[1].length : 0);
+// shows(text, c, draft) → does the linked text back this number: as written, as a JSON number, or (a percentage) as a
+// JSON fraction or a backed 'a of b' in the same draft that rounds to it
+export function shows(text, c, draft) {
+  const t = str(text), n = str(c && c.n);
+  if (!/^\d+(\.\d+)?$/.test(n)) return false;
+  const withCommas = n.replace(/^(\d+)/, (w) => w.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+  for (const form of new Set([n, withCommas])) if (new RegExp('(?<![\\d.])' + form.replace('.', '\\.') + '(?![\\d]|\\.\\d)').test(t)) return true;
+  let json = null;
+  try { json = JSON.parse(t); } catch { /* not JSON */ }
+  const vals = json === null ? [] : numbersIn(json), v = Number(n);
+  if (vals.includes(v)) return true;
+  if (!c.pct) return false;
+  const d = decimals(n);
+  if (vals.some((x) => (x * 100).toFixed(d) === n)) return true;
+  // a of 0 gives Infinity or NaN, which no draft number (digits only) can equal: no guard needed
+  return fractions(draft).some(([a, b]) => backedHere(t, json, a, b) && ((100 * a) / b).toFixed(d) === n);
+}
+const backedHere = (t, json, a, b) => shows(t, { n: a, pct: false }, '') && shows(t, { n: b, pct: false }, '');
+
+function draft(line, facts, ctx) {
+  if (!OUT_KINDS.includes(line.kind)) return [];
+  const t = [str(line.what), str(line.quote)].filter(Boolean).join(' '), out = [];
+  // holds: true or not, these must not be said yet (the list is private: ctx.holds, from team/holds.json)
+  for (const h of list(ctx.holds)) {
+    let re = null;
+    try { re = new RegExp(str(h.match), 'i'); } catch { out.push({ check: 'hold', result: 'FLAG', evidence: `hold ${str(h.id)} does not compile, so it was not checked` }); continue; }
+    if (str(h.match) && re.test(t)) out.push({ check: 'hold', result: 'FAIL', evidence: `held (${str(h.id)}): ${str(h.why)}` });
+  }
+  // a licence claim needs the licence file
+  const lic = isObj(facts.licence) ? facts.licence : null;
+  if (lic && lic.found === false && /\bMIT\b|open[- ]source licen[cs]e/i.test(t)) out.push({ check: 'licence', result: 'FAIL', evidence: `says MIT, but ${str(lic.repo) || 'the linked repo'} has no LICENSE file` });
+  // every number backed by what the link shows
+  const cs = counts(t);
+  if (cs.length && !str(line.link) && !NUMBER.test(t) && !MONEY.test(t)) out.push({ check: 'backing', result: 'FLAG', evidence: 'numbers with no link: ' + cs.map((c) => c.n + (c.pct ? '%' : '')).join(', ') });
+  const L = isObj(facts.linked) ? facts.linked : null;
+  if (L && str(line.link)) {
+    if (L.found !== true) out.push({ check: 'backing', result: 'FLAG', evidence: 'the link could not be read: ' + line.link });
+    else {
+      const missing = cs.filter((c) => !shows(L.text, c, t)).map((c) => c.n + (c.pct ? '%' : ''));
+      out.push(missing.length ? { check: 'backing', result: 'FLAG', evidence: 'the link does not show: ' + missing.join(', ') } : { check: 'backing', result: 'ok', evidence: cs.length ? 'every number is on the link (' + cs.length + ')' : 'no numbers' });
+    }
+  }
+  return out;
+}
+
 function judge(line, facts) {
   if (!OUT_KINDS.includes(line.kind)) return [];
   return list(facts.judge).filter((j) => str(j.label)).map((j) => ({ check: 'judge', result: 'FLAG', evidence: `the local model: ${j.label}: "${str(j.quote)}"` }));
@@ -147,7 +206,7 @@ export function audit(line, facts, ctx) {
   if (!isObj(line)) return { verdict: 'FAIL', checks: [{ check: 'line', result: 'FAIL', evidence: 'not a line' }] };
   const F = isObj(facts) ? facts : {}, C = isObj(ctx) ? ctx : {};
   const words_ = OUT_KINDS.includes(line.kind) || line.needs_owner === true ? words(line, C) : [];
-  const checks = [...receipt(line, F), ...seal(line, F), ...rerun(F), ...tools(line, C), ...words_, ...judge(line, F)];
+  const checks = [...receipt(line, F), ...seal(line, F), ...rerun(F), ...tools(line, C), ...words_, ...draft(line, F, C), ...judge(line, F)];
   const verdict = checks.some((c) => c.result === 'FAIL') ? 'FAIL' : checks.some((c) => c.result === 'FLAG') ? 'FLAG' : 'PASS';
   return { verdict, checks };
 }
@@ -157,4 +216,4 @@ const open = (lines) => { const L = list(lines), done = answered(L); return L.fi
 export const forApproval = (lines) => { const v = verdicts(lines); return open(lines).filter((x) => v[x.id] === 'PASS'); };
 export const heldBack = (lines) => { const v = verdicts(lines); return open(lines).filter((x) => v[x.id] !== 'PASS').map((x) => ({ line: x, verdict: v[x.id] || 'not yet audited' })); };
 
-export default { RESULTS, EARN, CRYPTO, HYPE, MONEY, NUMBER, JARGON, pinOf, fractions, backed, verdicts, auditable, audit, forApproval, heldBack };
+export default { RESULTS, EARN, CRYPTO, HYPE, MONEY, NUMBER, JARGON, pinOf, fractions, backed, counts, shows, verdicts, auditable, audit, forApproval, heldBack };

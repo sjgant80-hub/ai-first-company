@@ -90,6 +90,8 @@ export const rosterNow = () => JSON.parse(readFileSync(new URL('data/roster.json
 export const consentNow = () => { try { return JSON.parse(readFileSync(join(REPO, 'team', 'consent.json'), 'utf8')); } catch { return { partners: [] }; } };
 /** in-house words a buyer would not know, kept in the shared repo so this public code never names them */
 export const jargonNow = () => { try { const j = JSON.parse(readFileSync(join(REPO, 'team', 'jargon.json'), 'utf8')); return Array.isArray(j.words) ? j.words : []; } catch { return []; } };
+/** claims that must not be said yet (team/holds.json, private like the jargon list): a draft matching one FAILs */
+export const holdsNow = () => { try { const j = JSON.parse(readFileSync(join(REPO, 'team', 'holds.json'), 'utf8')); return Array.isArray(j.holds) ? j.holds : []; } catch { return []; } };
 
 /** the verdict line the auditor writes for one audited line */
 export function verdictLine(line, result) {
@@ -102,7 +104,7 @@ export function verdictLine(line, result) {
 export async function auditFeed({ rerun = false, judge = true, cache = {} } = {}) {
   const text = existsSync(join(REPO, '.estate', 'feed.jsonl')) ? readFileSync(join(REPO, '.estate', 'feed.jsonl'), 'utf8') : '';
   const { lines } = read(text, isSigned);
-  const ctx = { roster: rosterNow(), lines, consent: consentNow(), jargon: jargonNow() }, done = verdicts(lines);
+  const ctx = { roster: rosterNow(), lines, consent: consentNow(), jargon: jargonNow(), holds: holdsNow() }, done = verdicts(lines);
   const out = [];
   for (const line of lines) {
     if (!auditable(line, ctx) || done[line.id]) continue;

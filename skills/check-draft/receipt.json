@@ -1,0 +1,54 @@
+{
+ "kind": "skill-receipt",
+ "skill": "check-draft",
+ "ran": "2026-11-17",
+ "note": "Two sample answers from the real script: a draft whose every number is on its pinned link (PASS, exit 0), and one matching the public fixture hold (FAIL, exit 1). The full sealed measurement is data/draftgate-run.json.",
+ "samples": [
+  {
+   "args": [
+    "--text",
+    "witness on vercel/ms, pinned at its own commit: 15/17 mutants killed, 2 survivors its tests never pin.",
+    "--link",
+    "https://github.com/sjgant80-hub/witness/blob/68d95e253915779a136e804b7e4aab0d81b7acd2/README.md"
+   ],
+   "answer": {
+    "verdict": "PASS",
+    "link": "https://github.com/sjgant80-hub/witness/blob/68d95e253915779a136e804b7e4aab0d81b7acd2/README.md",
+    "checks": [
+     {
+      "check": "tools",
+      "result": "ok",
+      "evidence": "on the list: post.draft"
+     },
+     {
+      "check": "backing",
+      "result": "ok",
+      "evidence": "every number is on the link (3)"
+     }
+    ]
+   }
+  },
+  {
+   "args": [
+    "--text",
+    "Our next launch, codename Bluebird, ships in June."
+   ],
+   "answer": {
+    "verdict": "FAIL",
+    "link": null,
+    "checks": [
+     {
+      "check": "tools",
+      "result": "ok",
+      "evidence": "on the list: post.draft"
+     },
+     {
+      "check": "hold",
+      "result": "FAIL",
+      "evidence": "held (fixture-bluebird): a made-up hold for the public test"
+     }
+    ]
+   }
+  }
+ ]
+}

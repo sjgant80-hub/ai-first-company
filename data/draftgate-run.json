@@ -1,0 +1,105 @@
+{
+ "kind": "ai-first-company-draftgate-run",
+ "v": 1,
+ "ran": "2026-11-17",
+ "holds": "data/draftgate-holds.fixture.json",
+ "rows": [
+  {
+   "id": "B1",
+   "verdict": "FAIL",
+   "mustBe": "not PASS",
+   "asSealed": true,
+   "byNamedCheck": true,
+   "findings": [
+    "hold FAIL: held (600-mcps): the estate has 385 repos named mcp; a count comes only from a checked pass list",
+    "backing FLAG: numbers with no link: 600"
+   ]
+  },
+  {
+   "id": "B2",
+   "verdict": "FAIL",
+   "mustBe": "FAIL",
+   "asSealed": true,
+   "byNamedCheck": true,
+   "findings": [
+    "hold FAIL: held (raw-7b-1.3): the raw-7B 1.3% baseline crashed on 25 of 80; a fair re-run is pending",
+    "backing FLAG: the link does not show: 86.3%, 1.3%"
+   ]
+  },
+  {
+   "id": "B3",
+   "verdict": "FAIL",
+   "mustBe": "FAIL",
+   "asSealed": true,
+   "byNamedCheck": true,
+   "findings": [
+    "hold FAIL: held (fixture-bluebird): a made-up hold for the public test"
+   ]
+  },
+  {
+   "id": "B4",
+   "verdict": "FAIL",
+   "mustBe": "FAIL",
+   "asSealed": true,
+   "byNamedCheck": true,
+   "findings": [
+    "licence FAIL: says MIT, but sjgant80-hub/bonded-pair has no LICENSE file",
+    "backing FLAG: the link does not show: 89.9, 88.7, 86.3"
+   ]
+  },
+  {
+   "id": "B5",
+   "verdict": "FLAG",
+   "mustBe": "not PASS",
+   "asSealed": true,
+   "byNamedCheck": true,
+   "findings": [
+    "backing FLAG: the link does not show: 276"
+   ]
+  },
+  {
+   "id": "B6",
+   "verdict": "FLAG",
+   "mustBe": "not PASS",
+   "asSealed": true,
+   "byNamedCheck": true,
+   "findings": [
+    "words FLAG: a money amount: \"$5.\" (prices are Simon's)"
+   ]
+  },
+  {
+   "id": "G1",
+   "verdict": "PASS",
+   "mustBe": "PASS",
+   "asSealed": true,
+   "byNamedCheck": null,
+   "findings": []
+  },
+  {
+   "id": "G2",
+   "verdict": "PASS",
+   "mustBe": "PASS",
+   "asSealed": true,
+   "byNamedCheck": null,
+   "findings": []
+  },
+  {
+   "id": "G3",
+   "verdict": "PASS",
+   "mustBe": "PASS",
+   "asSealed": true,
+   "byNamedCheck": null,
+   "findings": []
+  }
+ ],
+ "claims": {
+  "D1": {
+   "pass": true,
+   "held": "6 of 6"
+  },
+  "D2": {
+   "pass": true,
+   "good": "3 of 3"
+  }
+ }
+}

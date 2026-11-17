@@ -1,0 +1,8 @@
+{
+ "note": "The public test's holds for data/draftgate-prereg.json. 'codename bluebird' is made up and stands in for the private holds, which live in the shared repo's team/holds.json and are never named in this code. The other two are not secret: they are copies of real holds whose reasons are already public on the pages they concern. The 1.3% one was lifted on 17 Nov, once the fair 7B re-run was published (slm-suite b172bba). It stays here as a test case, because the sealed draft B2 is judged against it.",
+ "holds": [
+  { "id": "fixture-bluebird", "match": "codename bluebird", "why": "a made-up hold for the public test" },
+  { "id": "raw-7b-1.3", "match": "1\\.3\\s?%|1 of 80|1/80", "why": "the raw-7B 1.3% baseline crashed on 25 of 80; a fair re-run is pending" },
+  { "id": "600-mcps", "match": "\\b6\\d\\d\\s?\\+?\\s*(mcp|mcps|mcp servers)\\b|\\bhundreds of (working )?mcp", "why": "the estate has 385 repos named mcp; a count comes only from a checked pass list" }
+ ]
+}

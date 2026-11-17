@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { RESULTS, pinOf, fractions, backed, verdicts, auditable, audit, forApproval, heldBack } from '../src/auditor.mjs';
+import { RESULTS, pinOf, fractions, backed, counts, shows, verdicts, auditable, audit, forApproval, heldBack } from '../src/auditor.mjs';
 
 const roster = JSON.parse(readFileSync(new URL('../data/roster.json', import.meta.url), 'utf8'));
 const C = 'a'.repeat(40), H = 'b'.repeat(64), LINK = `https://github.com/sjgant80-hub/r/blob/${C}/data/x-run.json`;
@@ -176,4 +176,89 @@ test('verdicts, forApproval, heldBack: only signed PASSes reach Simon', () => {
   assert.deepEqual(verdicts([V('x', 'maybe'), null]), {});
   assert.deepEqual(forApproval('x'), []);
   assert.deepEqual(heldBack(null), []);
+});
+
+// ── a reach draft before it goes out (data/draftgate-prereg.json) ───────────────────────────────────────────────
+test('counts: standalone numbers, commas dropped, a % kept; names (0.5B, v2, hashes) and decimals inside dotted names are not counts', () => {
+  assert.deepEqual(counts('a 0.5B model got 86.3% on 69 of 80; 1,500 rows; v2; 1c6264b; $5; 290. And 3 %.'), [
+    { n: '86.3', pct: true }, { n: '69', pct: false }, { n: '80', pct: false }, { n: '1500', pct: false }, { n: '5', pct: false }, { n: '290', pct: false }, { n: '3', pct: true }]);
+  assert.deepEqual(counts('version 1.2.3 and x.5 and 7,'), [{ n: '7', pct: false }]);
+  assert.deepEqual(counts('issue #12 and rank #1'), [], 'a number after # is a name or a rank, not a count');
+  assert.deepEqual(counts(null), []);
+});
+test('shows: a number as written, with commas, as a JSON value, and a percentage from a JSON fraction or a backed a-of-b', () => {
+  const draft = '69 of 80 (86.3%)';
+  assert.equal(shows('held 275 of 290', { n: '275', pct: false }, ''), true);
+  assert.equal(shows('held 2750 of 290', { n: '275', pct: false }, ''), false, 'not inside a longer number');
+  assert.equal(shows('held 1275', { n: '275', pct: false }, ''), false);
+  assert.equal(shows('held 275.5', { n: '275', pct: false }, ''), false, 'not the whole part of a decimal');
+  assert.equal(shows('rows 1,500 in all', { n: '1500', pct: false }, ''), true);
+  assert.equal(shows('rows 1500 in all', { n: '1500', pct: false }, ''), true);
+  assert.equal(shows('{"a":{"b":[1e3]}}', { n: '1000', pct: false }, ''), true, 'a JSON number in another form');
+  assert.equal(shows('{"a":1}', { n: '2', pct: false }, ''), false);
+  assert.equal(shows('{"share":0.8625}', { n: '86.3', pct: true }, ''), true, 'a JSON fraction that rounds to it');
+  assert.equal(shows('{"share":0.8625}', { n: '86.3', pct: false }, ''), false, 'only a percentage may be a fraction');
+  assert.equal(shows('{"share":0.8625}', { n: '86', pct: true }, ''), true, 'rounded to the draft\'s own decimals');
+  assert.equal(shows('{"share":0.8625}', { n: '86.25', pct: true }, ''), true);
+  assert.equal(shows('{"share":0.8625}', { n: '86.2', pct: true }, ''), false);
+  assert.equal(shows('stack 69 of 80', { n: '86.3', pct: true }, draft), true, 'from a backed a of b in the draft');
+  assert.equal(shows('stack 69 of 81', { n: '86.3', pct: true }, draft), false, 'the fraction must be backed: 80 is not on it');
+  assert.equal(shows('stack 70 of 80', { n: '86.3', pct: true }, draft), false, 'and 69');
+  assert.equal(shows('stack 69 of 80', { n: '86.3', pct: false }, draft), false, 'a bare number is never a fraction');
+  assert.equal(shows('0 of 0', { n: '0', pct: true }, '0 of 0'), true, 'as written');
+  assert.equal(shows('nothing', { n: 'NaN', pct: true }, '0 of 0'), false);
+  assert.equal(shows('5 of 0', { n: '50', pct: true }, '5 of 0'), false, 'no division by zero');
+  assert.equal(shows('x', { n: '12a' }, ''), false); assert.equal(shows('x', null, ''), false); assert.equal(shows(null, { n: '1' }, ''), false);
+  assert.equal(shows('[3.5]', { n: '3.5', pct: false }, ''), true);
+  assert.equal(shows('3x5', { n: '3.5', pct: false }, ''), false, 'the dot is a dot');
+});
+const D = (o) => ({ agent: 'reach', kind: 'post', what: 'a post', link: '', ...o });
+const dctx = (holds) => ({ ...ctx(), holds });
+const on = (r, check) => r.checks.filter((c) => c.check === check);
+test('holds: a draft matching a private hold FAILs with its reason; no match, an empty match or another kind does not', () => {
+  const holds = [{ id: 'h1', match: 'codename bluebird', why: 'not yet' }, { id: 'h2', match: '', why: 'empty' }];
+  const r = audit(D({ what: 'Our CODENAME Bluebird ships' }), {}, dctx(holds));
+  assert.equal(r.verdict, 'FAIL'); assert.deepEqual(on(r, 'hold'), [{ check: 'hold', result: 'FAIL', evidence: 'held (h1): not yet' }]);
+  assert.deepEqual(on(audit(D({ what: 'a quiet launch', quote: 'codename bluebird' }), {}, dctx(holds)), 'hold').length, 1, 'the quote is read too');
+  assert.deepEqual(on(audit(D({ what: 'a quiet launch' }), {}, dctx(holds)), 'hold'), []);
+  assert.deepEqual(on(audit(D({ kind: 'note', what: 'codename bluebird' }), {}, dctx(holds)), 'hold'), [], 'only posts and listings');
+  assert.deepEqual(on(audit(D({ kind: 'listing', what: 'codename bluebird' }), {}, dctx(holds)), 'hold').length, 1);
+  const bad = audit(D({ what: 'x' }), {}, dctx([{ id: 'h3', match: '(', why: 'broken' }]));
+  assert.deepEqual(on(bad, 'hold'), [{ check: 'hold', result: 'FLAG', evidence: 'hold h3 does not compile, so it was not checked' }]);
+  assert.equal(bad.verdict, 'FLAG');
+  assert.deepEqual(on(audit(D({ what: 'x' }), {}, dctx('none')), 'hold'), []);
+});
+test('licence: an MIT claim FAILs when the linked repo has no LICENSE; a found licence, no claim, or no lookup says nothing', () => {
+  const lic = (found) => ({ licence: { repo: 'o/r', found } });
+  assert.deepEqual(on(audit(D({ what: 'MIT licensed' }), lic(false), dctx([])), 'licence'), [{ check: 'licence', result: 'FAIL', evidence: 'says MIT, but o/r has no LICENSE file' }]);
+  assert.equal(on(audit(D({ what: 'under an open-source license' }), lic(false), dctx([])), 'licence').length, 1);
+  assert.equal(on(audit(D({ what: 'an open source licence' }), lic(false), dctx([])), 'licence').length, 1);
+  assert.equal(on(audit(D({ what: 'SUBMIT now' }), lic(false), dctx([])), 'licence').length, 0, 'MIT as a word, not inside one');
+  assert.equal(on(audit(D({ what: 'MIT licensed' }), lic(true), dctx([])), 'licence').length, 0);
+  assert.equal(on(audit(D({ what: 'MIT licensed' }), {}, dctx([])), 'licence').length, 0);
+  assert.equal(on(audit(D({ what: 'MIT' }), { licence: { found: false } }, dctx([])), 'licence')[0].evidence, 'says MIT, but the linked repo has no LICENSE file');
+});
+test('backing: every number on the link, or a FLAG naming what is missing; an unreadable link FLAGs; numbers with no link FLAG', () => {
+  const linked = (text) => ({ linked: { found: true, text } }), LK = 'https://github.com/o/r/blob/' + 'c'.repeat(40) + '/x.json';
+  const ok = audit(D({ what: '275 of 290, against 98', link: LK }), linked('{"a":275,"b":290,"c":98}'), dctx([]));
+  assert.deepEqual(on(ok, 'backing'), [{ check: 'backing', result: 'ok', evidence: 'every number is on the link (3)' }]);
+  assert.equal(ok.verdict, 'PASS');
+  assert.deepEqual(on(audit(D({ what: 'no figures here', link: LK }), linked('{}'), dctx([])), 'backing'), [{ check: 'backing', result: 'ok', evidence: 'no numbers' }]);
+  const miss = audit(D({ what: '276 of 290 and 12%', link: LK }), linked('275 290'), dctx([]));
+  assert.deepEqual(on(miss, 'backing'), [{ check: 'backing', result: 'FLAG', evidence: 'the link does not show: 276, 12%' }]);
+  assert.equal(miss.verdict, 'FLAG');
+  assert.deepEqual(on(audit(D({ what: 'see 5', link: LK }), { linked: { found: false } }, dctx([])), 'backing'), [{ check: 'backing', result: 'FLAG', evidence: 'the link could not be read: ' + LK }]);
+  assert.deepEqual(on(audit(D({ what: 'see 5', link: LK }), { linked: 'x' }, dctx([])), 'backing'), [], 'no lookup made: nothing said');
+  assert.deepEqual(on(audit(D({ what: 'see 5' }), linked('5'), dctx([])), 'backing'), [{ check: 'backing', result: 'FLAG', evidence: 'numbers with no link: 5' }], 'a lookup with no link is not a link');
+  assert.deepEqual(on(audit(D({ what: 'we ship 600+ servers and 3%' }), {}, dctx([])), 'backing'), [], 'today\'s number check already flags 3%: not said twice');
+  assert.deepEqual(on(audit(D({ what: 'we ship 600+ servers from £5' }), {}, dctx([])), 'backing'), [], 'nor after a money flag');
+  assert.deepEqual(on(audit(D({ what: 'we ship 600+ servers' }), {}, dctx([])), 'backing'), [{ check: 'backing', result: 'FLAG', evidence: 'numbers with no link: 600' }]);
+  assert.deepEqual(on(audit(D({ what: 'no numbers at all' }), {}, dctx([])), 'backing'), []);
+  assert.deepEqual(on(audit(D({ kind: 'note', what: '600 of them', link: LK }), linked('1'), dctx([])), 'backing'), [], 'only posts and listings');
+  // a done post whose link was read is judged by backing, not by the feed's receipt rule (which wants its hash)
+  const done = audit(D({ what: 'shipped: 69 of 80 right', link: LK }), linked('{"stack":69,"n":80}'), dctx([]));
+  assert.deepEqual(on(done, 'receipt'), []); assert.equal(done.verdict, 'PASS');
+  assert.equal(on(audit(D({ what: 'shipped: 69 of 80 right', link: LK }), { linked: { found: false } }, dctx([])), 'receipt').length, 1, 'an unread link keeps the receipt rule');
+  assert.equal(on(audit(D({ kind: 'note', what: 'shipped: 69 of 80 right', link: LK }), linked('{"stack":69,"n":80}'), dctx([])), 'receipt').length, 1, 'and so does a feed line');
+  assert.equal(on(audit(D({ what: 'shipped: 69 of 80 right', link: LK }), { linked: 'yes' }, dctx([])), 'receipt').length, 1);
 });
