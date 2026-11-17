@@ -1,0 +1,35 @@
+{
+ "kind": "ai-first-company-origin-prereg",
+ "v": 1,
+ "sealed": "2026-11-17",
+ "question": "Can Kar originate products himself (find gaps, keep only those with attested demand, test the cheapest way before building, build only what the market answers) with every step on the record and the market, not Kar's confidence, as the judge?",
+ "why": "Simon's Origination Engine spec, 17 Nov 2026: 'ideas are free, validation is the gate'; 'a gap is not a market'; 'test before you build, always'; 'hunt your own forest'; 'most ideas should die cheap'. One correction to the spec, from the record: the estate's cheap build rail is not '600 MCPs'. On 17 Nov, 385 repos were named mcp and 2 passed a buyer's check. The edge is the verified-kernel stack (witness, the gate, the pattern libraries).",
+ "design": {
+  "forest": "A gap must carry at least one of the estate's own forest tags: sovereign-ai, mcp-agent-tooling, verification, slm-niche, trust-layer. A gap outside the forest is refused, however strong its demand ('someone else's gap').",
+  "attest": "Attested demand, all of these:\n- at least 3 evidence items (each a public https URL, its host, a date and what it says in 25 words or fewer);\n- from at least 2 distinct hosts;\n- of at least 2 distinct kinds (looking, paying for a workaround, complaining), or at least 1 'paying';\n- every item dated within 365 days of the scan and not in the future.\nThe same URL counts once. Anything less stays a daydream: logged, never tested.",
+  "test": "The cheapest demand test, written before it runs. Its fields:\n- kind: post, issue, listing, landing or waitlist;\n- channel;\n- the metric it counts: clicks, signups, reactions, installs or preorders;\n- the bar: a whole number of at least 1;\n- the exposure that makes it a real test: a metric and a minimum;\n- the window: open and close dates, at most 30 days;\n- its cost in pounds;\n- the date it was sealed, on or before it opens.\nA test that takes money, sets a price, or collects personal data (a waitlist, a pre-sell, a buy button) is refused unless it records Simon's approval.",
+  "judge": "The test's verdict, from its sealed numbers alone:\n- OPEN before it closes;\n- UNRUN when the exposure fell short of the sealed minimum (never a kill: nobody saw it);\n- BUILD when the metric reached the bar;\n- KILL otherwise.",
+  "funnel": "The ledger's counts at each stage: scanned, attested, tested, open, build, kill, unrun. Also the total spent, and what the kills cost."
+ },
+ "fixtures": {
+  "refused": [
+   { "id": "F1", "case": "in the forest, no evidence" },
+   { "id": "F2", "case": "three items, all from one host" },
+   { "id": "F3", "case": "three items, one kind only (complaining), none paying" },
+   { "id": "F4", "case": "one item older than 365 days, leaving two" },
+   { "id": "F5", "case": "strong demand, outside the forest (phone cases)" },
+   { "id": "F6", "case": "the same URL three times" }
+  ],
+  "accepted": [
+   { "id": "F7", "case": "3 items, 3 hosts, 2 kinds, all recent" },
+   { "id": "F8", "case": "3 items, 2 hosts, one kind, one of them paying" }
+  ]
+ },
+ "claims": [
+  { "id": "O1", "claim": "The gate refuses F1 to F6, each for its own reason, and accepts F7 and F8.", "pass": "6 refused, 2 accepted, each reason named" },
+  { "id": "O2", "claim": "A test is judged only from what was sealed. A test sealed after it opened, or with no bar, cannot be judged. Too little exposure is UNRUN, never KILL or BUILD. A money, price or personal-data test without Simon's approval is refused.", "pass": "all four, in the kernel's tests" },
+  { "id": "O3", "claim": "Reported, not passed or failed: the first real scan. The gaps found with the gate off, those that pass attest (each with its sources linked), and a cheapest test proposed for each survivor, its bar sealed before it runs. Nothing is built from this scan.", "pass": "reported in data/origin-ledger.json" },
+  { "id": "O4", "claim": "The kernel is clean under witness, uncapped.", "pass": "witness clean on src/origin.mjs" }
+ ],
+ "scope": "The engine and its first scan. A demand test that goes outward runs through the team's existing rails: Grok's posts on the agreed cadence, checked by check-draft. A test needing money, a price or personal data waits for Simon. The scan's evidence is quoted in 25 words or fewer and linked, never copied wholesale."
+}
