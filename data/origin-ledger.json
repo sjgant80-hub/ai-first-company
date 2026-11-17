@@ -1,0 +1,64 @@
+{
+ "kind": "ai-first-company-origin-ledger",
+ "v": 1,
+ "note": "The Origination Engine's ledger (sealed rules: data/origin-prereg.json; gate: src/origin.mjs). First scan 17 Nov 2026, gate off, inside the forest. Sources: Hacker News (its search API, dated), GitHub issues (dated) and pages whose date was read off the page. Each line is a summary of 25 words or fewer, never copied text. Two search results (dev.to posts) returned 404 when opened and were not used.",
+ "scanned": "2026-11-17",
+ "ideas": [
+  {
+   "id": "ai-test-theatre",
+   "title": "AI-written tests that pass but catch nothing: proof that a suite would catch a regression",
+   "forest": ["verification"],
+   "edge": "witness, the estate's mutation gate, already does this and is live",
+   "scanned": "2026-11-17",
+   "evidence": [
+    { "kind": "complaining", "url": "https://news.ycombinator.com/item?id=50062158", "date": "2026-10-12", "said": "CI bloated with untargeted AI test slop that has not been mutation tested or checked by a human." },
+    { "kind": "complaining", "url": "https://news.ycombinator.com/item?id=48495058", "date": "2026-06-11", "said": "Mutation testing found a test passing even when the method returned an empty string; AI tests at scale will have this problem." },
+    { "kind": "looking", "url": "https://news.ycombinator.com/item?id=47504909", "date": "2026-03-24", "said": "The open problem is verifying that agents' tests actually test what they are supposed to." },
+    { "kind": "complaining", "url": "https://codemyspec.com/blog/agentic-testing", "date": "2026-04-02", "said": "When one AI writes the code and its tests, the tests confirm its misunderstandings and passing suites hide broken apps." }
+   ],
+   "test": { "kind": "post", "channel": "X @ainativesol via Grok: two proof-led posts on the agreed cadence, each passing check-draft, linking https://sjgant80-hub.github.io/witness/", "metric": "clicks", "bar": 5, "exposure": { "metric": "impressions", "min": 300 }, "opens": "2026-11-18", "closes": "2026-11-25", "sealed": "2026-11-17", "cost": 0 },
+   "result": null
+  },
+  {
+   "id": "agent-spend-caps",
+   "title": "A hard spend cap for AI agents that actually holds, with a receipt of what was spent",
+   "forest": ["mcp-agent-tooling", "trust-layer"],
+   "edge": "kar-tally (an MIT verifier skill) and the spend wall the estate runs on its own API key",
+   "scanned": "2026-11-17",
+   "evidence": [
+    { "kind": "complaining", "url": "https://github.com/anthropics/claude-code/issues/73795", "date": "2026-07-03", "said": "Charged $1,771 in four hours against a $25 spending limit." },
+    { "kind": "complaining", "url": "https://github.com/anthropics/claude-code/issues/67031", "date": "2026-06-10", "said": "A monthly spending limit was not enforced, allowing overage charges." },
+    { "kind": "looking", "url": "https://github.com/anthropics/claude-code/issues/95964", "date": "2026-09-22", "said": "Asks for a per-session spend cap in interactive sessions; the budget flag works only in print mode." },
+    { "kind": "complaining", "url": "https://news.ycombinator.com/item?id=47418575", "date": "2026-03-17", "said": "A runaway agent left running for twenty minutes ran up a surprise bill, so the author built a kill switch." }
+   ],
+   "test": { "kind": "post", "channel": "X @ainativesol via Grok: two proof-led posts on the agreed cadence, each passing check-draft, linking the kar-tally page", "metric": "clicks", "bar": 5, "exposure": { "metric": "impressions", "min": 300 }, "opens": "2026-11-18", "closes": "2026-11-25", "sealed": "2026-11-17", "cost": 0 },
+   "result": null
+  },
+  {
+   "id": "agent-audit-trail",
+   "title": "A tamper-evident audit record of every tool call an agent makes, that a regulator can verify",
+   "forest": ["trust-layer", "mcp-agent-tooling"],
+   "edge": "the trust rail (receipts re-run by anyone) and fallcore-mcp in front of the FallCore proxy's log",
+   "scanned": "2026-11-17",
+   "evidence": [
+    { "kind": "looking", "url": "https://github.com/modelcontextprotocol/financial-services-interest-group/issues/17", "date": "2026-10-16", "said": "An outline for a tool-call audit record a regulator can verify." },
+    { "kind": "looking", "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3004", "date": "2026-07-02", "said": "A proposed standard: a tamper-evident audit record contract for MCP." },
+    { "kind": "looking", "url": "https://news.ycombinator.com/item?id=49591371", "date": "2026-09-06", "said": "Add immutable logs and approval gates for any agent action touching money, data exports or production." },
+    { "kind": "looking", "url": "https://news.ycombinator.com/item?id=48335321", "date": "2026-05-30", "said": "Enterprises need MCP providers to tell whether a call came from a human or an LLM, and audit it." }
+   ],
+   "why": "Strong interest, all of one kind: people looking, a standard being drafted. Nobody yet complaining that they lack it, or paying for a workaround. A daydream until that evidence exists."
+  },
+  {
+   "id": "hallucinated-citations",
+   "title": "A check that every legal citation in an AI-drafted filing exists, before it reaches a court",
+   "forest": ["verification"],
+   "edge": "CiteLock, an MIT verifier skill",
+   "scanned": "2026-11-17",
+   "evidence": [
+    { "kind": "complaining", "url": "https://vaquill.ai/blog/ai-hallucination-sanctions-tracker", "date": "2026-10-12", "said": "US court decisions involving lawyers' AI hallucinations: 207 in 2025, 361 so far in 2026 (third-party count)." },
+    { "kind": "complaining", "url": "https://news.ycombinator.com/item?id=50158310", "date": "2026-10-19", "said": "Law firms are wary of AI tools after hallucinated citations led to sanctions, fines and a licence suspension." }
+   ],
+   "why": "Two dated items only; the October sanctions coverage found was from October 2025, older than a year. A daydream until a third recent source (ideally someone paying for a check) is found."
+  }
+ ]
+}

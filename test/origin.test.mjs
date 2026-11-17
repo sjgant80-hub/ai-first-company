@@ -151,3 +151,16 @@ test('stageOf and funnel: every idea at its stage; only tests that ran are spent
   assert.deepEqual(funnel('x', AS), { scanned: 0, daydream: 0, attested: 0, testing: 0, build: 0, kill: 0, unrun: 0, spent: 0, killCost: 0 });
   assert.equal(stageOf(null, AS), 'daydream');
 });
+
+// ── the first real scan (data/origin-ledger.json, O3): its verdicts re-derive from the gate ─────────────────────────
+import { readFileSync } from 'node:fs';
+test('the ledger: every item linked, dated and short; the gate gives the stages the scan reported', () => {
+  const L = JSON.parse(readFileSync(new URL('../data/origin-ledger.json', import.meta.url), 'utf8'));
+  for (const i of L.ideas) for (const e of i.evidence) {
+    assert.match(e.url, /^https:\/\//); assert.ok(!Number.isNaN(dayOf(e.date)), e.url);
+    assert.ok(e.said.split(/\s+/).length <= 25, 'a short line, never copied text: ' + e.url);
+  }
+  assert.deepEqual(L.ideas.map((i) => [i.id, stageOf(i, '2026-11-17')]), [['ai-test-theatre', 'testing'], ['agent-spend-caps', 'testing'], ['agent-audit-trail', 'daydream'], ['hallucinated-citations', 'daydream']]);
+  for (const i of L.ideas.filter((x) => x.test)) assert.equal(normalizeTest(i.test).ok, true, i.id + ' has a sealed, whole test');
+  for (const i of L.ideas.filter((x) => !attest(x, x.scanned).ok)) assert.ok(typeof i.why === 'string' && i.why.length > 20, i.id + ' says why it is a daydream');
+});
