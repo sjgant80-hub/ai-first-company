@@ -160,7 +160,7 @@ test('the ledger: every item linked, dated and short; the gate gives the stages 
     assert.match(e.url, /^https:\/\//); assert.ok(!Number.isNaN(dayOf(e.date)), e.url);
     assert.ok(e.said.split(/\s+/).length <= 25, 'a short line, never copied text: ' + e.url);
   }
-  assert.deepEqual(L.ideas.map((i) => [i.id, stageOf(i, '2026-11-17')]), [['ai-test-theatre', 'testing'], ['agent-spend-caps', 'testing'], ['agent-audit-trail', 'daydream'], ['hallucinated-citations', 'daydream']]);
+  assert.deepEqual(L.ideas.map((i) => [i.id, stageOf(i, '2026-11-17')]), [['ai-test-theatre', 'testing'], ['agent-spend-caps', 'testing'], ['agent-audit-trail', 'testing'], ['hallucinated-citations', 'daydream']]);
   for (const i of L.ideas.filter((x) => x.test)) assert.equal(normalizeTest(i.test).ok, true, i.id + ' has a sealed, whole test');
   for (const i of L.ideas.filter((x) => !attest(x, x.scanned).ok)) assert.ok(typeof i.why === 'string' && i.why.length > 20, i.id + ' says why it is a daydream');
 });
